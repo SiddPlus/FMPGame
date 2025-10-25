@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\siddg\\onedrive\\documents\\unreal projects\\fmp\\plugins\\advancedsessions\\source\\advancedsessions\\private\\advancedsessions.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\siddg\\onedrive\\documents\\unreal projects\\fmp\\intermediate\\build\\win64\\x64\\fmpeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\siddg\\onedrive\\documents\\unreal projects\\fmp\\plugins\\advancedsessions\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedsessions\\definitions.advancedsessions.h",
+            "c:\\users\\siddg\\onedrive\\documents\\unreal projects\\fmp\\plugins\\advancedsessions\\source\\advancedsessions\\classes\\advancedsessions.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

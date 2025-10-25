@@ -1,0 +1,17 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\siddg\\downloads\\fmp\\source\\fmp\\private\\healthsystem.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\siddg\\downloads\\fmp\\intermediate\\build\\win64\\x64\\fmpeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\siddg\\downloads\\fmp\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmp\\definitions.fmp.h",
+            "c:\\users\\siddg\\downloads\\fmp\\source\\fmp\\public\\healthsystem.h",
+            "c:\\users\\siddg\\downloads\\fmp\\intermediate\\build\\win64\\unrealeditor\\inc\\fmp\\uht\\healthsystem.generated.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\engine\\public\\net\\unrealnetwork.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\net\\core\\public\\net\\core\\propertyconditions\\propertyconditions.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
