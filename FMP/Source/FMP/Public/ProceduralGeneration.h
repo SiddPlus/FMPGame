@@ -56,12 +56,6 @@ struct FActorPopulationSetting
 	UPROPERTY(EditAnywhere, Category = "Actor Setting", Meta = (ClampMin = 0.0f))
 	float Radius = 200.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Mesh Setting", Meta = (ClampMin = 0.0f, ClampMax = 1.0f))
-	float SingleSpawnChance = 1.0f; 
-
-	UPROPERTY(EditAnywhere, Category = "Actor Setting", Meta = (ClampMin = 0))
-	int MinSpawnCount = 0;
-
 	UPROPERTY(EditAnywhere, Category = "Actor Setting", Meta = (ClampMin = 0))
 	int MaxSpawnCount = 0;
 };
@@ -82,9 +76,6 @@ struct FMeshPopulationSetting
 	
 	UPROPERTY(EditAnywhere, Category = "Mesh Setting", Meta = (ClampMin = 0.0f))
 	float Radius = 200.0f;
-
-	UPROPERTY(EditAnywhere, Category = "Mesh Setting", Meta = (ClampMin = 0.0f, ClampMax = 1.0f))
-	float SingleSpawnChance = 1.0f; 
 
 	UPROPERTY(EditAnywhere, Category = "Mesh Setting", Meta = (ClampMin = 0))
 	int MaxSpawnCount = 0;

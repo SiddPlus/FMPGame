@@ -490,14 +490,8 @@ void AProceduralGeneration::PopulateObjects()
     {
         if (MeshSetting.Mesh)
         {
-            if (MeshSetting.MaxSpawnCount == 1)
-            {
-                if (FMath::FRand() >= MeshSetting.SingleSpawnChance)
-                {
-                    continue;
-                }
-            }
-
+            // Removed MaxSpawnCount == 1 SingleSpawnChance check here.
+            
             if (MeshSetting.MaxSpawnCount > 0)
             {
                 int CurrentAttempts = 0;
@@ -565,13 +559,7 @@ void AProceduralGeneration::PopulateObjects()
     {
         if (ActorSetting.ActorClass)
         {
-            if (ActorSetting.MaxSpawnCount == 1)
-            {
-                if (FMath::FRand() >= ActorSetting.SingleSpawnChance)
-                {
-                    continue;
-                }
-            }
+            // Removed MaxSpawnCount == 1 SingleSpawnChance check here.
 
             if (ActorSetting.MaxSpawnCount > 0)
             {
@@ -880,4 +868,3 @@ void AProceduralGeneration::PopulateObjects()
         }
     }
 }
-

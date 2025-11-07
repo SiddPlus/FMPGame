@@ -2,7 +2,6 @@
 	"RemapUnityFiles": 
 	{
 		"Module.FMP.1.cpp.obj": [
-			"FMP.cpp.obj",
 			"AnimNotify_CheckChargedAttack.gen.cpp.obj",
 			"AnimNotify_CheckCombo.gen.cpp.obj",
 			"AnimNotify_DoAttackTrace.gen.cpp.obj",
@@ -22,7 +21,9 @@
 			"CombatLavaFloor.gen.cpp.obj",
 			"CombatLifeBar.gen.cpp.obj",
 			"CombatPlayerController.gen.cpp.obj",
-			"CombatStateTreeUtility.gen.cpp.obj",
+			"CombatStateTreeUtility.gen.cpp.obj"
+		],
+		"Module.FMP.2.cpp.obj": [
 			"EnemySpawner.gen.cpp.obj",
 			"EnvQueryContext_Player.gen.cpp.obj",
 			"FMP.init.gen.cpp.obj",
@@ -43,19 +44,19 @@
 			"SideScrollingMovingPlatform.gen.cpp.obj",
 			"SideScrollingNPC.gen.cpp.obj",
 			"SideScrollingPickup.gen.cpp.obj",
-			"SideScrollingPlayerController.gen.cpp.obj",
+			"SideScrollingPlayerController.gen.cpp.obj"
+		],
+		"Module.FMP.3.cpp.obj": [
 			"SideScrollingSoftPlatform.gen.cpp.obj",
 			"SideScrollingStateTreeUtility.gen.cpp.obj",
 			"SideScrollingUI.gen.cpp.obj",
-			"PerModuleInline.gen.cpp.obj"
-		],
-		"Module.FMP.2.cpp.obj": [
+			"PerModuleInline.gen.cpp.obj",
+			"FMP.cpp.obj",
 			"FMPCharacter.cpp.obj",
 			"FMPGameMode.cpp.obj",
 			"FMPPlayerController.cpp.obj",
 			"EnemySpawner.cpp.obj",
 			"HealthSystem.cpp.obj",
-			"ProceduralGeneration.cpp.obj",
 			"CombatAIController.cpp.obj",
 			"CombatEnemy.cpp.obj",
 			"CombatEnemySpawner.cpp.obj",
@@ -92,7 +93,8 @@
 			"SideScrollingCharacter.cpp.obj",
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
-			"SideScrollingUI.cpp.obj"
+			"SideScrollingUI.cpp.obj",
+			"ProceduralGeneration.cpp.obj"
 		]
 	}
 }
