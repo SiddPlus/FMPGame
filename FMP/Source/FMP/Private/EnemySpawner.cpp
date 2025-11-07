@@ -18,19 +18,51 @@ void AEnemySpawner::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Only start the timer on the authoritative server
+	StartSpawningTimer();
+	
+}
+
+void AEnemySpawner::StartSpawningTimer()
+{
+	// IMPORTANT: Check if this Actor instance has network authority (is the server).
 	if (HasAuthority())
 	{
-		// Set a timer to repeatedly call the SpawnEnemy function
+		// Clear any existing timer before setting a new one
+		GetWorldTimerManager().ClearTimer(SpawnTimerHandle);
+
+		// Set a new repeating timer on the Server
 		GetWorldTimerManager().SetTimer(
 			SpawnTimerHandle,
 			this,
 			&AEnemySpawner::SpawnEnemy,
 			SpawnRate,
-			true // Loop
+			true // Loop: Timer will automatically repeat
 		);
 	}
-	
+}
+
+void AEnemySpawner::EndSpawningAndClearEnemies()
+{
+	// IMPORTANT: Ensure only the Server executes game logic that affects replication or timers.
+	if (HasAuthority())
+	{
+		// 1. Clear the timer
+		GetWorldTimerManager().ClearTimer(SpawnTimerHandle);
+
+		// 2. Despawn/Destroy Enemies (Actual logic)
+		for (AActor* Enemy : SpawnedEnemies)
+		{
+			// Calling Destroy() on the server will automatically replicate the destruction 
+			// to all connected clients, clearing the enemy from their worlds as well.
+			if (IsValid(Enemy))
+			{
+				Enemy->Destroy();
+			}
+		}
+
+		// 3. Clear the tracking array (The pointers are now invalid, so we clear the array)
+		SpawnedEnemies.Empty();
+	}
 }
 
 void AEnemySpawner::SpawnEnemy()
@@ -42,7 +74,7 @@ void AEnemySpawner::SpawnEnemy()
 	}
 	
 	// 2. Max Count Check
-	if (!EnemyToSpawnClass || CurrentEnemyCount >= MaxConcurrentEnemies)
+	if (!EnemyToSpawnClass || SpawnedEnemies.Num() >= MaxConcurrentEnemies)
 	{
 		return;
 	}
@@ -79,11 +111,9 @@ void AEnemySpawner::SpawnEnemy()
 
 	if (NewEnemy)
 	{
-		CurrentEnemyCount++;
+		SpawnedEnemies.Add(NewEnemy);
 		// Optional: Attach delegate to enemy's death event to decrement CurrentEnemyCount
 		// (Requires C++ or Blueprint logic in BP_Enemy to call a function on the spawner upon death)
-		
-		UE_LOG(LogTemp, Log, TEXT("Spawned new enemy at %s. Current count: %d"), *RandomPoint.ToString(), CurrentEnemyCount);
 	}
 }
 

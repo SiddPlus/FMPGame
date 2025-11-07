@@ -32,7 +32,9 @@ protected:
 	int MaxConcurrentEnemies = 10;
 
 	FTimerHandle SpawnTimerHandle;
-	int CurrentEnemyCount = 0;
+	
+	UPROPERTY(VisibleAnywhere, Transient, Category = "Spawning")
+    TArray<AActor*> SpawnedEnemies;
 
 	UFUNCTION(BlueprintCallable, Category = "Spawning")
 	void SpawnEnemy();
@@ -40,5 +42,11 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION(BlueprintCallable, Category = "Spawning")
+	void StartSpawningTimer();
+
+	UFUNCTION(BlueprintCallable, Category = "Spawning")
+	void EndSpawningAndClearEnemies();
 
 };
