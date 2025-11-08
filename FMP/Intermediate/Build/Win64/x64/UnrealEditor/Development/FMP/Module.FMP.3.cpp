@@ -9,6 +9,7 @@
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/FMPPlayerController.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/EnemySpawner.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/HealthSystem.cpp"
+#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/ProceduralGeneration.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_Combat/AI/CombatAIController.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_Combat/AI/CombatEnemy.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_Combat/AI/CombatEnemySpawner.cpp"

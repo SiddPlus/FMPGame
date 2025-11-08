@@ -35,6 +35,7 @@
 			"PlatformingGameMode.gen.cpp.obj",
 			"PlatformingPlayerController.gen.cpp.obj",
 			"ProceduralGeneration.gen.cpp.obj",
+			"RoundManager.gen.cpp.obj",
 			"SideScrollingAIController.gen.cpp.obj",
 			"SideScrollingCameraManager.gen.cpp.obj",
 			"SideScrollingCharacter.gen.cpp.obj",
@@ -57,6 +58,7 @@
 			"FMPPlayerController.cpp.obj",
 			"EnemySpawner.cpp.obj",
 			"HealthSystem.cpp.obj",
+			"ProceduralGeneration.cpp.obj",
 			"CombatAIController.cpp.obj",
 			"CombatEnemy.cpp.obj",
 			"CombatEnemySpawner.cpp.obj",
@@ -94,7 +96,7 @@
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
 			"SideScrollingUI.cpp.obj",
-			"ProceduralGeneration.cpp.obj"
+			"RoundManager.cpp.obj"
 		]
 	}
 }
