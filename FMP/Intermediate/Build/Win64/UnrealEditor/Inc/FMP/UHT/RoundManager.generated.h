@@ -17,7 +17,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 // ********** Begin Class ARoundManager ************************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execGetCurrentRoundNumber); \
 	DECLARE_FUNCTION(execIsRoundActive); \
 	DECLARE_FUNCTION(execGetRemainingTime); \
@@ -26,7 +26,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 FMP_API UClass* Z_Construct_UClass_ARoundManager_NoRegister();
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_14_INCLASS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesARoundManager(); \
 	friend struct Z_Construct_UClass_ARoundManager_Statics; \
@@ -45,7 +45,7 @@ public: \
 	DECLARE_VALIDATE_GENERATED_REP_ENUMS(NO_API)
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_14_ENHANCED_CONSTRUCTORS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_15_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	ARoundManager(ARoundManager&&) = delete; \
 	ARoundManager(const ARoundManager&) = delete; \
@@ -55,13 +55,13 @@ public: \
 	NO_API virtual ~ARoundManager();
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_11_PROLOG
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_14_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_12_PROLOG
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_14_INCLASS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_14_ENHANCED_CONSTRUCTORS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_15_INCLASS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

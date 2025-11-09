@@ -17,5 +17,3 @@
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingJumpPad.gen.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingMovingPlatform.gen.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingNPC.gen.cpp"
-#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingPickup.gen.cpp"
-#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingPlayerController.gen.cpp"

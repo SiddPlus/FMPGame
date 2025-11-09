@@ -4,6 +4,8 @@
 #include "RoundManager.h"
 #include "Engine/Engine.h"
 #include "Net/UnrealNetwork.h"
+#include "Kismet/GameplayStatics.h"
+#include "EnemySpawner.h"
 
 // Sets default values
 ARoundManager::ARoundManager()
@@ -19,7 +21,6 @@ ARoundManager::ARoundManager()
 void ARoundManager::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 void ARoundManager::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -36,6 +37,28 @@ void ARoundManager::StartRound()
 {
 	if (HasAuthority()) // Server check
 	{
+		// Use GetAllActorsOfClass to find every instance of AEnemySpawner
+		TArray<AActor*> FoundActors;
+		UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemySpawner::StaticClass(), FoundActors);
+
+		// Cast and store all found actors into our TArray<AEnemySpawner*>
+		for (AActor* Actor : FoundActors)
+		{
+			if (AEnemySpawner* Spawner = Cast<AEnemySpawner>(Actor))
+			{
+				AllEnemySpawners.Add(Spawner);
+			}
+		}
+
+		if (AllEnemySpawners.Num() > 0)
+		{
+			UE_LOG(LogTemp, Log, TEXT("Round Manager found %d Enemy Spawner(s)."), AllEnemySpawners.Num());
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Round Manager could not find any AEnemySpawner actors in the level. Spawning will not work."));
+		}
+		
 		// 1. Initial State Setup
 		RoundTimer = RoundDuration;
 		bIsRoundActive = true;
@@ -43,6 +66,18 @@ void ARoundManager::StartRound()
 		CurrentRoundNumber++;
 		
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Round Started! Timer Reset."));
+
+		if (AllEnemySpawners.Num() > 0)
+		{
+			for (AEnemySpawner* Spawner : AllEnemySpawners)
+			{
+				if (Spawner)
+				{
+					Spawner->StartSpawningTimer();
+				}
+			}
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("All Enemy Spawners activated."));
+		}
 		
 		// Ensure Tick is enabled for counting down
 		SetActorTickEnabled(true);
@@ -59,6 +94,18 @@ void ARoundManager::EndRound()
 		RoundTimer = 0.0f;      // Finalize the timer display to zero
 		
 		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, TEXT("Round Ended! Time's Up."));
+
+		if (AllEnemySpawners.Num() > 0)
+		{
+			for (AEnemySpawner* Spawner : AllEnemySpawners)
+			{
+				if (Spawner)
+				{
+					Spawner->EndSpawningAndClearEnemies();
+				}
+			}
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("All Enemy Spawning stopped and enemies cleared."));
+		}
 		
 		// You would typically call a GameMode function here to handle match scoring, etc.
 		

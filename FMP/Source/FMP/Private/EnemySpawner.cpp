@@ -18,7 +18,7 @@ void AEnemySpawner::BeginPlay()
 {
 	Super::BeginPlay();
 
-	StartSpawningTimer();
+	//StartSpawningTimer();
 	
 }
 

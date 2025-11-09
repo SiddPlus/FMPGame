@@ -7,6 +7,7 @@
 #include "RoundManager.generated.h"
 
 class FLifetimeProperty;
+class AEnemySpawner;
 
 UCLASS()
 class FMP_API ARoundManager : public AActor
@@ -32,6 +33,9 @@ private:
 
 	UPROPERTY(Replicated)
 	int32 CurrentRoundNumber = 0;
+
+	UPROPERTY(Transient) 
+	TArray<AEnemySpawner*> AllEnemySpawners;
 	
 	void StartRound();
 	
