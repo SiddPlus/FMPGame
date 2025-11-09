@@ -232,6 +232,16 @@ struct Z_Construct_UClass_ARoundManager_Statics
 		{ "Category", "Round Management" },
 		{ "ModuleRelativePath", "Public/RoundManager.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentRoundSpawnRate_MetaData[] = {
+		{ "Category", "Round Management|Spawning" },
+		{ "ClampMin", "0.1" },
+		{ "ModuleRelativePath", "Public/RoundManager.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentRoundMaxEnemies_MetaData[] = {
+		{ "Category", "Round Management|Spawning" },
+		{ "ClampMin", "1" },
+		{ "ModuleRelativePath", "Public/RoundManager.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsRoundActive_MetaData[] = {
 		{ "ModuleRelativePath", "Public/RoundManager.h" },
 	};
@@ -249,6 +259,8 @@ struct Z_Construct_UClass_ARoundManager_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_RoundDuration;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentRoundSpawnRate;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_CurrentRoundMaxEnemies;
 	static void NewProp_bIsRoundActive_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsRoundActive;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_RoundTimer;
@@ -271,7 +283,9 @@ struct Z_Construct_UClass_ARoundManager_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ARoundManager_Statics::NewProp_RoundDuration = { "RoundDuration", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ARoundManager, RoundDuration), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RoundDuration_MetaData), NewProp_RoundDuration_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ARoundManager_Statics::NewProp_RoundDuration = { "RoundDuration", nullptr, (EPropertyFlags)0x0010000000000021, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ARoundManager, RoundDuration), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RoundDuration_MetaData), NewProp_RoundDuration_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ARoundManager_Statics::NewProp_CurrentRoundSpawnRate = { "CurrentRoundSpawnRate", nullptr, (EPropertyFlags)0x0010000000000021, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ARoundManager, CurrentRoundSpawnRate), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentRoundSpawnRate_MetaData), NewProp_CurrentRoundSpawnRate_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ARoundManager_Statics::NewProp_CurrentRoundMaxEnemies = { "CurrentRoundMaxEnemies", nullptr, (EPropertyFlags)0x0010000000000021, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ARoundManager, CurrentRoundMaxEnemies), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentRoundMaxEnemies_MetaData), NewProp_CurrentRoundMaxEnemies_MetaData) };
 void Z_Construct_UClass_ARoundManager_Statics::NewProp_bIsRoundActive_SetBit(void* Obj)
 {
 	((ARoundManager*)Obj)->bIsRoundActive = 1;
@@ -288,6 +302,8 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ARoundManager_
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ARoundManager_Statics::NewProp_AllEnemySpawners = { "AllEnemySpawners", nullptr, (EPropertyFlags)0x0040000000002000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ARoundManager, AllEnemySpawners), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AllEnemySpawners_MetaData), NewProp_AllEnemySpawners_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ARoundManager_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ARoundManager_Statics::NewProp_RoundDuration,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ARoundManager_Statics::NewProp_CurrentRoundSpawnRate,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ARoundManager_Statics::NewProp_CurrentRoundMaxEnemies,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ARoundManager_Statics::NewProp_bIsRoundActive,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ARoundManager_Statics::NewProp_RoundTimer,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ARoundManager_Statics::NewProp_bHasRoundEnded,
@@ -327,10 +343,16 @@ UClass* Z_Construct_UClass_ARoundManager()
 #if VALIDATE_CLASS_REPS
 void ARoundManager::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const
 {
+	static FName Name_RoundDuration(TEXT("RoundDuration"));
+	static FName Name_CurrentRoundSpawnRate(TEXT("CurrentRoundSpawnRate"));
+	static FName Name_CurrentRoundMaxEnemies(TEXT("CurrentRoundMaxEnemies"));
 	static FName Name_bIsRoundActive(TEXT("bIsRoundActive"));
 	static FName Name_RoundTimer(TEXT("RoundTimer"));
 	static FName Name_CurrentRoundNumber(TEXT("CurrentRoundNumber"));
 	const bool bIsValid = true
+		&& Name_RoundDuration == ClassReps[(int32)ENetFields_Private::RoundDuration].Property->GetFName()
+		&& Name_CurrentRoundSpawnRate == ClassReps[(int32)ENetFields_Private::CurrentRoundSpawnRate].Property->GetFName()
+		&& Name_CurrentRoundMaxEnemies == ClassReps[(int32)ENetFields_Private::CurrentRoundMaxEnemies].Property->GetFName()
 		&& Name_bIsRoundActive == ClassReps[(int32)ENetFields_Private::bIsRoundActive].Property->GetFName()
 		&& Name_RoundTimer == ClassReps[(int32)ENetFields_Private::RoundTimer].Property->GetFName()
 		&& Name_CurrentRoundNumber == ClassReps[(int32)ENetFields_Private::CurrentRoundNumber].Property->GetFName();
@@ -345,10 +367,10 @@ ARoundManager::~ARoundManager() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ARoundManager, ARoundManager::StaticClass, TEXT("ARoundManager"), &Z_Registration_Info_UClass_ARoundManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ARoundManager), 3284211002U) },
+		{ Z_Construct_UClass_ARoundManager, ARoundManager::StaticClass, TEXT("ARoundManager"), &Z_Registration_Info_UClass_ARoundManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ARoundManager), 479276430U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h__Script_FMP_1315598007(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h__Script_FMP_3556948668(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_RoundManager_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

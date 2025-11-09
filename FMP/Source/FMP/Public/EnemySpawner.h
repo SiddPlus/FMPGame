@@ -43,6 +43,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable, Category = "Spawning|Control")
+	void ConfigureSpawner(float NewSpawnRate, int32 NewMaxConcurrentEnemies);
+
 	UFUNCTION(BlueprintCallable, Category = "Spawning")
 	void StartSpawningTimer();
 

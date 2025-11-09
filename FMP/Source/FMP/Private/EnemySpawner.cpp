@@ -65,6 +65,18 @@ void AEnemySpawner::EndSpawningAndClearEnemies()
 	}
 }
 
+void AEnemySpawner::ConfigureSpawner(float NewSpawnRate, int32 NewMaxConcurrentEnemies)
+{
+	// Only the server should apply configuration changes
+	if (HasAuthority())
+	{
+		SpawnRate = NewSpawnRate;
+		MaxConcurrentEnemies = NewMaxConcurrentEnemies;
+		// NOTE: The StartSpawningTimer() function must be called after this
+		// to apply the new SpawnRate to the FTimerHandle.
+	}
+}
+
 void AEnemySpawner::SpawnEnemy()
 {
 	// 1. Authorization Check: Only execute on the server

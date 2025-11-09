@@ -30,7 +30,10 @@ void ARoundManager::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	// Replicate the core state variables
 	DOREPLIFETIME(ARoundManager, bIsRoundActive);
 	DOREPLIFETIME(ARoundManager, RoundTimer);
-	DOREPLIFETIME(ARoundManager, CurrentRoundNumber);
+	DOREPLIFETIME(ARoundManager, CurrentRoundNumber)
+	DOREPLIFETIME(ARoundManager, CurrentRoundSpawnRate);
+	DOREPLIFETIME(ARoundManager, CurrentRoundMaxEnemies);
+	DOREPLIFETIME(ARoundManager, RoundDuration);
 }
 
 void ARoundManager::StartRound()
@@ -73,6 +76,7 @@ void ARoundManager::StartRound()
 			{
 				if (Spawner)
 				{
+					Spawner->ConfigureSpawner(CurrentRoundSpawnRate, CurrentRoundMaxEnemies);
 					Spawner->StartSpawningTimer();
 				}
 			}
@@ -110,6 +114,11 @@ void ARoundManager::EndRound()
 		// You would typically call a GameMode function here to handle match scoring, etc.
 		
 		// Disable Tick to save performance until the next round starts
+
+		CurrentRoundSpawnRate = FMath::Max(0.1f, CurrentRoundSpawnRate - 0.1f);
+		CurrentRoundMaxEnemies += 1;
+		RoundDuration += 60.0f;
+		
 		SetActorTickEnabled(false);
 	}
 }

@@ -26,6 +26,7 @@
 		"Module.FMP.2.cpp.obj": [
 			"EnemySpawner.gen.cpp.obj",
 			"EnvQueryContext_Player.gen.cpp.obj",
+			"FMP.init.gen.cpp.obj",
 			"FMPCharacter.gen.cpp.obj",
 			"FMPGameMode.gen.cpp.obj",
 			"FMPPlayerController.gen.cpp.obj",
@@ -34,6 +35,7 @@
 			"PlatformingGameMode.gen.cpp.obj",
 			"PlatformingPlayerController.gen.cpp.obj",
 			"ProceduralGeneration.gen.cpp.obj",
+			"RoundManager.gen.cpp.obj",
 			"SideScrollingAIController.gen.cpp.obj",
 			"SideScrollingCameraManager.gen.cpp.obj",
 			"SideScrollingCharacter.gen.cpp.obj",
@@ -41,9 +43,7 @@
 			"SideScrollingInteractable.gen.cpp.obj",
 			"SideScrollingJumpPad.gen.cpp.obj",
 			"SideScrollingMovingPlatform.gen.cpp.obj",
-			"SideScrollingNPC.gen.cpp.obj",
-			"FMP.init.gen.cpp.obj",
-			"RoundManager.gen.cpp.obj"
+			"SideScrollingNPC.gen.cpp.obj"
 		],
 		"Module.FMP.3.cpp.obj": [
 			"SideScrollingPickup.gen.cpp.obj",
@@ -56,7 +56,6 @@
 			"FMPCharacter.cpp.obj",
 			"FMPGameMode.cpp.obj",
 			"FMPPlayerController.cpp.obj",
-			"EnemySpawner.cpp.obj",
 			"HealthSystem.cpp.obj",
 			"ProceduralGeneration.cpp.obj",
 			"CombatAIController.cpp.obj",
@@ -96,6 +95,7 @@
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
 			"SideScrollingUI.cpp.obj",
+			"EnemySpawner.cpp.obj",
 			"RoundManager.cpp.obj"
 		]
 	}

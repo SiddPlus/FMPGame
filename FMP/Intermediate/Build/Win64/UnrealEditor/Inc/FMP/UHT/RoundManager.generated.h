@@ -38,7 +38,10 @@ public: \
 	enum class ENetFields_Private : uint16 \
 	{ \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
-		bIsRoundActive=NETFIELD_REP_START, \
+		RoundDuration=NETFIELD_REP_START, \
+		CurrentRoundSpawnRate, \
+		CurrentRoundMaxEnemies, \
+		bIsRoundActive, \
 		RoundTimer, \
 		CurrentRoundNumber, \
 		NETFIELD_REP_END=CurrentRoundNumber	}; \

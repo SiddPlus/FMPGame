@@ -20,6 +20,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execEndSpawningAndClearEnemies); \
 	DECLARE_FUNCTION(execStartSpawningTimer); \
+	DECLARE_FUNCTION(execConfigureSpawner); \
 	DECLARE_FUNCTION(execSpawnEnemy);
 
 

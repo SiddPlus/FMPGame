@@ -24,7 +24,6 @@
 			"CombatStateTreeUtility.gen.cpp.obj"
 		],
 		"Module.FMP.2.cpp.obj": [
-			"EnemySpawner.gen.cpp.obj",
 			"EnvQueryContext_Player.gen.cpp.obj",
 			"FMPCharacter.gen.cpp.obj",
 			"FMPGameMode.gen.cpp.obj",
@@ -42,6 +41,7 @@
 			"SideScrollingJumpPad.gen.cpp.obj",
 			"SideScrollingMovingPlatform.gen.cpp.obj",
 			"SideScrollingNPC.gen.cpp.obj",
+			"EnemySpawner.gen.cpp.obj",
 			"FMP.init.gen.cpp.obj",
 			"RoundManager.gen.cpp.obj"
 		],

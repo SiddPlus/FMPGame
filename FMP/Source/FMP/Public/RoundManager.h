@@ -18,8 +18,14 @@ public:
 	// Sets default values for this actor's properties
 	ARoundManager();
 
-	UPROPERTY(EditAnywhere, Category = "Round Management")
+	UPROPERTY(EditAnywhere, Replicated, Category = "Round Management")
 	float RoundDuration = 60.0f;
+
+	UPROPERTY(EditAnywhere, Replicated, Category = "Round Management|Spawning", Meta = (ClampMin = "0.1"))
+	float CurrentRoundSpawnRate = 5.0f;
+
+	UPROPERTY(EditAnywhere, Replicated, Category = "Round Management|Spawning", Meta = (ClampMin = "1"))
+	int32 CurrentRoundMaxEnemies = 10;
 	
 private:
 	UPROPERTY(Replicated)

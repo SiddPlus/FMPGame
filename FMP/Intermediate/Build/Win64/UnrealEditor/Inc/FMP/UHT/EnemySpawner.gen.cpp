@@ -21,6 +21,54 @@ FMP_API UClass* Z_Construct_UClass_AEnemySpawner_NoRegister();
 UPackage* Z_Construct_UPackage__Script_FMP();
 // ********** End Cross Module References **********************************************************
 
+// ********** Begin Class AEnemySpawner Function ConfigureSpawner **********************************
+struct Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics
+{
+	struct EnemySpawner_eventConfigureSpawner_Parms
+	{
+		float NewSpawnRate;
+		int32 NewMaxConcurrentEnemies;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Spawning|Control" },
+		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_NewSpawnRate;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_NewMaxConcurrentEnemies;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_NewSpawnRate = { "NewSpawnRate", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EnemySpawner_eventConfigureSpawner_Parms, NewSpawnRate), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_NewMaxConcurrentEnemies = { "NewMaxConcurrentEnemies", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EnemySpawner_eventConfigureSpawner_Parms, NewMaxConcurrentEnemies), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_NewSpawnRate,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_NewMaxConcurrentEnemies,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_AEnemySpawner, nullptr, "ConfigureSpawner", Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::PropPointers), sizeof(Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::EnemySpawner_eventConfigureSpawner_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::Function_MetaDataParams), Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::Function_MetaDataParams)},  };
+static_assert(sizeof(Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::EnemySpawner_eventConfigureSpawner_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AEnemySpawner::execConfigureSpawner)
+{
+	P_GET_PROPERTY(FFloatProperty,Z_Param_NewSpawnRate);
+	P_GET_PROPERTY(FIntProperty,Z_Param_NewMaxConcurrentEnemies);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->ConfigureSpawner(Z_Param_NewSpawnRate,Z_Param_NewMaxConcurrentEnemies);
+	P_NATIVE_END;
+}
+// ********** End Class AEnemySpawner Function ConfigureSpawner ************************************
+
 // ********** Begin Class AEnemySpawner Function EndSpawningAndClearEnemies ************************
 struct Z_Construct_UFunction_AEnemySpawner_EndSpawningAndClearEnemies_Statics
 {
@@ -116,6 +164,7 @@ void AEnemySpawner::StaticRegisterNativesAEnemySpawner()
 {
 	UClass* Class = AEnemySpawner::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "ConfigureSpawner", &AEnemySpawner::execConfigureSpawner },
 		{ "EndSpawningAndClearEnemies", &AEnemySpawner::execEndSpawningAndClearEnemies },
 		{ "SpawnEnemy", &AEnemySpawner::execSpawnEnemy },
 		{ "StartSpawningTimer", &AEnemySpawner::execStartSpawningTimer },
@@ -191,6 +240,7 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner, "ConfigureSpawner" }, // 2635230640
 		{ &Z_Construct_UFunction_AEnemySpawner_EndSpawningAndClearEnemies, "EndSpawningAndClearEnemies" }, // 2736406896
 		{ &Z_Construct_UFunction_AEnemySpawner_SpawnEnemy, "SpawnEnemy" }, // 1825267898
 		{ &Z_Construct_UFunction_AEnemySpawner_StartSpawningTimer, "StartSpawningTimer" }, // 1476011976
@@ -252,10 +302,10 @@ AEnemySpawner::~AEnemySpawner() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 4050850016U) },
+		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 2481995447U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_1306272214(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_681335007(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
