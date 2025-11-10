@@ -66,7 +66,6 @@ void ARoundManager::StartRound()
 		RoundTimer = RoundDuration;
 		bIsRoundActive = true;
 		bHasRoundEnded = false;
-		CurrentRoundNumber++;
 		
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Round Started! Timer Reset."));
 
@@ -115,6 +114,7 @@ void ARoundManager::EndRound()
 		
 		// Disable Tick to save performance until the next round starts
 
+		CurrentRoundNumber++;
 		CurrentRoundSpawnRate = FMath::Max(0.1f, CurrentRoundSpawnRate - 0.1f);
 		CurrentRoundMaxEnemies += 1;
 		RoundDuration += 60.0f;
@@ -126,6 +126,11 @@ void ARoundManager::EndRound()
 // Public entry point to start the round (callable from Blueprints or GameMode)
 void ARoundManager::BeginNewRound()
 {
+	if (bIsRoundActive)
+	{
+		return;
+	}
+	
 	if (HasAuthority()) // Only allow the server to initiate the start
 	{
 		StartRound();

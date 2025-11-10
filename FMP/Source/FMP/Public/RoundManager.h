@@ -38,7 +38,7 @@ private:
 	bool bHasRoundEnded = false;
 
 	UPROPERTY(Replicated)
-	int32 CurrentRoundNumber = 0;
+	int32 CurrentRoundNumber = 1;
 
 	UPROPERTY(Transient) 
 	TArray<AEnemySpawner*> AllEnemySpawners;
