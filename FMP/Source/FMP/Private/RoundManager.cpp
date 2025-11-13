@@ -13,7 +13,8 @@ ARoundManager::ARoundManager()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	bReplicates = true;
-	NetUpdateFrequency = 1.0f; 
+	NetUpdateFrequency = 1.0f;
+	SetRemoteRoleForBackwardsCompat(ROLE_SimulatedProxy);
 
 }
 
@@ -34,6 +35,35 @@ void ARoundManager::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	DOREPLIFETIME(ARoundManager, CurrentRoundSpawnRate);
 	DOREPLIFETIME(ARoundManager, CurrentRoundMaxEnemies);
 	DOREPLIFETIME(ARoundManager, RoundDuration);
+}
+
+void ARoundManager::Server_BeginNewRound_Implementation()
+{
+	StartRound();
+}
+
+void ARoundManager::OnRep_IsRoundActive()
+{
+	// This code runs on the client whenever bIsRoundActive is updated by the server
+	if (bIsRoundActive)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, TEXT("Client: Round state received: ACTIVE."));
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Magenta, TEXT("Client: Round state received: ENDED."));
+	}
+	
+	// BROADCAST THE EVENT: This immediately notifies all listening Blueprints (HUD, PlayerController, etc.)
+	OnRoundStateChanged.Broadcast(bIsRoundActive);
+}
+
+void ARoundManager::OnRep_RoundTimer()
+{
+	// This function runs on the client when RoundTimer is updated by the server 
+	// (mainly for initial sync or the final 0.0 value).
+	GEngine->AddOnScreenDebugMessage(1234, 5.f, FColor::Blue, 
+		FString::Printf(TEXT("Client: RoundTimer initial/final sync: %.1f"), RoundTimer));
 }
 
 void ARoundManager::StartRound()
@@ -134,6 +164,10 @@ void ARoundManager::BeginNewRound()
 	if (HasAuthority()) // Only allow the server to initiate the start
 	{
 		StartRound();
+	}
+	else // If a client calls it, request the server to start the round via RPC
+	{
+		Server_BeginNewRound();
 	}
 }
 

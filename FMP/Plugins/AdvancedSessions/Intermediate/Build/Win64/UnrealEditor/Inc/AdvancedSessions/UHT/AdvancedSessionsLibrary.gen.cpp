@@ -2651,14 +2651,14 @@ UAdvancedSessionsLibrary::~UAdvancedSessionsLibrary() {}
 // ********** End Class UAdvancedSessionsLibrary ***************************************************
 
 // ********** Begin Registration *******************************************************************
-struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_Statics
+struct Z_CompiledInDeferFile_FID_Users_2304613_UCREATIVE_Documents_GitHub_FMPGame_FMP_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
 		{ Z_Construct_UClass_UAdvancedSessionsLibrary, UAdvancedSessionsLibrary::StaticClass, TEXT("UAdvancedSessionsLibrary"), &Z_Registration_Info_UClass_UAdvancedSessionsLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedSessionsLibrary), 3834618282U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_1082032778(TEXT("/Script/AdvancedSessions"),
-	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_2304613_UCREATIVE_Documents_GitHub_FMPGame_FMP_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_1082032778(TEXT("/Script/AdvancedSessions"),
+	Z_CompiledInDeferFile_FID_Users_2304613_UCREATIVE_Documents_GitHub_FMPGame_FMP_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_2304613_UCREATIVE_Documents_GitHub_FMPGame_FMP_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // ********** End Registration *********************************************************************

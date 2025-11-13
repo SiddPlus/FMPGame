@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "RoundManager.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRoundStateChanged, bool, IsActive);
+
 class FLifetimeProperty;
 class AEnemySpawner;
 
@@ -26,12 +28,15 @@ public:
 
 	UPROPERTY(EditAnywhere, Replicated, Category = "Round Management|Spawning", Meta = (ClampMin = "1"))
 	int32 CurrentRoundMaxEnemies = 10;
+
+	UPROPERTY(BlueprintAssignable, Category = "Round Management|Events")
+	FOnRoundStateChanged OnRoundStateChanged;
 	
 private:
-	UPROPERTY(Replicated)
+	UPROPERTY(ReplicatedUsing = OnRep_IsRoundActive)
 	bool bIsRoundActive = false;
 	
-	UPROPERTY(Replicated)
+	UPROPERTY(ReplicatedUsing = OnRep_RoundTimer)
 	float RoundTimer = 0.0f;
 	
 	UPROPERTY()
@@ -50,6 +55,15 @@ private:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void OnRep_IsRoundActive(); // Calls the Blueprint event delegate
+	
+	UFUNCTION()
+	void OnRep_RoundTimer();
+
+	UFUNCTION(Server, Reliable)
+	void Server_BeginNewRound();
 
 public:	
 	// Called every frame
