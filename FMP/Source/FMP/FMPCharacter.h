@@ -13,6 +13,7 @@ class UInputAction;
 struct FInputActionValue;
 
 class UHealthSystem;
+class UPlayerPerks;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -27,6 +28,9 @@ class AFMPCharacter : public ACharacter
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player", meta = (AllowPrivateAccess = "true"))
 	UHealthSystem* PlayerHealth;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player", meta = (AllowPrivateAccess = "true"))
+	UPlayerPerks* PlayerPerks;
 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
@@ -99,5 +103,7 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 	FORCEINLINE UHealthSystem* GetHealthSystem() const { return PlayerHealth; }
+	FORCEINLINE UPlayerPerks* GetPlayerPerks() const { return PlayerPerks; }
+	
 };
 

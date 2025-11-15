@@ -13,6 +13,7 @@
 #include "FMP.h"
 
 #include "HealthSystem.h"
+#include "PlayerPerks.h"
 
 AFMPCharacter::AFMPCharacter()
 {
@@ -52,6 +53,8 @@ AFMPCharacter::AFMPCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
 	PlayerHealth = CreateDefaultSubobject<UHealthSystem>(TEXT("Health"));
+	PlayerPerks = CreateDefaultSubobject<UPlayerPerks>(TEXT("Perks"));
+	
 }
 
 void AFMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
