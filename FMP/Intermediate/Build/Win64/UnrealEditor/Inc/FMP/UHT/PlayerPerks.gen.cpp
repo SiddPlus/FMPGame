@@ -97,6 +97,7 @@ struct Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics
 	struct PlayerPerks_eventEquipPerk_Parms
 	{
 		FString PerkName;
+		bool ReturnValue;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -108,12 +109,20 @@ struct Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStrPropertyParams NewProp_PerkName;
+	static void NewProp_ReturnValue_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::NewProp_PerkName = { "PerkName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(PlayerPerks_eventEquipPerk_Parms, PerkName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PerkName_MetaData), NewProp_PerkName_MetaData) };
+void Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+{
+	((PlayerPerks_eventEquipPerk_Parms*)Obj)->ReturnValue = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(PlayerPerks_eventEquipPerk_Parms), &Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::NewProp_PerkName,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UPlayerPerks, nullptr, "EquipPerk", Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::PropPointers), sizeof(Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::PlayerPerks_eventEquipPerk_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::Function_MetaDataParams), Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics::Function_MetaDataParams)},  };
@@ -132,7 +141,7 @@ DEFINE_FUNCTION(UPlayerPerks::execEquipPerk)
 	P_GET_PROPERTY(FStrProperty,Z_Param_PerkName);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	P_THIS->EquipPerk(Z_Param_PerkName);
+	*(bool*)Z_Param__Result=P_THIS->EquipPerk(Z_Param_PerkName);
 	P_NATIVE_END;
 }
 // ********** End Class UPlayerPerks Function EquipPerk ********************************************
@@ -442,7 +451,7 @@ struct Z_Construct_UClass_UPlayerPerks_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UPlayerPerks_EquipPerk, "EquipPerk" }, // 3783227928
+		{ &Z_Construct_UFunction_UPlayerPerks_EquipPerk, "EquipPerk" }, // 161918881
 		{ &Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent, "OnPerkEquipped_ClientEvent" }, // 3066845085
 		{ &Z_Construct_UFunction_UPlayerPerks_OnRep_LastEquippedPerk, "OnRep_LastEquippedPerk" }, // 2699304897
 		{ &Z_Construct_UFunction_UPlayerPerks_ServerEquipPerk, "ServerEquipPerk" }, // 502088429
@@ -526,10 +535,10 @@ struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Pu
 		{ FPerks::StaticStruct, Z_Construct_UScriptStruct_FPerks_Statics::NewStructOps, TEXT("Perks"), &Z_Registration_Info_UScriptStruct_FPerks, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPerks), 4124859362U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPlayerPerks, UPlayerPerks::StaticClass, TEXT("UPlayerPerks"), &Z_Registration_Info_UClass_UPlayerPerks, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPlayerPerks), 4265433358U) },
+		{ Z_Construct_UClass_UPlayerPerks, UPlayerPerks::StaticClass, TEXT("UPlayerPerks"), &Z_Registration_Info_UClass_UPlayerPerks, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPlayerPerks), 3127808306U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_1771097391(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_944053242(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ScriptStructInfo),
 	nullptr, 0);

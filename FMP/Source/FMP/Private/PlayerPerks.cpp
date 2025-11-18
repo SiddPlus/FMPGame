@@ -58,15 +58,16 @@ void UPlayerPerks::UnlockPerk(const FString& PerkName)
     }
 }
 
-void UPlayerPerks::EquipPerk(const FString& PerkName)
+bool UPlayerPerks::EquipPerk(const FString& PerkName)
 {
     if (GetOwner() && GetOwner()->HasAuthority())
     {
-        PerkEquipLogic(PerkName);
+        return PerkEquipLogic(PerkName);
     }
     else
     {
         ServerEquipPerk(PerkName);
+        return false;
     }
 }
 

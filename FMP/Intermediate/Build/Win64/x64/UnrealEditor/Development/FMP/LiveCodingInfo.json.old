@@ -38,11 +38,12 @@
 			"SideScrollingAIController.gen.cpp.obj",
 			"SideScrollingCameraManager.gen.cpp.obj",
 			"SideScrollingCharacter.gen.cpp.obj",
-			"SideScrollingGameMode.gen.cpp.obj",
 			"FMP.init.gen.cpp.obj",
+			"LootPool.gen.cpp.obj",
 			"PlayerPerks.gen.cpp.obj"
 		],
 		"Module.FMP.3.cpp.obj": [
+			"SideScrollingGameMode.gen.cpp.obj",
 			"SideScrollingInteractable.gen.cpp.obj",
 			"SideScrollingJumpPad.gen.cpp.obj",
 			"SideScrollingMovingPlatform.gen.cpp.obj",
@@ -98,6 +99,7 @@
 			"SideScrollingPlayerController.cpp.obj",
 			"SideScrollingUI.cpp.obj",
 			"FMPCharacter.cpp.obj",
+			"LootPool.cpp.obj",
 			"PlayerPerks.cpp.obj"
 		]
 	}

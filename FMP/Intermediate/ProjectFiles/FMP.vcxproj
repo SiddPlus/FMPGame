@@ -737,6 +737,10 @@
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_2)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_2)</ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FMP\Private\LootPool.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_2)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_2)</ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FMP\Private\PlayerPerks.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_2)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_2)</ForcedIncludeFiles>
@@ -751,6 +755,7 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\FMP\Public\EnemySpawner.h"/>
     <ClInclude Include="..\..\Source\FMP\Public\HealthSystem.h"/>
+    <ClInclude Include="..\..\Source\FMP\Public\LootPool.h"/>
     <ClInclude Include="..\..\Source\FMP\Public\PlayerPerks.h"/>
     <ClInclude Include="..\..\Source\FMP\Public\ProceduralGeneration.h"/>
     <ClInclude Include="..\..\Source\FMP\Public\RoundManager.h"/>

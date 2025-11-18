@@ -313,6 +313,9 @@
     <ClCompile Include="..\..\Source\FMP\Private\HealthSystem.cpp">
       <Filter>Source\FMP\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FMP\Private\LootPool.cpp">
+      <Filter>Source\FMP\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FMP\Private\PlayerPerks.cpp">
       <Filter>Source\FMP\Private</Filter>
     </ClCompile>
@@ -329,6 +332,9 @@
       <Filter>Source\FMP\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FMP\Public\HealthSystem.h">
+      <Filter>Source\FMP\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FMP\Public\LootPool.h">
       <Filter>Source\FMP\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FMP\Public\PlayerPerks.h">

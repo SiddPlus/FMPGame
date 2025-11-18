@@ -14,6 +14,7 @@
 
 #include "HealthSystem.h"
 #include "PlayerPerks.h"
+#include "LootPool.h"
 
 AFMPCharacter::AFMPCharacter()
 {
@@ -54,6 +55,7 @@ AFMPCharacter::AFMPCharacter()
 
 	PlayerHealth = CreateDefaultSubobject<UHealthSystem>(TEXT("Health"));
 	PlayerPerks = CreateDefaultSubobject<UPlayerPerks>(TEXT("Perks"));
+	LootPool = CreateDefaultSubobject<ULootPool>(TEXT("LootPool"));
 	
 }
 

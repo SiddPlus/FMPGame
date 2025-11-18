@@ -44,7 +44,7 @@ public:
 	void UnlockPerk(const FString& PerkName);
 	
 	UFUNCTION(BlueprintCallable, Category = "Perk Functions")
-	void EquipPerk(const FString& PerkName);
+	bool EquipPerk(const FString& PerkName);
 
 private:
 	UFUNCTION(Server, Reliable)

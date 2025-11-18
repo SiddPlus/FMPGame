@@ -12,4 +12,3 @@
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingAIController.gen.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingCameraManager.gen.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingCharacter.gen.cpp"
-#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingGameMode.gen.cpp"

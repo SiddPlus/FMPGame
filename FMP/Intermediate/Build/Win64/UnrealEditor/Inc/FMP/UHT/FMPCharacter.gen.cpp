@@ -19,6 +19,7 @@ ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputAction_NoRegister();
 FMP_API UClass* Z_Construct_UClass_AFMPCharacter();
 FMP_API UClass* Z_Construct_UClass_AFMPCharacter_NoRegister();
 FMP_API UClass* Z_Construct_UClass_UHealthSystem_NoRegister();
+FMP_API UClass* Z_Construct_UClass_ULootPool_NoRegister();
 FMP_API UClass* Z_Construct_UClass_UPlayerPerks_NoRegister();
 UPackage* Z_Construct_UPackage__Script_FMP();
 // ********** End Cross Module References **********************************************************
@@ -270,6 +271,12 @@ struct Z_Construct_UClass_AFMPCharacter_Statics
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "FMPCharacter.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LootPool_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Player" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "FMPCharacter.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CameraBoom_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Components" },
@@ -337,6 +344,7 @@ struct Z_Construct_UClass_AFMPCharacter_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PlayerHealth;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PlayerPerks;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_LootPool;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CameraBoom;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_FollowCamera;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_JumpAction;
@@ -359,6 +367,7 @@ struct Z_Construct_UClass_AFMPCharacter_Statics
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFMPCharacter_Statics::NewProp_PlayerHealth = { "PlayerHealth", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFMPCharacter, PlayerHealth), Z_Construct_UClass_UHealthSystem_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerHealth_MetaData), NewProp_PlayerHealth_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFMPCharacter_Statics::NewProp_PlayerPerks = { "PlayerPerks", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFMPCharacter, PlayerPerks), Z_Construct_UClass_UPlayerPerks_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerPerks_MetaData), NewProp_PlayerPerks_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFMPCharacter_Statics::NewProp_LootPool = { "LootPool", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFMPCharacter, LootPool), Z_Construct_UClass_ULootPool_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LootPool_MetaData), NewProp_LootPool_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFMPCharacter_Statics::NewProp_CameraBoom = { "CameraBoom", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFMPCharacter, CameraBoom), Z_Construct_UClass_USpringArmComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CameraBoom_MetaData), NewProp_CameraBoom_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFMPCharacter_Statics::NewProp_FollowCamera = { "FollowCamera", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFMPCharacter, FollowCamera), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_FollowCamera_MetaData), NewProp_FollowCamera_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFMPCharacter_Statics::NewProp_JumpAction = { "JumpAction", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFMPCharacter, JumpAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_JumpAction_MetaData), NewProp_JumpAction_MetaData) };
@@ -368,6 +377,7 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFMPCharacter_
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFMPCharacter_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFMPCharacter_Statics::NewProp_PlayerHealth,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFMPCharacter_Statics::NewProp_PlayerPerks,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFMPCharacter_Statics::NewProp_LootPool,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFMPCharacter_Statics::NewProp_CameraBoom,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFMPCharacter_Statics::NewProp_FollowCamera,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFMPCharacter_Statics::NewProp_JumpAction,
@@ -412,10 +422,10 @@ AFMPCharacter::~AFMPCharacter() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFMPCharacter, AFMPCharacter::StaticClass, TEXT("AFMPCharacter"), &Z_Registration_Info_UClass_AFMPCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFMPCharacter), 3667553577U) },
+		{ Z_Construct_UClass_AFMPCharacter, AFMPCharacter::StaticClass, TEXT("AFMPCharacter"), &Z_Registration_Info_UClass_AFMPCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFMPCharacter), 3630288958U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h__Script_FMP_1210484352(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h__Script_FMP_1185022863(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
