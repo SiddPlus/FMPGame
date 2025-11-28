@@ -6,6 +6,7 @@
 #include "Net/UnrealNetwork.h"
 #include "Kismet/GameplayStatics.h"
 #include "EnemySpawner.h"
+#include "PlayerPerks.h"
 
 // Sets default values
 ARoundManager::ARoundManager()
@@ -140,9 +141,15 @@ void ARoundManager::EndRound()
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("All Enemy Spawning stopped and enemies cleared."));
 		}
 		
-		// You would typically call a GameMode function here to handle match scoring, etc.
-		
-		// Disable Tick to save performance until the next round starts
+		AController* PlayerController = GetWorld()->GetFirstPlayerController();
+		if (PlayerController && PlayerController->GetPawn())
+		{
+			if (UPlayerPerks* PerksComp = PlayerController->GetPawn()->FindComponentByClass<UPlayerPerks>())
+			{
+				// Calls the function to check unlocks and set bIsPerkSelectionActive = true
+				PerksComp->CheckAndUnlockPerks(CurrentRoundNumber); 
+			}
+		}
 
 		CurrentRoundNumber++;
 		CurrentRoundSpawnRate = FMath::Max(0.1f, CurrentRoundSpawnRate - 0.1f);

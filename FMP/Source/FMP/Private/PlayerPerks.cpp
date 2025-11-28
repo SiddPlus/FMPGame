@@ -42,9 +42,86 @@ void UPlayerPerks::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
     DOREPLIFETIME(UPlayerPerks, UnlockedPerks);
     DOREPLIFETIME(UPlayerPerks, EquippedPerks);
     DOREPLIFETIME(UPlayerPerks, LastEquippedPerk); 
+	DOREPLIFETIME(UPlayerPerks, bIsPerkSelectionActive);
 }
 
-// --- CLIENT WRAPPERS (Execute on Client, Call RPC) ---
+void UPlayerPerks::OnRep_IsPerkSelectionActive()
+{
+    OnPerkSelectionNeeded.Broadcast(bIsPerkSelectionActive);
+}
+
+void UPlayerPerks::CheckAndUnlockPerks(int32 CurrentRound)
+{
+    if (GetOwner() && GetOwner()->HasAuthority())
+    {
+        // 1. Run CheckUnlockLogic (moves perks Locked -> Unlocked)
+        CheckUnlockLogic(CurrentRound); 
+        
+        // 2. Set authoritative state to TRUE
+        bIsPerkSelectionActive = true; 
+        
+        // 3. Call RepNotify directly on the server (which broadcasts the delegate)
+        OnRep_IsPerkSelectionActive(); 
+    }
+}
+
+void UPlayerPerks::FinishedPerkSelection()
+{
+    if (GetOwner() && GetOwner()->HasAuthority())
+    {
+        // Host/Server click: execute directly
+        bIsPerkSelectionActive = false;
+        OnRep_IsPerkSelectionActive();
+    }
+    else // Client click: request server action
+    {
+        ServerFinishedPerkSelection();
+    }
+}
+
+void UPlayerPerks::ServerFinishedPerkSelection_Implementation()
+{
+    // Server performs the authoritative state change
+    bIsPerkSelectionActive = false;
+    OnRep_IsPerkSelectionActive(); 
+}
+
+bool UPlayerPerks::CheckUnlockLogic(int32 CurrentRound)
+{
+    // 1. Authoritative Check: Ensure only the server runs this logic
+    if (!GetOwner() || !GetOwner()->HasAuthority()) 
+    {
+        return false;
+    }
+    
+    TArray<FPerks> NewlyUnlocked;
+    bool bPerkUnlocked = false;
+    
+    // 2. Iterate LockedPerks backwards for safe removal
+    for (int32 i = LockedPerks.Num() - 1; i >= 0; --i)
+    {
+        FPerks& Perk = LockedPerks[i];
+        
+        // 3. The Unlock Requirement: UnlockLevel must be LESS THAN the round just completed
+        if (Perk.RoundLevelUnlockAmount <= CurrentRound) 
+        {
+            NewlyUnlocked.Add(Perk);
+            LockedPerks.RemoveAt(i); // Remove from Locked Array
+            bPerkUnlocked = true;
+            
+            UE_LOG(LogTemp, Warning, TEXT("SERVER: Perk '%s' unlocked (Required Round %d)."), *Perk.Name, Perk.RoundLevelUnlockAmount);
+        }
+    }
+    
+    // 4. Move newly unlocked perks into the replicated UnlockedPerks array
+    if (NewlyUnlocked.Num() > 0)
+    {
+        UnlockedPerks.Append(NewlyUnlocked); 
+        // Note: The UnlockedPerks array is replicated, so clients will see the update.
+    }
+    
+    return bPerkUnlocked;
+}
 
 void UPlayerPerks::UnlockPerk(const FString& PerkName)
 {

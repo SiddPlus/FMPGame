@@ -6,6 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "PlayerPerks.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPerkSelectionNeeded, bool, IsActive);
+
 USTRUCT(BlueprintType)
 struct FPerks
 {
@@ -46,6 +48,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Perk Functions")
 	bool EquipPerk(const FString& PerkName);
 
+	UFUNCTION(BlueprintCallable, Category = "Perk Functions")
+	void CheckAndUnlockPerks(int32 CurrentRound); 
+
+	UPROPERTY(BlueprintAssignable, Category = "Perk UI")
+	FOnPerkSelectionNeeded OnPerkSelectionNeeded; 
+
+	UFUNCTION(BlueprintPure, Category = "Perk UI")
+	bool IsPerkSelectionActive() const { return bIsPerkSelectionActive; }
+
+	UFUNCTION(BlueprintCallable, Category = "Perk UI")
+	void FinishedPerkSelection();
+
+	UPROPERTY(ReplicatedUsing = OnRep_IsPerkSelectionActive, BlueprintReadOnly, Category = "Perk UI")
+	bool bIsPerkSelectionActive = false;
+
 private:
 	UFUNCTION(Server, Reliable)
 	void ServerUnlockPerk(const FString& PerkName);
@@ -54,6 +71,14 @@ private:
 	void ServerEquipPerk(const FString& PerkName);
 	
 	bool PerkUnlockLogic(const FString& PerkName);
+
+	UFUNCTION(Server, Reliable)
+	void ServerFinishedPerkSelection();
+    
+	UFUNCTION()
+	void OnRep_IsPerkSelectionActive();
+    
+	bool CheckUnlockLogic(int32 CurrentRound);
 
 public:
 	bool PerkEquipLogic(const FString& PerkName); 
