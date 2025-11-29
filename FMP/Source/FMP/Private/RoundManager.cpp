@@ -7,6 +7,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "EnemySpawner.h"
 #include "PlayerPerks.h"
+#include "TelemetryLogger.h"
+#include "GameFramework/Pawn.h"
+#include "GameFramework/Controller.h"
 
 // Sets default values
 ARoundManager::ARoundManager()
@@ -147,7 +150,12 @@ void ARoundManager::EndRound()
 			if (UPlayerPerks* PerksComp = PlayerController->GetPawn()->FindComponentByClass<UPlayerPerks>())
 			{
 				// Calls the function to check unlocks and set bIsPerkSelectionActive = true
-				PerksComp->CheckAndUnlockPerks(CurrentRoundNumber); 
+				PerksComp->CheckAndUnlockPerks(CurrentRoundNumber);
+
+				TelemetryLogger::RecordSessionData(
+					CurrentRoundNumber,         // Round Survived/Completed
+					PerksComp->UnlockedPerks    // The current array of Unlocked Perks
+				);
 			}
 		}
 

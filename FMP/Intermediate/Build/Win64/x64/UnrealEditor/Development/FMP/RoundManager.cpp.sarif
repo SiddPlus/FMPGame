@@ -19,7 +19,7 @@
                                     "uri": "file:///C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/RoundManager.cpp"
                                 },
                                 "region": {
-                                    "startLine": 17,
+                                    "startLine": 20,
                                     "startColumn": 2,
                                     "snippet": {
                                         "text": "\tNetUpdateFrequency = 1.0f;"

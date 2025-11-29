@@ -26,6 +26,7 @@
 		"Module.FMP.2.cpp.obj": [
 			"EnemySpawner.gen.cpp.obj",
 			"EnvQueryContext_Player.gen.cpp.obj",
+			"FMP.init.gen.cpp.obj",
 			"FMPCharacter.gen.cpp.obj",
 			"FMPGameMode.gen.cpp.obj",
 			"FMPPlayerController.gen.cpp.obj",
@@ -34,13 +35,12 @@
 			"PlatformingCharacter.gen.cpp.obj",
 			"PlatformingGameMode.gen.cpp.obj",
 			"PlatformingPlayerController.gen.cpp.obj",
+			"PlayerPerks.gen.cpp.obj",
 			"ProceduralGeneration.gen.cpp.obj",
 			"RoundManager.gen.cpp.obj",
 			"SideScrollingAIController.gen.cpp.obj",
 			"SideScrollingCameraManager.gen.cpp.obj",
-			"SideScrollingCharacter.gen.cpp.obj",
-			"FMP.init.gen.cpp.obj",
-			"PlayerPerks.gen.cpp.obj"
+			"SideScrollingCharacter.gen.cpp.obj"
 		],
 		"Module.FMP.3.cpp.obj": [
 			"SideScrollingGameMode.gen.cpp.obj",
@@ -61,7 +61,9 @@
 			"EnemySpawner.cpp.obj",
 			"HealthSystem.cpp.obj",
 			"LootPool.cpp.obj",
+			"PlayerPerks.cpp.obj",
 			"ProceduralGeneration.cpp.obj",
+			"RoundManager.cpp.obj",
 			"CombatAIController.cpp.obj",
 			"CombatEnemy.cpp.obj",
 			"CombatEnemySpawner.cpp.obj",
@@ -99,8 +101,7 @@
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
 			"SideScrollingUI.cpp.obj",
-			"PlayerPerks.cpp.obj",
-			"RoundManager.cpp.obj"
+			"TelemetryLogger.cpp.obj"
 		]
 	}
 }
