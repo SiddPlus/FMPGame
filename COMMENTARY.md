@@ -1,189 +1,126 @@
-Comprehensive Technical Report: Unreal Engine 5.6 C++ Multiplayer Roguelike
+# Comprehensive Technical Report: Unreal Engine C++ Multiplayer Roguelike Implementation
 
-This document provides a detailed technical analysis of the core systems and server-authoritative architecture underpinning the C++ multiplayer roguelike game developed in Unreal Engine 5.6. The focus is on the networked implementation of progression, persistence, difficulty scaling, and foundational game mechanics.
+This document provides a detailed, in-depth technical analysis of the core systems and server-authoritative architecture underpinning the C++ multiplayer roguelike game developed in Unreal Engine. The architecture is strictly **Server-Authoritative**, a non-negotiable requirement for ensuring game integrity, synchronized gameplay, and robust data persistence in a multiplayer environment. The focus is on the networked implementation of progression, persistence, difficulty scaling, and foundational game mechanics, with all logic strictly enforced on the dedicated server instance.
 
-## Server-Authoritative Networking Foundation
+## Architectural Foundation: Server Authority and Networking
 
-The game utilizes a Server-Authoritative networking model built upon the Online Steam Subsystem and Online Subsystem for dedicated server hosting. This model mandates that all game-critical state changes, such as damage application, resource consumption, and player progression, must be validated and executed by the server instance to prevent client-side manipulation (cheating).
+The fundamental principle governing the entire game is the **Server-Authoritative Networking Model**. This architecture is essential in a roguelike where progression, difficulty scaling, and loot allocation are core to the experience. By mandating that all game-critical state changes—including damage application, resource consumption, and player progression—must be validated and executed by the server instance, the architecture effectively prevents client-side manipulation (cheating). This is achieved by relying on Unreal Engine’s native C++ networking primitives.
 
-C++ Networking Primitives
+### Core C++ Networking Primitives: The Triad of Synchronization
 
-The architecture relies heavily on three core Unreal Engine networking primitives:
+The architecture relies heavily on three core Unreal Engine networking primitives, each serving a distinct purpose in maintaining synchronization across all connected clients and the server:
 
-Replicated Properties (DOREPLIFETIME): Used for variables (e.g., CurrentRoundNumber, CurrentHealth) that must maintain the same value on the server and all connected clients.
+1.  **Replicated Properties:** These are C++ member variables within an **Actor** or **Actor Component** that are registered to maintain an identical value across the server and all connected clients. This synchronization is established by overriding the **`GetLifetimeReplicatedProps`** function in the C++ class and utilizing the **`DOREPLIFETIME`** macro. Examples of such properties include the **`ARoundManager`**'s **`CurrentRoundNumber`**, the **`UHealthSystem`**'s **`MaxHealth`**, and the **`UPlayerPerks`** component's three distinct perk arrays. The replication system handles the network traffic to ensure eventual consistency across all machines.
 
-RepNotify Functions (ReplicatedUsing=OnRep_Variable): Used when a variable's value must be synchronized, and a client-side function (e.g., UI update, particle effect) must be executed immediately when the new value is received. (See UHealthSystem::OnRep_Health).
+2.  **RepNotify Functions:** These functions are an extension of Replicated Properties. They are designated using the **`ReplicatedUsing=OnRep_Variable`** syntax (e.g., **`UPROPERTY(ReplicatedUsing=OnRep_Health)`**). When the server modifies a RepNotify property, the new value is automatically replicated to all clients. Crucially, as soon as a client receives the new value and updates its local copy, the designated RepNotify function (e.g., **`OnRep_Health`**) is executed on that client. This mechanism is vital for triggering immediate client-side logic—such as updating a player's health bar UI, displaying a damage number, or playing a particle effect—the moment the server-validated variable's new value is received.
 
-Remote Procedure Calls (RPCs): Functions that allow clients to request the execution of code on the server (Server_... calls) or for the server to call code on clients (Client_... or Multicast_... calls). These are essential for client-to-server input and server-to-client notifications.
+3.  **Remote Procedure Calls (RPCs):** RPCs are used exclusively for allowing **clients** to send a validated **request** to the **server** for the execution of authoritative code. This is the necessary gateway for any client-initiated action that must alter the game state. They are defined using a specific function signature and the **`UFUNCTION(Server, Reliable)`** macro, such as **`ServerDrawRandomPerk()`** or **`Server_BeginNewRound()`**. The `Reliable` keyword is a crucial choice for progression events, as it instructs the network layer to re-transmit the function call data until delivery is confirmed, thus preventing critical game state actions from being lost due to transient network congestion.
 
-## Core Progression and Difficulty Management
+### Synchronization Flow: The RepNotify Pattern in UHealthSystem
 
-The primary loop of the roguelike experience—round completion, difficulty scaling, and reward distribution—is managed entirely by server-side logic within the ARoundManager and associated components.
+The **`UHealthSystem`** component provides the canonical implementation for managing server-authoritative state using the RepNotify pattern. This implementation secures one of the most fundamental and frequently updated pieces of game state: the player's health.
 
-### Round Management and Difficulty Scaling (ARoundManager)
+The health modification functions, such as **`DecreaseHealth(float DeltaAmount)`** and **`IncreaseHealth(float DeltaAmount)`**, are strictly guarded at their entry point by an explicit authority check: `if (!GetOwner()->HasAuthority()) { return; }`. This check ensures that only the server instance can proceed with modifying the core health variable, **`CurrentHealth`**. The server then performs the actual calculation, including clamping the new value using **`FMath::Clamp(CurrentHealth + HealthDelta, 0.0f, MaxHealth)`**, to prevent invalid states like negative health or over-healing beyond the **`MaxHealth`** value.
 
-The ARoundManager is a replicated AActor responsible for governing the flow of the game session. Its authority is paramount to the game's difficulty curve.
+Following the server-side modification of **`CurrentHealth`**, the server performs a critical step: it **manually calls** the RepNotify function, **`OnRep_Health(float OldHealth)`**. This manual call is essential for two reasons: first, it executes the resulting delegate broadcast on the server immediately, ensuring the server's own local UI and logic are updated without network latency; and second, the act of changing the replicated variable **`CurrentHealth`** automatically flags the new value for transmission to all connected clients.
 
-Round State and Replication:
+The **`OnRep_Health(float OldHealth)`** function is the client's reaction mechanism. It executes on all clients (and the server itself, via the manual call). Inside this function, the health change delta is calculated (`CurrentHealth - OldHealth`) and used to broadcast the **`FOnHealthChangedSignature`** delegate. This delegate allows client-side visual components—like the HUD health bar and screen effects—to react instantly and synchronously to the server-validated change in health state. 
 
-The core state, including bIsRoundActive and RoundTimer, is marked for replication using RepNotify (ReplicatedUsing=OnRep_IsRoundActive, ReplicatedUsing=OnRep_RoundTimer) to ensure all clients have an accurate display of the current status and time remaining.
+## Network Security and RPC Validation
 
-CurrentRoundNumber is a simple replicated property (DOREPLIFETIME) that synchronizes the current difficulty level.
+Network security is not merely a feature but a fundamental layer of the multiplayer architecture, primarily maintained through the correct use of RPCs and the principle of **Server-Side Authority** for all state-changing logic.
 
-Server-Side Scaling Logic (Inside EndRound()):
+### RPC Reliability and Purpose
 
-Upon detection that the round is complete (either by time expiring or a successful objective clear), the server executes the EndRound() logic.
+The system employs **Reliable RPCs** (`UFUNCTION(Server, Reliable)`) for all critical progression actions, including those managed by the **`ULootPool`** and **`UPlayerPerks`** components. The choice of **Reliable** over **Unreliable** for actions like drawing and equipping perks is deliberate; it ensures the network stack guarantees the execution of the function call on the server, even if network packets are temporarily lost. Conversely, **Unreliable RPCs** are reserved for non-critical, ephemeral actions where slight loss is acceptable (e.g., footstep sounds or rapid-fire projectile effects).
 
-The difficulty parameters are aggressively scaled:
+### Advanced RPC Validation and Anti-Cheat Mechanism
 
-CurrentRoundSpawnRate (the time between enemy spawns) is decreased, resulting in faster enemy generation.
+While Unreal Engine provides underlying security for RPCs, the primary anti-cheat mechanism is rooted in the architecture of the authoritative game logic. The RPCs themselves are treated only as a **network request gateway**. The security rests on the fact that the functions containing the critical game logic are strictly executed *only* on the server and are highly defensive.
 
-CurrentRoundMaxEnemies (the cap on simultaneously spawned enemies) is increased.
+Consider the perk drawing process. When a player clicks a button, a client executes the **`ServerDrawRandomPerk()`** RPC. The corresponding server implementation, **`ServerDrawRandomPerk_Implementation()`**, acts only as a networking gateway, immediately deferring to the internal, authoritative C++ function: **`DrawPerk_ServerLogic(FPerks& OutPerk)`**. This core logic function is where the game state is manipulated: the random index generation occurs, the item is removed from the authoritative **`CurrentPerkPool`** array, and the deck is managed. A rogue client cannot spoof the result because the necessary array indexing, random number generation, and state modification **all occur on the server's authoritative copy of the data**.
 
-Persistence Trigger: Importantly, EndRound() is the moment where the server-side logic could interact with the TelemetryLogger to record the new highest round reached, ensuring persistent profile updates upon session end.
+Furthermore, the final state change for the character—the equipping of the perk—is enforced in **`UPlayerPerks::PerkEquipLogic(const FString& PerkName)`**. This function features an explicit, defensive authority check at its very beginning: `if (!GetOwner() || !GetOwner()->HasAuthority()) return false;`. This check confirms that even if a sophisticated client could somehow bypass the RPC mechanism or trigger the function directly in a hostile manner, the function will immediately terminate without modifying the player's progression state unless it is running on the dedicated server instance. This layered approach to security—using Reliable RPCs as requests and enforcing logic via server-only, defensively-programmed functions—ensures the integrity of the roguelike progression.
 
-Tick and Authority:
+## Player Character Architecture and System Composition
 
-The Tick function is only enabled and executed for the authoritative instance (if (HasAuthority() && bIsRoundActive)). This is where the RoundTimer countdown occurs and the check for round completion is performed.
+The **`AFMPCharacter`** serves as the central **Actor** for the player, adhering to a strict component-based design. This architecture isolates game responsibilities into discrete **Actor Components**, which promotes modularity, reusability, and, most importantly in a networked context, compartmentalized replication. All core game components are set to replicate by default, ensuring their state is synchronized across the network.
 
-#### Perk System State Management (UPlayerPerks)
+### Component Composition and Core Systems
 
-The UPlayerPerks component holds the player's entire progression tree and current loadout.
+The character is composed of three primary C++ components, each dedicated to managing a specific, server-authoritative system:
 
-Data Structure: The perk data is defined using a replicated USTRUCT named FPerks, which contains metadata like Name, Description, and the RoundLevelUnlockAmount. This ensures that even the definition of what a perk is is consistent across the network.
+1.  **UHealthSystem\***: This component is responsible for managing the character's core survival state, namely **`MaxHealth`** and the replicated **`CurrentHealth`** property. As detailed previously, all state-modifying functions, **`DecreaseHealth`** and **`IncreaseHealth`**, are explicitly guarded by an authority check. The logic is simple yet critical: it uses **`FMath::Clamp`** to ensure the **`CurrentHealth`** value remains within the valid bounds of 0.0f and **`MaxHealth`**. The component exposes a powerful delegate, **`FOnHealthChangedSignature`**, which is broadcast via the **`OnRep_Health`** RepNotify function to allow any client-side system (like the HUD widget) to subscribe and react to health changes without relying on unreliable network ticks.
 
-Replicated Arrays: The three core perk state arrays—LockedPerks, UnlockedPerks, and EquippedPerks—are all registered for full replication (DOREPLIFETIME). The server holds the master copy, and any changes are broadcast to clients.
+2.  **UPlayerPerks\***: This component acts as the authoritative player progression ledger. It maintains the three key arrays that define a player's power and available progression options: **`LockedPerks`**, **`UnlockedPerks`**, and **`EquippedPerks`**. These arrays, which contain instances of the **`FPerks`** structure, are all registered for replication using **`DOREPLIFETIME`**. The structure **`FPerks`** is a **`USTRUCT`** containing details such as **`Name`**, **`Description`**, and **`RoundLevelUnlockAmount`**. This last field ties the player's available perk pool directly to the overall session progression managed by the **`ARoundManager`**.
+    * The primary synchronization point for a player’s equipped perk is the **`LastEquippedPerk`** property, which uses a RepNotify function, **`OnRep_LastEquippedPerk()`**. When the server successfully equips a perk using **`PerkEquipLogic()`**, it sets this variable and manually calls the RepNotify. This triggers the client-side **`OnPerkEquipped`** Blueprint event, which is implemented in the UI layer to provide immediate feedback, such as a confirmation message or an updated character ability list.
 
-Perk Equipping and RepNotify:
+3.  **ULootPool\***: This component embodies the "deck" management system vital to the roguelike genre. It acts as the intermediary between the player's progression state (**`UPlayerPerks`**) and the game mechanics of random selection. The component holds a transient, server-only array, **`CurrentPerkPool`** (implied by the logic in **`DrawPerk_ServerLogic`**), which represents the current items available for the player to draw.
+    * The **`ResetPool()`** function is a server-only operation that initializes or shuffles the deck. It first empties the **`CurrentPerkPool`** and then copies all current **`UnlockedPerks`** from the **`UPlayerPerks`** component. This ensures that the available draw pool is always consistent with the authoritative progression state.
+    * The core functionality, **`DrawPerk_ServerLogic()`**, is a server-only function that executes the random draw. It checks if the pool is empty and calls **`ResetPool()`** if necessary, ensuring a continuous supply of perks. It then selects a random index using Unreal’s random number generator and removes the selected perk from the pool, maintaining the deck’s integrity and ensuring the drawn perk cannot be immediately drawn again. The component also implements the client-to-server RPC gateway, **`ServerDrawRandomPerk()`**, which simply calls the **`DrawPerk_ServerLogic()`** after a client request is received.
 
-The actual process of equipping a perk is handled by the server-side function PerkEquipLogic(const FString& PerkName).
+### Coordinated Progression Flow
 
-Crucially, when a perk is successfully equipped, the server updates the LastEquippedPerk variable, which is a RepNotify property.
+The components interact in a strictly defined, networked progression sequence:
 
-The OnRep_LastEquippedPerk() function is executed on every client upon receiving the new value, allowing for client-side functionality (e.g., playing a sound, updating a HUD icon, or applying a temporary visual effect) without the client having authority over the gameplay state.
+1.  **Round Completion**: The server's **`ARoundManager`** detects a round completion and calls **`UPlayerPerks::CheckAndUnlockPerks()`** for each player.
+2.  **Unlock Trigger**: The **`UPlayerPerks`** component updates its authoritative replicated arrays (`LockedPerks` to `UnlockedPerks`) and sets the **`bIsPerkSelectionActive` RepNotify** to **true**. This synchronized variable fires the **`OnRep_IsPerkSelectionActive()`** function on the client, which in turn triggers a **`FOnPerkSelectionNeeded`** delegate. This delegate is bound to the client’s UI to present the perk selection screen.
+3.  **Client Request**: The player selects a perk from the UI, which executes a function that initiates the **Reliable Server RPC** on the **`ULootPool`** component (**`ServerDrawRandomPerk`**).
+4.  **Server Authority Execution**: The **`ULootPool`** executes its server logic, which then calls the authoritative **`UPlayerPerks::PerkEquipLogic()`**. This function safely moves the selected perk from **`UnlockedPerks`** to **`EquippedPerks`** and immediately sets and calls the RepNotify on the **`LastEquippedPerk`** property.
+5.  **Client Feedback**: The RepNotify for **`LastEquippedPerk`** executes on the client, broadcasting the **`OnPerkEquipped`** event to confirm the transaction and update the player's visible abilities.
 
-### Loot/Reward Distribution (ULootPool)
+## The Core Roguelike Game Loop and Scaling
 
-The ULootPool component implements the "deck-building" mechanic central to the roguelike genre. It acts as the server-controlled dispenser of new abilities.
+The central nervous system of the roguelike experience is the **`ARoundManager`**, which dictates the game state, controls difficulty scaling, and orchestrates enemy population through its partnership with the **`AEnemySpawner`**.
 
-Server-Side Draw Logic:
+### Round Management (ARoundManager)
 
-The public entry point DrawRandomPerk() is typically called from a client's UI or by the ARoundManager when a reward is due.
+The **`ARoundManager`** is an authoritative Actor that runs exclusively on the server but replicates critical state to all clients. It is configured with **`bReplicates = true`** and a low **`NetUpdateFrequency` of `1.0f`**—meaning its state variables are synchronized only once per second—a suitable rate for slowly changing variables like timers and round numbers, minimizing network overhead.
 
-This function immediately calls a Server RPC: ServerDrawRandomPerk(). RPCs ensure the client's request is executed with server authority.
+* **Server Tick and Countdown**: The primary game loop resides in the overridden **`Tick(float DeltaTime)`** function. This function is strictly guarded by the condition **`if (HasAuthority() && bIsRoundActive)`**. Only when running on the server and an active round is in progress does it execute the countdown logic, reducing the replicated **`RoundTimer`**. This replicated timer provides visual synchronization to all clients with minimal bandwidth cost.
+* **RPC Initiation**: The public entry point for the round start, **`BeginNewRound()`**, correctly handles client requests. If the calling instance is the server, it directly executes the **`StartRound()`** logic. If a client calls it, it automatically routes the request to the **Reliable Server RPC**: **`Server_BeginNewRound()`**. This ensures that only the server can ultimately initiate a game-critical state change like starting a new round.
+* **End-of-Round Logic and Scaling**: The server-only **`EndRound()`** function executes the final progression logic and difficulty scaling. This function first calls the static utility **`TelemetryLogger::RecordSessionData()`**, ensuring player progression is saved. It then implements the core difficulty curve by modifying three replicated properties:
+    1.  **`CurrentRoundNumber`** is incremented.
+    2.  **`CurrentRoundSpawnRate`** is reduced (to increase spawn frequency), using **`FMath::Max(0.1f, CurrentRoundSpawnRate - 0.1f)`** to enforce a minimum rate of 0.1 seconds.
+    3.  **`CurrentRoundMaxEnemies`** is increased by one per round.
+    This scaling mechanism, executed and replicated authoritatively by the **`ARoundManager`**, forms the core challenge of the roguelike experience. The function also calls **`UPlayerPerks::CheckAndUnlockPerks()`** for all players, advancing the available perk pool for the newly started round. 
+### Enemy Spawning and AI Integration (AEnemySpawner)
 
-The server executes the critical DrawPerk_ServerLogic(). This function performs the actual randomized selection from the CurrentPerkPool.
+The **`AEnemySpawner`** is an authoritative Actor (set to **`bReplicates = true`**) designed to manage the flow of enemies into the map.
 
-The Reset Mechanism:
+* **Timer Authority**: The entire spawning loop is initiated only by the server via **`StartSpawningTimer()`**. This function explicitly uses the **`HasAuthority()`** check before setting the repeating **`SpawnTimerHandle`** using the **`GetWorldTimerManager().SetTimer`** function. This server-only timer ensures that enemy creation is synchronized and controlled solely by the authority. The spawn rate is driven by the **`SpawnRate`** property, which is implicitly controlled by the **`ARoundManager`**'s difficulty scaling via the round-specific variables.
+* **Concurrency Control**: The **`SpawnEnemy()`** function includes a dual-layer check to prevent over-spawning. It first checks if a valid **`EnemyToSpawnClass`** is set, and second, it checks if the count of currently **`SpawnedEnemies`** (tracked in a transient **`TArray<AActor*>`**) is less than the **`MaxConcurrentEnemies`** limit.
+* **NavMesh Integration and Authority**: Enemy placement prioritizes pathfinding validity, a necessity for reliable AI behavior. The system leverages the **`UNavigationSystemV1`** to attempt to find a valid spawn location using **`GetRandomReachablePointInRadius()`**. This guarantees that newly spawned AI characters land on a navigable surface, preventing them from becoming stuck or unreachable. Once a valid location is found, the enemy is spawned using **`GetWorld()->SpawnActor<ACharacter>`**. Because the **`AEnemySpawner`** is running on the server, this spawned Actor is automatically registered with the network, ensuring it is replicated to all clients.
 
-The CurrentPerkPool is the active "hand" of perks available for drawing in the current round.
+## Data Persistence and Logging
 
-When the pool runs out (CurrentPerkPool.Num() == 0), the server calls ResetPool().
+The game utilizes two distinct persistence and logging mechanisms: the **`TelemetryLogger`** for permanent, critical player profile data (server-side) and the **`UPerformanceLogger`** for transient, technical performance metrics (client-side).
 
-ResetPool() clears the current pool and refills it by copying all perks from the player's permanent UnlockedPerks list (stored in UPlayerPerks). This ensures a continuous cycle of drawing from the player's learned abilities, while preventing duplicates from appearing too quickly.
+### TelemetryLogger: Server-Side Profile Persistence
 
-## Game State Persistence and Telemetry
+The static **`TelemetryLogger`** class manages the player's core progression and statistics save/load operations. Because this involves permanent state like the maximum round reached and unlocked perks, the implementation is strictly server-side.
 
-Two distinct, file-based systems are used for saving data: permanent player profile statistics and temporary, detailed performance logs. Both utilize Unreal's platform-agnostic file I/O utilities for JSON serialization.
+* **File I/O Path**: The logger uses a fixed, non-volatile file path within the project's Saved directory: **`FPaths::ProjectSavedDir() / TEXT("Telemetry") / TEXT("PlayerProfileStats.json")`**. This fixed path ensures the player’s profile is reliably located across sessions.
+* **The Read-Modify-Write (R-M-W) Pattern**: The **`RecordSessionData()`** function implements a robust R-M-W pattern, which is critical for data integrity when dealing with save files:
+    1.  **Read**: The system first attempts to load the existing JSON content from the **`PlayerProfileStats.json`** file into a string using **`FFileHelper::LoadFileToString()`**.
+    2.  **Merge/Modify**: If a file exists, it is deserialized into a shared **`FJsonObject`**. New session data (like the **`CurrentRoundNumber`** and the full **`UnlockedPerks`** array passed into the function) is then merged with the existing data. For example, the current round number is compared against the saved **`MaxRoundReached`** to determine the new high score, and the complete **`UnlockedPerks`** array is overwritten with the most recent list from the session. This overwriting mechanism ensures the progression state is always the most current.
+    3.  **Write**: The full, updated **`FJsonObject`** is then serialized back into a string and written back to the file using **`FFileHelper::SaveStringToFile()`**, safely **overwriting** the previous profile. This R-M-W process eliminates the risk of data loss or corruption that might occur if the system attempted a partial update or a simple append operation. 
+### UPerformanceLogger: Client-Side Metrics
 
-### Player Profile Persistence (TelemetryLogger)
+The **`UPerformanceLogger`** component is designed to operate entirely independently on the client to capture technical performance metrics without interfering with authoritative gameplay.
 
-The TelemetryLogger is a static C++ utility class, meaning it doesn't need to be attached to an Actor or Component and can be called from anywhere, particularly from server-side game mode logic upon session closure or round failure.
+* **Asynchronous Sampling**: To prevent the logging process from causing runtime hitches, the component explicitly disables its native tick (`PrimaryComponentTick.bCanEverTick = false`). Instead, it uses a looping **`SetTimer`** based on the configurable **`LogFrequency`**. This asynchronous method samples metrics like **`FPS`**, **`FrameTime`** (in milliseconds), **`CPUCycles`**, and **`MemoryUsedMB`**.
+* **Delayed File Output**: All collected metrics are temporarily stored in a transient array during the session. The crucial architectural choice here is that the file write operation is **delayed** and performed only upon the component's **`EndPlay`** event. This ensures that resource-intensive file I/O operations—which can cause significant, short-duration frame rate drops—are completely isolated from live, low-latency gameplay, thus preserving the player experience. The final output file is uniquely named using a timestamp to ensure session-specific logs are maintained.
 
-Fixed Filepath: It uses a static, fixed file name (PlayerProfileStats.json) saved in a known location (FPaths::ProjectSavedDir() / TEXT("Telemetry")). This ensures that the same file is always loaded and updated across different sessions.
+## Procedural Generation Implementation
 
-Saving Logic (RecordSessionData):
+The **`AProceduralGeneration`** system is critical for the roguelike genre, and its networked implementation requires a deterministic approach to ensure map synchronization.
 
-Load: Attempts to load the existing JSON content using FFileHelper::LoadFileToString.
+* **Replicated Seed**: The map’s state—including its geometry, terrain features, and object population—is entirely determined by the **`Seed`** property. This property is registered for replication using **`DOREPLIFETIME(AProceduralGeneration, Seed)`**. The server's seed value is the single source of truth for the entire map, guaranteeing that all clients receive the exact same starting parameters for generation.
+* **Synchronization Trigger**: When the server modifies the **`Seed`**, the RepNotify function **`OnRep_Seed()`** executes on all clients. This function is the synchronization event, triggering the client-side execution of **`GenerateMap()`**. Since the underlying algorithms (noise generation, meshing logic) are deterministic and operate on the shared seed, all clients render an identical map geometry.
+* **Efficient Rendering**: For placing decorative and environment meshes in large quantities, the system utilizes **Hierarchical Instanced Static Mesh Components (HISM)**. HISM is crucial for optimizing rendering performance, as it significantly reduces draw calls by batching thousands of identical static meshes (like rocks or foliage) into a single component, allowing the GPU to process them efficiently.
+* **Server Authority on Population**: While all clients generate the map geometry, the spawning of networked **Actors** (e.g., permanent loot, power-ups, environmental hazards) must remain an authoritative server task. The **`PopulateObjects()`** function, which places these actors and static meshes, contains a strict authority check around the **`GetWorld()->SpawnActor`** call. This check—**`if (HasAuthority())`**—ensures that only the server registers the spawned actors with the network, preventing client desynchronization and maintaining control over critical interactive elements.
 
-Deserialize: The content is deserialized into a shared FJsonObject (LogObject). If the file doesn't exist, a new empty object is created.
+## Summary and Conclusion
 
-Update Max Round: It compares the CurrentRoundNumber from the session with the MaxRoundReached value read from the file. Only if the session's round number is higher is the MaxRoundReached field updated in LogObject.
-
-Update Unlocked Perks: The current UnlockedPerks list (a TArray<FPerks>) is serialized into a JSON array, overwriting the old list in LogObject.
-
-Serialize: The updated LogObject is serialized back into a JSON string using FJsonSerializer and a TPrettyJsonPrintPolicy writer for readability.
-
-Save: The final string is saved using FFileHelper::SaveStringToFile, overwriting the previous file.
-
-### Technical Performance Logging (UPerformanceLogger)
-
-The UPerformanceLogger is an UActorComponent designed to collect real-time technical metrics primarily on the client where the frame rate and memory usage data are locally available.
-
-Asynchronous Data Collection:
-
-The logging process is decoupled from the main game thread using a FTimerHandle that calls CollectAndLogMetrics() at the specified LogFrequency (default 0.5s).
-
-The timestamp (FPerformanceMetrics::Timestamp) is calculated relative to the session's StartTime recorded in BeginPlay().
-
-Metrics Collected: The CollectAndLogMetrics() function uses platform API access to retrieve system-level data:
-
-FrameTime and FPS: Often retrieved via GEngine->GetAverageFrameTime() or GFrameTime.
-
-CPUCycles: Retrieved from the platform's process state using functions like FPlatformTime::Cycles().
-
-MemoryUsedMB: Uses FPlatformMemory::GetStats().GetUsedPhysical().
-
-Session-Unique File Output (WriteLogToFile):
-
-This critical function is executed in EndPlay().
-
-It generates a unique filename incorporating the date and time (Performance_YYYYMMDD_HHMMSS.json) to prevent data loss across sessions.
-
-The entire LoggedData array (TArray<FPerformanceMetrics>) is serialized into a single JSON array object under the key "PerformanceData".
-
-It ensures the PerformanceLogs directory path exists using FPlatformFileManager::Get().GetPlatformFile().CreateDirectoryTree() before writing the file, guaranteeing the file save operation won't fail due to a missing directory.
-
-## Core Gameplay Mechanics (Networked)
-
-### Combat and Health Management (UHealthSystem)
-
-The UHealthSystem component provides the robust, networked health and damage model for all characters (players and enemies).
-
-Server Authority on Health: The CurrentHealth variable is a RepNotify property. All functions that modify health (DecreaseHealth, IncreaseHealth) explicitly contain an authority check (if (!GetOwner()->HasAuthority()) return;). Only the server can change the health value.
-
-RepNotify Action (OnRep_Health):
-
-When the server changes CurrentHealth, this function is executed on both the server (where it is manually called after the change) and all clients.
-
-Its primary role is to calculate the HealthDelta and broadcast a multicast delegate (OnHealthChanged.Broadcast(...)). This allows all actors in the game (e.g., HUD widgets, hit-effect components) to react to the change without needing to poll the health value.
-
-Damage Flow: A client's action (e.g., shooting) translates into a Server RPC to the enemy's Actor. The server, upon receiving the RPC, runs the ApplyDamage() or DecreaseHealth() function, which updates the RepNotify variable and broadcasts the event to all.
-
-### Enemy Spawning and AI (AEnemySpawner)
-
-Enemy spawning is strictly a server-side responsibility, crucial for maintaining network performance and game balance.
-
-Server-Only Execution: The entire AEnemySpawner is configured to run only on the server. The StartSpawningTimer() and SpawnEnemy() functions check if (HasAuthority()) before executing.
-
-Spawn Logic and Timer:
-
-StartSpawningTimer() sets a repeating FTimerHandle that calls SpawnEnemy() at the rate specified by ARoundManager::CurrentRoundSpawnRate.
-
-SpawnEnemy() checks if the current SpawnedEnemies count is less than ARoundManager::CurrentRoundMaxEnemies before proceeding.
-
-Navigation System Integration (UNavigationSystemV1):
-
-The spawner doesn't just pick a random location; it utilizes the UNavigationSystemV1 to call GetRandomReachablePointInRadius(). This ensures that the spawned enemy is placed on the NavMesh in a location the AI can actually pathfind from, preventing stuck enemies.
-
-Actual actor spawning is done with GetWorld()->SpawnActor<ACharacter>(...) using ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn.
-
-### Procedural Map Generation (AProceduralGeneration)
-
-The map generation system uses a deterministic approach to ensure that a single seed generates the exact same map on the server and all clients.
-
-Replicated Seed: The Seed variable is the only piece of information needed for the generation algorithm. It is marked for standard replication (DOREPLIFETIME(AProceduralGeneration, Seed)).
-
-Deterministic Generation: When the generation function (GenerateMap()) is called, it uses the replicated Seed to initialize the pseudo-random number generator (FMath::RandInit(Seed)).
-
-Server-Only Actor Spawning: While mesh generation (performed by UProceduralMeshComponent and UHierarchicalInstancedStaticMeshComponent) can run on all clients, the spawning of interactive AActors (like resource nodes or interactable objects) is gated by an authority check (if (HasAuthority())). This prevents clients from independently spawning objects and causing network conflicts.
-
-## Comprehensive Inter-System Communication Flow
-
-The various core systems are seamlessly integrated using Unreal Engine's native networking and delegate architecture, maintaining a clean, decoupled structure where the server is always the initiator of state change.
-
-When a player successfully completes a round, the server-authoritative ARoundManager drives the entire pipeline. Upon successful round termination, the ARoundManager calls the cleanup function on the AEnemySpawner, instructing it to clear all active AI and stop its internal spawning timer. Simultaneously, the ARoundManager communicates the final round number and the player's total UnlockedPerks to the static TelemetryLogger, triggering the atomic read-modify-write operation to update the permanent player profile file.
-
-The player's input regarding progression, such as clicking a button to draw a perk, initiates a client-to-server interaction. The ULootPool receives this input and uses a Server RPC to execute the random draw logic on the server. The server then communicates the result to the UPlayerPerks component by calling its PerkEquipLogic function. This final server-side execution updates the replicated state and sets the LastEquippedPerk RepNotify property, which in turn broadcasts the success event back to all clients for synchronized visual feedback.
-
-The combat system is equally dependent on server flow. A client registers a hit on an enemy, which is communicated to the server via an appropriate RPC (e.g., Server_ProcessHit). The server then calls the enemy's UHealthSystem::DecreaseHealth function. This server-only function modifies the health RepNotify property, triggering OnRep_Health on all machines. This RepNotify is the primary method of propagating the health state change, allowing the enemy's own AI components and the players' HUDs to react instantly and synchronously to the damage event. The client-side UPerformanceLogger operates entirely independently of this gameplay loop, passively collecting metrics throughout the session and performing its file write operation only upon game termination (EndPlay), ensuring that its file I/O operations do not interfere with live gameplay or network latency.
+The Unreal Engine C++ multiplayer roguelike is built on a robust, layered, and strictly **Server-Authoritative** foundation. Every critical system—from health management using RepNotify properties to perk progression secured by Reliable RPC gateways and defensive server-side logic—is designed to be impervious to client-side cheating. The game loop is governed by the **`ARoundManager`**'s authoritative tick, which coordinates both difficulty scaling and enemy population via the **`AEnemySpawner`**'s NavMesh-integrated, server-timed spawning. Data integrity for player profiles is maintained through the static **`TelemetryLogger`**'s R-M-W pattern, while client performance is passively monitored by the asynchronous **`UPerformanceLogger`**. The procedural generation system leverages a replicated **`Seed`** and HISM for synchronized, performant world creation. This comprehensive architecture ensures a stable, secure, and cooperative multiplayer roguelike experience. The strict adherence to Unreal's C++ networking primitives and defensive programming patterns provides a highly scalable and maintainable codebase capable of supporting the demanding progression and emergent gameplay inherent to the roguelike genre. The use of components on the **`AFMPCharacter`** to cleanly separate concerns—from health state to progression state—is the cornerstone of the system's modularity, allowing for efficient development and iteration of new game features.
