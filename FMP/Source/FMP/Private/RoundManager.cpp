@@ -26,6 +26,13 @@ ARoundManager::ARoundManager()
 void ARoundManager::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	if (HasAuthority())
+	{
+		TArray<AActor*> FoundControllers;
+		UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerController::StaticClass(), FoundControllers);
+		TotalPlayersInGame = FoundControllers.Num(); 
+	}
 }
 
 void ARoundManager::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -39,6 +46,54 @@ void ARoundManager::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	DOREPLIFETIME(ARoundManager, CurrentRoundSpawnRate);
 	DOREPLIFETIME(ARoundManager, CurrentRoundMaxEnemies);
 	DOREPLIFETIME(ARoundManager, RoundDuration);
+	DOREPLIFETIME(ARoundManager, ReadyPlayersCount);      
+	DOREPLIFETIME(ARoundManager, TotalPlayersInGame);
+}
+
+void ARoundManager::OnRep_ReadyPlayers()
+{
+	// This runs on the client when ReadyPlayersCount is updated
+	// Broadcasts the event to notify Blueprints (HUD) of the updated count
+	OnPlayerReadyChanged.Broadcast(ReadyPlayersCount);
+}
+
+void ARoundManager::Server_PlayerReadyUp_Implementation(APlayerController* PlayerController)
+{
+	// Must be server, not active round, and valid controller
+	if (HasAuthority() && !bIsRoundActive && PlayerController) 
+	{
+		// Toggle logic based on whether the player is already in the set
+		if (ReadyPlayersSet.Contains(PlayerController))
+		{
+			// UNREADY UP
+			ReadyPlayersSet.Remove(PlayerController);
+			ReadyPlayersCount--;
+		}
+		else
+		{
+			// READY UP
+			ReadyPlayersSet.Add(PlayerController);
+			ReadyPlayersCount++;
+
+			// After readying, check if round can start
+			CheckAllPlayersReady();
+		}
+	}
+}
+
+void ARoundManager::CheckAllPlayersReady()
+{
+	if (HasAuthority() && TotalPlayersInGame > 0)
+	{
+		// Check if the number of players in the set meets or exceeds the total expected players
+		if (ReadyPlayersSet.Num() >= TotalPlayersInGame)
+		{
+			// Reset for the next round
+			ReadyPlayersSet.Empty(); 
+			ReadyPlayersCount = 0; 
+			StartRound(); // Starts the round for all players
+		}
+	}
 }
 
 void ARoundManager::Server_BeginNewRound_Implementation()
@@ -74,6 +129,14 @@ void ARoundManager::StartRound()
 {
 	if (HasAuthority()) // Server check
 	{
+		TArray<AActor*> FoundControllers;
+		UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerController::StaticClass(), FoundControllers);
+		TotalPlayersInGame = FoundControllers.Num(); 
+
+		// Safety clear for Ready systems
+		ReadyPlayersSet.Empty(); 
+		ReadyPlayersCount = 0;
+		
 		// Use GetAllActorsOfClass to find every instance of AEnemySpawner
 		TArray<AActor*> FoundActors;
 		UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemySpawner::StaticClass(), FoundActors);

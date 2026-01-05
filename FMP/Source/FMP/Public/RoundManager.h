@@ -7,9 +7,11 @@
 #include "RoundManager.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRoundStateChanged, bool, IsActive);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayerReadyChanged, int32, CurrentReadyPlayers);
 
 class FLifetimeProperty;
 class AEnemySpawner;
+class APlayerController;
 
 UCLASS()
 class FMP_API ARoundManager : public AActor
@@ -29,8 +31,17 @@ public:
 	UPROPERTY(EditAnywhere, Replicated, Category = "Round Management|Spawning", Meta = (ClampMin = "1"))
 	int32 CurrentRoundMaxEnemies = 10;
 
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ReadyPlayers, Category = "Round Management")
+	int32 ReadyPlayersCount = 0;
+
+	UPROPERTY(BlueprintReadOnly, Replicated, Category = "Round Management")
+	int32 TotalPlayersInGame = 0;
+
 	UPROPERTY(BlueprintAssignable, Category = "Round Management|Events")
 	FOnRoundStateChanged OnRoundStateChanged;
+
+	UPROPERTY(BlueprintAssignable, Category = "Round Management|Events")
+	FOnPlayerReadyChanged OnPlayerReadyChanged;
 	
 private:
 	UPROPERTY(ReplicatedUsing = OnRep_IsRoundActive)
@@ -47,10 +58,15 @@ private:
 
 	UPROPERTY(Transient) 
 	TArray<AEnemySpawner*> AllEnemySpawners;
+
+	UPROPERTY(Transient) 
+	TSet<APlayerController*> ReadyPlayersSet;
 	
 	void StartRound();
 	
 	void EndRound();
+
+	void CheckAllPlayersReady();
 
 protected:
 	// Called when the game starts or when spawned
@@ -61,6 +77,9 @@ protected:
 	
 	UFUNCTION()
 	void OnRep_RoundTimer();
+
+	UFUNCTION()
+	void OnRep_ReadyPlayers();
 
 	UFUNCTION(Server, Reliable)
 	void Server_BeginNewRound();
@@ -73,6 +92,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Round Management")
 	void BeginNewRound();
+	
+	UFUNCTION(Server, Reliable)
+	void Server_PlayerReadyUp(APlayerController* PlayerController);
 	
 	UFUNCTION(BlueprintPure, Category = "Round Management")
 	float GetRemainingTime() const { return RoundTimer; }
