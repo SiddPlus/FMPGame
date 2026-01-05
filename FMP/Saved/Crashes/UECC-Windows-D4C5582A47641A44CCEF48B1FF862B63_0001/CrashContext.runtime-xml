@@ -29,7 +29,7 @@
 		<DeploymentName />
 		<EngineVersion>5.6.1-44394996+++UE5+Release-5.6</EngineVersion>
 		<EngineCompatibleVersion>5.6.1-44394996+++UE5+Release-5.6</EngineCompatibleVersion>
-		<CommandLine>C:\Users\Siddg\Downloads\FMPGame\FMP\FMP.uproject</CommandLine>
+		<CommandLine>CommandLineRemoved</CommandLine>
 		<LanguageLCID>9</LanguageLCID>
 		<AppDefaultLocale>en-GB</AppDefaultLocale>
 		<BuildVersion>++UE5+Release-5.6-CL-44394996</BuildVersion>
