@@ -93,7 +93,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Round Management")
 	void BeginNewRound();
 	
-	UFUNCTION(Server, Reliable)
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Round Management")
 	void Server_PlayerReadyUp(APlayerController* PlayerController);
 	
 	UFUNCTION(BlueprintPure, Category = "Round Management")
