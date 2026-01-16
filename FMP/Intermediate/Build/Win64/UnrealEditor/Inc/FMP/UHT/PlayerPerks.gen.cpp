@@ -12,7 +12,9 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodePlayerPerks() {}
 
 // ********** Begin Cross Module References ********************************************************
+COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
+FMP_API UClass* Z_Construct_UClass_UPerkEffectBase_NoRegister();
 FMP_API UClass* Z_Construct_UClass_UPlayerPerks();
 FMP_API UClass* Z_Construct_UClass_UPlayerPerks_NoRegister();
 FMP_API UFunction* Z_Construct_UDelegateFunction_FMP_OnPerkSelectionNeeded__DelegateSignature();
@@ -94,6 +96,10 @@ struct Z_Construct_UScriptStruct_FPerks_Statics
 		{ "Category", "Perk Details" },
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PerkEffectClass_MetaData[] = {
+		{ "Category", "Perk Details" },
+		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RoundLevelUnlockAmount_MetaData[] = {
 		{ "Category", "Perk Details" },
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
@@ -101,6 +107,7 @@ struct Z_Construct_UScriptStruct_FPerks_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStrPropertyParams NewProp_Name;
 	static const UECodeGen_Private::FStrPropertyParams NewProp_Description;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_PerkEffectClass;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_RoundLevelUnlockAmount;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static void* NewStructOps()
@@ -111,10 +118,12 @@ struct Z_Construct_UScriptStruct_FPerks_Statics
 };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FPerks_Statics::NewProp_Name = { "Name", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FPerks, Name), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Name_MetaData), NewProp_Name_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FPerks_Statics::NewProp_Description = { "Description", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FPerks, Description), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Description_MetaData), NewProp_Description_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UScriptStruct_FPerks_Statics::NewProp_PerkEffectClass = { "PerkEffectClass", nullptr, (EPropertyFlags)0x0014000000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FPerks, PerkEffectClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UPerkEffectBase_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PerkEffectClass_MetaData), NewProp_PerkEffectClass_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FPerks_Statics::NewProp_RoundLevelUnlockAmount = { "RoundLevelUnlockAmount", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FPerks, RoundLevelUnlockAmount), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RoundLevelUnlockAmount_MetaData), NewProp_RoundLevelUnlockAmount_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FPerks_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FPerks_Statics::NewProp_Name,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FPerks_Statics::NewProp_Description,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FPerks_Statics::NewProp_PerkEffectClass,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FPerks_Statics::NewProp_RoundLevelUnlockAmount,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FPerks_Statics::PropPointers) < 2048);
@@ -344,7 +353,7 @@ struct Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics::NewProp_NewPerk = { "NewPerk", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(PlayerPerks_eventOnPerkEquipped_ClientEvent_Parms, NewPerk), Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NewPerk_MetaData), NewProp_NewPerk_MetaData) }; // 4124859362
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics::NewProp_NewPerk = { "NewPerk", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(PlayerPerks_eventOnPerkEquipped_ClientEvent_Parms, NewPerk), Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NewPerk_MetaData), NewProp_NewPerk_MetaData) }; // 3622194358
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics::NewProp_NewPerk,
 };
@@ -705,7 +714,7 @@ struct Z_Construct_UClass_UPlayerPerks_Statics
 		{ &Z_Construct_UFunction_UPlayerPerks_EquipPerk, "EquipPerk" }, // 161918881
 		{ &Z_Construct_UFunction_UPlayerPerks_FinishedPerkSelection, "FinishedPerkSelection" }, // 726752084
 		{ &Z_Construct_UFunction_UPlayerPerks_IsPerkSelectionActive, "IsPerkSelectionActive" }, // 1836899518
-		{ &Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent, "OnPerkEquipped_ClientEvent" }, // 3066845085
+		{ &Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent, "OnPerkEquipped_ClientEvent" }, // 1186238673
 		{ &Z_Construct_UFunction_UPlayerPerks_OnRep_IsPerkSelectionActive, "OnRep_IsPerkSelectionActive" }, // 1963707831
 		{ &Z_Construct_UFunction_UPlayerPerks_OnRep_LastEquippedPerk, "OnRep_LastEquippedPerk" }, // 2699304897
 		{ &Z_Construct_UFunction_UPlayerPerks_ServerEquipPerk, "ServerEquipPerk" }, // 502088429
@@ -725,13 +734,13 @@ void Z_Construct_UClass_UPlayerPerks_Statics::NewProp_bIsPerkSelectionActive_Set
 	((UPlayerPerks*)Obj)->bIsPerkSelectionActive = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_bIsPerkSelectionActive = { "bIsPerkSelectionActive", "OnRep_IsPerkSelectionActive", (EPropertyFlags)0x0010000100000034, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UPlayerPerks), &Z_Construct_UClass_UPlayerPerks_Statics::NewProp_bIsPerkSelectionActive_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsPerkSelectionActive_MetaData), NewProp_bIsPerkSelectionActive_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LastEquippedPerk = { "LastEquippedPerk", "OnRep_LastEquippedPerk", (EPropertyFlags)0x0010000100000034, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, LastEquippedPerk), Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastEquippedPerk_MetaData), NewProp_LastEquippedPerk_MetaData) }; // 4124859362
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LockedPerks_Inner = { "LockedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 4124859362
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LockedPerks = { "LockedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, LockedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LockedPerks_MetaData), NewProp_LockedPerks_MetaData) }; // 4124859362
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_UnlockedPerks_Inner = { "UnlockedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 4124859362
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_UnlockedPerks = { "UnlockedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, UnlockedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UnlockedPerks_MetaData), NewProp_UnlockedPerks_MetaData) }; // 4124859362
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_EquippedPerks_Inner = { "EquippedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 4124859362
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_EquippedPerks = { "EquippedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, EquippedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EquippedPerks_MetaData), NewProp_EquippedPerks_MetaData) }; // 4124859362
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LastEquippedPerk = { "LastEquippedPerk", "OnRep_LastEquippedPerk", (EPropertyFlags)0x0010000100000034, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, LastEquippedPerk), Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastEquippedPerk_MetaData), NewProp_LastEquippedPerk_MetaData) }; // 3622194358
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LockedPerks_Inner = { "LockedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 3622194358
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LockedPerks = { "LockedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, LockedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LockedPerks_MetaData), NewProp_LockedPerks_MetaData) }; // 3622194358
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_UnlockedPerks_Inner = { "UnlockedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 3622194358
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_UnlockedPerks = { "UnlockedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, UnlockedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UnlockedPerks_MetaData), NewProp_UnlockedPerks_MetaData) }; // 3622194358
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_EquippedPerks_Inner = { "EquippedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 3622194358
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_EquippedPerks = { "EquippedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, EquippedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EquippedPerks_MetaData), NewProp_EquippedPerks_MetaData) }; // 3622194358
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UPlayerPerks_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPlayerPerks_Statics::NewProp_OnPerkSelectionNeeded,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPlayerPerks_Statics::NewProp_bIsPerkSelectionActive,
@@ -797,13 +806,13 @@ UPlayerPerks::~UPlayerPerks() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FPerks::StaticStruct, Z_Construct_UScriptStruct_FPerks_Statics::NewStructOps, TEXT("Perks"), &Z_Registration_Info_UScriptStruct_FPerks, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPerks), 4124859362U) },
+		{ FPerks::StaticStruct, Z_Construct_UScriptStruct_FPerks_Statics::NewStructOps, TEXT("Perks"), &Z_Registration_Info_UScriptStruct_FPerks, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPerks), 3622194358U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPlayerPerks, UPlayerPerks::StaticClass, TEXT("UPlayerPerks"), &Z_Registration_Info_UClass_UPlayerPerks, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPlayerPerks), 215484227U) },
+		{ Z_Construct_UClass_UPlayerPerks, UPlayerPerks::StaticClass, TEXT("UPlayerPerks"), &Z_Registration_Info_UClass_UPlayerPerks, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPlayerPerks), 1611421121U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_2726584666(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_1102477861(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ScriptStructInfo),
 	nullptr, 0);

@@ -35,7 +35,7 @@ struct FPerks;
 // ********** End ScriptStruct FPerks **************************************************************
 
 // ********** Begin Class UPlayerPerks *************************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_30_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_33_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual void ServerFinishedPerkSelection_Implementation(); \
 	virtual void ServerEquipPerk_Implementation(const FString& PerkName); \
 	virtual void ServerUnlockPerk_Implementation(const FString& PerkName); \
@@ -51,10 +51,10 @@ struct FPerks;
 	DECLARE_FUNCTION(execUnlockPerk);
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_30_CALLBACK_WRAPPERS
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_33_CALLBACK_WRAPPERS
 FMP_API UClass* Z_Construct_UClass_UPlayerPerks_NoRegister();
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_30_INCLASS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_33_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUPlayerPerks(); \
 	friend struct Z_Construct_UClass_UPlayerPerks_Statics; \
@@ -75,7 +75,7 @@ public: \
 	DECLARE_VALIDATE_GENERATED_REP_ENUMS(NO_API)
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_30_ENHANCED_CONSTRUCTORS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_33_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	UPlayerPerks(UPlayerPerks&&) = delete; \
 	UPlayerPerks(const UPlayerPerks&) = delete; \
@@ -85,14 +85,14 @@ public: \
 	NO_API virtual ~UPlayerPerks();
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_27_PROLOG
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_30_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_30_PROLOG
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_33_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_30_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_30_CALLBACK_WRAPPERS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_30_INCLASS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_30_ENHANCED_CONSTRUCTORS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_33_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_33_CALLBACK_WRAPPERS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_33_INCLASS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_33_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

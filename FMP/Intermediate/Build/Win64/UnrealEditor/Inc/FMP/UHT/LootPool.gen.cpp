@@ -240,8 +240,8 @@ struct Z_Construct_UClass_ULootPool_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULootPool_Statics::NewProp_PlayerPerksComponent = { "PlayerPerksComponent", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ULootPool, PlayerPerksComponent), Z_Construct_UClass_UPlayerPerks_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerPerksComponent_MetaData), NewProp_PlayerPerksComponent_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ULootPool_Statics::NewProp_CurrentPerkPool_Inner = { "CurrentPerkPool", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 4124859362
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ULootPool_Statics::NewProp_CurrentPerkPool = { "CurrentPerkPool", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ULootPool, CurrentPerkPool), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentPerkPool_MetaData), NewProp_CurrentPerkPool_MetaData) }; // 4124859362
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ULootPool_Statics::NewProp_CurrentPerkPool_Inner = { "CurrentPerkPool", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 3622194358
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ULootPool_Statics::NewProp_CurrentPerkPool = { "CurrentPerkPool", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ULootPool, CurrentPerkPool), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentPerkPool_MetaData), NewProp_CurrentPerkPool_MetaData) }; // 3622194358
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULootPool_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULootPool_Statics::NewProp_PlayerPerksComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULootPool_Statics::NewProp_CurrentPerkPool_Inner,
@@ -293,10 +293,10 @@ ULootPool::~ULootPool() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ULootPool, ULootPool::StaticClass, TEXT("ULootPool"), &Z_Registration_Info_UClass_ULootPool, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULootPool), 922312735U) },
+		{ Z_Construct_UClass_ULootPool, ULootPool::StaticClass, TEXT("ULootPool"), &Z_Registration_Info_UClass_ULootPool, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULootPool), 4064776360U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h__Script_FMP_1724345183(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h__Script_FMP_1502392964(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

@@ -2,6 +2,7 @@
 
 
 #include "PlayerPerks.h"
+#include "PerkEffectBase.h"
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/Actor.h"
 
@@ -191,6 +192,17 @@ bool UPlayerPerks::PerkEquipLogic(const FString& PerkName)
         FPerks PerkToEquip = UnlockedPerks[FoundIndex];
         UnlockedPerks.RemoveAt(FoundIndex);
         EquippedPerks.Add(PerkToEquip);
+
+        if (PerkToEquip.PerkEffectClass)
+        {
+            // Create the effect object
+            UPerkEffectBase* NewEffect = NewObject<UPerkEffectBase>(this, PerkToEquip.PerkEffectClass);
+            if (NewEffect)
+            {
+                // Execute the Apply logic (C++ or Blueprint)
+                NewEffect->ApplyPerkEffect(GetOwner());
+            }
+        }
 
         // SET THE REPLICATED VARIABLE (Triggers RepNotify on client)
         LastEquippedPerk = PerkToEquip; 

@@ -19,6 +19,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Perk Details")
 	FString Description;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Perk Details")
+	TSubclassOf<class UPerkEffectBase> PerkEffectClass;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Perk Details")
 	int32 RoundLevelUnlockAmount = 0;
