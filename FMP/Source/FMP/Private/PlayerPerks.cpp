@@ -181,8 +181,20 @@ bool UPlayerPerks::PerkUnlockLogic(const FString& PerkName)
 
 bool UPlayerPerks::PerkEquipLogic(const FString& PerkName)
 {
-    if (!GetOwner() || !GetOwner()->HasAuthority()) return false;
+   if (!GetOwner() || !GetOwner()->HasAuthority()) return false;
 
+    // 1. Check if the perk is already equipped (Prevent duplicates)
+    bool bAlreadyEquipped = EquippedPerks.ContainsByPredicate([&PerkName](const FPerks& P) {
+        return P.Name.Equals(PerkName, ESearchCase::IgnoreCase);
+    });
+
+    if (bAlreadyEquipped)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("SERVER: Perk '%s' is already equipped!"), *PerkName);
+        return false;
+    }
+
+    // 2. Find the perk in the Unlocked array
     int32 FoundIndex = UnlockedPerks.IndexOfByPredicate([&PerkName](const FPerks& Perk){
         return Perk.Name.Equals(PerkName, ESearchCase::IgnoreCase);
     });
@@ -190,25 +202,24 @@ bool UPlayerPerks::PerkEquipLogic(const FString& PerkName)
     if (FoundIndex != INDEX_NONE)
     {
         FPerks PerkToEquip = UnlockedPerks[FoundIndex];
-        UnlockedPerks.RemoveAt(FoundIndex);
+        
+        // REMOVED: UnlockedPerks.RemoveAt(FoundIndex); <--- Keep it in the unlocked array
+        
         EquippedPerks.Add(PerkToEquip);
 
         if (PerkToEquip.PerkEffectClass)
         {
-            // Create the effect object
             UPerkEffectBase* NewEffect = NewObject<UPerkEffectBase>(this, PerkToEquip.PerkEffectClass);
             if (NewEffect)
             {
-                // Execute the Apply logic (C++ or Blueprint)
                 NewEffect->ApplyPerkEffect(GetOwner());
             }
         }
 
-        // SET THE REPLICATED VARIABLE (Triggers RepNotify on client)
         LastEquippedPerk = PerkToEquip; 
-        OnRep_LastEquippedPerk(); // Call directly on server for consistency
+        OnRep_LastEquippedPerk(); 
         
-        UE_LOG(LogTemp, Warning, TEXT("SERVER: Perk '%s' equipped."), *PerkName);
+        UE_LOG(LogTemp, Warning, TEXT("SERVER: Perk '%s' equipped and retained in Unlocked list."), *PerkName);
         return true;
     }
     

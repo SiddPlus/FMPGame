@@ -105,10 +105,21 @@ void ULootPool::ResetPool()
     }
 
     CurrentPerkPool.Empty();
-    // Copy all current Unlocked Perks from the Player Perks Component (the deck source)
-    CurrentPerkPool.Append(PlayerPerksComponent->UnlockedPerks); 
 
-    UE_LOG(LogTemp, Warning, TEXT("SERVER: Loot Pool reset from Unlocked Perks. Available: %d"), CurrentPerkPool.Num());
+    // Only add perks that are UNLOCKED but NOT yet EQUIPPED
+    for (const FPerks& UnlockedPerk : PlayerPerksComponent->UnlockedPerks)
+    {
+        bool bIsEquipped = PlayerPerksComponent->EquippedPerks.ContainsByPredicate([&UnlockedPerk](const FPerks& EP) {
+            return EP.Name.Equals(UnlockedPerk.Name, ESearchCase::IgnoreCase);
+        });
+
+        if (!bIsEquipped)
+        {
+            CurrentPerkPool.Add(UnlockedPerk);
+        }
+    }
+
+    UE_LOG(LogTemp, Warning, TEXT("SERVER: Loot Pool reset. Available non-equipped perks: %d"), CurrentPerkPool.Num());
 }
 
 bool ULootPool::DrawPerk_ServerLogic(FPerks& OutPerk)
