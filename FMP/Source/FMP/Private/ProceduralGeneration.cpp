@@ -10,6 +10,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "HAL/PlatformTime.h"
 #include "Engine/Engine.h"
+#include "NavigationSystem.h"
 // **Multiplayer Change:** Required for DOREPLIFETIME macro
 #include "Net/UnrealNetwork.h"
 
@@ -40,8 +41,61 @@ void AProceduralGeneration::OnRep_Seed()
 	// Run map generation only after the deterministic seed has been set/received.
 	if (Seed != 0)
 	{
-		GenerateMap();
+		//GenerateMap();
+        FMath::RandInit(Seed);
+        DeformMeshWithNoise();
+        PopulateWorld();
 	}
+}
+
+void AProceduralGeneration::DeformMeshWithNoise()
+{
+    // 1. Generate new deterministic offset
+    NoiseOffset = FVector2D(FMath::RandRange(-10000.f, 10000.f), FMath::RandRange(-10000.f, 10000.f));
+
+    // 2. Update existing vertex Z values
+    for (int i = 0; i <= XSize; ++i)
+    {
+        for (int j = 0; j <= YSize; ++j)
+        {
+            int32 Index = i * (YSize + 1) + j;
+            float Z = FMath::PerlinNoise2D(FVector2D((i * NoiseScale + NoiseOffset.X), (j * NoiseScale + NoiseOffset.Y))) * ZMultiplier;
+            Vertices[Index].Z = Z;
+        }
+    }
+
+    // 3. Rebuild Normals/Tangents for the new hills
+    UKismetProceduralMeshLibrary::CalculateTangentsForMesh(Vertices, Triangles, UV0, Normals, Tangents);
+
+    // 4. Update the mesh section (faster than CreateMeshSection)
+    ProceduralMesh->UpdateMeshSection(0, Vertices, Normals, UV0, TArray<FColor>(), Tangents);
+}
+
+void AProceduralGeneration::PopulateWorld()
+{
+    // Reset data structures
+    SpawnedObjectGrid.Reset();
+    SpawnedMeshCounts.Reset();
+    SpawnedActorCounts.Reset();
+
+    // Clean up old instances if they exist
+    for (auto& Elem : MeshToHISMMap)
+    {
+        if (Elem.Value) Elem.Value->ClearInstances();
+    }
+
+    SetupHISMComponents();
+    PopulateObjects(); // Your existing logic to place trees/actors on the new Z heights
+
+    // Calculate exclusion for bounds
+    BorderExclusion = FMath::CeilToInt(OutOfBoundsDepth / Scale);
+
+    UNavigationSystemV1* NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+    if (NavSys && ProceduralMesh)
+    {
+        // This is the "Magic Line" for Procedural Mesh AI
+        NavSys->UpdateComponentInNavOctree(*ProceduralMesh);
+    }
 }
 
 // **Refactor:** The entire map generation logic is now in this function.
@@ -87,11 +141,42 @@ void AProceduralGeneration::GenerateMap()
 	BorderExclusion = FMath::CeilToInt(OutOfBoundsDepth / Scale);
 }
 
+void AProceduralGeneration::OnConstruction(const FTransform& Transform)
+{
+    Super::OnConstruction(Transform);
+    GenerateBaseMesh();
+    ProceduralMesh->bUseComplexAsSimpleCollision = true;
+    ProceduralMesh->SetCanEverAffectNavigation(true);
+}
+
+void AProceduralGeneration::GenerateBaseMesh()
+{
+    Vertices.Empty();
+    Triangles.Empty();
+    UV0.Empty();
+
+    // Create a FLAT grid (Z = 0)
+    for (int i = 0; i <= XSize; ++i)
+    {
+        for (int j = 0; j <= YSize; ++j)
+        {
+            Vertices.Add(FVector(i * Scale, j * Scale, 0.0f));
+            UV0.Add(FVector2D(i * UVScale, j * UVScale));
+        }
+    }
+
+    CreateTriangles(); // Use your existing triangle logic
+
+    // Create the initial mesh section so NavMesh can see it
+    ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), UV0, TArray<FColor>(), TArray<FProcMeshTangent>(), true);
+    ProceduralMesh->SetMaterial(0, TerrainMaterial);
+}
+
 // Called when the game starts or when spawned
 void AProceduralGeneration::BeginPlay()
 {
 	Super::BeginPlay();
-
+    /*
 	// **Multiplayer Change:** Only the server (HasAuthority()) generates and sets the replicated Seed.
 	if (HasAuthority())
 	{
@@ -106,7 +191,14 @@ void AProceduralGeneration::BeginPlay()
 		// Manually call the RepNotify function to run the generation logic on the Server immediately.
 		OnRep_Seed();
 	}
-	// Clients wait for the Seed to be replicated from the server, which automatically triggers OnRep_Seed().
+	// Clients wait for the Seed to be replicated from the server, which automatically triggers OnRep_Seed().*/
+
+    if (HasAuthority())
+    {
+        // Generate new seed every time we press play
+        Seed = FMath::TruncToInt(FPlatformTime::Seconds() * 1000.0f);
+        OnRep_Seed();
+    }
 	
 }
 

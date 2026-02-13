@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "ProceduralMeshComponent.h"
 #include "Components/HierarchicalInstancedStaticMeshComponent.h"
+#include "NavigationSystem.h"
 #include "ProceduralGeneration.generated.h"
 
 class UProceduralMeshComponent;
@@ -214,6 +215,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
 	
 	UPROPERTY(EditAnywhere, Category = "Materials")
 	UMaterialInterface* TerrainMaterial;
@@ -221,6 +224,12 @@ protected:
 	// **Multiplayer Change:** RepNotify function
 	UFUNCTION()
 	void OnRep_Seed();
+
+	void GenerateBaseMesh();
+
+	void DeformMeshWithNoise();
+
+	void PopulateWorld();
 
 	// **Refactor:** Function to hold the core generation logic
 	void GenerateMap();

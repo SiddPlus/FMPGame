@@ -26,21 +26,21 @@
 		"Module.FMP.2.cpp.obj": [
 			"EnemySpawner.gen.cpp.obj",
 			"EnvQueryContext_Player.gen.cpp.obj",
+			"FMP.init.gen.cpp.obj",
 			"FMPCharacter.gen.cpp.obj",
 			"FMPGameMode.gen.cpp.obj",
 			"FMPPlayerController.gen.cpp.obj",
 			"HealthSystem.gen.cpp.obj",
+			"LootPool.gen.cpp.obj",
 			"PerformanceData.gen.cpp.obj",
 			"PerformanceLogger.gen.cpp.obj",
+			"PerkEffectBase.gen.cpp.obj",
 			"PlatformingCharacter.gen.cpp.obj",
 			"PlatformingGameMode.gen.cpp.obj",
 			"PlatformingPlayerController.gen.cpp.obj",
+			"PlayerPerks.gen.cpp.obj",
 			"ProceduralGeneration.gen.cpp.obj",
-			"RoundManager.gen.cpp.obj",
-			"FMP.init.gen.cpp.obj",
-			"LootPool.gen.cpp.obj",
-			"PerkEffectBase.gen.cpp.obj",
-			"PlayerPerks.gen.cpp.obj"
+			"RoundManager.gen.cpp.obj"
 		],
 		"Module.FMP.3.cpp.obj": [
 			"SideScrollingAIController.gen.cpp.obj",
@@ -61,12 +61,12 @@
 			"FMPCharacter.cpp.obj",
 			"FMPGameMode.cpp.obj",
 			"FMPPlayerController.cpp.obj",
-			"EnemySpawner.cpp.obj",
 			"HealthSystem.cpp.obj",
 			"LootPool.cpp.obj",
 			"PerformanceData.cpp.obj",
 			"PerformanceLogger.cpp.obj",
-			"ProceduralGeneration.cpp.obj",
+			"PerkEffectBase.cpp.obj",
+			"PlayerPerks.cpp.obj",
 			"RoundManager.cpp.obj",
 			"TelemetryLogger.cpp.obj",
 			"CombatAIController.cpp.obj",
@@ -106,8 +106,8 @@
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
 			"SideScrollingUI.cpp.obj",
-			"PerkEffectBase.cpp.obj",
-			"PlayerPerks.cpp.obj"
+			"EnemySpawner.cpp.obj",
+			"ProceduralGeneration.cpp.obj"
 		]
 	}
 }
