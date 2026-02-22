@@ -146,6 +146,7 @@ void AProceduralGeneration::OnConstruction(const FTransform& Transform)
     Super::OnConstruction(Transform);
     GenerateBaseMesh();
     ProceduralMesh->bUseComplexAsSimpleCollision = true;
+    ProceduralMesh->bUseAsyncCooking = false;
     ProceduralMesh->SetCanEverAffectNavigation(true);
 }
 

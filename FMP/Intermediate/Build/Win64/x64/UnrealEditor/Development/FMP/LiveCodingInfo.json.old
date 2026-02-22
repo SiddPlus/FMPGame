@@ -61,6 +61,7 @@
 			"FMPCharacter.cpp.obj",
 			"FMPGameMode.cpp.obj",
 			"FMPPlayerController.cpp.obj",
+			"EnemySpawner.cpp.obj",
 			"HealthSystem.cpp.obj",
 			"LootPool.cpp.obj",
 			"PerformanceData.cpp.obj",
@@ -106,8 +107,7 @@
 			"SideScrollingCharacter.cpp.obj",
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
-			"SideScrollingUI.cpp.obj",
-			"EnemySpawner.cpp.obj"
+			"SideScrollingUI.cpp.obj"
 		]
 	}
 }

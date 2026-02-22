@@ -3,6 +3,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Character.h"
 #include "NavigationSystem.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 AEnemySpawner::AEnemySpawner()
@@ -79,53 +80,51 @@ void AEnemySpawner::ConfigureSpawner(float NewSpawnRate, int32 NewMaxConcurrentE
 
 void AEnemySpawner::SpawnEnemy()
 {
-	// 1. Authorization Check: Only execute on the server
-	if (!HasAuthority())
-	{
-		return;
-	}
-	
-	// 2. Max Count Check
-	if (!EnemyToSpawnClass || SpawnedEnemies.Num() >= MaxConcurrentEnemies)
-	{
-		return;
-	}
-	
-	// 3. Determine Spawn Location
+	if (!HasAuthority() || !EnemyToSpawnClass || SpawnedEnemies.Num() >= MaxConcurrentEnemies) return;
+
 	FVector Origin = GetActorLocation();
-	FVector RandomPoint = Origin + FMath::VRand() * FMath::FRand() * SpawnRadius;
-	
-	// Check NavMesh for a valid location (important for AI)
-	UNavigationSystemV1* NavSys = UNavigationSystemV1::GetCurrent(GetWorld());
-	FNavLocation NavLocation;
-	
-	if (NavSys && NavSys->GetRandomReachablePointInRadius(Origin, SpawnRadius, NavLocation))
-	{
-		// Use the valid point found on the NavMesh
-		RandomPoint = NavLocation.Location;
-	}
-	else
-	{
-		// Fallback: If NavMesh is unavailable, spawn at the random point and hope for the best
-		UE_LOG(LogTemp, Warning, TEXT("Enemy Spawner failed to find reachable point on NavMesh. Spawning at random location."));
-	}
 
-	// 4. Spawn the Enemy
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-	
-	ACharacter* NewEnemy = GetWorld()->SpawnActor<ACharacter>(
-		EnemyToSpawnClass,
-		RandomPoint,
-		FRotator::ZeroRotator,
-		SpawnParams
-	);
+	// 1. Trace DOWN from above the spawner to find the PHYSICAL ground
+	FHitResult Hit;
+	FCollisionQueryParams TraceParams;
+	TraceParams.AddIgnoredActor(this);
 
-	if (NewEnemy)
+	// Start trace 500 units above, end 1000 units below
+	FVector Start = Origin + FVector(0, 0, 500);
+	FVector End = Origin - FVector(0, 0, 1000);
+
+	if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams))
 	{
-		SpawnedEnemies.Add(NewEnemy);
-		// Optional: Attach delegate to enemy's death event to decrement CurrentEnemyCount
-		// (Requires C++ or Blueprint logic in BP_Enemy to call a function on the spawner upon death)
+		// 2. We found the physical ground. Now find a spot on the NavMesh nearby.
+		UNavigationSystemV1* NavSys = UNavigationSystemV1::GetCurrent(GetWorld());
+		FNavLocation NavLocation;
+
+		if (NavSys && NavSys->GetRandomReachablePointInRadius(Hit.ImpactPoint, SpawnRadius, NavLocation))
+		{
+			// 3. SPAWN OFFSET: 
+			// We spawn them 70 units ABOVE the NavLocation.
+			// This ensures they "drop" onto the floor rather than spawning inside it.
+			FVector FinalSpawnPos = NavLocation.Location + FVector(0, 0, 70.0f);
+
+			FActorSpawnParameters SpawnParams;
+			// IMPORTANT: If they would hit a tree, this prevents the spawn
+			SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+
+			ACharacter* NewEnemy = GetWorld()->SpawnActor<ACharacter>(
+				EnemyToSpawnClass,
+				FinalSpawnPos,
+				FRotator::ZeroRotator,
+				SpawnParams
+			);
+
+			if (NewEnemy)
+			{
+				SpawnedEnemies.Add(NewEnemy);
+
+				// FORCE the character to "Land" on the procedural floor
+				NewEnemy->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+			}
+		}
 	}
 }
 
