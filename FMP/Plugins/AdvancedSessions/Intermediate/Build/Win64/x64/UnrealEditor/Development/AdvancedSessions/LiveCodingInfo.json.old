@@ -2,7 +2,7 @@
 	"RemapUnityFiles": 
 	{
 		"Module.AdvancedSessions.1.cpp.obj": [
-			"PerModuleInline.gen.cpp.obj",
+			"AdvancedExternalUILibrary.cpp.obj",
 			"AdvancedExternalUILibrary.gen.cpp.obj",
 			"AdvancedFriendsGameInstance.gen.cpp.obj",
 			"AdvancedFriendsInterface.gen.cpp.obj",
@@ -26,10 +26,10 @@
 			"LogoutUserCallbackProxy.gen.cpp.obj",
 			"SendFriendInviteCallbackProxy.gen.cpp.obj",
 			"StartSessionCallbackProxyAdvanced.gen.cpp.obj",
-			"UpdateSessionCallbackProxyAdvanced.gen.cpp.obj"
+			"UpdateSessionCallbackProxyAdvanced.gen.cpp.obj",
+			"PerModuleInline.gen.cpp.obj"
 		],
 		"Module.AdvancedSessions.2.cpp.obj": [
-			"AdvancedExternalUILibrary.cpp.obj",
 			"AdvancedFriendsGameInstance.cpp.obj",
 			"AdvancedFriendsInterface.cpp.obj",
 			"AdvancedFriendsLibrary.cpp.obj",
