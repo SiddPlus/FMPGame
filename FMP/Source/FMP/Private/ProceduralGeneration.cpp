@@ -177,28 +177,22 @@ void AProceduralGeneration::GenerateBaseMesh()
 void AProceduralGeneration::BeginPlay()
 {
 	Super::BeginPlay();
-    /*
-	// **Multiplayer Change:** Only the server (HasAuthority()) generates and sets the replicated Seed.
-	if (HasAuthority())
-	{
-		// If Seed is the default value (0), generate a new one based on time.
-		if (Seed == 0)
-		{
-			int32 RandomTimeSeed = FMath::TruncToInt(FPlatformTime::Seconds() * 1000.0f);
-			// Set the replicated variable. This automatically triggers OnRep_Seed on all clients.
-			Seed = RandomTimeSeed;
-		}
-
-		// Manually call the RepNotify function to run the generation logic on the Server immediately.
-		OnRep_Seed();
-	}
-	// Clients wait for the Seed to be replicated from the server, which automatically triggers OnRep_Seed().*/
 
     if (HasAuthority())
     {
-        // Generate new seed every time we press play
+        // 1. Generate new seed every time we press play
         Seed = FMath::TruncToInt(FPlatformTime::Seconds() * 1000.0f);
         OnRep_Seed();
+
+        // 2. Pick the shared spawn spot for everyone
+        DetermineMasterSpawnPoint();
+
+        // 3. Teleport the Host (Player 0)
+        APawn* HostPawn = UGameplayStatics::GetPlayerPawn(this, 0);
+        if (HostPawn)
+        {
+            HostPawn->SetActorLocation(GetPlayerSpawnPoint());
+        }
     }
 	
 }
@@ -512,26 +506,36 @@ FVector AProceduralGeneration::GetRandomPlanarOffset(const FVector& BaseLocation
     return OffsetLocation;
 }
 
+void AProceduralGeneration::DetermineMasterSpawnPoint()
+{
+    // Only pick the spot once per game session
+    if (!MasterSpawnLocation.IsZero()) return;
+
+    FVector SurfaceNormal;
+    // Radius of 200.0f ensures the area is clear of other spawned objects
+    FVector FoundPoint = GetRandomValidSpawnLocation(200.0f, SurfaceNormal);
+
+    if (!FoundPoint.IsZero())
+    {
+        FVector ActualNormal;
+        // Trace against the generated mesh to get the exact surface Z height
+        FVector GroundPoint = GetTerrainPointAtWorldLocationXY(FoundPoint, ActualNormal);
+
+        // Use your PlayerSpawnForwardOffset to hover slightly above the ground
+        MasterSpawnLocation = GroundPoint + (ActualNormal * PlayerSpawnForwardOffset);
+    }
+}
+
 
 FVector AProceduralGeneration::GetPlayerSpawnPoint()
 {
-    FVector PlayerSpawnLocation = FVector::ZeroVector;
-    FVector SurfaceNormal = FVector::UpVector;
-
-    int RandomBorderInt = FMath::RandRange(0, 3);
-    EBorder RandomBorder = static_cast<EBorder>(RandomBorderInt);
-
-    FVector BaseMidpointLocation = GetBorderMidpointLocation(RandomBorder, SurfaceNormal);
-
-    if (!BaseMidpointLocation.IsZero())
+    if (MasterSpawnLocation.IsZero())
     {
-        FVector ActualGroundLocation;
-        FVector ActualSurfaceNormal;
-        ActualGroundLocation = GetTerrainPointAtWorldLocationXY(BaseMidpointLocation, ActualSurfaceNormal);
-        PlayerSpawnLocation = ActualGroundLocation + ActualSurfaceNormal * PlayerSpawnForwardOffset;
+        DetermineMasterSpawnPoint();
     }
-    
-    return PlayerSpawnLocation;
+
+    // Return the shared spot with a small random XY jitter (approx 1 meter)
+    return MasterSpawnLocation + FVector(FMath::RandRange(-100.f, 100.f), FMath::RandRange(-100.f, 100.f), 0.0f);
 }
 
 FVector AProceduralGeneration::GetTerrainPointAtWorldLocationXY(FVector WorldLocationXY, FVector& OutSurfaceNormal)

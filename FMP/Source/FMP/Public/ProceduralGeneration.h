@@ -266,6 +266,10 @@ private:
 	float OutOfBoundsTimer = 0.0f;
 	bool bPlayerIsDead = false;
 
+	FVector MasterSpawnLocation = FVector::ZeroVector;
+
+	void DetermineMasterSpawnPoint();
+
 	void CreateVertices();
 	void CreateTriangles();
 	void PopulateObjects();
