@@ -32,7 +32,7 @@ private: \
 	static UClass* GetPrivateStaticClass(); \
 	friend FMP_API UClass* Z_Construct_UClass_AFMPGameMode_NoRegister(); \
 public: \
-	DECLARE_CLASS2(AFMPGameMode, AGameModeBase, COMPILED_IN_FLAGS(CLASS_Abstract | CLASS_Transient | CLASS_Config), CASTCLASS_None, TEXT("/Script/FMP"), Z_Construct_UClass_AFMPGameMode_NoRegister) \
+	DECLARE_CLASS2(AFMPGameMode, AGameModeBase, COMPILED_IN_FLAGS(0 | CLASS_Transient | CLASS_Config), CASTCLASS_None, TEXT("/Script/FMP"), Z_Construct_UClass_AFMPGameMode_NoRegister) \
 	DECLARE_SERIALIZER(AFMPGameMode)
 
 
@@ -42,7 +42,7 @@ public: \
 	AFMPGameMode(const AFMPGameMode&) = delete; \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AFMPGameMode); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AFMPGameMode); \
-	DEFINE_ABSTRACT_DEFAULT_CONSTRUCTOR_CALL(AFMPGameMode) \
+	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AFMPGameMode) \
 	NO_API virtual ~AFMPGameMode();
 
 

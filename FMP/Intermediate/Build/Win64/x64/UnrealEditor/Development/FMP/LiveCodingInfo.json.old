@@ -2,6 +2,7 @@
 	"RemapUnityFiles": 
 	{
 		"Module.FMP.1.cpp.obj": [
+			"FMP.cpp.obj",
 			"AnimNotify_CheckChargedAttack.gen.cpp.obj",
 			"AnimNotify_CheckCombo.gen.cpp.obj",
 			"AnimNotify_DoAttackTrace.gen.cpp.obj",
@@ -21,11 +22,10 @@
 			"CombatLavaFloor.gen.cpp.obj",
 			"CombatLifeBar.gen.cpp.obj",
 			"CombatPlayerController.gen.cpp.obj",
-			"CombatStateTreeUtility.gen.cpp.obj"
-		],
-		"Module.FMP.2.cpp.obj": [
+			"CombatStateTreeUtility.gen.cpp.obj",
 			"EnemySpawner.gen.cpp.obj",
 			"EnvQueryContext_Player.gen.cpp.obj",
+			"FMP.init.gen.cpp.obj",
 			"FMPCharacter.gen.cpp.obj",
 			"FMPGameMode.gen.cpp.obj",
 			"FMPPlayerController.gen.cpp.obj",
@@ -40,9 +40,6 @@
 			"PlayerPerks.gen.cpp.obj",
 			"ProceduralGeneration.gen.cpp.obj",
 			"RoundManager.gen.cpp.obj",
-			"FMP.init.gen.cpp.obj"
-		],
-		"Module.FMP.3.cpp.obj": [
 			"SideScrollingAIController.gen.cpp.obj",
 			"SideScrollingCameraManager.gen.cpp.obj",
 			"SideScrollingCharacter.gen.cpp.obj",
@@ -56,8 +53,10 @@
 			"SideScrollingSoftPlatform.gen.cpp.obj",
 			"SideScrollingStateTreeUtility.gen.cpp.obj",
 			"SideScrollingUI.gen.cpp.obj",
-			"PerModuleInline.gen.cpp.obj",
-			"FMP.cpp.obj",
+			"TheGameState.gen.cpp.obj",
+			"PerModuleInline.gen.cpp.obj"
+		],
+		"Module.FMP.2.cpp.obj": [
 			"FMPCharacter.cpp.obj",
 			"FMPPlayerController.cpp.obj",
 			"EnemySpawner.cpp.obj",
@@ -70,6 +69,7 @@
 			"ProceduralGeneration.cpp.obj",
 			"RoundManager.cpp.obj",
 			"TelemetryLogger.cpp.obj",
+			"TheGameState.cpp.obj",
 			"CombatAIController.cpp.obj",
 			"CombatEnemy.cpp.obj",
 			"CombatEnemySpawner.cpp.obj",
@@ -104,14 +104,10 @@
 			"SideScrollingInteractable.cpp.obj",
 			"SideScrollingCameraManager.cpp.obj",
 			"SideScrollingCharacter.cpp.obj",
-			"TheGameState.gen.cpp.obj",
-			"FMPGameMode.cpp.obj",
-			"TheGameState.cpp.obj"
-		],
-		"Module.FMP.4.cpp.obj": [
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
-			"SideScrollingUI.cpp.obj"
+			"SideScrollingUI.cpp.obj",
+			"FMPGameMode.cpp.obj"
 		]
 	}
 }

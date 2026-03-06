@@ -6,7 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "FMPGameMode.generated.h"
 
-UCLASS(abstract)
+UCLASS()
 class AFMPGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
