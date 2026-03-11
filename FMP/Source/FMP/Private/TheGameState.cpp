@@ -2,4 +2,25 @@
 
 
 #include "TheGameState.h"
+#include "PerformanceLogger.h"
+#include "Net/UnrealNetwork.h"
+
+ATheGameState::ATheGameState()
+{
+	// Ensure the GameState can tick if you want to smooth out timer displays locally
+	PrimaryActorTick.bCanEverTick = true;
+
+	PerformanceLogger = CreateDefaultSubobject<UPerformanceLogger>(TEXT("PerformanceLogger"));
+}
+
+void ATheGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ATheGameState, bIsRoundActive);
+	DOREPLIFETIME(ATheGameState, RoundTimer);
+	DOREPLIFETIME(ATheGameState, CurrentRoundNumber);
+	DOREPLIFETIME(ATheGameState, ReadyPlayersCount);
+	DOREPLIFETIME(ATheGameState, TotalPlayersInGame);
+}
 
