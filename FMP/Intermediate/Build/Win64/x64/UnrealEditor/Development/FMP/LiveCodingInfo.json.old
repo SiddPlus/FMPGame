@@ -68,11 +68,11 @@
 			"LootPool.cpp.obj",
 			"PerformanceData.cpp.obj",
 			"PerformanceLogger.cpp.obj",
-			"PerkEffectBase.cpp.obj",
 			"PlayerPerks.cpp.obj",
 			"ProceduralGeneration.cpp.obj",
 			"RoundManager.cpp.obj",
 			"TelemetryLogger.cpp.obj",
+			"TheGameMode.cpp.obj",
 			"TheGameState.cpp.obj",
 			"CombatAIController.cpp.obj",
 			"CombatEnemy.cpp.obj",
@@ -102,7 +102,7 @@
 			"SideScrollingNPC.cpp.obj",
 			"SideScrollingStateTreeUtility.cpp.obj",
 			"SideScrollingJumpPad.cpp.obj",
-			"TheGameMode.cpp.obj"
+			"PerkEffectBase.cpp.obj"
 		],
 		"Module.FMP.4.cpp.obj": [
 			"SideScrollingMovingPlatform.cpp.obj",

@@ -4,13 +4,3 @@
 #include "PerkEffectBase.h"
 #include "GameFramework/Actor.h"
 
-void UPerkEffectBase::ApplyPerkEffect_Implementation(AActor* TargetActor)
-{
-
-	if (TargetActor)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Perk System: Applying base logic to %s"), *TargetActor->GetName());
-		
-	}
-}
-
