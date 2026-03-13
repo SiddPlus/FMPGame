@@ -6,12 +6,12 @@
 #include "GameFramework/GameMode.h"
 #include "TheGameMode.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class FMP_API ATheGameMode : public AGameMode
 {
 	GENERATED_BODY()
+
+public:
+	virtual void PostLogin(APlayerController* NewPlayer) override;
 	
 };

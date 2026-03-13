@@ -3,3 +3,13 @@
 
 #include "TheGameMode.h"
 
+void ATheGameMode::PostLogin(APlayerController* NewPlayer)
+{
+    Super::PostLogin(NewPlayer);
+
+    if (NewPlayer)
+    {
+        RestartPlayer(NewPlayer);
+    }
+}
+
