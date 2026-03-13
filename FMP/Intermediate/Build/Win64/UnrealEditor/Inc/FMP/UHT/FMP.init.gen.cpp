@@ -10,7 +10,9 @@ void EmptyLinkFunctionForGeneratedCodeFMP_init() {}
 	FMP_API UFunction* Z_Construct_UDelegateFunction_FMP_OnEnemyDied__DelegateSignature();
 	FMP_API UFunction* Z_Construct_UDelegateFunction_FMP_OnHealthChangedSignature__DelegateSignature();
 	FMP_API UFunction* Z_Construct_UDelegateFunction_FMP_OnPerkSelectionNeeded__DelegateSignature();
+	FMP_API UFunction* Z_Construct_UDelegateFunction_FMP_OnPlayerReadyChange__DelegateSignature();
 	FMP_API UFunction* Z_Construct_UDelegateFunction_FMP_OnPlayerReadyChanged__DelegateSignature();
+	FMP_API UFunction* Z_Construct_UDelegateFunction_FMP_OnRoundStateChange__DelegateSignature();
 	FMP_API UFunction* Z_Construct_UDelegateFunction_FMP_OnRoundStateChanged__DelegateSignature();
 	static FPackageRegistrationInfo Z_Registration_Info_UPackage__Script_FMP;
 	FORCENOINLINE UPackage* Z_Construct_UPackage__Script_FMP()
@@ -21,7 +23,9 @@ void EmptyLinkFunctionForGeneratedCodeFMP_init() {}
 				(UObject* (*)())Z_Construct_UDelegateFunction_FMP_OnEnemyDied__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_FMP_OnHealthChangedSignature__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_FMP_OnPerkSelectionNeeded__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_FMP_OnPlayerReadyChange__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_FMP_OnPlayerReadyChanged__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_FMP_OnRoundStateChange__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_FMP_OnRoundStateChanged__DelegateSignature,
 			};
 			static const UECodeGen_Private::FPackageParams PackageParams = {
@@ -29,13 +33,13 @@ void EmptyLinkFunctionForGeneratedCodeFMP_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x5ECE0741,
-				0x4BEF8C0C,
+				0x90A8E7FF,
+				0xD17617D8,
 				METADATA_PARAMS(0, nullptr)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_FMP.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_FMP.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_FMP(Z_Construct_UPackage__Script_FMP, TEXT("/Script/FMP"), Z_Registration_Info_UPackage__Script_FMP, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x5ECE0741, 0x4BEF8C0C));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_FMP(Z_Construct_UPackage__Script_FMP, TEXT("/Script/FMP"), Z_Registration_Info_UPackage__Script_FMP, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x90A8E7FF, 0xD17617D8));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -73,7 +73,7 @@
 			"ProceduralGeneration.cpp.obj",
 			"RoundManager.cpp.obj",
 			"TelemetryLogger.cpp.obj",
-			"TheGameState.cpp.obj",
+			"TheGameMode.cpp.obj",
 			"CombatAIController.cpp.obj",
 			"CombatEnemy.cpp.obj",
 			"CombatEnemySpawner.cpp.obj",
@@ -111,7 +111,7 @@
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
 			"SideScrollingUI.cpp.obj",
-			"TheGameMode.cpp.obj"
+			"TheGameState.cpp.obj"
 		]
 	}
 }
