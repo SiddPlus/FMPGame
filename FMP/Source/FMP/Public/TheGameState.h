@@ -6,12 +6,15 @@
 #include "GameFramework/GameState.h"
 #include "TheGameState.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class FMP_API ATheGameState : public AGameState
 {
 	GENERATED_BODY()
+
+public:
+	ATheGameState();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	class UPerformanceLogger* PerformanceLogger;
 	
 };

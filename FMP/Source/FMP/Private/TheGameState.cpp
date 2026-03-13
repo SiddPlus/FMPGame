@@ -2,4 +2,12 @@
 
 
 #include "TheGameState.h"
+#include "PerformanceLogger.h"
+
+ATheGameState::ATheGameState()
+{
+	PrimaryActorTick.bCanEverTick = true;
+
+	PerformanceLogger = CreateDefaultSubobject<UPerformanceLogger>(TEXT("PerformanceLogger"));
+}
 
