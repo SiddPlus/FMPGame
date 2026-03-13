@@ -43,6 +43,14 @@ void AProceduralGeneration::OnRep_Seed()
 	{
 		//GenerateMap();
         FMath::RandInit(Seed);
+
+        NoiseOffset = FVector2D(FMath::RandRange(-10000.0f, 10000.0f), FMath::RandRange(-10000.0f, 10000.0f));
+
+        if (Vertices.Num() == 0)
+        {
+            GenerateBaseMesh();
+        }
+
         DeformMeshWithNoise();
         PopulateWorld();
 	}
@@ -50,8 +58,9 @@ void AProceduralGeneration::OnRep_Seed()
 
 void AProceduralGeneration::DeformMeshWithNoise()
 {
+    FMath::RandInit(Seed);
     // 1. Generate new deterministic offset
-    NoiseOffset = FVector2D(FMath::RandRange(-10000.f, 10000.f), FMath::RandRange(-10000.f, 10000.f));
+    //NoiseOffset = FVector2D(FMath::RandRange(-10000.f, 10000.f), FMath::RandRange(-10000.f, 10000.f));
 
     // 2. Update existing vertex Z values
     for (int i = 0; i <= XSize; ++i)
@@ -73,6 +82,8 @@ void AProceduralGeneration::DeformMeshWithNoise()
 
 void AProceduralGeneration::PopulateWorld()
 {
+    FMath::RandInit(Seed);
+
     // Reset data structures
     SpawnedObjectGrid.Reset();
     SpawnedMeshCounts.Reset();
