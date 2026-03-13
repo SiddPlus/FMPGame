@@ -70,6 +70,7 @@
 			"PerformanceLogger.cpp.obj",
 			"PerkEffectBase.cpp.obj",
 			"PlayerPerks.cpp.obj",
+			"ProceduralGeneration.cpp.obj",
 			"RoundManager.cpp.obj",
 			"TelemetryLogger.cpp.obj",
 			"TheGameMode.cpp.obj",
@@ -107,8 +108,7 @@
 			"SideScrollingSoftPlatform.cpp.obj",
 			"SideScrollingInteractable.cpp.obj",
 			"SideScrollingCameraManager.cpp.obj",
-			"SideScrollingCharacter.cpp.obj",
-			"ProceduralGeneration.cpp.obj"
+			"SideScrollingCharacter.cpp.obj"
 		],
 		"Module.FMP.4.cpp.obj": [
 			"SideScrollingGameMode.cpp.obj",

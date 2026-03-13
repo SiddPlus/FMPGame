@@ -19,7 +19,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UMaterialInterface;
 
 // ********** Begin ScriptStruct FSpawnedObjectInfo ************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_37_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_38_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FSpawnedObjectInfo_Statics; \
 	FMP_API static class UScriptStruct* StaticStruct();
 
@@ -28,7 +28,7 @@ struct FSpawnedObjectInfo;
 // ********** End ScriptStruct FSpawnedObjectInfo **************************************************
 
 // ********** Begin ScriptStruct FActorPopulationSetting *******************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_49_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_50_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FActorPopulationSetting_Statics; \
 	FMP_API static class UScriptStruct* StaticStruct();
 
@@ -37,7 +37,7 @@ struct FActorPopulationSetting;
 // ********** End ScriptStruct FActorPopulationSetting *********************************************
 
 // ********** Begin ScriptStruct FMeshPopulationSetting ********************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_67_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_68_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FMeshPopulationSetting_Statics; \
 	FMP_API static class UScriptStruct* StaticStruct();
 
@@ -46,7 +46,7 @@ struct FMeshPopulationSetting;
 // ********** End ScriptStruct FMeshPopulationSetting **********************************************
 
 // ********** Begin ScriptStruct FBorderMeshSpawnSetting *******************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_100_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_101_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FBorderMeshSpawnSetting_Statics; \
 	FMP_API static class UScriptStruct* StaticStruct();
 
@@ -55,7 +55,7 @@ struct FBorderMeshSpawnSetting;
 // ********** End ScriptStruct FBorderMeshSpawnSetting *********************************************
 
 // ********** Begin ScriptStruct FBorderActorSpawnSetting ******************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_133_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_134_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FBorderActorSpawnSetting_Statics; \
 	FMP_API static class UScriptStruct* StaticStruct();
 
@@ -64,7 +64,7 @@ struct FBorderActorSpawnSetting;
 // ********** End ScriptStruct FBorderActorSpawnSetting ********************************************
 
 // ********** Begin Class AProceduralGeneration ****************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_151_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_152_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execGetPlayerSpawnPoint); \
 	DECLARE_FUNCTION(execApplyMaterialToTerrain); \
 	DECLARE_FUNCTION(execOnRep_Seed);
@@ -72,7 +72,7 @@ struct FBorderActorSpawnSetting;
 
 FMP_API UClass* Z_Construct_UClass_AProceduralGeneration_NoRegister();
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_151_INCLASS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_152_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAProceduralGeneration(); \
 	friend struct Z_Construct_UClass_AProceduralGeneration_Statics; \
@@ -89,7 +89,7 @@ public: \
 	DECLARE_VALIDATE_GENERATED_REP_ENUMS(NO_API)
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_151_ENHANCED_CONSTRUCTORS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_152_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	AProceduralGeneration(AProceduralGeneration&&) = delete; \
 	AProceduralGeneration(const AProceduralGeneration&) = delete; \
@@ -99,13 +99,13 @@ public: \
 	NO_API virtual ~AProceduralGeneration();
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_148_PROLOG
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_151_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_149_PROLOG
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_152_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_151_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_151_INCLASS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_151_ENHANCED_CONSTRUCTORS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_152_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_152_INCLASS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h_152_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

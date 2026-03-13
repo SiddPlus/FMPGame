@@ -28,6 +28,7 @@
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/PlayerPerks.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/RoundManager.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/TelemetryLogger.cpp"
+#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/TheGameMode.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/TheGameState.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_Combat/AI/CombatAIController.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_Combat/AI/CombatEnemy.cpp"

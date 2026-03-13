@@ -8,6 +8,7 @@
 #include "ProceduralMeshComponent.h"
 #include "Components/HierarchicalInstancedStaticMeshComponent.h"
 #include "NavigationSystem.h"
+#include "Math/RandomStream.h"
 #include "ProceduralGeneration.generated.h"
 
 class UProceduralMeshComponent;
@@ -267,6 +268,8 @@ private:
 	bool bPlayerIsDead = false;
 
 	FVector MasterSpawnLocation = FVector::ZeroVector;
+
+	FRandomStream MapRandomStream;
 
 	void DetermineMasterSpawnPoint();
 
