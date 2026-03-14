@@ -73,6 +73,7 @@
 			"ProceduralGeneration.cpp.obj",
 			"RoundManager.cpp.obj",
 			"TelemetryLogger.cpp.obj",
+			"TheGameMode.cpp.obj",
 			"TheGameState.cpp.obj",
 			"CombatAIController.cpp.obj",
 			"CombatEnemy.cpp.obj",
@@ -102,8 +103,7 @@
 			"SideScrollingNPC.cpp.obj",
 			"SideScrollingStateTreeUtility.cpp.obj",
 			"SideScrollingJumpPad.cpp.obj",
-			"SideScrollingMovingPlatform.cpp.obj",
-			"TheGameMode.cpp.obj"
+			"SideScrollingMovingPlatform.cpp.obj"
 		],
 		"Module.FMP.4.cpp.obj": [
 			"SideScrollingPickup.cpp.obj",

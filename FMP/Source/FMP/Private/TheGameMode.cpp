@@ -94,7 +94,18 @@ void ATheGameMode::PlayerReadyUp(APlayerController* PC)
     ATheGameState* GS = GetGameState<ATheGameState>();
     if (!GS || GS->bIsRoundActive || !PC) return;
 
-    ReadyPlayersSet.Add(PC);
+    if (ReadyPlayersSet.Contains(PC))
+    {
+        // Player is already ready, so UNREADY them
+        ReadyPlayersSet.Remove(PC);
+    }
+    else
+    {
+        // Player is not ready, so READY them up
+        ReadyPlayersSet.Add(PC);
+    }
+
+    // Sync the count to the GameState so the UI updates for everyone
     GS->ReadyPlayersCount = ReadyPlayersSet.Num();
 
     // Auto-start when all are ready
