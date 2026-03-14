@@ -16,7 +16,13 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
+class APlayerController;
+
 // ********** Begin Class ATheGameMode *************************************************************
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execPlayerReadyUp);
+
+
 FMP_API UClass* Z_Construct_UClass_ATheGameMode_NoRegister();
 
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h_12_INCLASS_NO_PURE_DECLS \
@@ -44,6 +50,7 @@ public: \
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h_12_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
 	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h_12_INCLASS_NO_PURE_DECLS \
 	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h_12_ENHANCED_CONSTRUCTORS \
 private: \

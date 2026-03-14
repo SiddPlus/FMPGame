@@ -25,6 +25,7 @@
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/PerformanceLogger.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/PerkEffectBase.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/PlayerPerks.cpp"
+#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/ProceduralGeneration.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/RoundManager.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/TelemetryLogger.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Private/TheGameState.cpp"
@@ -59,5 +60,3 @@
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/Gameplay/SideScrollingMovingPlatform.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/Gameplay/SideScrollingPickup.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/Gameplay/SideScrollingSoftPlatform.cpp"
-#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/Interfaces/SideScrollingInteractable.cpp"
-#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/SideScrollingCameraManager.cpp"

@@ -13,14 +13,63 @@ void EmptyLinkFunctionForGeneratedCodeTheGameMode() {}
 
 // ********** Begin Cross Module References ********************************************************
 ENGINE_API UClass* Z_Construct_UClass_AGameMode();
+ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 FMP_API UClass* Z_Construct_UClass_ATheGameMode();
 FMP_API UClass* Z_Construct_UClass_ATheGameMode_NoRegister();
 UPackage* Z_Construct_UPackage__Script_FMP();
 // ********** End Cross Module References **********************************************************
 
+// ********** Begin Class ATheGameMode Function PlayerReadyUp **************************************
+struct Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics
+{
+	struct TheGameMode_eventPlayerReadyUp_Parms
+	{
+		APlayerController* PC;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Round" },
+		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_PC;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::NewProp_PC = { "PC", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(TheGameMode_eventPlayerReadyUp_Parms, PC), Z_Construct_UClass_APlayerController_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::NewProp_PC,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_ATheGameMode, nullptr, "PlayerReadyUp", Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::PropPointers), sizeof(Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::TheGameMode_eventPlayerReadyUp_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::Function_MetaDataParams), Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::Function_MetaDataParams)},  };
+static_assert(sizeof(Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::TheGameMode_eventPlayerReadyUp_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_ATheGameMode_PlayerReadyUp()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(ATheGameMode::execPlayerReadyUp)
+{
+	P_GET_OBJECT(APlayerController,Z_Param_PC);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->PlayerReadyUp(Z_Param_PC);
+	P_NATIVE_END;
+}
+// ********** End Class ATheGameMode Function PlayerReadyUp ****************************************
+
 // ********** Begin Class ATheGameMode *************************************************************
 void ATheGameMode::StaticRegisterNativesATheGameMode()
 {
+	UClass* Class = ATheGameMode::StaticClass();
+	static const FNameNativePtrPair Funcs[] = {
+		{ "PlayerReadyUp", &ATheGameMode::execPlayerReadyUp },
+	};
+	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
 FClassRegistrationInfo Z_Registration_Info_UClass_ATheGameMode;
 UClass* ATheGameMode::GetPrivateStaticClass()
@@ -68,6 +117,10 @@ struct Z_Construct_UClass_ATheGameMode_Statics
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_BaseRoundDuration;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
+	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_ATheGameMode_PlayerReadyUp, "PlayerReadyUp" }, // 2198353830
+	};
+	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ATheGameMode>::IsAbstract,
 	};
@@ -88,11 +141,11 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_ATheGameMode_Statics::C
 	"Game",
 	&StaticCppClassTypeInfo,
 	DependentSingletons,
-	nullptr,
+	FuncInfo,
 	Z_Construct_UClass_ATheGameMode_Statics::PropPointers,
 	nullptr,
 	UE_ARRAY_COUNT(DependentSingletons),
-	0,
+	UE_ARRAY_COUNT(FuncInfo),
 	UE_ARRAY_COUNT(Z_Construct_UClass_ATheGameMode_Statics::PropPointers),
 	0,
 	0x009003ACu,
@@ -114,10 +167,10 @@ ATheGameMode::~ATheGameMode() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ATheGameMode, ATheGameMode::StaticClass, TEXT("ATheGameMode"), &Z_Registration_Info_UClass_ATheGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameMode), 821424611U) },
+		{ Z_Construct_UClass_ATheGameMode, ATheGameMode::StaticClass, TEXT("ATheGameMode"), &Z_Registration_Info_UClass_ATheGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameMode), 1729224738U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_3397180901(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_3514634931(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

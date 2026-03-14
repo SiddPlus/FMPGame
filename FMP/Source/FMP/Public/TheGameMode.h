@@ -17,6 +17,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Settings")
 	float BaseRoundDuration = 60.0f;
 
+	UFUNCTION(BlueprintCallable, Category = "Round")
+	void PlayerReadyUp(APlayerController* PC);
+
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 
 protected:
@@ -26,4 +29,6 @@ protected:
 
 private:
 	FTimerHandle RoundTimerHandle;
+
+	TSet<APlayerController*> ReadyPlayersSet;
 };

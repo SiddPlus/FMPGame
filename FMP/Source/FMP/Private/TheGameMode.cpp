@@ -40,6 +40,11 @@ void ATheGameMode::PostLogin(APlayerController* NewPlayer)
             }
         }
     }
+
+    if (ATheGameState* GS = GetGameState<ATheGameState>())
+    {
+        GS->TotalPlayersInGame++;
+    }
 }
 
 
@@ -67,5 +72,20 @@ void ATheGameMode::AdvanceTimer()
 void ATheGameMode::EndRound()
 {
     
+}
+
+void ATheGameMode::PlayerReadyUp(APlayerController* PC)
+{
+    ATheGameState* GS = GetGameState<ATheGameState>();
+    if (!GS || GS->bIsRoundActive || !PC) return;
+
+    ReadyPlayersSet.Add(PC);
+    GS->ReadyPlayersCount = ReadyPlayersSet.Num();
+
+    // Auto-start when all are ready
+    if (GS->ReadyPlayersCount >= GS->TotalPlayersInGame && GS->TotalPlayersInGame > 0)
+    {
+        StartRound();
+    }
 }
 
