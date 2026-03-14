@@ -12,7 +12,6 @@
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingSoftPlatform.gen.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingStateTreeUtility.gen.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/SideScrollingUI.gen.cpp"
-#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/TheGameMode.gen.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/UnrealEditor/Inc/FMP/UHT/TheGameState.gen.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Intermediate/Build/Win64/x64/UnrealEditor/Development/FMP/PerModuleInline.gen.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/FMP.cpp"
@@ -62,4 +61,3 @@
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/Gameplay/SideScrollingSoftPlatform.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/Interfaces/SideScrollingInteractable.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/SideScrollingCameraManager.cpp"
-#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/SideScrollingCharacter.cpp"

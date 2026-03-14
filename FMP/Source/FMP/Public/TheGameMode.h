@@ -12,6 +12,18 @@ class FMP_API ATheGameMode : public AGameMode
 	GENERATED_BODY()
 
 public:
+	ATheGameMode();
+
+	UPROPERTY(EditAnywhere, Category = "Settings")
+	float BaseRoundDuration = 60.0f;
+
 	virtual void PostLogin(APlayerController* NewPlayer) override;
-	
+
+protected:
+	void StartRound();
+	void EndRound();
+	void AdvanceTimer();
+
+private:
+	FTimerHandle RoundTimerHandle;
 };

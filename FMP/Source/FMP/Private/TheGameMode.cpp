@@ -4,6 +4,12 @@
 #include "TheGameMode.h"
 #include "ProceduralGeneration.h"
 #include "Kismet/GameplayStatics.h"
+#include "TheGameState.h"
+
+ATheGameMode::ATheGameMode()
+{
+    
+}
 
 void ATheGameMode::PostLogin(APlayerController* NewPlayer)
 {
@@ -34,5 +40,32 @@ void ATheGameMode::PostLogin(APlayerController* NewPlayer)
             }
         }
     }
+}
+
+
+void ATheGameMode::StartRound()
+{
+    ATheGameState* GS = GetGameState<ATheGameState>();
+    if (!GS) return;
+
+    GS->RoundTimer = BaseRoundDuration;
+    GS->bIsRoundActive = true;
+
+    GetWorldTimerManager().SetTimer(RoundTimerHandle, this, &ATheGameMode::AdvanceTimer, 1.0f, true);
+}
+
+void ATheGameMode::AdvanceTimer()
+{
+    ATheGameState* GS = GetGameState<ATheGameState>();
+    if (GS && GS->bIsRoundActive)
+    {
+        GS->RoundTimer -= 1.0f;
+        if (GS->RoundTimer <= 0.0f) EndRound();
+    }
+}
+
+void ATheGameMode::EndRound()
+{
+    
 }
 

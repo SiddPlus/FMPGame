@@ -31,14 +31,12 @@ public: \
 
 
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h_12_ENHANCED_CONSTRUCTORS \
-	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API ATheGameMode(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	ATheGameMode(ATheGameMode&&) = delete; \
 	ATheGameMode(const ATheGameMode&) = delete; \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, ATheGameMode); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(ATheGameMode); \
-	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ATheGameMode) \
+	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ATheGameMode) \
 	NO_API virtual ~ATheGameMode();
 
 
