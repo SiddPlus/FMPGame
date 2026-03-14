@@ -5,6 +5,7 @@
 #include "ProceduralGeneration.h"
 #include "Kismet/GameplayStatics.h"
 #include "TheGameState.h"
+#include "EnemySpawner.h"
 
 ATheGameMode::ATheGameMode()
 {
@@ -53,8 +54,22 @@ void ATheGameMode::StartRound()
     ATheGameState* GS = GetGameState<ATheGameState>();
     if (!GS) return;
 
+    TArray<AActor*> FoundSpawners;
+    UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemySpawner::StaticClass(), FoundSpawners);
+    for (AActor* Actor : FoundSpawners)
+    {
+        if (AEnemySpawner* Spawner = Cast<AEnemySpawner>(Actor))
+            CachedSpawners.Add(Spawner);
+    }
+
     GS->RoundTimer = BaseRoundDuration;
     GS->bIsRoundActive = true;
+
+    for (AEnemySpawner* Spawner : CachedSpawners)
+    {
+        Spawner->ConfigureSpawner(CurrentRoundSpawnRate, CurrentRoundMaxEnemies);
+        Spawner->StartSpawningTimer();
+    }
 
     GetWorldTimerManager().SetTimer(RoundTimerHandle, this, &ATheGameMode::AdvanceTimer, 1.0f, true);
 }

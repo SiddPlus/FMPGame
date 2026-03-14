@@ -17,6 +17,12 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Settings")
 	float BaseRoundDuration = 60.0f;
 
+	UPROPERTY(EditAnywhere, Category = "Settings")
+	float CurrentRoundSpawnRate = 5.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Settings")
+	int32 CurrentRoundMaxEnemies = 10;
+
 	UFUNCTION(BlueprintCallable, Category = "Round")
 	void PlayerReadyUp(APlayerController* PC);
 
@@ -29,6 +35,9 @@ protected:
 
 private:
 	FTimerHandle RoundTimerHandle;
+
+	UPROPERTY()
+	TArray<class AEnemySpawner*> CachedSpawners;
 
 	TSet<APlayerController*> ReadyPlayersSet;
 };

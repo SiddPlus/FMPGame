@@ -59,5 +59,3 @@
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/AI/SideScrollingStateTreeUtility.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/Gameplay/SideScrollingJumpPad.cpp"
 #include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/Gameplay/SideScrollingMovingPlatform.cpp"
-#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/Gameplay/SideScrollingPickup.cpp"
-#include "C:/Users/Siddg/Downloads/FMPGame/FMP/Source/FMP/Variant_SideScrolling/Gameplay/SideScrollingSoftPlatform.cpp"

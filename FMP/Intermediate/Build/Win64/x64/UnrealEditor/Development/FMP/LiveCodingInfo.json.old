@@ -103,11 +103,11 @@
 			"SideScrollingStateTreeUtility.cpp.obj",
 			"SideScrollingJumpPad.cpp.obj",
 			"SideScrollingMovingPlatform.cpp.obj",
-			"SideScrollingPickup.cpp.obj",
-			"SideScrollingSoftPlatform.cpp.obj",
 			"TheGameMode.cpp.obj"
 		],
 		"Module.FMP.4.cpp.obj": [
+			"SideScrollingPickup.cpp.obj",
+			"SideScrollingSoftPlatform.cpp.obj",
 			"SideScrollingInteractable.cpp.obj",
 			"SideScrollingCameraManager.cpp.obj",
 			"SideScrollingCharacter.cpp.obj",
