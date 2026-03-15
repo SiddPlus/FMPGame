@@ -117,9 +117,16 @@ void ATheGameMode::EndRound()
     }
 
     // Scale difficulty for the next round
+    float PlayerScalingFactor = 1.0f + (GS->TotalPlayersInGame - 1) * 0.5f;
+
     GS->CurrentRoundNumber++;
-    CurrentRoundSpawnRate = FMath::Max(0.1f, CurrentRoundSpawnRate - 0.1f);
-    CurrentRoundMaxEnemies += 1;
+
+    float BaseRate = FMath::Max(0.5f, 5.0f - (GS->CurrentRoundNumber * 0.2f));
+    CurrentRoundSpawnRate = BaseRate / PlayerScalingFactor;
+
+    int32 BaseMax = 10 + (GS->CurrentRoundNumber * 2);
+    CurrentRoundMaxEnemies = FMath::CeilToInt(BaseMax * PlayerScalingFactor);
+
     BaseRoundDuration += 60.0f;
 
     // Reset ready status for intermission
