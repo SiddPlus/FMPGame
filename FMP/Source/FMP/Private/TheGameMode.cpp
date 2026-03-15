@@ -6,6 +6,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "TheGameState.h"
 #include "EnemySpawner.h"
+#include "PlayerPerks.h"
+#include "TelemetryLogger.h"
 
 ATheGameMode::ATheGameMode()
 {
@@ -86,7 +88,43 @@ void ATheGameMode::AdvanceTimer()
 
 void ATheGameMode::EndRound()
 {
-    
+    ATheGameState* GS = GetGameState<ATheGameState>();
+    if (!GS) return;
+
+    GetWorldTimerManager().ClearTimer(RoundTimerHandle);
+    GS->bIsRoundActive = false;
+
+    // Cleanup enemies
+    for (AEnemySpawner* Spawner : CachedSpawners)
+    {
+        Spawner->EndSpawningAndClearEnemies();
+    }
+
+    // Process Perks and Telemetry for all players (OG Core Logic)
+    for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+    {
+        if (APlayerController* PC = It->Get())
+        {
+            if (APawn* Pawn = PC->GetPawn())
+            {
+                if (UPlayerPerks* Perks = Pawn->FindComponentByClass<UPlayerPerks>())
+                {
+                    Perks->CheckAndUnlockPerks(GS->CurrentRoundNumber); // Unlocks & notifies UI
+                    TelemetryLogger::RecordSessionData(GS->CurrentRoundNumber, Perks->UnlockedPerks); // Save state
+                }
+            }
+        }
+    }
+
+    // Scale difficulty for the next round
+    GS->CurrentRoundNumber++;
+    CurrentRoundSpawnRate = FMath::Max(0.1f, CurrentRoundSpawnRate - 0.1f);
+    CurrentRoundMaxEnemies += 1;
+    BaseRoundDuration += 60.0f;
+
+    // Reset ready status for intermission
+    ReadyPlayersSet.Empty();
+    GS->ReadyPlayersCount = 0;
 }
 
 void ATheGameMode::PlayerReadyUp(APlayerController* PC)
