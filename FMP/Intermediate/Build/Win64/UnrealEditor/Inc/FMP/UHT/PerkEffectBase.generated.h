@@ -19,11 +19,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AActor;
 
 // ********** Begin Class UPerkEffectBase **********************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	virtual void ApplyPerkEffect_Implementation(AActor* TargetActor); \
-	DECLARE_FUNCTION(execApplyPerkEffect);
-
-
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h_15_CALLBACK_WRAPPERS
 FMP_API UClass* Z_Construct_UClass_UPerkEffectBase_NoRegister();
 
@@ -54,7 +49,6 @@ public: \
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
 	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h_15_CALLBACK_WRAPPERS \
 	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h_15_INCLASS_NO_PURE_DECLS \
 	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h_15_ENHANCED_CONSTRUCTORS \

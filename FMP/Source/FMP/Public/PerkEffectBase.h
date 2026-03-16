@@ -21,6 +21,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats")
 	float MaxHealthBonus = 0.0f;
 	
-	UFUNCTION(BlueprintNativeEvent, Category = "Perk Logic")
+	UFUNCTION(BlueprintImplementableEvent, Category = "Perk Logic")
 	void ApplyPerkEffect(AActor* TargetActor);
 };
