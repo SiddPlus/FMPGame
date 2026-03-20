@@ -63,12 +63,56 @@ DEFINE_FUNCTION(ATheGameMode::execPlayerReadyUp)
 }
 // ********** End Class ATheGameMode Function PlayerReadyUp ****************************************
 
+// ********** Begin Class ATheGameMode Function RegisterPlayerDown *********************************
+struct Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics
+{
+	struct TheGameMode_eventRegisterPlayerDown_Parms
+	{
+		APlayerController* PC;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Game" },
+		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_PC;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::NewProp_PC = { "PC", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(TheGameMode_eventRegisterPlayerDown_Parms, PC), Z_Construct_UClass_APlayerController_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::NewProp_PC,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_ATheGameMode, nullptr, "RegisterPlayerDown", Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::PropPointers), sizeof(Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::TheGameMode_eventRegisterPlayerDown_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::Function_MetaDataParams), Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::Function_MetaDataParams)},  };
+static_assert(sizeof(Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::TheGameMode_eventRegisterPlayerDown_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(ATheGameMode::execRegisterPlayerDown)
+{
+	P_GET_OBJECT(APlayerController,Z_Param_PC);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->RegisterPlayerDown(Z_Param_PC);
+	P_NATIVE_END;
+}
+// ********** End Class ATheGameMode Function RegisterPlayerDown ***********************************
+
 // ********** Begin Class ATheGameMode *************************************************************
 void ATheGameMode::StaticRegisterNativesATheGameMode()
 {
 	UClass* Class = ATheGameMode::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
 		{ "PlayerReadyUp", &ATheGameMode::execPlayerReadyUp },
+		{ "RegisterPlayerDown", &ATheGameMode::execRegisterPlayerDown },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -125,16 +169,22 @@ struct Z_Construct_UClass_ATheGameMode_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CachedSpawners_MetaData[] = {
 		{ "ModuleRelativePath", "Public/TheGameMode.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DownPlayers_MetaData[] = {
+		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_BaseRoundDuration;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentRoundSpawnRate;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_CurrentRoundMaxEnemies;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CachedSpawners_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_CachedSpawners;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_DownPlayers_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_DownPlayers;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_ATheGameMode_PlayerReadyUp, "PlayerReadyUp" }, // 2198353830
+		{ &Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown, "RegisterPlayerDown" }, // 2406432487
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -147,12 +197,16 @@ const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ATheGameMode_St
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_CurrentRoundMaxEnemies = { "CurrentRoundMaxEnemies", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameMode, CurrentRoundMaxEnemies), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentRoundMaxEnemies_MetaData), NewProp_CurrentRoundMaxEnemies_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_CachedSpawners_Inner = { "CachedSpawners", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_AEnemySpawner_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_CachedSpawners = { "CachedSpawners", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameMode, CachedSpawners), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CachedSpawners_MetaData), NewProp_CachedSpawners_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_DownPlayers_Inner = { "DownPlayers", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_APlayerController_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_DownPlayers = { "DownPlayers", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameMode, DownPlayers), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DownPlayers_MetaData), NewProp_DownPlayers_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ATheGameMode_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_BaseRoundDuration,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_CurrentRoundSpawnRate,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_CurrentRoundMaxEnemies,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_CachedSpawners_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_CachedSpawners,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_DownPlayers_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_DownPlayers,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ATheGameMode_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_ATheGameMode_Statics::DependentSingletons[])() = {
@@ -191,10 +245,10 @@ ATheGameMode::~ATheGameMode() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ATheGameMode, ATheGameMode::StaticClass, TEXT("ATheGameMode"), &Z_Registration_Info_UClass_ATheGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameMode), 2805530336U) },
+		{ Z_Construct_UClass_ATheGameMode, ATheGameMode::StaticClass, TEXT("ATheGameMode"), &Z_Registration_Info_UClass_ATheGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameMode), 2906584135U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_1409512469(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_1481635635(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

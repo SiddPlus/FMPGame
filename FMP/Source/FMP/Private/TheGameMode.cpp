@@ -21,7 +21,20 @@ void ATheGameMode::PostLogin(APlayerController* NewPlayer)
     if (NewPlayer)
     {
         RestartPlayer(NewPlayer);
+    }
 
+    if (ATheGameState* GS = GetGameState<ATheGameState>())
+    {
+        GS->TotalPlayersInGame++;
+    }
+}
+
+void ATheGameMode::RestartPlayer(AController* NewPlayer)
+{
+    Super::RestartPlayer(NewPlayer);
+
+    if (NewPlayer)
+    {
         TArray<AActor*> FoundGenerators;
         UGameplayStatics::GetAllActorsOfClass(GetWorld(), AProceduralGeneration::StaticClass(), FoundGenerators);
 
@@ -42,11 +55,6 @@ void ATheGameMode::PostLogin(APlayerController* NewPlayer)
                 NewPawn->SetActorLocation(TargetLocation);
             }
         }
-    }
-
-    if (ATheGameState* GS = GetGameState<ATheGameState>())
-    {
-        GS->TotalPlayersInGame++;
     }
 }
 
@@ -88,6 +96,15 @@ void ATheGameMode::AdvanceTimer()
 
 void ATheGameMode::EndRound()
 {
+    for (APlayerController* PC : DownPlayers)
+    {
+        if (PC)
+        {
+            RestartPlayer(PC);
+        }
+    }
+    DownPlayers.Empty();
+
     ATheGameState* GS = GetGameState<ATheGameState>();
     if (!GS) return;
 
@@ -160,3 +177,11 @@ void ATheGameMode::PlayerReadyUp(APlayerController* PC)
     }
 }
 
+
+void ATheGameMode::RegisterPlayerDown(APlayerController* PC)
+{
+    if (PC && !DownPlayers.Contains(PC))
+    {
+        DownPlayers.Add(PC);
+    }
+}

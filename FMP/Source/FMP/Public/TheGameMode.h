@@ -26,7 +26,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Round")
 	void PlayerReadyUp(APlayerController* PC);
 
+	UFUNCTION(BlueprintCallable, Category = "Game")
+	void RegisterPlayerDown(APlayerController* PC);
+
 	virtual void PostLogin(APlayerController* NewPlayer) override;
+
+	virtual void RestartPlayer(AController* NewPlayer) override;
 
 protected:
 	void StartRound();
@@ -38,6 +43,9 @@ private:
 
 	UPROPERTY()
 	TArray<class AEnemySpawner*> CachedSpawners;
+
+	UPROPERTY()
+	TArray<APlayerController*> DownPlayers;
 
 	TSet<APlayerController*> ReadyPlayersSet;
 };

@@ -20,6 +20,7 @@ class APlayerController;
 
 // ********** Begin Class ATheGameMode *************************************************************
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execRegisterPlayerDown); \
 	DECLARE_FUNCTION(execPlayerReadyUp);
 
 
