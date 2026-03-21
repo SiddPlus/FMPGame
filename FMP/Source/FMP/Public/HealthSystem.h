@@ -49,5 +49,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Health|Modification")
 	void IncreaseHealth(float HealthDelta);
-		
+
+	UFUNCTION(BlueprintCallable, Category = "Health|Modification")
+	void RestoreFullHealth();	
 };
