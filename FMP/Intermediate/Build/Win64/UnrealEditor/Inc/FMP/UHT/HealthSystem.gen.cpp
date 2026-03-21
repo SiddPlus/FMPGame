@@ -303,6 +303,36 @@ DEFINE_FUNCTION(UHealthSystem::execOnRep_Health)
 }
 // ********** End Class UHealthSystem Function OnRep_Health ****************************************
 
+// ********** Begin Class UHealthSystem Function RestoreFullHealth *********************************
+struct Z_Construct_UFunction_UHealthSystem_RestoreFullHealth_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Health|Modification" },
+		{ "ModuleRelativePath", "Public/HealthSystem.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UHealthSystem_RestoreFullHealth_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UHealthSystem, nullptr, "RestoreFullHealth", nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UHealthSystem_RestoreFullHealth_Statics::Function_MetaDataParams), Z_Construct_UFunction_UHealthSystem_RestoreFullHealth_Statics::Function_MetaDataParams)},  };
+UFunction* Z_Construct_UFunction_UHealthSystem_RestoreFullHealth()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UHealthSystem_RestoreFullHealth_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UHealthSystem::execRestoreFullHealth)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->RestoreFullHealth();
+	P_NATIVE_END;
+}
+// ********** End Class UHealthSystem Function RestoreFullHealth ***********************************
+
 // ********** Begin Class UHealthSystem ************************************************************
 void UHealthSystem::StaticRegisterNativesUHealthSystem()
 {
@@ -312,6 +342,7 @@ void UHealthSystem::StaticRegisterNativesUHealthSystem()
 		{ "HandleHealthChange", &UHealthSystem::execHandleHealthChange },
 		{ "IncreaseHealth", &UHealthSystem::execIncreaseHealth },
 		{ "OnRep_Health", &UHealthSystem::execOnRep_Health },
+		{ "RestoreFullHealth", &UHealthSystem::execRestoreFullHealth },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -376,6 +407,7 @@ struct Z_Construct_UClass_UHealthSystem_Statics
 		{ &Z_Construct_UFunction_UHealthSystem_HandleHealthChange, "HandleHealthChange" }, // 1676525991
 		{ &Z_Construct_UFunction_UHealthSystem_IncreaseHealth, "IncreaseHealth" }, // 1312972814
 		{ &Z_Construct_UFunction_UHealthSystem_OnRep_Health, "OnRep_Health" }, // 3217107835
+		{ &Z_Construct_UFunction_UHealthSystem_RestoreFullHealth, "RestoreFullHealth" }, // 873201022
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -439,10 +471,10 @@ UHealthSystem::~UHealthSystem() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UHealthSystem, UHealthSystem::StaticClass, TEXT("UHealthSystem"), &Z_Registration_Info_UClass_UHealthSystem, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHealthSystem), 488919104U) },
+		{ Z_Construct_UClass_UHealthSystem, UHealthSystem::StaticClass, TEXT("UHealthSystem"), &Z_Registration_Info_UClass_UHealthSystem, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHealthSystem), 131879361U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h__Script_FMP_2010163977(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h__Script_FMP_50157840(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

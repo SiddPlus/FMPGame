@@ -85,6 +85,23 @@ void UHealthSystem::IncreaseHealth(float DeltaAmount)
 	OnRep_Health(CurrentHealth + HealthDelta); 
 }
 
+void UHealthSystem::RestoreFullHealth()
+{
+	// Ensure this only runs on the Server/Authority
+	if (!GetOwner()->HasAuthority())
+	{
+		return;
+	}
+
+	float OldHealth = CurrentHealth;
+
+	// Set health to max
+	CurrentHealth = MaxHealth;
+
+	// Manually trigger the RepNotify to update the Server's UI and broadcast to Clients
+	OnRep_Health(OldHealth);
+}
+
 
 void UHealthSystem::OnRep_Health(float OldHealth)
 {
