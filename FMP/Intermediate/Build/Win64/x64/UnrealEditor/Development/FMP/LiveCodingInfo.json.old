@@ -2,7 +2,6 @@
 	"RemapUnityFiles": 
 	{
 		"Module.FMP.1.cpp.obj": [
-			"FMP.cpp.obj",
 			"AnimNotify_CheckChargedAttack.gen.cpp.obj",
 			"AnimNotify_CheckCombo.gen.cpp.obj",
 			"AnimNotify_DoAttackTrace.gen.cpp.obj",
@@ -22,7 +21,9 @@
 			"CombatLavaFloor.gen.cpp.obj",
 			"CombatLifeBar.gen.cpp.obj",
 			"CombatPlayerController.gen.cpp.obj",
-			"CombatStateTreeUtility.gen.cpp.obj",
+			"CombatStateTreeUtility.gen.cpp.obj"
+		],
+		"Module.FMP.2.cpp.obj": [
 			"EnemySpawner.gen.cpp.obj",
 			"EnvQueryContext_Player.gen.cpp.obj",
 			"FMP.init.gen.cpp.obj",
@@ -39,7 +40,9 @@
 			"PlatformingPlayerController.gen.cpp.obj",
 			"PlayerPerks.gen.cpp.obj",
 			"ProceduralGeneration.gen.cpp.obj",
-			"RoundManager.gen.cpp.obj",
+			"RoundManager.gen.cpp.obj"
+		],
+		"Module.FMP.3.cpp.obj": [
 			"SideScrollingAIController.gen.cpp.obj",
 			"SideScrollingCameraManager.gen.cpp.obj",
 			"SideScrollingCharacter.gen.cpp.obj",
@@ -55,13 +58,13 @@
 			"SideScrollingUI.gen.cpp.obj",
 			"TheGameMode.gen.cpp.obj",
 			"TheGameState.gen.cpp.obj",
-			"PerModuleInline.gen.cpp.obj"
-		],
-		"Module.FMP.2.cpp.obj": [
+			"PerModuleInline.gen.cpp.obj",
+			"FMP.cpp.obj",
 			"FMPCharacter.cpp.obj",
 			"FMPGameMode.cpp.obj",
 			"FMPPlayerController.cpp.obj",
 			"EnemySpawner.cpp.obj",
+			"HealthSystem.cpp.obj",
 			"LootPool.cpp.obj",
 			"PerformanceData.cpp.obj",
 			"PerformanceLogger.cpp.obj",
@@ -95,7 +98,9 @@
 			"AnimNotify_EndDash.cpp.obj",
 			"PlatformingCharacter.cpp.obj",
 			"PlatformingGameMode.cpp.obj",
-			"PlatformingPlayerController.cpp.obj",
+			"PlatformingPlayerController.cpp.obj"
+		],
+		"Module.FMP.4.cpp.obj": [
 			"SideScrollingAIController.cpp.obj",
 			"SideScrollingNPC.cpp.obj",
 			"SideScrollingStateTreeUtility.cpp.obj",
@@ -108,8 +113,7 @@
 			"SideScrollingCharacter.cpp.obj",
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
-			"SideScrollingUI.cpp.obj",
-			"HealthSystem.cpp.obj"
+			"SideScrollingUI.cpp.obj"
 		]
 	}
 }

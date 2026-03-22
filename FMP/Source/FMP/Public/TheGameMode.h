@@ -37,6 +37,7 @@ protected:
 	void StartRound();
 	void EndRound();
 	void AdvanceTimer();
+	void EndRun();
 
 private:
 	FTimerHandle RoundTimerHandle;

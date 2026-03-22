@@ -183,5 +183,63 @@ void ATheGameMode::RegisterPlayerDown(APlayerController* PC)
     if (PC && !DownPlayers.Contains(PC))
     {
         DownPlayers.Add(PC);
+
+        ATheGameState* GS = GetGameState<ATheGameState>();
+        if (!GS) return;
+
+        if (DownPlayers.Num() >= GS->TotalPlayersInGame && GS->TotalPlayersInGame > 0)
+        {
+            EndRun();
+        }
     }
+}
+
+void ATheGameMode::EndRun()
+{
+    for (APlayerController* PC : DownPlayers)
+    {
+        if (PC)
+        {
+            RestartPlayer(PC);
+
+            if (APawn* NewPawn = PC->GetPawn())
+            {
+                UPlayerPerks* PerkComp = NewPawn->FindComponentByClass<UPlayerPerks>();
+                if (PerkComp)
+                {
+                    PerkComp->EquippedPerks.Empty();
+                }
+            }
+        }
+    }
+    DownPlayers.Empty();
+
+    ATheGameState* GS = GetGameState<ATheGameState>();
+    if (!GS) return;
+
+    GetWorldTimerManager().ClearTimer(RoundTimerHandle);
+    GS->bIsRoundActive = false;
+
+    // Cleanup enemies
+    for (AEnemySpawner* Spawner : CachedSpawners)
+    {
+        Spawner->EndSpawningAndClearEnemies();
+    }
+
+    // Scale difficulty for the next round
+    float PlayerScalingFactor = 1.0f + (GS->TotalPlayersInGame - 1) * 0.5f;
+
+    GS->CurrentRoundNumber = 1;
+
+    float BaseRate = FMath::Max(0.5f, 5.0f - (GS->CurrentRoundNumber * 0.2f));
+    CurrentRoundSpawnRate = BaseRate / PlayerScalingFactor;
+
+    int32 BaseMax = 10 + (GS->CurrentRoundNumber * 2);
+    CurrentRoundMaxEnemies = FMath::CeilToInt(BaseMax * PlayerScalingFactor);
+
+    BaseRoundDuration = 60.0f;
+
+    // Reset ready status for intermission
+    ReadyPlayersSet.Empty();
+    GS->ReadyPlayersCount = 0;
 }
