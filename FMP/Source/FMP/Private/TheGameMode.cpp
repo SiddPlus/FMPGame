@@ -156,6 +156,11 @@ void ATheGameMode::PlayerReadyUp(APlayerController* PC)
     ATheGameState* GS = GetGameState<ATheGameState>();
     if (!GS || GS->bIsRoundActive || !PC) return;
 
+    if (GS->bIsTeamWiped)
+    {
+        GS->bIsTeamWiped = false;
+    }
+
     if (ReadyPlayersSet.Contains(PC))
     {
         // Player is already ready, so UNREADY them
@@ -189,6 +194,7 @@ void ATheGameMode::RegisterPlayerDown(APlayerController* PC)
 
         if (DownPlayers.Num() >= GS->TotalPlayersInGame && GS->TotalPlayersInGame > 0)
         {
+            GS->bIsTeamWiped = true;
             EndRun();
         }
     }
