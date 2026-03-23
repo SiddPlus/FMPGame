@@ -33,11 +33,14 @@ public:
 
 	virtual void RestartPlayer(AController* NewPlayer) override;
 
+	virtual void BeginPlay() override;
+
 protected:
 	void StartRound();
 	void EndRound();
 	void AdvanceTimer();
 	void EndRun();
+	void RefreshDifficultyScaling();
 
 private:
 	FTimerHandle RoundTimerHandle;

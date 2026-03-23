@@ -14,6 +14,13 @@ ATheGameMode::ATheGameMode()
     
 }
 
+void ATheGameMode::BeginPlay()
+{
+    Super::BeginPlay();
+
+    RefreshDifficultyScaling();
+}
+
 void ATheGameMode::PostLogin(APlayerController* NewPlayer)
 {
     Super::PostLogin(NewPlayer);
@@ -26,6 +33,8 @@ void ATheGameMode::PostLogin(APlayerController* NewPlayer)
     if (ATheGameState* GS = GetGameState<ATheGameState>())
     {
         GS->TotalPlayersInGame++;
+
+        RefreshDifficultyScaling();
     }
 }
 
@@ -133,16 +142,9 @@ void ATheGameMode::EndRound()
         }
     }
 
-    // Scale difficulty for the next round
-    float PlayerScalingFactor = 1.0f + (GS->TotalPlayersInGame - 1) * 0.5f;
-
     GS->CurrentRoundNumber++;
 
-    float BaseRate = FMath::Max(0.5f, 5.0f - (GS->CurrentRoundNumber * 0.2f));
-    CurrentRoundSpawnRate = BaseRate / PlayerScalingFactor;
-
-    int32 BaseMax = 10 + (GS->CurrentRoundNumber * 2);
-    CurrentRoundMaxEnemies = FMath::CeilToInt(BaseMax * PlayerScalingFactor);
+    RefreshDifficultyScaling();
 
     BaseRoundDuration += 60.0f;
 
@@ -233,19 +235,32 @@ void ATheGameMode::EndRun()
     }
 
     // Scale difficulty for the next round
-    float PlayerScalingFactor = 1.0f + (GS->TotalPlayersInGame - 1) * 0.5f;
+    
 
     GS->CurrentRoundNumber = 1;
 
-    float BaseRate = FMath::Max(0.5f, 5.0f - (GS->CurrentRoundNumber * 0.2f));
-    CurrentRoundSpawnRate = BaseRate / PlayerScalingFactor;
-
-    int32 BaseMax = 10 + (GS->CurrentRoundNumber * 2);
-    CurrentRoundMaxEnemies = FMath::CeilToInt(BaseMax * PlayerScalingFactor);
+    RefreshDifficultyScaling();
 
     BaseRoundDuration = 60.0f;
 
     // Reset ready status for intermission
     ReadyPlayersSet.Empty();
     GS->ReadyPlayersCount = 0;
+}
+
+void ATheGameMode::RefreshDifficultyScaling()
+{
+    ATheGameState* GS = GetGameState<ATheGameState>();
+    if (!GS) return;
+
+    // Calculate scaling based on total players
+    float PlayerScalingFactor = 1.0f + (GS->TotalPlayersInGame - 1) * 0.5f;
+
+    // Calculate base values based on round number
+    float BaseRate = FMath::Max(0.5f, 5.0f - (GS->CurrentRoundNumber * 0.2f));
+    int32 BaseMax = 10 + (GS->CurrentRoundNumber * 2);
+
+    // Apply scaling
+    CurrentRoundSpawnRate = BaseRate / PlayerScalingFactor;
+    CurrentRoundMaxEnemies = FMath::CeilToInt(BaseMax * PlayerScalingFactor);
 }
