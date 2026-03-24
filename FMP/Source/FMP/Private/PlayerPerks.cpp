@@ -71,6 +71,12 @@ void UPlayerPerks::FinishedPerkSelection()
     if (GetOwner() && GetOwner()->HasAuthority())
     {
         // Host/Server click: execute directly
+        FString PerkToApply = LastEquippedPerk.Name;
+
+        if (!PerkToApply.IsEmpty())
+        {
+            PerkEquipLogic(PerkToApply);
+        }
         bIsPerkSelectionActive = false;
         OnRep_IsPerkSelectionActive();
     }
@@ -82,6 +88,13 @@ void UPlayerPerks::FinishedPerkSelection()
 
 void UPlayerPerks::ServerFinishedPerkSelection_Implementation()
 {
+    FString PerkToApply = LastEquippedPerk.Name;
+
+    if (!PerkToApply.IsEmpty())
+    {
+        PerkEquipLogic(PerkToApply);
+    }
+
     // Server performs the authoritative state change
     bIsPerkSelectionActive = false;
     OnRep_IsPerkSelectionActive(); 
