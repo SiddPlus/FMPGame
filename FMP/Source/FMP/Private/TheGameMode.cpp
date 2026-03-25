@@ -67,11 +67,59 @@ void ATheGameMode::RestartPlayer(AController* NewPlayer)
     }
 }
 
+void ATheGameMode::Logout(AController* Exiting)
+{
+    Super::Logout(Exiting);
+
+    ATheGameState* GS = GetGameState<ATheGameState>();
+    if (GS)
+    {
+        // Subtract 1, but don't let it go below 0
+        GS->TotalPlayersInGame = FMath::Max(0, GS->TotalPlayersInGame - 1);
+
+        // Also remove them from the Ready set if they were readied up
+        APlayerController* PC = Cast<APlayerController>(Exiting);
+        if (PC && ReadyPlayersSet.Contains(PC))
+        {
+            ReadyPlayersSet.Remove(PC);
+            GS->ReadyPlayersCount = ReadyPlayersSet.Num();
+        }
+
+        RefreshDifficultyScaling();
+    }
+}
+
+void ATheGameMode::PreLogin(const FString& Options, const FString& Address, const FUniqueNetIdRepl& UniqueId, FString& ErrorMessage)
+{
+    Super::PreLogin(Options, Address, UniqueId, ErrorMessage);
+
+    ATheGameState* GS = GetGameState<ATheGameState>();
+    if (GS)
+    {
+        // Check 1: Is the run active? (Started Round 1)
+        if (GS->bIsRunActive)
+        {
+            ErrorMessage = TEXT("Run in progress. Join after the team wipes.");
+        }
+
+        // Check 2: Is the lobby physically full?
+        if (GS->TotalPlayersInGame >= 4)
+        {
+            ErrorMessage = TEXT("Lobby is full (4/4).");
+        }
+    }
+}
+
 
 void ATheGameMode::StartRound()
 {
     ATheGameState* GS = GetGameState<ATheGameState>();
     if (!GS) return;
+
+    if (GS->CurrentRoundNumber == 1)
+    {
+        GS->bIsRunActive = true;
+    }
 
     TArray<AActor*> FoundSpawners;
     UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemySpawner::StaticClass(), FoundSpawners);
@@ -224,6 +272,8 @@ void ATheGameMode::EndRun()
 
     ATheGameState* GS = GetGameState<ATheGameState>();
     if (!GS) return;
+
+    GS->bIsRunActive = false;
 
     GetWorldTimerManager().ClearTimer(RoundTimerHandle);
     GS->bIsRoundActive = false;

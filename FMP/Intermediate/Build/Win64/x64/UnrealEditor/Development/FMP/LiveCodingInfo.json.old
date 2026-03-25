@@ -69,10 +69,10 @@
 			"PerformanceData.cpp.obj",
 			"PerformanceLogger.cpp.obj",
 			"PerkEffectBase.cpp.obj",
+			"PlayerPerks.cpp.obj",
 			"ProceduralGeneration.cpp.obj",
 			"RoundManager.cpp.obj",
 			"TelemetryLogger.cpp.obj",
-			"TheGameState.cpp.obj",
 			"CombatAIController.cpp.obj",
 			"CombatEnemy.cpp.obj",
 			"CombatEnemySpawner.cpp.obj",
@@ -95,8 +95,8 @@
 			"CombatLifeBar.cpp.obj",
 			"AnimNotify_EndDash.cpp.obj",
 			"PlatformingCharacter.cpp.obj",
-			"PlayerPerks.cpp.obj",
-			"TheGameMode.cpp.obj"
+			"TheGameMode.cpp.obj",
+			"TheGameState.cpp.obj"
 		],
 		"Module.FMP.4.cpp.obj": [
 			"PlatformingGameMode.cpp.obj",

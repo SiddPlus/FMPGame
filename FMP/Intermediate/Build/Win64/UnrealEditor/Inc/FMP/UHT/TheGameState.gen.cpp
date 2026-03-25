@@ -229,6 +229,10 @@ struct Z_Construct_UClass_ATheGameState_Statics
 		{ "Category", "Round Management" },
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsRunActive_MetaData[] = {
+		{ "Category", "Run Management" },
+		{ "ModuleRelativePath", "Public/TheGameState.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsTeamWiped_MetaData[] = {
 		{ "Category", "Game" },
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
@@ -261,6 +265,8 @@ struct Z_Construct_UClass_ATheGameState_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PerformanceLogger;
 	static void NewProp_bIsRoundActive_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsRoundActive;
+	static void NewProp_bIsRunActive_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsRunActive;
 	static void NewProp_bIsTeamWiped_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsTeamWiped;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_RoundTimer;
@@ -287,6 +293,11 @@ void Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsRoundActive_SetBit(voi
 	((ATheGameState*)Obj)->bIsRoundActive = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsRoundActive = { "bIsRoundActive", "OnRep_IsRoundActive", (EPropertyFlags)0x0010000100000034, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ATheGameState), &Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsRoundActive_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsRoundActive_MetaData), NewProp_bIsRoundActive_MetaData) };
+void Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsRunActive_SetBit(void* Obj)
+{
+	((ATheGameState*)Obj)->bIsRunActive = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsRunActive = { "bIsRunActive", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ATheGameState), &Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsRunActive_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsRunActive_MetaData), NewProp_bIsRunActive_MetaData) };
 void Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsTeamWiped_SetBit(void* Obj)
 {
 	((ATheGameState*)Obj)->bIsTeamWiped = 1;
@@ -301,6 +312,7 @@ const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ATh
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ATheGameState_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_PerformanceLogger,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsRoundActive,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsRunActive,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsTeamWiped,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_RoundTimer,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_CurrentRoundNumber,
@@ -342,6 +354,7 @@ UClass* Z_Construct_UClass_ATheGameState()
 void ATheGameState::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const
 {
 	static FName Name_bIsRoundActive(TEXT("bIsRoundActive"));
+	static FName Name_bIsRunActive(TEXT("bIsRunActive"));
 	static FName Name_bIsTeamWiped(TEXT("bIsTeamWiped"));
 	static FName Name_RoundTimer(TEXT("RoundTimer"));
 	static FName Name_CurrentRoundNumber(TEXT("CurrentRoundNumber"));
@@ -349,6 +362,7 @@ void ATheGameState::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& C
 	static FName Name_TotalPlayersInGame(TEXT("TotalPlayersInGame"));
 	const bool bIsValid = true
 		&& Name_bIsRoundActive == ClassReps[(int32)ENetFields_Private::bIsRoundActive].Property->GetFName()
+		&& Name_bIsRunActive == ClassReps[(int32)ENetFields_Private::bIsRunActive].Property->GetFName()
 		&& Name_bIsTeamWiped == ClassReps[(int32)ENetFields_Private::bIsTeamWiped].Property->GetFName()
 		&& Name_RoundTimer == ClassReps[(int32)ENetFields_Private::RoundTimer].Property->GetFName()
 		&& Name_CurrentRoundNumber == ClassReps[(int32)ENetFields_Private::CurrentRoundNumber].Property->GetFName()
@@ -365,10 +379,10 @@ ATheGameState::~ATheGameState() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ATheGameState, ATheGameState::StaticClass, TEXT("ATheGameState"), &Z_Registration_Info_UClass_ATheGameState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameState), 196705162U) },
+		{ Z_Construct_UClass_ATheGameState, ATheGameState::StaticClass, TEXT("ATheGameState"), &Z_Registration_Info_UClass_ATheGameState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameState), 685052763U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_2402903256(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_4190869270(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

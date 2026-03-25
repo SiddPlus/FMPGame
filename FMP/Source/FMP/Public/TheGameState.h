@@ -23,6 +23,9 @@ public:
 	UPROPERTY(ReplicatedUsing = OnRep_IsRoundActive, BlueprintReadOnly, Category = "Round Management")
 	bool bIsRoundActive = false;
 
+	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Run Management")
+	bool bIsRunActive = false;
+
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Game")
 	bool bIsTeamWiped = false;
 

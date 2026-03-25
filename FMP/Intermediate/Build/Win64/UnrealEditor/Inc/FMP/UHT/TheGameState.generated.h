@@ -51,6 +51,7 @@ public: \
 	{ \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
 		bIsRoundActive=NETFIELD_REP_START, \
+		bIsRunActive, \
 		bIsTeamWiped, \
 		RoundTimer, \
 		CurrentRoundNumber, \

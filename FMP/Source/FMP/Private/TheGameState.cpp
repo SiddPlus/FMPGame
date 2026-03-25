@@ -17,6 +17,7 @@ void ATheGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(ATheGameState, bIsRoundActive);
+	DOREPLIFETIME(ATheGameState, bIsRunActive);
 	DOREPLIFETIME(ATheGameState, RoundTimer);
 	DOREPLIFETIME(ATheGameState, CurrentRoundNumber);
 	DOREPLIFETIME(ATheGameState, ReadyPlayersCount);
