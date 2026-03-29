@@ -26,7 +26,6 @@
 		"Module.FMP.2.cpp.obj": [
 			"EnemySpawner.gen.cpp.obj",
 			"EnvQueryContext_Player.gen.cpp.obj",
-			"FMP.init.gen.cpp.obj",
 			"FMPCharacter.gen.cpp.obj",
 			"FMPGameMode.gen.cpp.obj",
 			"FMPPlayerController.gen.cpp.obj",
@@ -38,9 +37,10 @@
 			"PlatformingCharacter.gen.cpp.obj",
 			"PlatformingGameMode.gen.cpp.obj",
 			"PlatformingPlayerController.gen.cpp.obj",
-			"PlayerPerks.gen.cpp.obj",
 			"ProceduralGeneration.gen.cpp.obj",
-			"RoundManager.gen.cpp.obj"
+			"RoundManager.gen.cpp.obj",
+			"FMP.init.gen.cpp.obj",
+			"PlayerPerks.gen.cpp.obj"
 		],
 		"Module.FMP.3.cpp.obj": [
 			"SideScrollingAIController.gen.cpp.obj",
@@ -69,10 +69,10 @@
 			"PerformanceData.cpp.obj",
 			"PerformanceLogger.cpp.obj",
 			"PerkEffectBase.cpp.obj",
-			"PlayerPerks.cpp.obj",
 			"ProceduralGeneration.cpp.obj",
 			"RoundManager.cpp.obj",
 			"TelemetryLogger.cpp.obj",
+			"TheGameMode.cpp.obj",
 			"TheGameState.cpp.obj",
 			"CombatAIController.cpp.obj",
 			"CombatEnemy.cpp.obj",
@@ -96,7 +96,7 @@
 			"CombatLifeBar.cpp.obj",
 			"AnimNotify_EndDash.cpp.obj",
 			"PlatformingCharacter.cpp.obj",
-			"TheGameMode.cpp.obj"
+			"PlayerPerks.cpp.obj"
 		],
 		"Module.FMP.4.cpp.obj": [
 			"PlatformingGameMode.cpp.obj",

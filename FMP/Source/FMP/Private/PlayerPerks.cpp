@@ -226,6 +226,7 @@ bool UPlayerPerks::PerkEquipLogic(const FString& PerkName)
             if (NewEffect)
             {
                 NewEffect->ApplyPerkEffect(GetOwner());
+                ActivePerkInstances.Add(NewEffect);
             }
         }
 
@@ -237,6 +238,40 @@ bool UPlayerPerks::PerkEquipLogic(const FString& PerkName)
     }
     
     return false;
+}
+
+void UPlayerPerks::RemoveAllPerkEffects()
+{
+    // Ensure the logic runs on the server (works for Host directly, RPC for Clients)
+    if (GetOwner() && GetOwner()->HasAuthority())
+    {
+        ServerRemoveAllPerkEffects_Implementation();
+    }
+    else
+    {
+        ServerRemoveAllPerkEffects();
+    }
+}
+
+void UPlayerPerks::ServerRemoveAllPerkEffects_Implementation()
+{
+    // 1. Loop through instances and trigger the "Undo" logic in Blueprints
+    for (UPerkEffectBase* Effect : ActivePerkInstances)
+    {
+        if (Effect)
+        {
+            // This calls the UnapplyPerkEffect you added to the base class
+            Effect->UnapplyPerkEffect(GetOwner());
+        }
+    }
+
+    // 2. Clear the data arrays
+    ActivePerkInstances.Empty();
+    EquippedPerks.Empty();
+
+    // 3. Update the client UI
+    LastEquippedPerk = FPerks();
+    OnRep_LastEquippedPerk();
 }
 
 void UPlayerPerks::OnRep_LastEquippedPerk()

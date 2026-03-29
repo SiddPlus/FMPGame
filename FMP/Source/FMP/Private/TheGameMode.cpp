@@ -246,6 +246,12 @@ void ATheGameMode::RegisterPlayerDown(APlayerController* PC)
         {
             //GS->bIsTeamWiped = true;
             //EndRun();
+
+            if (GS->CurrentRoundNumber > 2)
+            {
+                GS->bIsTeamWiped = true;
+                EndRun();
+            }
         }
     }
 }
@@ -263,7 +269,7 @@ void ATheGameMode::EndRun()
                 UPlayerPerks* PerkComp = NewPawn->FindComponentByClass<UPlayerPerks>();
                 if (PerkComp)
                 {
-                    PerkComp->EquippedPerks.Empty();
+                    PerkComp->RemoveAllPerkEffects();
                 }
             }
         }

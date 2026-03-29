@@ -36,14 +36,17 @@ struct FPerks;
 
 // ********** Begin Class UPlayerPerks *************************************************************
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h_33_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void ServerRemoveAllPerkEffects_Implementation(); \
 	virtual void ServerFinishedPerkSelection_Implementation(); \
 	virtual void ServerEquipPerk_Implementation(const FString& PerkName); \
 	virtual void ServerUnlockPerk_Implementation(const FString& PerkName); \
 	DECLARE_FUNCTION(execOnRep_LastEquippedPerk); \
 	DECLARE_FUNCTION(execOnRep_IsPerkSelectionActive); \
+	DECLARE_FUNCTION(execServerRemoveAllPerkEffects); \
 	DECLARE_FUNCTION(execServerFinishedPerkSelection); \
 	DECLARE_FUNCTION(execServerEquipPerk); \
 	DECLARE_FUNCTION(execServerUnlockPerk); \
+	DECLARE_FUNCTION(execRemoveAllPerkEffects); \
 	DECLARE_FUNCTION(execFinishedPerkSelection); \
 	DECLARE_FUNCTION(execIsPerkSelectionActive); \
 	DECLARE_FUNCTION(execCheckAndUnlockPerks); \

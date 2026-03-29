@@ -63,6 +63,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Perk UI")
 	void FinishedPerkSelection();
 
+	UFUNCTION(BlueprintCallable, Category = "Perks")
+	void RemoveAllPerkEffects();
+
 	UPROPERTY(ReplicatedUsing = OnRep_IsPerkSelectionActive, BlueprintReadOnly, Category = "Perk UI")
 	bool bIsPerkSelectionActive = false;
 
@@ -77,6 +80,12 @@ private:
 
 	UFUNCTION(Server, Reliable)
 	void ServerFinishedPerkSelection();
+
+	UPROPERTY()
+	TArray<class UPerkEffectBase*> ActivePerkInstances;
+
+	UFUNCTION(Server, Reliable)
+	void ServerRemoveAllPerkEffects();
     
 	UFUNCTION()
 	void OnRep_IsPerkSelectionActive();
