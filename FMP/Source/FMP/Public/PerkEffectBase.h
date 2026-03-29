@@ -23,4 +23,7 @@ public:
 	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Perk Logic")
 	void ApplyPerkEffect(AActor* TargetActor);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Perk Logic")
+	void UnapplyPerkEffect(AActor* TargetActor);
 };

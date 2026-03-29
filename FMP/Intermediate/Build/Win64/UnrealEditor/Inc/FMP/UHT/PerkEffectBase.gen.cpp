@@ -62,6 +62,49 @@ UFunction* Z_Construct_UFunction_UPerkEffectBase_ApplyPerkEffect()
 }
 // ********** End Class UPerkEffectBase Function ApplyPerkEffect ***********************************
 
+// ********** Begin Class UPerkEffectBase Function UnapplyPerkEffect *******************************
+struct PerkEffectBase_eventUnapplyPerkEffect_Parms
+{
+	AActor* TargetActor;
+};
+static FName NAME_UPerkEffectBase_UnapplyPerkEffect = FName(TEXT("UnapplyPerkEffect"));
+void UPerkEffectBase::UnapplyPerkEffect(AActor* TargetActor)
+{
+	PerkEffectBase_eventUnapplyPerkEffect_Parms Parms;
+	Parms.TargetActor=TargetActor;
+	UFunction* Func = FindFunctionChecked(NAME_UPerkEffectBase_UnapplyPerkEffect);
+	ProcessEvent(Func,&Parms);
+}
+struct Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Perk Logic" },
+		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_TargetActor;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics::NewProp_TargetActor = { "TargetActor", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(PerkEffectBase_eventUnapplyPerkEffect_Parms, TargetActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics::NewProp_TargetActor,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UPerkEffectBase, nullptr, "UnapplyPerkEffect", Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics::PropPointers), sizeof(PerkEffectBase_eventUnapplyPerkEffect_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics::Function_MetaDataParams), Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics::Function_MetaDataParams)},  };
+static_assert(sizeof(PerkEffectBase_eventUnapplyPerkEffect_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+// ********** End Class UPerkEffectBase Function UnapplyPerkEffect *********************************
+
 // ********** Begin Class UPerkEffectBase **********************************************************
 void UPerkEffectBase::StaticRegisterNativesUPerkEffectBase()
 {
@@ -122,6 +165,7 @@ struct Z_Construct_UClass_UPerkEffectBase_Statics
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_UPerkEffectBase_ApplyPerkEffect, "ApplyPerkEffect" }, // 670510354
+		{ &Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect, "UnapplyPerkEffect" }, // 162444871
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -173,10 +217,10 @@ UPerkEffectBase::~UPerkEffectBase() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPerkEffectBase, UPerkEffectBase::StaticClass, TEXT("UPerkEffectBase"), &Z_Registration_Info_UClass_UPerkEffectBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPerkEffectBase), 845400007U) },
+		{ Z_Construct_UClass_UPerkEffectBase, UPerkEffectBase::StaticClass, TEXT("UPerkEffectBase"), &Z_Registration_Info_UClass_UPerkEffectBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPerkEffectBase), 3007444208U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_2910144428(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_2546931522(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
