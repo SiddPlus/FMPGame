@@ -18,8 +18,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 // ********** Begin Class AFMPCharacter ************************************************************
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
-	DECLARE_FUNCTION(execDoJumpEnd); \
-	DECLARE_FUNCTION(execDoJumpStart); \
 	DECLARE_FUNCTION(execDoLook); \
 	DECLARE_FUNCTION(execDoMove);
 

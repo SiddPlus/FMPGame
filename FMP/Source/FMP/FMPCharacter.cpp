@@ -32,7 +32,6 @@ AFMPCharacter::AFMPCharacter()
 
 	// Note: For faster iteration times these variables, and many more, can be tweaked in the Character Blueprint
 	// instead of recompiling to adjust them
-	GetCharacterMovement()->JumpZVelocity = 500.f;
 	GetCharacterMovement()->AirControl = 0.35f;
 	GetCharacterMovement()->MaxWalkSpeed = 500.f;
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
@@ -63,10 +62,6 @@ void AFMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 {
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
-		
-		// Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFMPCharacter::Move);
@@ -127,16 +122,4 @@ void AFMPCharacter::DoLook(float Yaw, float Pitch)
 		AddControllerYawInput(Yaw);
 		AddControllerPitchInput(Pitch);
 	}
-}
-
-void AFMPCharacter::DoJumpStart()
-{
-	// signal the character to jump
-	Jump();
-}
-
-void AFMPCharacter::DoJumpEnd()
-{
-	// signal the character to stop jumping
-	StopJumping();
 }
