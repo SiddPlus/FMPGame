@@ -31,6 +31,12 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Spawning", Meta = (ClampMin = "1"))
 	int MaxConcurrentEnemies = 10;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Spawning")
+	float CurrentHealthMultiplier = 1.0f;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Spawning")
+	float CurrentSpeedMultiplier = 1.0f;
+
 	FTimerHandle SpawnTimerHandle;
 	
 	UPROPERTY(VisibleAnywhere, Transient, Category = "Spawning")
@@ -44,7 +50,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable, Category = "Spawning|Control")
-	void ConfigureSpawner(float NewSpawnRate, int32 NewMaxConcurrentEnemies);
+	void ConfigureSpawner(float NewSpawnRate, int32 NewMaxConcurrentEnemies, float HealthMult, float SpeedMult);
 
 	UFUNCTION(BlueprintCallable, Category = "Spawning")
 	void StartSpawningTimer();

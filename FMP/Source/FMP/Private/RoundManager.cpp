@@ -172,7 +172,7 @@ void ARoundManager::StartRound()
 			{
 				if (Spawner)
 				{
-					Spawner->ConfigureSpawner(CurrentRoundSpawnRate, CurrentRoundMaxEnemies);
+					Spawner->ConfigureSpawner(CurrentRoundSpawnRate, CurrentRoundMaxEnemies, 1.0f, 1.0f);
 					Spawner->StartSpawningTimer();
 				}
 			}

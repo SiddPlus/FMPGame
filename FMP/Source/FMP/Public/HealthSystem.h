@@ -51,5 +51,8 @@ public:
 	void IncreaseHealth(float HealthDelta);
 
 	UFUNCTION(BlueprintCallable, Category = "Health|Modification")
-	void RestoreFullHealth();	
+	void RestoreFullHealth();
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void SetMaxHealth(float NewMax);
 };

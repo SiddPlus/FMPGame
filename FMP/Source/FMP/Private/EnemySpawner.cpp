@@ -1,4 +1,5 @@
 #include "EnemySpawner.h"
+#include "HealthSystem.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Character.h"
@@ -66,15 +67,15 @@ void AEnemySpawner::EndSpawningAndClearEnemies()
 	}
 }
 
-void AEnemySpawner::ConfigureSpawner(float NewSpawnRate, int32 NewMaxConcurrentEnemies)
+void AEnemySpawner::ConfigureSpawner(float NewSpawnRate, int32 NewMaxConcurrentEnemies, float HealthMult, float SpeedMult)
 {
 	// Only the server should apply configuration changes
 	if (HasAuthority())
 	{
 		SpawnRate = NewSpawnRate;
 		MaxConcurrentEnemies = NewMaxConcurrentEnemies;
-		// NOTE: The StartSpawningTimer() function must be called after this
-		// to apply the new SpawnRate to the FTimerHandle.
+		CurrentHealthMultiplier = HealthMult;
+		CurrentSpeedMultiplier = SpeedMult;
 	}
 }
 
@@ -120,6 +121,19 @@ void AEnemySpawner::SpawnEnemy()
 			if (NewEnemy)
 			{
 				SpawnedEnemies.Add(NewEnemy);
+
+				// Apply Health Multiplier
+				if (UHealthSystem* HealthComp = NewEnemy->FindComponentByClass<UHealthSystem>())
+				{
+					// Update the MaxHealth in HealthSystem.h first
+					HealthComp->SetMaxHealth(100.0f * CurrentHealthMultiplier);
+				}
+
+				// Apply Speed Multiplier
+				if (NewEnemy->GetCharacterMovement())
+				{
+					NewEnemy->GetCharacterMovement()->MaxWalkSpeed *= CurrentSpeedMultiplier;
+				}
 
 				// FORCE the character to "Land" on the procedural floor
 				NewEnemy->GetCharacterMovement()->SetMovementMode(MOVE_Walking);

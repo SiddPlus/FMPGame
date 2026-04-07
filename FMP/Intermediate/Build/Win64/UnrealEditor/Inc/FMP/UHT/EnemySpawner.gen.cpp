@@ -28,6 +28,8 @@ struct Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics
 	{
 		float NewSpawnRate;
 		int32 NewMaxConcurrentEnemies;
+		float HealthMult;
+		float SpeedMult;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -37,14 +39,20 @@ struct Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_NewSpawnRate;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_NewMaxConcurrentEnemies;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_HealthMult;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_SpeedMult;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_NewSpawnRate = { "NewSpawnRate", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EnemySpawner_eventConfigureSpawner_Parms, NewSpawnRate), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_NewMaxConcurrentEnemies = { "NewMaxConcurrentEnemies", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EnemySpawner_eventConfigureSpawner_Parms, NewMaxConcurrentEnemies), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_HealthMult = { "HealthMult", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EnemySpawner_eventConfigureSpawner_Parms, HealthMult), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_SpeedMult = { "SpeedMult", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EnemySpawner_eventConfigureSpawner_Parms, SpeedMult), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_NewSpawnRate,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_NewMaxConcurrentEnemies,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_HealthMult,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::NewProp_SpeedMult,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_AEnemySpawner, nullptr, "ConfigureSpawner", Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::PropPointers), sizeof(Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::EnemySpawner_eventConfigureSpawner_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::Function_MetaDataParams), Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics::Function_MetaDataParams)},  };
@@ -62,9 +70,11 @@ DEFINE_FUNCTION(AEnemySpawner::execConfigureSpawner)
 {
 	P_GET_PROPERTY(FFloatProperty,Z_Param_NewSpawnRate);
 	P_GET_PROPERTY(FIntProperty,Z_Param_NewMaxConcurrentEnemies);
+	P_GET_PROPERTY(FFloatProperty,Z_Param_HealthMult);
+	P_GET_PROPERTY(FFloatProperty,Z_Param_SpeedMult);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	P_THIS->ConfigureSpawner(Z_Param_NewSpawnRate,Z_Param_NewMaxConcurrentEnemies);
+	P_THIS->ConfigureSpawner(Z_Param_NewSpawnRate,Z_Param_NewMaxConcurrentEnemies,Z_Param_HealthMult,Z_Param_SpeedMult);
 	P_NATIVE_END;
 }
 // ********** End Class AEnemySpawner Function ConfigureSpawner ************************************
@@ -226,6 +236,14 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 		{ "ClampMin", "1" },
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentHealthMultiplier_MetaData[] = {
+		{ "Category", "Spawning" },
+		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentSpeedMultiplier_MetaData[] = {
+		{ "Category", "Spawning" },
+		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SpawnedEnemies_MetaData[] = {
 		{ "Category", "Spawning" },
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
@@ -235,12 +253,14 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_SpawnRate;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_SpawnRadius;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_MaxConcurrentEnemies;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentHealthMultiplier;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentSpeedMultiplier;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SpawnedEnemies_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_SpawnedEnemies;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner, "ConfigureSpawner" }, // 2635230640
+		{ &Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner, "ConfigureSpawner" }, // 1715962905
 		{ &Z_Construct_UFunction_AEnemySpawner_EndSpawningAndClearEnemies, "EndSpawningAndClearEnemies" }, // 2736406896
 		{ &Z_Construct_UFunction_AEnemySpawner_SpawnEnemy, "SpawnEnemy" }, // 1825267898
 		{ &Z_Construct_UFunction_AEnemySpawner_StartSpawningTimer, "StartSpawningTimer" }, // 1476011976
@@ -255,6 +275,8 @@ const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AEnemySpawner_S
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnRate = { "SpawnRate", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, SpawnRate), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpawnRate_MetaData), NewProp_SpawnRate_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnRadius = { "SpawnRadius", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, SpawnRadius), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpawnRadius_MetaData), NewProp_SpawnRadius_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_MaxConcurrentEnemies = { "MaxConcurrentEnemies", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, MaxConcurrentEnemies), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxConcurrentEnemies_MetaData), NewProp_MaxConcurrentEnemies_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_CurrentHealthMultiplier = { "CurrentHealthMultiplier", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, CurrentHealthMultiplier), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentHealthMultiplier_MetaData), NewProp_CurrentHealthMultiplier_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_CurrentSpeedMultiplier = { "CurrentSpeedMultiplier", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, CurrentSpeedMultiplier), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentSpeedMultiplier_MetaData), NewProp_CurrentSpeedMultiplier_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnedEnemies_Inner = { "SpawnedEnemies", nullptr, (EPropertyFlags)0x0000000000020000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnedEnemies = { "SpawnedEnemies", nullptr, (EPropertyFlags)0x0020080000022001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, SpawnedEnemies), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpawnedEnemies_MetaData), NewProp_SpawnedEnemies_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AEnemySpawner_Statics::PropPointers[] = {
@@ -262,6 +284,8 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AEnemySpa
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnRate,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnRadius,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_MaxConcurrentEnemies,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_CurrentHealthMultiplier,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_CurrentSpeedMultiplier,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnedEnemies_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnedEnemies,
 };
@@ -302,10 +326,10 @@ AEnemySpawner::~AEnemySpawner() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 2481995447U) },
+		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 3516270114U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_681335007(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_120273950(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

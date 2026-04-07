@@ -102,6 +102,15 @@ void UHealthSystem::RestoreFullHealth()
 	OnRep_Health(OldHealth);
 }
 
+void UHealthSystem::SetMaxHealth(float NewMax)
+{
+	if (GetOwner()->HasAuthority())
+	{
+		MaxHealth = NewMax;
+		RestoreFullHealth(); // Reset health to the new max
+	}
+}
+
 
 void UHealthSystem::OnRep_Health(float OldHealth)
 {

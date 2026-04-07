@@ -30,6 +30,7 @@ FMP_API void FOnHealthChangedSignature_DelegateWrapper(const FMulticastScriptDel
 
 // ********** Begin Class UHealthSystem ************************************************************
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execSetMaxHealth); \
 	DECLARE_FUNCTION(execRestoreFullHealth); \
 	DECLARE_FUNCTION(execIncreaseHealth); \
 	DECLARE_FUNCTION(execDecreaseHealth); \
