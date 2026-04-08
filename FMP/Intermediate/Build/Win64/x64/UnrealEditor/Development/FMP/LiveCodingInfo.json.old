@@ -61,13 +61,17 @@
 			"FMPCharacter.cpp.obj",
 			"FMPGameMode.cpp.obj",
 			"FMPPlayerController.cpp.obj",
+			"EnemySpawner.cpp.obj",
+			"HealthSystem.cpp.obj",
 			"LootPool.cpp.obj",
 			"PerformanceData.cpp.obj",
 			"PerformanceLogger.cpp.obj",
 			"PerkEffectBase.cpp.obj",
 			"PlayerPerks.cpp.obj",
 			"ProceduralGeneration.cpp.obj",
+			"RoundManager.cpp.obj",
 			"TelemetryLogger.cpp.obj",
+			"TheGameMode.cpp.obj",
 			"TheGameState.cpp.obj",
 			"CombatAIController.cpp.obj",
 			"CombatEnemy.cpp.obj",
@@ -105,11 +109,7 @@
 			"SideScrollingCharacter.cpp.obj",
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
-			"SideScrollingUI.cpp.obj",
-			"EnemySpawner.cpp.obj",
-			"HealthSystem.cpp.obj",
-			"RoundManager.cpp.obj",
-			"TheGameMode.cpp.obj"
+			"SideScrollingUI.cpp.obj"
 		]
 	}
 }
