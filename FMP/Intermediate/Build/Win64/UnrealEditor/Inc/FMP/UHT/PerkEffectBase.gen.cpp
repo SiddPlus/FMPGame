@@ -158,9 +158,39 @@ struct Z_Construct_UClass_UPerkEffectBase_Statics
 		{ "Category", "Stats" },
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DamageMultiplier_MetaData[] = {
+		{ "Category", "Stats" },
+		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ReloadSpeedMultiplier_MetaData[] = {
+		{ "Category", "Stats" },
+		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RecoilMultiplier_MetaData[] = {
+		{ "Category", "Stats" },
+		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SpreadMultiplier_MetaData[] = {
+		{ "Category", "Stats" },
+		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DamageTakenMultiplier_MetaData[] = {
+		{ "Category", "Stats" },
+		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxAmmoMultiplier_MetaData[] = {
+		{ "Category", "Stats" },
+		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MovementSpeedMultiplier;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxHealthBonus;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_DamageMultiplier;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_ReloadSpeedMultiplier;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_RecoilMultiplier;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_SpreadMultiplier;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_DamageTakenMultiplier;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxAmmoMultiplier;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -175,9 +205,21 @@ struct Z_Construct_UClass_UPerkEffectBase_Statics
 };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_MovementSpeedMultiplier = { "MovementSpeedMultiplier", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPerkEffectBase, MovementSpeedMultiplier), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MovementSpeedMultiplier_MetaData), NewProp_MovementSpeedMultiplier_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_MaxHealthBonus = { "MaxHealthBonus", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPerkEffectBase, MaxHealthBonus), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxHealthBonus_MetaData), NewProp_MaxHealthBonus_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_DamageMultiplier = { "DamageMultiplier", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPerkEffectBase, DamageMultiplier), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DamageMultiplier_MetaData), NewProp_DamageMultiplier_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_ReloadSpeedMultiplier = { "ReloadSpeedMultiplier", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPerkEffectBase, ReloadSpeedMultiplier), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ReloadSpeedMultiplier_MetaData), NewProp_ReloadSpeedMultiplier_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_RecoilMultiplier = { "RecoilMultiplier", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPerkEffectBase, RecoilMultiplier), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RecoilMultiplier_MetaData), NewProp_RecoilMultiplier_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_SpreadMultiplier = { "SpreadMultiplier", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPerkEffectBase, SpreadMultiplier), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpreadMultiplier_MetaData), NewProp_SpreadMultiplier_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_DamageTakenMultiplier = { "DamageTakenMultiplier", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPerkEffectBase, DamageTakenMultiplier), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DamageTakenMultiplier_MetaData), NewProp_DamageTakenMultiplier_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_MaxAmmoMultiplier = { "MaxAmmoMultiplier", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPerkEffectBase, MaxAmmoMultiplier), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxAmmoMultiplier_MetaData), NewProp_MaxAmmoMultiplier_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UPerkEffectBase_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_MovementSpeedMultiplier,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_MaxHealthBonus,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_DamageMultiplier,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_ReloadSpeedMultiplier,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_RecoilMultiplier,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_SpreadMultiplier,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_DamageTakenMultiplier,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPerkEffectBase_Statics::NewProp_MaxAmmoMultiplier,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UPerkEffectBase_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UPerkEffectBase_Statics::DependentSingletons[])() = {
@@ -217,10 +259,10 @@ UPerkEffectBase::~UPerkEffectBase() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPerkEffectBase, UPerkEffectBase::StaticClass, TEXT("UPerkEffectBase"), &Z_Registration_Info_UClass_UPerkEffectBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPerkEffectBase), 3007444208U) },
+		{ Z_Construct_UClass_UPerkEffectBase, UPerkEffectBase::StaticClass, TEXT("UPerkEffectBase"), &Z_Registration_Info_UClass_UPerkEffectBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPerkEffectBase), 2923698067U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_2546931522(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_2011340368(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
