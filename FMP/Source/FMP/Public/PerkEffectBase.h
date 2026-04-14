@@ -38,6 +38,21 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats")
 	float MaxAmmoMultiplier = 1.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats|Special")
+	float HealthRegenAmount = 0.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats|Special")
+	float HealthPerKill = 0.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats|Special")
+	float EnemySlowMultiplier = 1.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats|Special")
+	float ExplosionRadius = 500.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats|Special")
+	float ExplosionDamage = 50.0f;
 	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Perk Logic")
 	void ApplyPerkEffect(AActor* TargetActor);
