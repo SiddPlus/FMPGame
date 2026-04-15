@@ -66,6 +66,7 @@
 			"LootPool.cpp.obj",
 			"PerformanceData.cpp.obj",
 			"PerformanceLogger.cpp.obj",
+			"PerkEffectBase.cpp.obj",
 			"PlayerPerks.cpp.obj",
 			"ProceduralGeneration.cpp.obj",
 			"RoundManager.cpp.obj",
@@ -108,8 +109,7 @@
 			"SideScrollingCharacter.cpp.obj",
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
-			"SideScrollingUI.cpp.obj",
-			"PerkEffectBase.cpp.obj"
+			"SideScrollingUI.cpp.obj"
 		]
 	}
 }
