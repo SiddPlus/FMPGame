@@ -46,13 +46,7 @@ public:
 	float HealthPerKill = 0.0f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats|Special")
-	float EnemySlowMultiplier = 1.0f;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats|Special")
-	float ExplosionRadius = 500.0f;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats|Special")
-	float ExplosionDamage = 50.0f;
+	float EnemySlowAmmount = 1.0f;
 	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Perk Logic")
 	void ApplyPerkEffect(AActor* TargetActor);
