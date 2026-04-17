@@ -1,5 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -20,83 +18,110 @@ class ULootPool;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 /**
- *  A simple player-controllable third person character
- *  Implements a controllable orbiting camera
+ * @brief A simple player-controllable third person character
+ * 
+ * Implements a controllable orbiting camera and manages the player's health,
+ * perks, and loot systems.
  */
 UCLASS(abstract)
 class AFMPCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+	/** @brief Component that manages the character's health, damage, and healing */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player", meta = (AllowPrivateAccess = "true"))
 	UHealthSystem* PlayerHealth;
 
+	/** @brief Component that manages the character's unlocked and equipped perks */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player", meta = (AllowPrivateAccess = "true"))
 	UPlayerPerks* PlayerPerks;
 
+	/** @brief Component that provides a randomized pool of perks for the player to draw from */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player", meta = (AllowPrivateAccess = "true"))
 	ULootPool* LootPool;
 
-	/** Camera boom positioning the camera behind the character */
+	/** @brief Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* CameraBoom;
 
-	/** Follow camera */
+	/** @brief Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FollowCamera;
 	
 protected:
 
-	/** Move Input Action */
+	/** @brief Move Input Action */
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* MoveAction;
 
-	/** Look Input Action */
+	/** @brief Look Input Action */
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* LookAction;
 
-	/** Mouse Look Input Action */
+	/** @brief Mouse Look Input Action */
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* MouseLookAction;
 
 public:
 
-	/** Constructor */
+	/** @brief Default Constructor */
 	AFMPCharacter();	
 
 protected:
 
-	/** Initialize input action bindings */
+	/**
+	 * @brief Initialize input action bindings
+	 * @param PlayerInputComponent The input component to bind to
+	 */
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
 
-	/** Called for movement input */
+	/**
+	 * @brief Called for movement input
+	 * @param Value The input value
+	 */
 	void Move(const FInputActionValue& Value);
 
-	/** Called for looking input */
+	/**
+	 * @brief Called for looking input
+	 * @param Value The input value
+	 */
 	void Look(const FInputActionValue& Value);
 
 public:
 
-	/** Handles move inputs from either controls or UI interfaces */
+	/**
+	 * @brief Handles move inputs from either controls or UI interfaces
+	 * @param Right The right movement value
+	 * @param Forward The forward movement value
+	 */
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoMove(float Right, float Forward);
 
-	/** Handles look inputs from either controls or UI interfaces */
+	/**
+	 * @brief Handles look inputs from either controls or UI interfaces
+	 * @param Yaw The yaw rotation value
+	 * @param Pitch The pitch rotation value
+	 */
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoLook(float Yaw, float Pitch);
 
 public:
 
-	/** Returns CameraBoom subobject **/
+	/** @brief Returns the CameraBoom subobject */
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
-	/** Returns FollowCamera subobject **/
+	/** @brief Returns the FollowCamera subobject */
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	/** @brief Returns the HealthSystem subobject */
 	FORCEINLINE UHealthSystem* GetHealthSystem() const { return PlayerHealth; }
+
+	/** @brief Returns the PlayerPerks subobject */
 	FORCEINLINE UPlayerPerks* GetPlayerPerks() const { return PlayerPerks; }
+
+	/** @brief Returns the LootPool subobject */
 	FORCEINLINE ULootPool* GetLootPool() const { return LootPool; }
 	
 };

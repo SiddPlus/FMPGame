@@ -1,10 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "PerformanceData.generated.h"
 
+/**
+ * @brief Structure containing a snapshot of various game performance metrics.
+ */
 USTRUCT()
 struct FPerformanceMetrics
 {
@@ -12,18 +13,23 @@ struct FPerformanceMetrics
 
 public: 
     
+	/** @brief Time elapsed since logging started (in seconds) */
 	UPROPERTY()
-	float Timestamp = 0.0f; // Time elapsed since logging started (in seconds)
+	float Timestamp = 0.0f;
     
+	/** @brief Frame rendering time (in milliseconds) */
 	UPROPERTY()
-	float FrameTime = 0.0f; // Frame rendering time (in milliseconds)
+	float FrameTime = 0.0f;
     
+	/** @brief Current frames per second */
 	UPROPERTY()
 	float FPS = 0.0f;
     
+	/** @brief Cumulative CPU cycles used by the process (in seconds representation if applicable) */
 	UPROPERTY()
-	uint64 CPUCycles = 0; // Cumulative CPU time used by the process (in seconds)
+	uint64 CPUCycles = 0;
     
+	/** @brief Resident memory used by the process (in MB) */
 	UPROPERTY()
-	int64 MemoryUsedMB = 0; // Resident memory used by the process (in MB)
+	int64 MemoryUsedMB = 0;
 };
