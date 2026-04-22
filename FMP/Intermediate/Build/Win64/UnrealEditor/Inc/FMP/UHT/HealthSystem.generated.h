@@ -22,14 +22,14 @@ class UDamageType;
 class UHealthSystem;
 
 // ********** Begin Delegate FOnHealthChangedSignature *********************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_9_DELEGATE \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_14_DELEGATE \
 FMP_API void FOnHealthChangedSignature_DelegateWrapper(const FMulticastScriptDelegate& OnHealthChangedSignature, UHealthSystem* HealthComp, float Health, float HealthDelta, const UDamageType* DamageType);
 
 
 // ********** End Delegate FOnHealthChangedSignature ***********************************************
 
 // ********** Begin Class UHealthSystem ************************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execSetMaxHealth); \
 	DECLARE_FUNCTION(execRestoreFullHealth); \
 	DECLARE_FUNCTION(execIncreaseHealth); \
@@ -40,7 +40,7 @@ FMP_API void FOnHealthChangedSignature_DelegateWrapper(const FMulticastScriptDel
 
 FMP_API UClass* Z_Construct_UClass_UHealthSystem_NoRegister();
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_14_INCLASS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_22_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUHealthSystem(); \
 	friend struct Z_Construct_UClass_UHealthSystem_Statics; \
@@ -58,7 +58,7 @@ public: \
 	DECLARE_VALIDATE_GENERATED_REP_ENUMS(NO_API)
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_14_ENHANCED_CONSTRUCTORS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_22_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	UHealthSystem(UHealthSystem&&) = delete; \
 	UHealthSystem(const UHealthSystem&) = delete; \
@@ -68,13 +68,13 @@ public: \
 	NO_API virtual ~UHealthSystem();
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_11_PROLOG
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_14_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_19_PROLOG
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_22_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_14_INCLASS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_14_ENHANCED_CONSTRUCTORS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_22_INCLASS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h_22_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

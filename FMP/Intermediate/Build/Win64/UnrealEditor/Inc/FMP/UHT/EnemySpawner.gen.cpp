@@ -34,7 +34,13 @@ struct Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Spawning|Control" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Updates the spawner's settings, adjusting difficulty parameters.\n\x09 * @param NewSpawnRate The new time interval between spawns.\n\x09 * @param NewMaxConcurrentEnemies The new cap for active enemies.\n\x09 * @param HealthMult The new health multiplier for spawned enemies.\n\x09 * @param SpeedMult The new speed multiplier for spawned enemies.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Updates the spawner's settings, adjusting difficulty parameters.\n@param NewSpawnRate The new time interval between spawns.\n@param NewMaxConcurrentEnemies The new cap for active enemies.\n@param HealthMult The new health multiplier for spawned enemies.\n@param SpeedMult The new speed multiplier for spawned enemies." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_NewSpawnRate;
@@ -85,7 +91,13 @@ struct Z_Construct_UFunction_AEnemySpawner_EndSpawningAndClearEnemies_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Spawning" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Stops the spawn timer and destroys all currently active enemies spawned by this instance */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Stops the spawn timer and destroys all currently active enemies spawned by this instance" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -115,7 +127,13 @@ struct Z_Construct_UFunction_AEnemySpawner_SpawnEnemy_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Spawning" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Instantiates a new enemy and applies the current multipliers */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Instantiates a new enemy and applies the current multipliers" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -145,7 +163,13 @@ struct Z_Construct_UFunction_AEnemySpawner_StartSpawningTimer_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Spawning" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Initiates the repeating spawn timer based on the configured SpawnRate */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Initiates the repeating spawn timer based on the configured SpawnRate" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -214,39 +238,87 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Actor responsible for spawning enemies at runtime based on configured rates and multipliers.\n */" },
+#endif
 		{ "IncludePath", "EnemySpawner.h" },
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Actor responsible for spawning enemies at runtime based on configured rates and multipliers." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_EnemyToSpawnClass_MetaData[] = {
 		{ "Category", "Spawning" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The class of the enemy character to spawn */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The class of the enemy character to spawn" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SpawnRate_MetaData[] = {
 		{ "Category", "Spawning" },
 		{ "ClampMin", "0.5" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Frequency of enemy spawns in seconds */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Frequency of enemy spawns in seconds" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SpawnRadius_MetaData[] = {
 		{ "Category", "Spawning" },
 		{ "ClampMin", "100.0" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Maximum radius around the spawner where enemies can spawn */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Maximum radius around the spawner where enemies can spawn" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxConcurrentEnemies_MetaData[] = {
 		{ "Category", "Spawning" },
 		{ "ClampMin", "1" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Maximum number of active enemies this spawner can maintain at once */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Maximum number of active enemies this spawner can maintain at once" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentHealthMultiplier_MetaData[] = {
 		{ "Category", "Spawning" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier applied to the spawned enemy's health */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier applied to the spawned enemy's health" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentSpeedMultiplier_MetaData[] = {
 		{ "Category", "Spawning" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier applied to the spawned enemy's movement speed */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier applied to the spawned enemy's movement speed" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SpawnedEnemies_MetaData[] = {
 		{ "Category", "Spawning" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Tracks all currently active enemies spawned by this spawner */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Tracks all currently active enemies spawned by this spawner" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_EnemyToSpawnClass;
@@ -260,10 +332,10 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner, "ConfigureSpawner" }, // 1715962905
-		{ &Z_Construct_UFunction_AEnemySpawner_EndSpawningAndClearEnemies, "EndSpawningAndClearEnemies" }, // 2736406896
-		{ &Z_Construct_UFunction_AEnemySpawner_SpawnEnemy, "SpawnEnemy" }, // 1825267898
-		{ &Z_Construct_UFunction_AEnemySpawner_StartSpawningTimer, "StartSpawningTimer" }, // 1476011976
+		{ &Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner, "ConfigureSpawner" }, // 353782792
+		{ &Z_Construct_UFunction_AEnemySpawner_EndSpawningAndClearEnemies, "EndSpawningAndClearEnemies" }, // 3091595215
+		{ &Z_Construct_UFunction_AEnemySpawner_SpawnEnemy, "SpawnEnemy" }, // 2284598156
+		{ &Z_Construct_UFunction_AEnemySpawner_StartSpawningTimer, "StartSpawningTimer" }, // 3355906880
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -326,10 +398,10 @@ AEnemySpawner::~AEnemySpawner() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 3516270114U) },
+		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 2471560504U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_120273950(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_3800606901(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

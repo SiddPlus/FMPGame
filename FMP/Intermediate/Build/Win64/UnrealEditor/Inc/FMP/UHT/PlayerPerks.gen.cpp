@@ -31,7 +31,13 @@ struct Z_Construct_UDelegateFunction_FMP_OnPerkSelectionNeeded__DelegateSignatur
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Delegate triggered when the perk selection UI needs to be shown or hidden.\n * @param IsActive True if the selection UI should be active.\n */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Delegate triggered when the perk selection UI needs to be shown or hidden.\n@param IsActive True if the selection UI should be active." },
+#endif
 	};
 #endif // WITH_METADATA
 	static void NewProp_IsActive_SetBit(void* Obj);
@@ -86,23 +92,53 @@ struct Z_Construct_UScriptStruct_FPerks_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Structure representing a single player perk, including its details and unlock requirements.\n */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Structure representing a single player perk, including its details and unlock requirements." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Name_MetaData[] = {
 		{ "Category", "Perk Details" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The display name of the perk */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The display name of the perk" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Description_MetaData[] = {
 		{ "Category", "Perk Details" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Description of the perk's effect */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Description of the perk's effect" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PerkEffectClass_MetaData[] = {
 		{ "Category", "Perk Details" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Class representing the actual logic/effect of the perk */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Class representing the actual logic/effect of the perk" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RoundLevelUnlockAmount_MetaData[] = {
 		{ "Category", "Perk Details" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The round number required to unlock this perk */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The round number required to unlock this perk" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStrPropertyParams NewProp_Name;
@@ -160,7 +196,13 @@ struct Z_Construct_UFunction_UPlayerPerks_CheckAndUnlockPerks_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Perk Functions" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Checks the current round number and unlocks any perks that meet the round requirement.\n\x09 * @param CurrentRound The current round number.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Checks the current round number and unlocks any perks that meet the round requirement.\n@param CurrentRound The current round number." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FIntPropertyParams NewProp_CurrentRound;
@@ -204,7 +246,13 @@ struct Z_Construct_UFunction_UPlayerPerks_EquipPerk_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Perk Functions" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Equips an unlocked perk.\n\x09 * @param PerkName The name of the perk to equip.\n\x09 * @return True if the perk was successfully equipped.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Equips an unlocked perk.\n@param PerkName The name of the perk to equip.\n@return True if the perk was successfully equipped." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PerkName_MetaData[] = {
 		{ "NativeConst", "" },
@@ -254,7 +302,13 @@ struct Z_Construct_UFunction_UPlayerPerks_FinishedPerkSelection_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Perk UI" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Marks the perk selection process as finished */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Marks the perk selection process as finished" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -288,7 +342,13 @@ struct Z_Construct_UFunction_UPlayerPerks_IsPerkSelectionActive_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Perk UI" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Checks if the perk selection is currently active.\n\x09 * @return True if perk selection is active.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Checks if the perk selection is currently active.\n@return True if perk selection is active." },
+#endif
 	};
 #endif // WITH_METADATA
 	static void NewProp_ReturnValue_SetBit(void* Obj);
@@ -343,7 +403,13 @@ struct Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Perk UI" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Client-side event triggered when a new perk is equipped.\n\x09 * @param NewPerk The perk that was equipped.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Client-side event triggered when a new perk is equipped.\n@param NewPerk The perk that was equipped." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_NewPerk_MetaData[] = {
 		{ "NativeConst", "" },
@@ -353,7 +419,7 @@ struct Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics::NewProp_NewPerk = { "NewPerk", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(PlayerPerks_eventOnPerkEquipped_ClientEvent_Parms, NewPerk), Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NewPerk_MetaData), NewProp_NewPerk_MetaData) }; // 3622194358
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics::NewProp_NewPerk = { "NewPerk", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(PlayerPerks_eventOnPerkEquipped_ClientEvent_Parms, NewPerk), Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NewPerk_MetaData), NewProp_NewPerk_MetaData) }; // 4111855256
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent_Statics::NewProp_NewPerk,
 };
@@ -376,7 +442,13 @@ struct Z_Construct_UFunction_UPlayerPerks_OnRep_IsPerkSelectionActive_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Replication callback for bIsPerkSelectionActive */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Replication callback for bIsPerkSelectionActive" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -405,7 +477,13 @@ struct Z_Construct_UFunction_UPlayerPerks_OnRep_LastEquippedPerk_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Replication callback for LastEquippedPerk */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Replication callback for LastEquippedPerk" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -435,7 +513,13 @@ struct Z_Construct_UFunction_UPlayerPerks_RemoveAllPerkEffects_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Perks" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Removes all currently active perk effects from the player */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Removes all currently active perk effects from the player" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -476,7 +560,13 @@ struct Z_Construct_UFunction_UPlayerPerks_ServerEquipPerk_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Server RPC to equip a perk */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Server RPC to equip a perk" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PerkName_MetaData[] = {
 		{ "NativeConst", "" },
@@ -523,7 +613,13 @@ struct Z_Construct_UFunction_UPlayerPerks_ServerFinishedPerkSelection_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Server RPC to finalize the perk selection */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Server RPC to finalize the perk selection" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -558,7 +654,13 @@ struct Z_Construct_UFunction_UPlayerPerks_ServerRemoveAllPerkEffects_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Server RPC to remove all active perk effects */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Server RPC to remove all active perk effects" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -599,7 +701,13 @@ struct Z_Construct_UFunction_UPlayerPerks_ServerUnlockPerk_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Server RPC to unlock a perk */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Server RPC to unlock a perk" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PerkName_MetaData[] = {
 		{ "NativeConst", "" },
@@ -645,7 +753,13 @@ struct Z_Construct_UFunction_UPlayerPerks_UnlockPerk_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Perk Functions" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Unlocks a specific perk by name.\n\x09 * @param PerkName The name of the perk to unlock.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Unlocks a specific perk by name.\n@param PerkName The name of the perk to unlock." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PerkName_MetaData[] = {
 		{ "NativeConst", "" },
@@ -736,35 +850,83 @@ struct Z_Construct_UClass_UPlayerPerks_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
 		{ "ClassGroupNames", "Custom" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Component responsible for managing a player's locked, unlocked, and equipped perks.\n */" },
+#endif
 		{ "IncludePath", "PlayerPerks.h" },
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Component responsible for managing a player's locked, unlocked, and equipped perks." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnPerkSelectionNeeded_MetaData[] = {
 		{ "Category", "Perk UI" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Event broadcasted when the perk selection UI state changes */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Event broadcasted when the perk selection UI state changes" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsPerkSelectionActive_MetaData[] = {
 		{ "Category", "Perk UI" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief State variable tracking whether perk selection is currently active */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief State variable tracking whether perk selection is currently active" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ActivePerkInstances_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief List of instantiated perk effects currently active on the player */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief List of instantiated perk effects currently active on the player" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LastEquippedPerk_MetaData[] = {
 		{ "Category", "Perks|Client" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The most recently equipped perk, replicated to clients */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The most recently equipped perk, replicated to clients" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LockedPerks_MetaData[] = {
 		{ "Category", "Perks" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief List of perks that are currently locked */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief List of perks that are currently locked" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_UnlockedPerks_MetaData[] = {
 		{ "Category", "Perks" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief List of perks that are unlocked but not necessarily equipped */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief List of perks that are unlocked but not necessarily equipped" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_EquippedPerks_MetaData[] = {
 		{ "Category", "Perks" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief List of perks that are currently equipped and active */" },
+#endif
 		{ "ModuleRelativePath", "Public/PlayerPerks.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief List of perks that are currently equipped and active" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnPerkSelectionNeeded;
@@ -782,19 +944,19 @@ struct Z_Construct_UClass_UPlayerPerks_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UPlayerPerks_CheckAndUnlockPerks, "CheckAndUnlockPerks" }, // 36836131
-		{ &Z_Construct_UFunction_UPlayerPerks_EquipPerk, "EquipPerk" }, // 161918881
-		{ &Z_Construct_UFunction_UPlayerPerks_FinishedPerkSelection, "FinishedPerkSelection" }, // 726752084
-		{ &Z_Construct_UFunction_UPlayerPerks_IsPerkSelectionActive, "IsPerkSelectionActive" }, // 1836899518
-		{ &Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent, "OnPerkEquipped_ClientEvent" }, // 1186238673
-		{ &Z_Construct_UFunction_UPlayerPerks_OnRep_IsPerkSelectionActive, "OnRep_IsPerkSelectionActive" }, // 1963707831
-		{ &Z_Construct_UFunction_UPlayerPerks_OnRep_LastEquippedPerk, "OnRep_LastEquippedPerk" }, // 2699304897
-		{ &Z_Construct_UFunction_UPlayerPerks_RemoveAllPerkEffects, "RemoveAllPerkEffects" }, // 1372166995
-		{ &Z_Construct_UFunction_UPlayerPerks_ServerEquipPerk, "ServerEquipPerk" }, // 502088429
-		{ &Z_Construct_UFunction_UPlayerPerks_ServerFinishedPerkSelection, "ServerFinishedPerkSelection" }, // 85854977
-		{ &Z_Construct_UFunction_UPlayerPerks_ServerRemoveAllPerkEffects, "ServerRemoveAllPerkEffects" }, // 1213645204
-		{ &Z_Construct_UFunction_UPlayerPerks_ServerUnlockPerk, "ServerUnlockPerk" }, // 191257337
-		{ &Z_Construct_UFunction_UPlayerPerks_UnlockPerk, "UnlockPerk" }, // 2828244395
+		{ &Z_Construct_UFunction_UPlayerPerks_CheckAndUnlockPerks, "CheckAndUnlockPerks" }, // 1152817843
+		{ &Z_Construct_UFunction_UPlayerPerks_EquipPerk, "EquipPerk" }, // 544091499
+		{ &Z_Construct_UFunction_UPlayerPerks_FinishedPerkSelection, "FinishedPerkSelection" }, // 4008303532
+		{ &Z_Construct_UFunction_UPlayerPerks_IsPerkSelectionActive, "IsPerkSelectionActive" }, // 2103722769
+		{ &Z_Construct_UFunction_UPlayerPerks_OnPerkEquipped_ClientEvent, "OnPerkEquipped_ClientEvent" }, // 2356399872
+		{ &Z_Construct_UFunction_UPlayerPerks_OnRep_IsPerkSelectionActive, "OnRep_IsPerkSelectionActive" }, // 1194416934
+		{ &Z_Construct_UFunction_UPlayerPerks_OnRep_LastEquippedPerk, "OnRep_LastEquippedPerk" }, // 975260803
+		{ &Z_Construct_UFunction_UPlayerPerks_RemoveAllPerkEffects, "RemoveAllPerkEffects" }, // 293166545
+		{ &Z_Construct_UFunction_UPlayerPerks_ServerEquipPerk, "ServerEquipPerk" }, // 2786289309
+		{ &Z_Construct_UFunction_UPlayerPerks_ServerFinishedPerkSelection, "ServerFinishedPerkSelection" }, // 4194656333
+		{ &Z_Construct_UFunction_UPlayerPerks_ServerRemoveAllPerkEffects, "ServerRemoveAllPerkEffects" }, // 3891405385
+		{ &Z_Construct_UFunction_UPlayerPerks_ServerUnlockPerk, "ServerUnlockPerk" }, // 3221472051
+		{ &Z_Construct_UFunction_UPlayerPerks_UnlockPerk, "UnlockPerk" }, // 335201489
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -802,7 +964,7 @@ struct Z_Construct_UClass_UPlayerPerks_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_OnPerkSelectionNeeded = { "OnPerkSelectionNeeded", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, OnPerkSelectionNeeded), Z_Construct_UDelegateFunction_FMP_OnPerkSelectionNeeded__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnPerkSelectionNeeded_MetaData), NewProp_OnPerkSelectionNeeded_MetaData) }; // 2118706660
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_OnPerkSelectionNeeded = { "OnPerkSelectionNeeded", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, OnPerkSelectionNeeded), Z_Construct_UDelegateFunction_FMP_OnPerkSelectionNeeded__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnPerkSelectionNeeded_MetaData), NewProp_OnPerkSelectionNeeded_MetaData) }; // 2000106952
 void Z_Construct_UClass_UPlayerPerks_Statics::NewProp_bIsPerkSelectionActive_SetBit(void* Obj)
 {
 	((UPlayerPerks*)Obj)->bIsPerkSelectionActive = 1;
@@ -810,13 +972,13 @@ void Z_Construct_UClass_UPlayerPerks_Statics::NewProp_bIsPerkSelectionActive_Set
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_bIsPerkSelectionActive = { "bIsPerkSelectionActive", "OnRep_IsPerkSelectionActive", (EPropertyFlags)0x0010000100000034, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UPlayerPerks), &Z_Construct_UClass_UPlayerPerks_Statics::NewProp_bIsPerkSelectionActive_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsPerkSelectionActive_MetaData), NewProp_bIsPerkSelectionActive_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_ActivePerkInstances_Inner = { "ActivePerkInstances", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UPerkEffectBase_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_ActivePerkInstances = { "ActivePerkInstances", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, ActivePerkInstances), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ActivePerkInstances_MetaData), NewProp_ActivePerkInstances_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LastEquippedPerk = { "LastEquippedPerk", "OnRep_LastEquippedPerk", (EPropertyFlags)0x0010000100000034, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, LastEquippedPerk), Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastEquippedPerk_MetaData), NewProp_LastEquippedPerk_MetaData) }; // 3622194358
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LockedPerks_Inner = { "LockedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 3622194358
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LockedPerks = { "LockedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, LockedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LockedPerks_MetaData), NewProp_LockedPerks_MetaData) }; // 3622194358
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_UnlockedPerks_Inner = { "UnlockedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 3622194358
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_UnlockedPerks = { "UnlockedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, UnlockedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UnlockedPerks_MetaData), NewProp_UnlockedPerks_MetaData) }; // 3622194358
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_EquippedPerks_Inner = { "EquippedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 3622194358
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_EquippedPerks = { "EquippedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, EquippedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EquippedPerks_MetaData), NewProp_EquippedPerks_MetaData) }; // 3622194358
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LastEquippedPerk = { "LastEquippedPerk", "OnRep_LastEquippedPerk", (EPropertyFlags)0x0010000100000034, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, LastEquippedPerk), Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastEquippedPerk_MetaData), NewProp_LastEquippedPerk_MetaData) }; // 4111855256
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LockedPerks_Inner = { "LockedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 4111855256
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_LockedPerks = { "LockedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, LockedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LockedPerks_MetaData), NewProp_LockedPerks_MetaData) }; // 4111855256
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_UnlockedPerks_Inner = { "UnlockedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 4111855256
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_UnlockedPerks = { "UnlockedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, UnlockedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UnlockedPerks_MetaData), NewProp_UnlockedPerks_MetaData) }; // 4111855256
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_EquippedPerks_Inner = { "EquippedPerks", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 4111855256
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UPlayerPerks_Statics::NewProp_EquippedPerks = { "EquippedPerks", nullptr, (EPropertyFlags)0x0010000000000025, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPlayerPerks, EquippedPerks), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EquippedPerks_MetaData), NewProp_EquippedPerks_MetaData) }; // 4111855256
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UPlayerPerks_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPlayerPerks_Statics::NewProp_OnPerkSelectionNeeded,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPlayerPerks_Statics::NewProp_bIsPerkSelectionActive,
@@ -884,13 +1046,13 @@ UPlayerPerks::~UPlayerPerks() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FPerks::StaticStruct, Z_Construct_UScriptStruct_FPerks_Statics::NewStructOps, TEXT("Perks"), &Z_Registration_Info_UScriptStruct_FPerks, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPerks), 3622194358U) },
+		{ FPerks::StaticStruct, Z_Construct_UScriptStruct_FPerks_Statics::NewStructOps, TEXT("Perks"), &Z_Registration_Info_UScriptStruct_FPerks, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPerks), 4111855256U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPlayerPerks, UPlayerPerks::StaticClass, TEXT("UPlayerPerks"), &Z_Registration_Info_UClass_UPlayerPerks, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPlayerPerks), 4070792195U) },
+		{ Z_Construct_UClass_UPlayerPerks, UPlayerPerks::StaticClass, TEXT("UPlayerPerks"), &Z_Registration_Info_UClass_UPlayerPerks, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPlayerPerks), 2232186114U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_1148986331(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_1764049628(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PlayerPerks_h__Script_FMP_Statics::ScriptStructInfo),
 	nullptr, 0);

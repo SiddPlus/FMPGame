@@ -17,7 +17,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 // ********** Begin Class ULootPool ****************************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual void ServerDrawRandomPerk_Implementation(); \
 	DECLARE_FUNCTION(execCanDrawPerk); \
 	DECLARE_FUNCTION(execResetPool); \
@@ -25,10 +25,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execDrawRandomPerk);
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_14_CALLBACK_WRAPPERS
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_15_CALLBACK_WRAPPERS
 FMP_API UClass* Z_Construct_UClass_ULootPool_NoRegister();
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_14_INCLASS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesULootPool(); \
 	friend struct Z_Construct_UClass_ULootPool_Statics; \
@@ -45,7 +45,7 @@ public: \
 	DECLARE_VALIDATE_GENERATED_REP_ENUMS(NO_API)
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_14_ENHANCED_CONSTRUCTORS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_15_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	ULootPool(ULootPool&&) = delete; \
 	ULootPool(const ULootPool&) = delete; \
@@ -55,14 +55,14 @@ public: \
 	NO_API virtual ~ULootPool();
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_11_PROLOG
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_14_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_12_PROLOG
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_14_CALLBACK_WRAPPERS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_14_INCLASS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_14_ENHANCED_CONSTRUCTORS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_15_CALLBACK_WRAPPERS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_15_INCLASS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

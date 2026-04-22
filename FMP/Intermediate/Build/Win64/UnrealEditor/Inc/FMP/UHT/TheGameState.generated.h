@@ -17,28 +17,28 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 // ********** Begin Delegate FOnRoundStateChange ***************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_9_DELEGATE \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_11_DELEGATE \
 FMP_API void FOnRoundStateChange_DelegateWrapper(const FMulticastScriptDelegate& OnRoundStateChange, bool IsActive);
 
 
 // ********** End Delegate FOnRoundStateChange *****************************************************
 
 // ********** Begin Delegate FOnPlayerReadyChange **************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_10_DELEGATE \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_17_DELEGATE \
 FMP_API void FOnPlayerReadyChange_DelegateWrapper(const FMulticastScriptDelegate& OnPlayerReadyChange, int32 CurrentReadyPlayers);
 
 
 // ********** End Delegate FOnPlayerReadyChange ****************************************************
 
 // ********** Begin Class ATheGameState ************************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execOnRep_ReadyPlayers); \
 	DECLARE_FUNCTION(execOnRep_IsRoundActive);
 
 
 FMP_API UClass* Z_Construct_UClass_ATheGameState_NoRegister();
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_25_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesATheGameState(); \
 	friend struct Z_Construct_UClass_ATheGameState_Statics; \
@@ -61,7 +61,7 @@ public: \
 	DECLARE_VALIDATE_GENERATED_REP_ENUMS(NO_API)
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_15_ENHANCED_CONSTRUCTORS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_25_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	ATheGameState(ATheGameState&&) = delete; \
 	ATheGameState(const ATheGameState&) = delete; \
@@ -71,13 +71,13 @@ public: \
 	NO_API virtual ~ATheGameState();
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_12_PROLOG
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_15_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_22_PROLOG
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_25_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_15_INCLASS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_15_ENHANCED_CONSTRUCTORS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_25_INCLASS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_25_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

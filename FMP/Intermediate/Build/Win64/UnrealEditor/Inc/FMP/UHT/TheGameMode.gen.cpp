@@ -30,7 +30,13 @@ struct Z_Construct_UFunction_ATheGameMode_PlayerReadyUp_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Round" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Marks a player as ready to start the next round.\n\x09 * @param PC The PlayerController of the player who is ready.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Marks a player as ready to start the next round.\n@param PC The PlayerController of the player who is ready." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PC;
@@ -73,7 +79,13 @@ struct Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Game" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Registers a player as downed or out of action.\n\x09 * @param PC The PlayerController of the downed player.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Registers a player as downed or out of action.\n@param PC The PlayerController of the downed player." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PC;
@@ -149,28 +161,64 @@ struct Z_Construct_UClass_ATheGameMode_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Game mode class that manages rules, scoring, and round progression.\n */" },
+#endif
 		{ "HideCategories", "Info Rendering MovementReplication Replication Actor Input Movement Collision Rendering HLOD WorldPartition DataLayers Transformation" },
 		{ "IncludePath", "TheGameMode.h" },
 		{ "ModuleRelativePath", "Public/TheGameMode.h" },
 		{ "ShowCategories", "Input|MouseInput Input|TouchInput" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Game mode class that manages rules, scoring, and round progression." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_BaseRoundDuration_MetaData[] = {
 		{ "Category", "Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Base duration for a single round in seconds */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Base duration for a single round in seconds" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentRoundSpawnRate_MetaData[] = {
 		{ "Category", "Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Rate at which enemies spawn in the current round */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Rate at which enemies spawn in the current round" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentRoundMaxEnemies_MetaData[] = {
 		{ "Category", "Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Maximum number of enemies that can be active in the current round */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Maximum number of enemies that can be active in the current round" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CachedSpawners_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief List of cached enemy spawners in the map */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief List of cached enemy spawners in the map" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DownPlayers_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief List of players currently in the downed state */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief List of players currently in the downed state" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_BaseRoundDuration;
@@ -183,8 +231,8 @@ struct Z_Construct_UClass_ATheGameMode_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_ATheGameMode_PlayerReadyUp, "PlayerReadyUp" }, // 2198353830
-		{ &Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown, "RegisterPlayerDown" }, // 2406432487
+		{ &Z_Construct_UFunction_ATheGameMode_PlayerReadyUp, "PlayerReadyUp" }, // 2178071328
+		{ &Z_Construct_UFunction_ATheGameMode_RegisterPlayerDown, "RegisterPlayerDown" }, // 852680447
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -245,10 +293,10 @@ ATheGameMode::~ATheGameMode() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ATheGameMode, ATheGameMode::StaticClass, TEXT("ATheGameMode"), &Z_Registration_Info_UClass_ATheGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameMode), 2906584135U) },
+		{ Z_Construct_UClass_ATheGameMode, ATheGameMode::StaticClass, TEXT("ATheGameMode"), &Z_Registration_Info_UClass_ATheGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameMode), 1624307926U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_1481635635(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_1334930962(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

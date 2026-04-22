@@ -30,39 +30,57 @@ struct Z_Construct_UScriptStruct_FPerformanceMetrics_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/PerformanceData.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Timestamp_MetaData[] = {
-		{ "ModuleRelativePath", "Public/PerformanceData.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_FrameTime_MetaData[] = {
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// Time elapsed since logging started (in seconds)\n" },
+		{ "Comment", "/**\n * @brief Structure containing a snapshot of various game performance metrics.\n */" },
 #endif
 		{ "ModuleRelativePath", "Public/PerformanceData.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Time elapsed since logging started (in seconds)" },
+		{ "ToolTip", "@brief Structure containing a snapshot of various game performance metrics." },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Timestamp_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Time elapsed since logging started (in seconds) */" },
+#endif
+		{ "ModuleRelativePath", "Public/PerformanceData.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Time elapsed since logging started (in seconds)" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_FrameTime_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Frame rendering time (in milliseconds) */" },
+#endif
+		{ "ModuleRelativePath", "Public/PerformanceData.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Frame rendering time (in milliseconds)" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_FPS_MetaData[] = {
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// Frame rendering time (in milliseconds)\n" },
+		{ "Comment", "/** @brief Current frames per second */" },
 #endif
 		{ "ModuleRelativePath", "Public/PerformanceData.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Frame rendering time (in milliseconds)" },
+		{ "ToolTip", "@brief Current frames per second" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CPUCycles_MetaData[] = {
-		{ "ModuleRelativePath", "Public/PerformanceData.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MemoryUsedMB_MetaData[] = {
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// Cumulative CPU time used by the process (in seconds)\n" },
+		{ "Comment", "/** @brief Cumulative CPU cycles used by the process (in seconds representation if applicable) */" },
 #endif
 		{ "ModuleRelativePath", "Public/PerformanceData.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Cumulative CPU time used by the process (in seconds)" },
+		{ "ToolTip", "@brief Cumulative CPU cycles used by the process (in seconds representation if applicable)" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MemoryUsedMB_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Resident memory used by the process (in MB) */" },
+#endif
+		{ "ModuleRelativePath", "Public/PerformanceData.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Resident memory used by the process (in MB)" },
 #endif
 	};
 #endif // WITH_METADATA
@@ -118,10 +136,10 @@ UScriptStruct* Z_Construct_UScriptStruct_FPerformanceMetrics()
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerformanceData_h__Script_FMP_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FPerformanceMetrics::StaticStruct, Z_Construct_UScriptStruct_FPerformanceMetrics_Statics::NewStructOps, TEXT("PerformanceMetrics"), &Z_Registration_Info_UScriptStruct_FPerformanceMetrics, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPerformanceMetrics), 703462521U) },
+		{ FPerformanceMetrics::StaticStruct, Z_Construct_UScriptStruct_FPerformanceMetrics_Statics::NewStructOps, TEXT("PerformanceMetrics"), &Z_Registration_Info_UScriptStruct_FPerformanceMetrics, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPerformanceMetrics), 721148113U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerformanceData_h__Script_FMP_2515900409(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerformanceData_h__Script_FMP_3553842021(TEXT("/Script/FMP"),
 	nullptr, 0,
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerformanceData_h__Script_FMP_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerformanceData_h__Script_FMP_Statics::ScriptStructInfo),
 	nullptr, 0);

@@ -34,7 +34,13 @@ struct Z_Construct_UDelegateFunction_FMP_OnHealthChangedSignature__DelegateSigna
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Delegate triggered when the health value changes.\n * @param HealthComp The health system component instance.\n * @param Health The new current health.\n * @param HealthDelta The amount of health changed (positive for healing, negative for damage).\n * @param DamageType The type of damage applied, if applicable.\n */" },
+#endif
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Delegate triggered when the health value changes.\n@param HealthComp The health system component instance.\n@param Health The new current health.\n@param HealthDelta The amount of health changed (positive for healing, negative for damage).\n@param DamageType The type of damage applied, if applicable." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_HealthComp_MetaData[] = {
 		{ "EditInline", "true" },
@@ -101,7 +107,13 @@ struct Z_Construct_UFunction_UHealthSystem_DecreaseHealth_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Health|Modification" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Decreases the actor's health.\n\x09 * @param HealthDelta The amount of health to subtract.\n\x09 * @param DamageType The type of damage causing the health decrease.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Decreases the actor's health.\n@param HealthDelta The amount of health to subtract.\n@param DamageType The type of damage causing the health decrease." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DamageType_MetaData[] = {
 		{ "NativeConst", "" },
@@ -155,11 +167,11 @@ struct Z_Construct_UFunction_UHealthSystem_HandleHealthChange_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// Core damage/healing function (Server Only)\n" },
+		{ "Comment", "/**\n\x09 * @brief Internal handler for applying damage/healing logic.\n\x09 * @param DamagedActor The actor taking damage.\n\x09 * @param Damage The amount of damage.\n\x09 * @param DamageType The type of damage.\n\x09 * @param InstigatedBy The controller that caused the damage.\n\x09 * @param DamageCauser The physical actor that caused the damage.\n\x09 */" },
 #endif
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Core damage/healing function (Server Only)" },
+		{ "ToolTip", "@brief Internal handler for applying damage/healing logic.\n@param DamagedActor The actor taking damage.\n@param Damage The amount of damage.\n@param DamageType The type of damage.\n@param InstigatedBy The controller that caused the damage.\n@param DamageCauser The physical actor that caused the damage." },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DamageType_MetaData[] = {
@@ -222,7 +234,13 @@ struct Z_Construct_UFunction_UHealthSystem_IncreaseHealth_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Health|Modification" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Increases the actor's health.\n\x09 * @param HealthDelta The amount of health to add.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Increases the actor's health.\n@param HealthDelta The amount of health to add." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_HealthDelta;
@@ -265,11 +283,11 @@ struct Z_Construct_UFunction_UHealthSystem_OnRep_Health_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// **Multiplayer:** Function called on clients when CurrentHealth is updated by the server\n" },
+		{ "Comment", "/** \n\x09 * @brief Replication callback for CurrentHealth updates. \n\x09 * @param OldHealth The health value before the replication update.\n\x09 */" },
 #endif
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "**Multiplayer:** Function called on clients when CurrentHealth is updated by the server" },
+		{ "ToolTip", "@brief Replication callback for CurrentHealth updates.\n@param OldHealth The health value before the replication update." },
 #endif
 	};
 #endif // WITH_METADATA
@@ -309,7 +327,13 @@ struct Z_Construct_UFunction_UHealthSystem_RestoreFullHealth_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Health|Modification" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Restores the actor's current health back to the maximum health */" },
+#endif
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Restores the actor's current health back to the maximum health" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -343,7 +367,13 @@ struct Z_Construct_UFunction_UHealthSystem_SetMaxHealth_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Health" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Updates the maximum health value.\n\x09 * @param NewMax The new maximum health.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Updates the maximum health value.\n@param NewMax The new maximum health." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_NewMax;
@@ -425,20 +455,44 @@ struct Z_Construct_UClass_UHealthSystem_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
 		{ "ClassGroupNames", "Custom" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Component that manages an actor's health, damage intake, and healing.\n */" },
+#endif
 		{ "IncludePath", "HealthSystem.h" },
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Component that manages an actor's health, damage intake, and healing." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxHealth_MetaData[] = {
 		{ "Category", "Health" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The maximum health value the actor can have */" },
+#endif
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The maximum health value the actor can have" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentHealth_MetaData[] = {
 		{ "Category", "Health" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The current health value of the actor */" },
+#endif
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The current health value of the actor" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnHealthChanged_MetaData[] = {
 		{ "Category", "Events" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Event broadcasted when the health value changes */" },
+#endif
 		{ "ModuleRelativePath", "Public/HealthSystem.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Event broadcasted when the health value changes" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxHealth;
@@ -447,12 +501,12 @@ struct Z_Construct_UClass_UHealthSystem_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UHealthSystem_DecreaseHealth, "DecreaseHealth" }, // 2065696228
-		{ &Z_Construct_UFunction_UHealthSystem_HandleHealthChange, "HandleHealthChange" }, // 1676525991
-		{ &Z_Construct_UFunction_UHealthSystem_IncreaseHealth, "IncreaseHealth" }, // 1312972814
-		{ &Z_Construct_UFunction_UHealthSystem_OnRep_Health, "OnRep_Health" }, // 3217107835
-		{ &Z_Construct_UFunction_UHealthSystem_RestoreFullHealth, "RestoreFullHealth" }, // 873201022
-		{ &Z_Construct_UFunction_UHealthSystem_SetMaxHealth, "SetMaxHealth" }, // 1514788850
+		{ &Z_Construct_UFunction_UHealthSystem_DecreaseHealth, "DecreaseHealth" }, // 3045695398
+		{ &Z_Construct_UFunction_UHealthSystem_HandleHealthChange, "HandleHealthChange" }, // 3403029924
+		{ &Z_Construct_UFunction_UHealthSystem_IncreaseHealth, "IncreaseHealth" }, // 2638817317
+		{ &Z_Construct_UFunction_UHealthSystem_OnRep_Health, "OnRep_Health" }, // 2776231372
+		{ &Z_Construct_UFunction_UHealthSystem_RestoreFullHealth, "RestoreFullHealth" }, // 3520819411
+		{ &Z_Construct_UFunction_UHealthSystem_SetMaxHealth, "SetMaxHealth" }, // 3496498589
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -462,7 +516,7 @@ struct Z_Construct_UClass_UHealthSystem_Statics
 };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UHealthSystem_Statics::NewProp_MaxHealth = { "MaxHealth", nullptr, (EPropertyFlags)0x0020080000000025, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UHealthSystem, MaxHealth), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxHealth_MetaData), NewProp_MaxHealth_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UHealthSystem_Statics::NewProp_CurrentHealth = { "CurrentHealth", "OnRep_Health", (EPropertyFlags)0x0020080100000034, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UHealthSystem, CurrentHealth), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentHealth_MetaData), NewProp_CurrentHealth_MetaData) };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UHealthSystem_Statics::NewProp_OnHealthChanged = { "OnHealthChanged", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UHealthSystem, OnHealthChanged), Z_Construct_UDelegateFunction_FMP_OnHealthChangedSignature__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnHealthChanged_MetaData), NewProp_OnHealthChanged_MetaData) }; // 1847516146
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UHealthSystem_Statics::NewProp_OnHealthChanged = { "OnHealthChanged", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UHealthSystem, OnHealthChanged), Z_Construct_UDelegateFunction_FMP_OnHealthChangedSignature__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnHealthChanged_MetaData), NewProp_OnHealthChanged_MetaData) }; // 2263291388
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UHealthSystem_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UHealthSystem_Statics::NewProp_MaxHealth,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UHealthSystem_Statics::NewProp_CurrentHealth,
@@ -516,10 +570,10 @@ UHealthSystem::~UHealthSystem() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UHealthSystem, UHealthSystem::StaticClass, TEXT("UHealthSystem"), &Z_Registration_Info_UClass_UHealthSystem, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHealthSystem), 3386663867U) },
+		{ Z_Construct_UClass_UHealthSystem, UHealthSystem::StaticClass, TEXT("UHealthSystem"), &Z_Registration_Info_UClass_UHealthSystem, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHealthSystem), 3254507141U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h__Script_FMP_823319188(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h__Script_FMP_2016013912(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_HealthSystem_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

@@ -36,11 +36,11 @@ struct Z_Construct_UFunction_AFMPCharacter_DoLook_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Input" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Handles look inputs from either controls or UI interfaces */" },
+		{ "Comment", "/**\n\x09 * @brief Handles look inputs from either controls or UI interfaces\n\x09 * @param Yaw The yaw rotation value\n\x09 * @param Pitch The pitch rotation value\n\x09 */" },
 #endif
 		{ "ModuleRelativePath", "FMPCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Handles look inputs from either controls or UI interfaces" },
+		{ "ToolTip", "@brief Handles look inputs from either controls or UI interfaces\n@param Yaw The yaw rotation value\n@param Pitch The pitch rotation value" },
 #endif
 	};
 #endif // WITH_METADATA
@@ -90,11 +90,11 @@ struct Z_Construct_UFunction_AFMPCharacter_DoMove_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Input" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Handles move inputs from either controls or UI interfaces */" },
+		{ "Comment", "/**\n\x09 * @brief Handles move inputs from either controls or UI interfaces\n\x09 * @param Right The right movement value\n\x09 * @param Forward The forward movement value\n\x09 */" },
 #endif
 		{ "ModuleRelativePath", "FMPCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Handles move inputs from either controls or UI interfaces" },
+		{ "ToolTip", "@brief Handles move inputs from either controls or UI interfaces\n@param Right The right movement value\n@param Forward The forward movement value" },
 #endif
 	};
 #endif // WITH_METADATA
@@ -176,85 +176,103 @@ struct Z_Construct_UClass_AFMPCharacter_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/**\n *  A simple player-controllable third person character\n *  Implements a controllable orbiting camera\n */" },
+		{ "Comment", "/**\n * @brief A simple player-controllable third person character\n * \n * Implements a controllable orbiting camera and manages the player's health,\n * perks, and loot systems.\n */" },
 #endif
 		{ "HideCategories", "Navigation" },
 		{ "IncludePath", "FMPCharacter.h" },
 		{ "ModuleRelativePath", "FMPCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "A simple player-controllable third person character\nImplements a controllable orbiting camera" },
+		{ "ToolTip", "@brief A simple player-controllable third person character\n\nImplements a controllable orbiting camera and manages the player's health,\nperks, and loot systems." },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PlayerHealth_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Player" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Component that manages the character's health, damage, and healing */" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "FMPCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Component that manages the character's health, damage, and healing" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PlayerPerks_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Player" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Component that manages the character's unlocked and equipped perks */" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "FMPCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Component that manages the character's unlocked and equipped perks" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LootPool_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Player" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Component that provides a randomized pool of perks for the player to draw from */" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "FMPCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Component that provides a randomized pool of perks for the player to draw from" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CameraBoom_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Components" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Camera boom positioning the camera behind the character */" },
+		{ "Comment", "/** @brief Camera boom positioning the camera behind the character */" },
 #endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "FMPCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Camera boom positioning the camera behind the character" },
+		{ "ToolTip", "@brief Camera boom positioning the camera behind the character" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_FollowCamera_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Components" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Follow camera */" },
+		{ "Comment", "/** @brief Follow camera */" },
 #endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "FMPCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Follow camera" },
+		{ "ToolTip", "@brief Follow camera" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MoveAction_MetaData[] = {
 		{ "Category", "Input" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Move Input Action */" },
+		{ "Comment", "/** @brief Move Input Action */" },
 #endif
 		{ "ModuleRelativePath", "FMPCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Move Input Action" },
+		{ "ToolTip", "@brief Move Input Action" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LookAction_MetaData[] = {
 		{ "Category", "Input" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Look Input Action */" },
+		{ "Comment", "/** @brief Look Input Action */" },
 #endif
 		{ "ModuleRelativePath", "FMPCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Look Input Action" },
+		{ "ToolTip", "@brief Look Input Action" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MouseLookAction_MetaData[] = {
 		{ "Category", "Input" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Mouse Look Input Action */" },
+		{ "Comment", "/** @brief Mouse Look Input Action */" },
 #endif
 		{ "ModuleRelativePath", "FMPCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Mouse Look Input Action" },
+		{ "ToolTip", "@brief Mouse Look Input Action" },
 #endif
 	};
 #endif // WITH_METADATA
@@ -269,8 +287,8 @@ struct Z_Construct_UClass_AFMPCharacter_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_AFMPCharacter_DoLook, "DoLook" }, // 2618480575
-		{ &Z_Construct_UFunction_AFMPCharacter_DoMove, "DoMove" }, // 2963858053
+		{ &Z_Construct_UFunction_AFMPCharacter_DoLook, "DoLook" }, // 3206720817
+		{ &Z_Construct_UFunction_AFMPCharacter_DoMove, "DoMove" }, // 1151745536
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -333,10 +351,10 @@ AFMPCharacter::~AFMPCharacter() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFMPCharacter, AFMPCharacter::StaticClass, TEXT("AFMPCharacter"), &Z_Registration_Info_UClass_AFMPCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFMPCharacter), 3831680254U) },
+		{ Z_Construct_UClass_AFMPCharacter, AFMPCharacter::StaticClass, TEXT("AFMPCharacter"), &Z_Registration_Info_UClass_AFMPCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFMPCharacter), 2175960597U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h__Script_FMP_4217624126(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h__Script_FMP_4124775025(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_FMPCharacter_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

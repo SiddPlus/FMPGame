@@ -37,7 +37,13 @@ struct Z_Construct_UFunction_UPerkEffectBase_ApplyPerkEffect_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Perk Logic" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Event triggered when this perk effect is applied to a target actor (player).\n\x09 * @param TargetActor The actor receiving the perk effect.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Event triggered when this perk effect is applied to a target actor (player).\n@param TargetActor The actor receiving the perk effect." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_TargetActor;
@@ -80,7 +86,13 @@ struct Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Perk Logic" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Event triggered when this perk effect is removed from a target actor.\n\x09 * @param TargetActor The actor losing the perk effect.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Event triggered when this perk effect is removed from a target actor.\n@param TargetActor The actor losing the perk effect." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_TargetActor;
@@ -144,55 +156,124 @@ struct Z_Construct_UClass_UPerkEffectBase_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/**\n * \n */" },
+		{ "Comment", "/**\n * @brief Base class for defining the effects of perks applied to a player.\n * \n * This class contains a variety of stat multipliers and flat bonuses that can be \n * configured per-perk in Blueprint, as well as events for applying and removing effects.\n */" },
 #endif
 		{ "IncludePath", "PerkEffectBase.h" },
 		{ "IsBlueprintBase", "true" },
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Base class for defining the effects of perks applied to a player.\n\nThis class contains a variety of stat multipliers and flat bonuses that can be\nconfigured per-perk in Blueprint, as well as events for applying and removing effects." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MovementSpeedMultiplier_MetaData[] = {
 		{ "Category", "Stats" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier applied to the player's base movement speed */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier applied to the player's base movement speed" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxHealthBonus_MetaData[] = {
 		{ "Category", "Stats" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Flat bonus added to the player's maximum health */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Flat bonus added to the player's maximum health" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DamageMultiplier_MetaData[] = {
 		{ "Category", "Stats" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier applied to the damage dealt by the player */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier applied to the damage dealt by the player" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ReloadSpeedMultiplier_MetaData[] = {
 		{ "Category", "Stats" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier applied to the weapon reload speed */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier applied to the weapon reload speed" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RecoilMultiplier_MetaData[] = {
 		{ "Category", "Stats" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier applied to weapon recoil */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier applied to weapon recoil" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SpreadMultiplier_MetaData[] = {
 		{ "Category", "Stats" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier applied to weapon spread/accuracy */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier applied to weapon spread/accuracy" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DamageTakenMultiplier_MetaData[] = {
 		{ "Category", "Stats" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier applied to the damage taken by the player */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier applied to the damage taken by the player" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxAmmoMultiplier_MetaData[] = {
 		{ "Category", "Stats" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier applied to the maximum ammo capacity */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier applied to the maximum ammo capacity" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_HealthRegenAmount_MetaData[] = {
 		{ "Category", "Stats|Special" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Amount of health regenerated passively over time */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Amount of health regenerated passively over time" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_HealthPerKill_MetaData[] = {
 		{ "Category", "Stats|Special" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Amount of health restored to the player per enemy killed */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Amount of health restored to the player per enemy killed" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_EnemySlowAmmount_MetaData[] = {
 		{ "Category", "Stats|Special" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier applied to slow down enemies (e.g., lower means slower) */" },
+#endif
 		{ "ModuleRelativePath", "Public/PerkEffectBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier applied to slow down enemies (e.g., lower means slower)" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MovementSpeedMultiplier;
@@ -209,8 +290,8 @@ struct Z_Construct_UClass_UPerkEffectBase_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UPerkEffectBase_ApplyPerkEffect, "ApplyPerkEffect" }, // 670510354
-		{ &Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect, "UnapplyPerkEffect" }, // 162444871
+		{ &Z_Construct_UFunction_UPerkEffectBase_ApplyPerkEffect, "ApplyPerkEffect" }, // 1856635574
+		{ &Z_Construct_UFunction_UPerkEffectBase_UnapplyPerkEffect, "UnapplyPerkEffect" }, // 4107981270
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -280,10 +361,10 @@ UPerkEffectBase::~UPerkEffectBase() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPerkEffectBase, UPerkEffectBase::StaticClass, TEXT("UPerkEffectBase"), &Z_Registration_Info_UClass_UPerkEffectBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPerkEffectBase), 545153812U) },
+		{ Z_Construct_UClass_UPerkEffectBase, UPerkEffectBase::StaticClass, TEXT("UPerkEffectBase"), &Z_Registration_Info_UClass_UPerkEffectBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPerkEffectBase), 3485389906U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_2228122681(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_2961868487(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerkEffectBase_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

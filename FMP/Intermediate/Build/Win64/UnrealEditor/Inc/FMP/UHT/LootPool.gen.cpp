@@ -31,7 +31,13 @@ struct Z_Construct_UFunction_ULootPool_CanDrawPerk_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Loot Pool" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Checks if there are any perks available to be drawn.\n\x09 * @return True if a perk can be drawn, false if the pool is empty.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/LootPool.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Checks if there are any perks available to be drawn.\n@return True if a perk can be drawn, false if the pool is empty." },
+#endif
 	};
 #endif // WITH_METADATA
 	static void NewProp_ReturnValue_SetBit(void* Obj);
@@ -74,7 +80,13 @@ struct Z_Construct_UFunction_ULootPool_DrawRandomPerk_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Loot Pool" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Initiates drawing a random perk from the pool */" },
+#endif
 		{ "ModuleRelativePath", "Public/LootPool.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Initiates drawing a random perk from the pool" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -104,7 +116,13 @@ struct Z_Construct_UFunction_ULootPool_ResetPool_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Loot Pool" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Resets the current perk pool based on unlocked but unequipped perks */" },
+#endif
 		{ "ModuleRelativePath", "Public/LootPool.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Resets the current perk pool based on unlocked but unequipped perks" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -139,7 +157,13 @@ struct Z_Construct_UFunction_ULootPool_ServerDrawRandomPerk_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Server RPC to execute the drawing of a random perk */" },
+#endif
 		{ "ModuleRelativePath", "Public/LootPool.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Server RPC to execute the drawing of a random perk" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -210,16 +234,34 @@ struct Z_Construct_UClass_ULootPool_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
 		{ "ClassGroupNames", "Custom" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Component that manages a pool of available perks and allows drawing random ones.\n */" },
+#endif
 		{ "IncludePath", "LootPool.h" },
 		{ "ModuleRelativePath", "Public/LootPool.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Component that manages a pool of available perks and allows drawing random ones." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PlayerPerksComponent_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Reference to the player's perk component to check for unlocked/equipped perks */" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/LootPool.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Reference to the player's perk component to check for unlocked/equipped perks" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentPerkPool_MetaData[] = {
 		{ "Category", "Loot Pool | Runtime" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The active pool of perks that can currently be drawn */" },
+#endif
 		{ "ModuleRelativePath", "Public/LootPool.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The active pool of perks that can currently be drawn" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PlayerPerksComponent;
@@ -228,10 +270,10 @@ struct Z_Construct_UClass_ULootPool_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_ULootPool_CanDrawPerk, "CanDrawPerk" }, // 3598789637
-		{ &Z_Construct_UFunction_ULootPool_DrawRandomPerk, "DrawRandomPerk" }, // 2637232248
-		{ &Z_Construct_UFunction_ULootPool_ResetPool, "ResetPool" }, // 1957173866
-		{ &Z_Construct_UFunction_ULootPool_ServerDrawRandomPerk, "ServerDrawRandomPerk" }, // 769915720
+		{ &Z_Construct_UFunction_ULootPool_CanDrawPerk, "CanDrawPerk" }, // 4113142020
+		{ &Z_Construct_UFunction_ULootPool_DrawRandomPerk, "DrawRandomPerk" }, // 497295533
+		{ &Z_Construct_UFunction_ULootPool_ResetPool, "ResetPool" }, // 1596206408
+		{ &Z_Construct_UFunction_ULootPool_ServerDrawRandomPerk, "ServerDrawRandomPerk" }, // 2668512163
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -240,8 +282,8 @@ struct Z_Construct_UClass_ULootPool_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULootPool_Statics::NewProp_PlayerPerksComponent = { "PlayerPerksComponent", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ULootPool, PlayerPerksComponent), Z_Construct_UClass_UPlayerPerks_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerPerksComponent_MetaData), NewProp_PlayerPerksComponent_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ULootPool_Statics::NewProp_CurrentPerkPool_Inner = { "CurrentPerkPool", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 3622194358
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ULootPool_Statics::NewProp_CurrentPerkPool = { "CurrentPerkPool", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ULootPool, CurrentPerkPool), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentPerkPool_MetaData), NewProp_CurrentPerkPool_MetaData) }; // 3622194358
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ULootPool_Statics::NewProp_CurrentPerkPool_Inner = { "CurrentPerkPool", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FPerks, METADATA_PARAMS(0, nullptr) }; // 4111855256
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ULootPool_Statics::NewProp_CurrentPerkPool = { "CurrentPerkPool", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ULootPool, CurrentPerkPool), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentPerkPool_MetaData), NewProp_CurrentPerkPool_MetaData) }; // 4111855256
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULootPool_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULootPool_Statics::NewProp_PlayerPerksComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULootPool_Statics::NewProp_CurrentPerkPool_Inner,
@@ -293,10 +335,10 @@ ULootPool::~ULootPool() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ULootPool, ULootPool::StaticClass, TEXT("ULootPool"), &Z_Registration_Info_UClass_ULootPool, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULootPool), 4064776360U) },
+		{ Z_Construct_UClass_ULootPool, ULootPool::StaticClass, TEXT("ULootPool"), &Z_Registration_Info_UClass_ULootPool, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULootPool), 755498095U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h__Script_FMP_1502392964(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h__Script_FMP_4060442872(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_LootPool_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

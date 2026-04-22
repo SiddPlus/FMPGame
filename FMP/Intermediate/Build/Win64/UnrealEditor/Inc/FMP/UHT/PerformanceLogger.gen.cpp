@@ -57,17 +57,23 @@ struct Z_Construct_UClass_UPerformanceLogger_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
 		{ "ClassGroupNames", "Custom" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Component responsible for tracking and logging game performance metrics.\n * \n * This component collects data such as frame rate and execution times, storing them\n * over the session and writing them to a log file upon session end.\n */" },
+#endif
 		{ "IncludePath", "PerformanceLogger.h" },
 		{ "ModuleRelativePath", "Public/PerformanceLogger.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Component responsible for tracking and logging game performance metrics.\n\nThis component collects data such as frame rate and execution times, storing them\nover the session and writing them to a log file upon session end." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LogFrequency_MetaData[] = {
 		{ "Category", "Performance" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// Sets the frequency for logging data (default: 0.5 seconds)\n" },
+		{ "Comment", "/** @brief Sets the frequency for logging data in seconds (default: 0.5 seconds) */" },
 #endif
 		{ "ModuleRelativePath", "Public/PerformanceLogger.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Sets the frequency for logging data (default: 0.5 seconds)" },
+		{ "ToolTip", "@brief Sets the frequency for logging data in seconds (default: 0.5 seconds)" },
 #endif
 	};
 #endif // WITH_METADATA
@@ -120,10 +126,10 @@ UPerformanceLogger::~UPerformanceLogger() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerformanceLogger_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPerformanceLogger, UPerformanceLogger::StaticClass, TEXT("UPerformanceLogger"), &Z_Registration_Info_UClass_UPerformanceLogger, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPerformanceLogger), 2715350478U) },
+		{ Z_Construct_UClass_UPerformanceLogger, UPerformanceLogger::StaticClass, TEXT("UPerformanceLogger"), &Z_Registration_Info_UClass_UPerformanceLogger, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPerformanceLogger), 12507908U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerformanceLogger_h__Script_FMP_474064353(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerformanceLogger_h__Script_FMP_3003068067(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerformanceLogger_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_PerformanceLogger_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

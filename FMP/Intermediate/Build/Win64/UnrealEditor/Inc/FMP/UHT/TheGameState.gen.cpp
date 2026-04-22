@@ -30,7 +30,13 @@ struct Z_Construct_UDelegateFunction_FMP_OnRoundStateChange__DelegateSignature_S
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** \n * @brief Delegate triggered when the round state changes.\n * @param IsActive True if the round is now active, false otherwise.\n */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Delegate triggered when the round state changes.\n@param IsActive True if the round is now active, false otherwise." },
+#endif
 	};
 #endif // WITH_METADATA
 	static void NewProp_IsActive_SetBit(void* Obj);
@@ -79,7 +85,13 @@ struct Z_Construct_UDelegateFunction_FMP_OnPlayerReadyChange__DelegateSignature_
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** \n * @brief Delegate triggered when the number of ready players changes.\n * @param CurrentReadyPlayers The number of players currently ready.\n */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Delegate triggered when the number of ready players changes.\n@param CurrentReadyPlayers The number of players currently ready." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FIntPropertyParams NewProp_CurrentReadyPlayers;
@@ -119,7 +131,13 @@ struct Z_Construct_UFunction_ATheGameState_OnRep_IsRoundActive_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Replication callback for bIsRoundActive */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Replication callback for bIsRoundActive" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -148,7 +166,13 @@ struct Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayers_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Replication callback for ReadyPlayersCount */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Replication callback for ReadyPlayersCount" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -215,51 +239,117 @@ struct Z_Construct_UClass_ATheGameState_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Game state class for handling round management, player readiness, and game progression.\n */" },
+#endif
 		{ "HideCategories", "Input Movement Collision Rendering HLOD WorldPartition DataLayers Transformation" },
 		{ "IncludePath", "TheGameState.h" },
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
 		{ "ShowCategories", "Input|MouseInput Input|TouchInput" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Game state class for handling round management, player readiness, and game progression." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PerformanceLogger_MetaData[] = {
 		{ "Category", "Components" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Component responsible for logging performance metrics */" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Component responsible for logging performance metrics" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsRoundActive_MetaData[] = {
 		{ "Category", "Round Management" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Indicates whether a round is currently active */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Indicates whether a round is currently active" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsRunActive_MetaData[] = {
 		{ "Category", "Run Management" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Indicates whether a run (a series of rounds) is currently active */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Indicates whether a run (a series of rounds) is currently active" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsTeamWiped_MetaData[] = {
 		{ "Category", "Game" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Indicates whether the entire team has been wiped out */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Indicates whether the entire team has been wiped out" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RoundTimer_MetaData[] = {
 		{ "Category", "Round Management" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Timer tracking the duration of the current round */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Timer tracking the duration of the current round" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentRoundNumber_MetaData[] = {
 		{ "Category", "Round Management" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The number of the current round */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The number of the current round" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ReadyPlayersCount_MetaData[] = {
 		{ "Category", "Round Management" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Number of players that have marked themselves as ready */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Number of players that have marked themselves as ready" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TotalPlayersInGame_MetaData[] = {
 		{ "Category", "Round Management" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Total number of players connected to the game */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Total number of players connected to the game" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnRoundStateChange_MetaData[] = {
 		{ "Category", "Round Management|Events" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Event broadcasted when the round active state changes */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Event broadcasted when the round active state changes" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnPlayerReadyChange_MetaData[] = {
 		{ "Category", "Round Management|Events" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Event broadcasted when the count of ready players changes */" },
+#endif
 		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Event broadcasted when the count of ready players changes" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PerformanceLogger;
@@ -278,8 +368,8 @@ struct Z_Construct_UClass_ATheGameState_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_ATheGameState_OnRep_IsRoundActive, "OnRep_IsRoundActive" }, // 553750608
-		{ &Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayers, "OnRep_ReadyPlayers" }, // 2305477266
+		{ &Z_Construct_UFunction_ATheGameState_OnRep_IsRoundActive, "OnRep_IsRoundActive" }, // 3146906656
+		{ &Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayers, "OnRep_ReadyPlayers" }, // 2383561813
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -307,8 +397,8 @@ const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ATheGameState_S
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_CurrentRoundNumber = { "CurrentRoundNumber", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, CurrentRoundNumber), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentRoundNumber_MetaData), NewProp_CurrentRoundNumber_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_ReadyPlayersCount = { "ReadyPlayersCount", "OnRep_ReadyPlayers", (EPropertyFlags)0x0010000100000034, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, ReadyPlayersCount), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ReadyPlayersCount_MetaData), NewProp_ReadyPlayersCount_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_TotalPlayersInGame = { "TotalPlayersInGame", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, TotalPlayersInGame), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TotalPlayersInGame_MetaData), NewProp_TotalPlayersInGame_MetaData) };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_OnRoundStateChange = { "OnRoundStateChange", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, OnRoundStateChange), Z_Construct_UDelegateFunction_FMP_OnRoundStateChange__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnRoundStateChange_MetaData), NewProp_OnRoundStateChange_MetaData) }; // 1407912862
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_OnPlayerReadyChange = { "OnPlayerReadyChange", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, OnPlayerReadyChange), Z_Construct_UDelegateFunction_FMP_OnPlayerReadyChange__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnPlayerReadyChange_MetaData), NewProp_OnPlayerReadyChange_MetaData) }; // 1418456057
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_OnRoundStateChange = { "OnRoundStateChange", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, OnRoundStateChange), Z_Construct_UDelegateFunction_FMP_OnRoundStateChange__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnRoundStateChange_MetaData), NewProp_OnRoundStateChange_MetaData) }; // 520184213
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_OnPlayerReadyChange = { "OnPlayerReadyChange", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, OnPlayerReadyChange), Z_Construct_UDelegateFunction_FMP_OnPlayerReadyChange__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnPlayerReadyChange_MetaData), NewProp_OnPlayerReadyChange_MetaData) }; // 1489233134
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ATheGameState_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_PerformanceLogger,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_bIsRoundActive,
@@ -379,10 +469,10 @@ ATheGameState::~ATheGameState() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ATheGameState, ATheGameState::StaticClass, TEXT("ATheGameState"), &Z_Registration_Info_UClass_ATheGameState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameState), 685052763U) },
+		{ Z_Construct_UClass_ATheGameState, ATheGameState::StaticClass, TEXT("ATheGameState"), &Z_Registration_Info_UClass_ATheGameState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameState), 3797711260U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_4190869270(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_3970290688(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

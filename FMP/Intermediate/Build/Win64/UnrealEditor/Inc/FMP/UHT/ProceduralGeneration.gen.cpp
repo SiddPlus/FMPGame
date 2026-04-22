@@ -49,10 +49,16 @@ struct Z_Construct_UEnum_FMP_EBorder_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Enum defining the four borders of the procedural map.\n */" },
+#endif
 		{ "East.Name", "EBorder::East" },
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
 		{ "North.Name", "EBorder::North" },
 		{ "South.Name", "EBorder::South" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Enum defining the four borders of the procedural map." },
+#endif
 		{ "West.Name", "EBorder::West" },
 	};
 #endif // WITH_METADATA
@@ -104,10 +110,16 @@ struct Z_Construct_UEnum_FMP_EBorderSpawnLocation_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Enum defining relative spawn locations on a specific border.\n */" },
+#endif
 		{ "Left.Name", "EBorderSpawnLocation::Left" },
 		{ "Middle.Name", "EBorderSpawnLocation::Middle" },
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
 		{ "Right.Name", "EBorderSpawnLocation::Right" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Enum defining relative spawn locations on a specific border." },
+#endif
 	};
 #endif // WITH_METADATA
 	static constexpr UECodeGen_Private::FEnumeratorParam Enumerators[] = {
@@ -153,7 +165,13 @@ struct Z_Construct_UScriptStruct_FSpawnedObjectInfo_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Information about an object that has been spawned on the map, used for overlap checking.\n */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Information about an object that has been spawned on the map, used for overlap checking." },
+#endif
 	};
 #endif // WITH_METADATA
 	static void* NewStructOps()
@@ -200,27 +218,57 @@ struct Z_Construct_UScriptStruct_FActorPopulationSetting_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Settings for procedurally populating the map with a specific actor class.\n */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Settings for procedurally populating the map with a specific actor class." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ActorClass_MetaData[] = {
 		{ "Category", "Actor Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The class of the actor to spawn */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The class of the actor to spawn" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Density_MetaData[] = {
 		{ "Category", "Actor Setting" },
 		{ "ClampMax", "1.000000" },
 		{ "ClampMin", "0.000000" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Probability of spawning the actor at any given valid point */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Probability of spawning the actor at any given valid point" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Radius_MetaData[] = {
 		{ "Category", "Actor Setting" },
 		{ "ClampMin", "0.000000" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The collision radius required around the spawn point */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The collision radius required around the spawn point" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxSpawnCount_MetaData[] = {
 		{ "Category", "Actor Setting" },
 		{ "ClampMin", "0" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The maximum number of actors to spawn from this setting */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The maximum number of actors to spawn from this setting" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_ActorClass;
@@ -283,47 +331,107 @@ struct Z_Construct_UScriptStruct_FMeshPopulationSetting_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Settings for procedurally populating the map with a static mesh (using HISM).\n */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Settings for procedurally populating the map with a static mesh (using HISM)." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Mesh_MetaData[] = {
 		{ "Category", "Mesh Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The static mesh to spawn */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The static mesh to spawn" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Density_MetaData[] = {
 		{ "Category", "Mesh Setting" },
 		{ "ClampMax", "1.000000" },
 		{ "ClampMin", "0.000000" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Probability of spawning the mesh at any given valid point */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Probability of spawning the mesh at any given valid point" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Material_MetaData[] = {
 		{ "Category", "Mesh Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Material to apply to the mesh (optional) */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Material to apply to the mesh (optional)" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Radius_MetaData[] = {
 		{ "Category", "Mesh Setting" },
 		{ "ClampMin", "0.000000" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The collision radius required around the spawn point */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The collision radius required around the spawn point" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxSpawnCount_MetaData[] = {
 		{ "Category", "Mesh Setting" },
 		{ "ClampMin", "0" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The maximum number of meshes to spawn from this setting */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The maximum number of meshes to spawn from this setting" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RotationMin_MetaData[] = {
 		{ "Category", "Mesh Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Minimum random rotation applied to spawned mesh */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Minimum random rotation applied to spawned mesh" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RotationMax_MetaData[] = {
 		{ "Category", "Mesh Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Maximum random rotation applied to spawned mesh */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Maximum random rotation applied to spawned mesh" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ScaleMin_MetaData[] = {
 		{ "Category", "Mesh Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Minimum random scale applied to spawned mesh */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Minimum random scale applied to spawned mesh" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ScaleMax_MetaData[] = {
 		{ "Category", "Mesh Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Maximum random scale applied to spawned mesh */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Maximum random scale applied to spawned mesh" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Mesh;
@@ -401,52 +509,106 @@ struct Z_Construct_UScriptStruct_FBorderMeshSpawnSetting_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Settings for spawning meshes specifically along the map borders.\n */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Settings for spawning meshes specifically along the map borders." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Mesh_MetaData[] = {
 		{ "Category", "Border Mesh Spawn Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The static mesh to spawn on the borders */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The static mesh to spawn on the borders" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Material_MetaData[] = {
 		{ "Category", "Border Mesh Spawn Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Material to apply to the mesh */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Material to apply to the mesh" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Radius_MetaData[] = {
 		{ "Category", "Border Mesh Spawn Setting" },
 		{ "ClampMin", "0.000000" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// Added this property as it is needed by SetupHISMComponents\n" },
+		{ "Comment", "/** @brief The collision radius required around the spawn point */" },
 #endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Added this property as it is needed by SetupHISMComponents" },
+		{ "ToolTip", "@brief The collision radius required around the spawn point" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ScaleMin_MetaData[] = {
 		{ "Category", "Border Mesh Spawn Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Minimum random scale applied to spawned mesh */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Minimum random scale applied to spawned mesh" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ScaleMax_MetaData[] = {
 		{ "Category", "Border Mesh Spawn Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Maximum random scale applied to spawned mesh */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Maximum random scale applied to spawned mesh" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RotationMin_MetaData[] = {
 		{ "Category", "Border Mesh Spawn Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Minimum random rotation applied to spawned mesh */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Minimum random rotation applied to spawned mesh" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RotationMax_MetaData[] = {
 		{ "Category", "Border Mesh Spawn Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Maximum random rotation applied to spawned mesh */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Maximum random rotation applied to spawned mesh" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxCountPerSide_MetaData[] = {
 		{ "Category", "Border Mesh Spawn Setting" },
 		{ "ClampMin", "1" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Number of meshes to spawn per side of the border */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Number of meshes to spawn per side of the border" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ForwardOffsetFromBorder_MetaData[] = {
 		{ "Category", "Border Mesh Spawn Setting" },
 		{ "ClampMin", "0.000000" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Offset to move the spawn location inward from the exact border edge */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Offset to move the spawn location inward from the exact border edge" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Mesh;
@@ -524,26 +686,56 @@ struct Z_Construct_UScriptStruct_FBorderActorSpawnSetting_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Settings for spawning actors specifically along the map borders.\n */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Settings for spawning actors specifically along the map borders." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ActorClass_MetaData[] = {
 		{ "Category", "Border Actor Spawn Setting" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The class of the actor to spawn on the borders */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The class of the actor to spawn on the borders" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Radius_MetaData[] = {
 		{ "Category", "Border Actor Spawn Setting" },
 		{ "ClampMin", "0.000000" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The collision radius required around the spawn point */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The collision radius required around the spawn point" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxCountPerSide_MetaData[] = {
 		{ "Category", "Border Actor Spawn Setting" },
 		{ "ClampMin", "1" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Number of actors to spawn per side of the border */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Number of actors to spawn per side of the border" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ForwardOffsetFromBorder_MetaData[] = {
 		{ "Category", "Border Actor Spawn Setting" },
 		{ "ClampMin", "0.000000" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Offset to move the spawn location inward from the exact border edge */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Offset to move the spawn location inward from the exact border edge" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_ActorClass;
@@ -601,7 +793,13 @@ struct Z_Construct_UFunction_AProceduralGeneration_ApplyMaterialToTerrain_Static
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Procedural Generation" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Dynamically applies a new material to the generated procedural mesh.\n\x09 * @param NewMaterial The material to apply.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Dynamically applies a new material to the generated procedural mesh.\n@param NewMaterial The material to apply." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_NewMaterial;
@@ -644,7 +842,13 @@ struct Z_Construct_UFunction_AProceduralGeneration_GetPlayerSpawnPoint_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Procedural Generation|Player" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n\x09 * @brief Calculates and retrieves the starting spawn location for players.\n\x09 * @return The initial player spawn location vector.\n\x09 */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Calculates and retrieves the starting spawn location for players.\n@return The initial player spawn location vector." },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
@@ -682,11 +886,11 @@ struct Z_Construct_UFunction_AProceduralGeneration_OnRep_Seed_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// **Multiplayer Change:** RepNotify function\n" },
+		{ "Comment", "/** @brief Called on clients when the Seed property is updated from the server */" },
 #endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "**Multiplayer Change:** RepNotify function" },
+		{ "ToolTip", "@brief Called on clients when the Seed property is updated from the server" },
 #endif
 	};
 #endif // WITH_METADATA
@@ -755,97 +959,211 @@ struct Z_Construct_UClass_AProceduralGeneration_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * @brief Actor responsible for procedurally generating a terrain map, populating it with meshes and actors, and managing map boundaries.\n */" },
+#endif
 		{ "IncludePath", "ProceduralGeneration.h" },
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Actor responsible for procedurally generating a terrain map, populating it with meshes and actors, and managing map boundaries." },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_XSize_MetaData[] = {
 		{ "Category", "ProceduralGeneration" },
 		{ "ClampMin", "0" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Number of vertices along the X-axis of the grid */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Number of vertices along the X-axis of the grid" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_YSize_MetaData[] = {
 		{ "Category", "ProceduralGeneration" },
 		{ "ClampMin", "0" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Number of vertices along the Y-axis of the grid */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Number of vertices along the Y-axis of the grid" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ZMultiplier_MetaData[] = {
 		{ "Category", "ProceduralGeneration" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multiplier for the height (Z-axis) of the generated terrain */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multiplier for the height (Z-axis) of the generated terrain" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_NoiseScale_MetaData[] = {
 		{ "Category", "ProceduralGeneration" },
 		{ "ClampMin", "0.000001" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Scale of the Perlin noise used for terrain generation */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Scale of the Perlin noise used for terrain generation" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Scale_MetaData[] = {
 		{ "Category", "ProceduralGeneration" },
 		{ "ClampMin", "0.000001" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Distance between each vertex in the terrain grid */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Distance between each vertex in the terrain grid" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_UVScale_MetaData[] = {
 		{ "Category", "ProceduralGeneration" },
 		{ "ClampMin", "0.000001" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Scale multiplier for the UV coordinates of the terrain */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Scale multiplier for the UV coordinates of the terrain" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Seed_MetaData[] = {
 		{ "Category", "ProceduralGeneration" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// **Multiplayer Change:** ReplicatedUsing added to synchronize the seed\n" },
+		{ "Comment", "/** @brief The random seed used for all procedural generation (replicated to clients) */" },
 #endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "**Multiplayer Change:** ReplicatedUsing added to synchronize the seed" },
+		{ "ToolTip", "@brief The random seed used for all procedural generation (replicated to clients)" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MeshPopulationSettings_MetaData[] = {
 		{ "Category", "Procedural Generation|Population Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Array of settings for meshes to be randomly populated across the map */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Array of settings for meshes to be randomly populated across the map" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ActorPopulationSettings_MetaData[] = {
 		{ "Category", "Procedural Generation|Population Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Array of settings for actors to be randomly populated across the map */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Array of settings for actors to be randomly populated across the map" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_BorderMeshSpawnSettings_MetaData[] = {
 		{ "Category", "Procedural Generation|Population Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Array of settings for meshes to be spawned specifically at map borders */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Array of settings for meshes to be spawned specifically at map borders" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_BorderActorSpawnSettings_MetaData[] = {
 		{ "Category", "Procedural Generation|Population Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Array of settings for actors to be spawned specifically at map borders */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Array of settings for actors to be spawned specifically at map borders" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxSlopeAngle_MetaData[] = {
 		{ "Category", "Procedural Generation|Population Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Maximum slope angle (in degrees) where objects are allowed to spawn */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Maximum slope angle (in degrees) where objects are allowed to spawn" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_GridCellSize_MetaData[] = {
 		{ "Category", "Procedural Generation|Performance" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Size of grid cells used for spatial partitioning during spawn checks */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Size of grid cells used for spatial partitioning during spawn checks" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_BorderExclusion_MetaData[] = {
 		{ "Category", "Procedural Generation|Population Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Number of grid units away from the edge to exclude general population spawns */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Number of grid units away from the edge to exclude general population spawns" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_BorderSpawnOffsetFraction_MetaData[] = {
 		{ "Category", "Procedural Generation|Population Settings" },
 		{ "ClampMax", "0.500000" },
 		{ "ClampMin", "0.000000" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Fraction of the map size to offset border spawns inward */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Fraction of the map size to offset border spawns inward" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OutOfBoundsDepth_MetaData[] = {
 		{ "Category", "Procedural Generation|Out of Bounds" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Depth at which players are considered out of bounds (falling off the map) */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Depth at which players are considered out of bounds (falling off the map)" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OutOfBoundsCountdownDuration_MetaData[] = {
 		{ "Category", "Procedural Generation|Out of Bounds" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Duration in seconds before a player is eliminated for being out of bounds */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Duration in seconds before a player is eliminated for being out of bounds" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PlayerSpawnForwardOffset_MetaData[] = {
 		{ "Category", "Procedural Generation|Player" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Distance forward from the center to spawn the player */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Distance forward from the center to spawn the player" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TerrainMaterial_MetaData[] = {
 		{ "Category", "Materials" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Material applied to the procedurally generated terrain */" },
+#endif
 		{ "ModuleRelativePath", "Public/ProceduralGeneration.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Material applied to the procedurally generated terrain" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FIntPropertyParams NewProp_XSize;
@@ -874,9 +1192,9 @@ struct Z_Construct_UClass_AProceduralGeneration_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_AProceduralGeneration_ApplyMaterialToTerrain, "ApplyMaterialToTerrain" }, // 1920220649
-		{ &Z_Construct_UFunction_AProceduralGeneration_GetPlayerSpawnPoint, "GetPlayerSpawnPoint" }, // 1876644709
-		{ &Z_Construct_UFunction_AProceduralGeneration_OnRep_Seed, "OnRep_Seed" }, // 3323994431
+		{ &Z_Construct_UFunction_AProceduralGeneration_ApplyMaterialToTerrain, "ApplyMaterialToTerrain" }, // 3719103413
+		{ &Z_Construct_UFunction_AProceduralGeneration_GetPlayerSpawnPoint, "GetPlayerSpawnPoint" }, // 3733868109
+		{ &Z_Construct_UFunction_AProceduralGeneration_OnRep_Seed, "OnRep_Seed" }, // 495199194
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -891,14 +1209,14 @@ const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AProceduralGene
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_Scale = { "Scale", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, Scale), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Scale_MetaData), NewProp_Scale_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_UVScale = { "UVScale", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, UVScale), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UVScale_MetaData), NewProp_UVScale_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_Seed = { "Seed", "OnRep_Seed", (EPropertyFlags)0x0010000100000021, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, Seed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Seed_MetaData), NewProp_Seed_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_MeshPopulationSettings_Inner = { "MeshPopulationSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FMeshPopulationSetting, METADATA_PARAMS(0, nullptr) }; // 528403059
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_MeshPopulationSettings = { "MeshPopulationSettings", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, MeshPopulationSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MeshPopulationSettings_MetaData), NewProp_MeshPopulationSettings_MetaData) }; // 528403059
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_ActorPopulationSettings_Inner = { "ActorPopulationSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FActorPopulationSetting, METADATA_PARAMS(0, nullptr) }; // 1346981080
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_ActorPopulationSettings = { "ActorPopulationSettings", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, ActorPopulationSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ActorPopulationSettings_MetaData), NewProp_ActorPopulationSettings_MetaData) }; // 1346981080
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_BorderMeshSpawnSettings_Inner = { "BorderMeshSpawnSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBorderMeshSpawnSetting, METADATA_PARAMS(0, nullptr) }; // 868047433
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_BorderMeshSpawnSettings = { "BorderMeshSpawnSettings", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, BorderMeshSpawnSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BorderMeshSpawnSettings_MetaData), NewProp_BorderMeshSpawnSettings_MetaData) }; // 868047433
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_BorderActorSpawnSettings_Inner = { "BorderActorSpawnSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBorderActorSpawnSetting, METADATA_PARAMS(0, nullptr) }; // 3243213933
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_BorderActorSpawnSettings = { "BorderActorSpawnSettings", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, BorderActorSpawnSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BorderActorSpawnSettings_MetaData), NewProp_BorderActorSpawnSettings_MetaData) }; // 3243213933
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_MeshPopulationSettings_Inner = { "MeshPopulationSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FMeshPopulationSetting, METADATA_PARAMS(0, nullptr) }; // 3403919884
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_MeshPopulationSettings = { "MeshPopulationSettings", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, MeshPopulationSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MeshPopulationSettings_MetaData), NewProp_MeshPopulationSettings_MetaData) }; // 3403919884
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_ActorPopulationSettings_Inner = { "ActorPopulationSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FActorPopulationSetting, METADATA_PARAMS(0, nullptr) }; // 2716376277
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_ActorPopulationSettings = { "ActorPopulationSettings", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, ActorPopulationSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ActorPopulationSettings_MetaData), NewProp_ActorPopulationSettings_MetaData) }; // 2716376277
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_BorderMeshSpawnSettings_Inner = { "BorderMeshSpawnSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBorderMeshSpawnSetting, METADATA_PARAMS(0, nullptr) }; // 2363625533
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_BorderMeshSpawnSettings = { "BorderMeshSpawnSettings", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, BorderMeshSpawnSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BorderMeshSpawnSettings_MetaData), NewProp_BorderMeshSpawnSettings_MetaData) }; // 2363625533
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_BorderActorSpawnSettings_Inner = { "BorderActorSpawnSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBorderActorSpawnSetting, METADATA_PARAMS(0, nullptr) }; // 2748441818
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_BorderActorSpawnSettings = { "BorderActorSpawnSettings", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, BorderActorSpawnSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BorderActorSpawnSettings_MetaData), NewProp_BorderActorSpawnSettings_MetaData) }; // 2748441818
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_MaxSlopeAngle = { "MaxSlopeAngle", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, MaxSlopeAngle), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxSlopeAngle_MetaData), NewProp_MaxSlopeAngle_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_GridCellSize = { "GridCellSize", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, GridCellSize), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GridCellSize_MetaData), NewProp_GridCellSize_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AProceduralGeneration_Statics::NewProp_BorderExclusion = { "BorderExclusion", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProceduralGeneration, BorderExclusion), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BorderExclusion_MetaData), NewProp_BorderExclusion_MetaData) };
@@ -978,21 +1296,21 @@ AProceduralGeneration::~AProceduralGeneration() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h__Script_FMP_Statics
 {
 	static constexpr FEnumRegisterCompiledInInfo EnumInfo[] = {
-		{ EBorder_StaticEnum, TEXT("EBorder"), &Z_Registration_Info_UEnum_EBorder, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2755615595U) },
-		{ EBorderSpawnLocation_StaticEnum, TEXT("EBorderSpawnLocation"), &Z_Registration_Info_UEnum_EBorderSpawnLocation, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2362132801U) },
+		{ EBorder_StaticEnum, TEXT("EBorder"), &Z_Registration_Info_UEnum_EBorder, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1473421863U) },
+		{ EBorderSpawnLocation_StaticEnum, TEXT("EBorderSpawnLocation"), &Z_Registration_Info_UEnum_EBorderSpawnLocation, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3994029154U) },
 	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FSpawnedObjectInfo::StaticStruct, Z_Construct_UScriptStruct_FSpawnedObjectInfo_Statics::NewStructOps, TEXT("SpawnedObjectInfo"), &Z_Registration_Info_UScriptStruct_FSpawnedObjectInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSpawnedObjectInfo), 2395699293U) },
-		{ FActorPopulationSetting::StaticStruct, Z_Construct_UScriptStruct_FActorPopulationSetting_Statics::NewStructOps, TEXT("ActorPopulationSetting"), &Z_Registration_Info_UScriptStruct_FActorPopulationSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FActorPopulationSetting), 1346981080U) },
-		{ FMeshPopulationSetting::StaticStruct, Z_Construct_UScriptStruct_FMeshPopulationSetting_Statics::NewStructOps, TEXT("MeshPopulationSetting"), &Z_Registration_Info_UScriptStruct_FMeshPopulationSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FMeshPopulationSetting), 528403059U) },
-		{ FBorderMeshSpawnSetting::StaticStruct, Z_Construct_UScriptStruct_FBorderMeshSpawnSetting_Statics::NewStructOps, TEXT("BorderMeshSpawnSetting"), &Z_Registration_Info_UScriptStruct_FBorderMeshSpawnSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBorderMeshSpawnSetting), 868047433U) },
-		{ FBorderActorSpawnSetting::StaticStruct, Z_Construct_UScriptStruct_FBorderActorSpawnSetting_Statics::NewStructOps, TEXT("BorderActorSpawnSetting"), &Z_Registration_Info_UScriptStruct_FBorderActorSpawnSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBorderActorSpawnSetting), 3243213933U) },
+		{ FSpawnedObjectInfo::StaticStruct, Z_Construct_UScriptStruct_FSpawnedObjectInfo_Statics::NewStructOps, TEXT("SpawnedObjectInfo"), &Z_Registration_Info_UScriptStruct_FSpawnedObjectInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSpawnedObjectInfo), 3215709744U) },
+		{ FActorPopulationSetting::StaticStruct, Z_Construct_UScriptStruct_FActorPopulationSetting_Statics::NewStructOps, TEXT("ActorPopulationSetting"), &Z_Registration_Info_UScriptStruct_FActorPopulationSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FActorPopulationSetting), 2716376277U) },
+		{ FMeshPopulationSetting::StaticStruct, Z_Construct_UScriptStruct_FMeshPopulationSetting_Statics::NewStructOps, TEXT("MeshPopulationSetting"), &Z_Registration_Info_UScriptStruct_FMeshPopulationSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FMeshPopulationSetting), 3403919884U) },
+		{ FBorderMeshSpawnSetting::StaticStruct, Z_Construct_UScriptStruct_FBorderMeshSpawnSetting_Statics::NewStructOps, TEXT("BorderMeshSpawnSetting"), &Z_Registration_Info_UScriptStruct_FBorderMeshSpawnSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBorderMeshSpawnSetting), 2363625533U) },
+		{ FBorderActorSpawnSetting::StaticStruct, Z_Construct_UScriptStruct_FBorderActorSpawnSetting_Statics::NewStructOps, TEXT("BorderActorSpawnSetting"), &Z_Registration_Info_UScriptStruct_FBorderActorSpawnSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBorderActorSpawnSetting), 2748441818U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AProceduralGeneration, AProceduralGeneration::StaticClass, TEXT("AProceduralGeneration"), &Z_Registration_Info_UClass_AProceduralGeneration, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProceduralGeneration), 1443354387U) },
+		{ Z_Construct_UClass_AProceduralGeneration, AProceduralGeneration::StaticClass, TEXT("AProceduralGeneration"), &Z_Registration_Info_UClass_AProceduralGeneration, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProceduralGeneration), 1973557277U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h__Script_FMP_3183333746(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h__Script_FMP_4115774645(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h__Script_FMP_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h__Script_FMP_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h__Script_FMP_Statics::ScriptStructInfo),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h__Script_FMP_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_ProceduralGeneration_h__Script_FMP_Statics::EnumInfo));
