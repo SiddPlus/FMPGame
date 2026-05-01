@@ -43,6 +43,7 @@ void AProceduralGeneration::OnRep_Seed()
 	{
         FMath::RandInit(Seed);
 
+        GenerateBaseMesh();
         DeformMeshWithNoise();
         PopulateWorld();
 	}
