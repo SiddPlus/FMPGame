@@ -68,6 +68,7 @@
 			"PerformanceLogger.cpp.obj",
 			"PerkEffectBase.cpp.obj",
 			"PlayerPerks.cpp.obj",
+			"ProceduralGeneration.cpp.obj",
 			"RoundManager.cpp.obj",
 			"TelemetryLogger.cpp.obj",
 			"TheGameMode.cpp.obj",
@@ -108,8 +109,7 @@
 			"SideScrollingCharacter.cpp.obj",
 			"SideScrollingGameMode.cpp.obj",
 			"SideScrollingPlayerController.cpp.obj",
-			"SideScrollingUI.cpp.obj",
-			"ProceduralGeneration.cpp.obj"
+			"SideScrollingUI.cpp.obj"
 		]
 	}
 }
