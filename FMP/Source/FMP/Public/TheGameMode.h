@@ -18,7 +18,7 @@ public:
 
 	/** @brief Base duration for a single round in seconds */
 	UPROPERTY(EditAnywhere, Category = "Settings")
-	float BaseRoundDuration = 60.0f;
+	float BaseRoundDuration = 30.0f;
 
 	/** @brief Rate at which enemies spawn in the current round */
 	UPROPERTY(EditAnywhere, Category = "Settings")
@@ -27,6 +27,14 @@ public:
 	/** @brief Maximum number of enemies that can be active in the current round */
 	UPROPERTY(EditAnywhere, Category = "Settings")
 	int32 CurrentRoundMaxEnemies = 10;
+
+	/** @brief Health multiplier of enemies in the current round */
+	UPROPERTY(EditAnywhere, Category = "Settings")
+	float TargetHealthMult = 1.0f;
+
+	/** @brief Speed multiplier of enemies in the current round */
+	UPROPERTY(EditAnywhere, Category = "Settings")
+	float TargetSpeedMult = 1.0f;
 
 	/**
 	 * @brief Marks a player as ready to start the next round.

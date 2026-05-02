@@ -134,7 +134,7 @@ void ATheGameMode::StartRound()
 
     for (AEnemySpawner* Spawner : CachedSpawners)
     {
-        Spawner->ConfigureSpawner(CurrentRoundSpawnRate, CurrentRoundMaxEnemies, 1.0f, 1.0f);
+        Spawner->ConfigureSpawner(CurrentRoundSpawnRate, CurrentRoundMaxEnemies, TargetHealthMult, TargetSpeedMult);
         Spawner->StartSpawningTimer();
     }
 
@@ -194,7 +194,7 @@ void ATheGameMode::EndRound()
 
     RefreshDifficultyScaling();
 
-    BaseRoundDuration += 60.0f;
+    BaseRoundDuration += 30.0f;
 
     // Reset ready status for intermission
     ReadyPlayersSet.Empty();
@@ -297,7 +297,7 @@ void ATheGameMode::EndRun()
 
     RefreshDifficultyScaling();
 
-    BaseRoundDuration = 60.0f;
+    BaseRoundDuration = 30.0f;
 
     // Reset ready status for intermission
     ReadyPlayersSet.Empty();
@@ -311,19 +311,15 @@ void ATheGameMode::RefreshDifficultyScaling()
 
     // 1. Calculate Core Scaling Factors
     float PlayerScalingFactor = 1.0f + (GS->TotalPlayersInGame - 1) * 0.5f;
-    float RoundStatMultiplier = 1.0f + (GS->CurrentRoundNumber - 1) * 0.15f;
 
     // 2. Calculate Specific Multipliers
     // Spawn Rate & Count
-    float BaseRate = FMath::Max(0.5f, 5.0f - (GS->CurrentRoundNumber * 0.2f));
-    int32 BaseMax = 10 + (GS->CurrentRoundNumber * 2);
-
-    CurrentRoundSpawnRate = BaseRate / PlayerScalingFactor;
-    CurrentRoundMaxEnemies = FMath::CeilToInt(BaseMax * PlayerScalingFactor);
+    CurrentRoundSpawnRate = (FMath::Max(0.5f, 5.0f - (GS->CurrentRoundNumber * 0.2f))) / PlayerScalingFactor;
+    CurrentRoundMaxEnemies = FMath::CeilToInt((1 + ((GS->CurrentRoundNumber - 1) * 2)) * PlayerScalingFactor);
 
     // Health & Speed Multipliers
-    float TargetHealthMult = RoundStatMultiplier * PlayerScalingFactor;
-    float TargetSpeedMult = (1.0f + (GS->CurrentRoundNumber * 0.05f)) * (1.0f + (GS->TotalPlayersInGame - 1) * 0.1f);
+    TargetHealthMult = (1.0f + (GS->CurrentRoundNumber - 1) * 0.15f) * PlayerScalingFactor;
+    TargetSpeedMult = (1.0f + (GS->CurrentRoundNumber * 0.05f)) * (1.0f + (GS->TotalPlayersInGame - 1) * 0.1f);
 
     // 3. Update Spawners (We pass Health and Speed, but NOT Damage since you're doing that in BP)
     for (AEnemySpawner* Spawner : CachedSpawners)

@@ -202,6 +202,26 @@ struct Z_Construct_UClass_ATheGameMode_Statics
 		{ "ToolTip", "@brief Maximum number of enemies that can be active in the current round" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TargetHealthMult_MetaData[] = {
+		{ "Category", "Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Health multiplier of enemies in the current round */" },
+#endif
+		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Health multiplier of enemies in the current round" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TargetSpeedMult_MetaData[] = {
+		{ "Category", "Settings" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Speed multiplier of enemies in the current round */" },
+#endif
+		{ "ModuleRelativePath", "Public/TheGameMode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Speed multiplier of enemies in the current round" },
+#endif
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CachedSpawners_MetaData[] = {
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/** @brief List of cached enemy spawners in the map */" },
@@ -224,6 +244,8 @@ struct Z_Construct_UClass_ATheGameMode_Statics
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_BaseRoundDuration;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentRoundSpawnRate;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_CurrentRoundMaxEnemies;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_TargetHealthMult;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_TargetSpeedMult;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CachedSpawners_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_CachedSpawners;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_DownPlayers_Inner;
@@ -243,6 +265,8 @@ struct Z_Construct_UClass_ATheGameMode_Statics
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_BaseRoundDuration = { "BaseRoundDuration", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameMode, BaseRoundDuration), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BaseRoundDuration_MetaData), NewProp_BaseRoundDuration_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_CurrentRoundSpawnRate = { "CurrentRoundSpawnRate", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameMode, CurrentRoundSpawnRate), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentRoundSpawnRate_MetaData), NewProp_CurrentRoundSpawnRate_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_CurrentRoundMaxEnemies = { "CurrentRoundMaxEnemies", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameMode, CurrentRoundMaxEnemies), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentRoundMaxEnemies_MetaData), NewProp_CurrentRoundMaxEnemies_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_TargetHealthMult = { "TargetHealthMult", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameMode, TargetHealthMult), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TargetHealthMult_MetaData), NewProp_TargetHealthMult_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_TargetSpeedMult = { "TargetSpeedMult", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameMode, TargetSpeedMult), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TargetSpeedMult_MetaData), NewProp_TargetSpeedMult_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_CachedSpawners_Inner = { "CachedSpawners", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_AEnemySpawner_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_CachedSpawners = { "CachedSpawners", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameMode, CachedSpawners), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CachedSpawners_MetaData), NewProp_CachedSpawners_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ATheGameMode_Statics::NewProp_DownPlayers_Inner = { "DownPlayers", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_APlayerController_NoRegister, METADATA_PARAMS(0, nullptr) };
@@ -251,6 +275,8 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ATheGameM
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_BaseRoundDuration,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_CurrentRoundSpawnRate,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_CurrentRoundMaxEnemies,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_TargetHealthMult,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_TargetSpeedMult,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_CachedSpawners_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_CachedSpawners,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameMode_Statics::NewProp_DownPlayers_Inner,
@@ -293,10 +319,10 @@ ATheGameMode::~ATheGameMode() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ATheGameMode, ATheGameMode::StaticClass, TEXT("ATheGameMode"), &Z_Registration_Info_UClass_ATheGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameMode), 1624307926U) },
+		{ Z_Construct_UClass_ATheGameMode, ATheGameMode::StaticClass, TEXT("ATheGameMode"), &Z_Registration_Info_UClass_ATheGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameMode), 619571789U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_1334930962(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_1126118691(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
