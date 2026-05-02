@@ -244,14 +244,8 @@ void ATheGameMode::RegisterPlayerDown(APlayerController* PC)
 
         if (DownPlayers.Num() >= GS->TotalPlayersInGame && GS->TotalPlayersInGame > 0)
         {
-            //GS->bIsTeamWiped = true;
-            //EndRun();
-
-            if (GS->CurrentRoundNumber > 2)
-            {
-                GS->bIsTeamWiped = true;
-                EndRun();
-            }
+            GS->bIsTeamWiped = true;
+            EndRun();
         }
     }
 }
