@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "FMPCharacter.h"
+#include "FMP/FMPCharacter.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 

@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "FMPGameMode.h"
+#include "FMP/FMPGameMode.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 

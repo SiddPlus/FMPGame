@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "FMPPlayerController.h"
+#include "FMP/FMPPlayerController.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
