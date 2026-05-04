@@ -8,25 +8,25 @@ In this high-stakes, up to 4-player cooperative 3D roguelike, you and your squad
 
 #### Networking and Multiplayer in Unreal Engine 5
 
-"Networking and Multiplayer" is an official documentation section published by Epic Games, the developers of Unreal Engine 5. Epic Games is a global leader in the games industry, and their networking framework is widely considered the gold standard for synchronized, client-server gameplay. This documentation reflects Epic’s commitment to providing a professional-grade architecture for developers to build scalable multiplayer experiences. While highly regarded for its technical depth and reliability, some community members have noted that the learning curve for "Network Relevancy" and "RPCs" can be steep, often requiring significant trial and error to master. Nevertheless, it remains the definitive authority for Unreal developers.
+"Networking and Multiplayer" is an official documentation section published by Epic Games, the developers of Unreal Engine 5 (Networking and Multiplayer in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). Epic Games is a global leader in the games industry, and their networking framework is widely considered the gold standard for synchronized, client-server gameplay. This documentation reflects Epic’s commitment to providing a professional-grade architecture for developers to build scalable multiplayer experiences. While highly regarded for its technical depth and reliability, some community members have noted that the learning curve for "Network Relevancy" and "RPCs" can be steep, often requiring significant trial and error to master. Nevertheless, it remains the definitive authority for Unreal developers.
 
-The source explains the core Client-Server model, where the server acts as the ultimate authority to prevent cheating. It covers essential concepts such as Actor Replication, Property Replication (using ReplicatedUsing for RepNotifies), and Remote Procedure Calls (RPCs). The guide details how data is passed between the server and clients, ensuring that game states like health and positioning are synchronized across the network.
+The source explains the core Client-Server model, where the server acts as the ultimate authority to prevent cheating. It covers essential concepts such as Actor Replication, Property Replication (using ReplicatedUsing for RepNotifies), and Remote Procedure Calls (RPCs). The guide details how data is passed between the server and clients, ensuring that game states like health and positioning are synchronized across the network (Networking and Multiplayer in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.).
 
 I found this documentation incredibly insightful because it lays out the "why" behind server authority. The step-by-step breakdown of how a variable travels from the server to the client was particularly helpful for understanding bandwidth optimization. However, the language is quite dense; as a student, I felt that more visual flowcharts of the packet lifecycle would have helped bridge the gap for beginners. I disagreed with the brief coverage of "Listen Servers," as more practical examples of host-player logic would have been beneficial.
 
 #### Procedural Mesh Component in Unreal Engine 5
 
-"Procedural Mesh Component" is an official technical guide provided by Epic Games. As the creators of the engine, Epic provides these resources to empower developers to create dynamic, runtime-generated geometry. The documentation is praised for its high degree of control, allowing developers to manipulate individual vertices and indices. However, critics often point out that the documentation assumes a high level of mathematical proficiency, particularly in linear algebra and coordinate spaces, which can be a barrier for some.
+"Procedural Mesh Component" is an official technical guide provided by Epic Games (Procedural Mesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). As the creators of the engine, Epic provides these resources to empower developers to create dynamic, runtime-generated geometry. The documentation is praised for its high degree of control, allowing developers to manipulate individual vertices and indices. However, critics often point out that the documentation assumes a high level of mathematical proficiency, particularly in linear algebra and coordinate spaces, which can be a barrier for some.
 
-This source explains how to generate 3D geometry at runtime by defining arrays of Vertices, Triangles, Normals, and UVs. It demonstrates how to use the CreateMeshSection function to build physical objects from purely mathematical data. This is essential for creating infinite, non-repetitive landscapes or destructible environments that are not limited by pre-made static meshes.
+This source explains how to generate 3D geometry at runtime by defining arrays of Vertices, Triangles, Normals, and UVs. It demonstrates how to use the CreateMeshSection function to build physical objects from purely mathematical data. This is essential for creating infinite, non-repetitive landscapes or destructible environments that are not limited by pre-made static meshes (Procedural Mesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.).
 
 I appreciated this source for its "no-nonsense" approach to geometry. Learning how triangles are wound (clockwise vs. counter-clockwise) to determine face direction was a fascinating technical hurdle. While the documentation is mathematically robust, I felt it lacked sufficient information on optimizing procedural meshes for collisions. I found the lack of a "Best Practices" section for performance frustrating, as generating large meshes at runtime can easily stall the game thread if not handled carefully.
 
 #### Roguelike Mechanics: Case Study of Risk of Rain 2
 
-Risk of Rain 2, developed by Hopoo Games, serves as a primary research case study for modern 3D Roguelike design. Hopoo Games is an independent studio that successfully transitioned a 2D franchise into a critically acclaimed 3D hit. They are recognized for their mastery of "Game Loops" and "Power Scaling." While the game is praised for its addictive loop, some players find the exponential difficulty scaling to be punishingly steep, suggesting a polarizing approach to balance.
+Risk of Rain 2, developed by Hopoo Games (Hopoo Games, 2020), serves as a primary research case study for modern 3D Roguelike design. Hopoo Games is an independent studio that successfully transitioned a 2D franchise into a critically acclaimed 3D hit. They are recognized for their mastery of "Game Loops" and "Power Scaling." While the game is praised for its addictive loop, some players find the exponential difficulty scaling to be punishingly steep, suggesting a polarizing approach to balance.
 
-The game demonstrates the core tenets of the Roguelike genre: Permadeath, Procedural Generation, and Meta-Progression. Specifically, it uses a "Director" system that scales difficulty based on time and player count. The "Stacking Item System" is a key research point, showing how individual buffs can combine to create unique "builds" in every run, ensuring high replayability.
+The game demonstrates the core tenets of the Roguelike genre: Permadeath, Procedural Generation, and Meta-Progression. Specifically, it uses a "Director" system that scales difficulty based on time and player count. The "Stacking Item System" is a key research point, showing how individual buffs can combine to create unique "builds" in every run, ensuring high replayability (Hopoo Games, 2020).
 
 Researching Risk of Rain 2 was the most engaging part of my planning. I found the "Director" concept—where an invisible AI spends a "budget" to spawn enemies—to be a brilliant way to manage difficulty. I particularly enjoyed analyzing how the game maintains its challenge in multiplayer. However, I felt that the game’s reliance on RNG (Random Number Generation) can sometimes lead to "dead runs," which I aim to mitigate in my own design by ensuring a baseline level of player agency through the perk selection system.
 
@@ -475,9 +475,11 @@ if (NavSys->GetRandomReachablePointInRadius(Hit.ImpactPoint, SpawnRadius, NavLoc
 
 By spawning the enemies 70 units above the ground, I ensured they "settle" onto the floor correctly, preventing them from falling through the world due to collision overlap. The spawner also maintains a `TArray<AActor*> SpawnedEnemies` to monitor the population. This allows the `GameMode` to enforce a hard cap on concurrent enemies, preventing the server from being overwhelmed by AI calculations and ensuring that the tick-rate remains high enough for a smooth multiplayer experience.
 
-### Full Documentation
+### Full Documentation & Architecture Diagram
 
 [Documentation](https://siddplus.github.io/FMPGame/)
+
+![My Photo](Images/ArchitectureDiagram.png)
 
 # Iteration & Problem-solving
 
@@ -650,6 +652,28 @@ In a future iteration, I would capitalize on the fact that I no longer need to "
 
 Ultimately, this project proved that a small-scale, high-performance multiplayer experience is achievable with a "Server-First" mindset. The lessons learned in debugging the HISM generation and the JSON memory leaks have provided me with a robust toolkit for professional-grade C++ development in the future.
 
+## Final Outcome
+
+
+
 # Bibiolography
+
+Low Poly Mayor Character (s.d.) At: https://www.fab.com/listings/21777ab8-ae5c-4d6a-99a5-b8a93f527e5e
+
+low poly chimp (s.d.) At: https://www.fab.com/listings/2aa62f43-00e3-4948-a474-0171a3c6c205
+
+Stylized Grass (s.d.) At: https://www.fab.com/listings/68708c13-df2d-46c0-bf3e-ffb6e9ee929f
+
+Low Poly Weapons Lite (s.d.) At: https://www.fab.com/listings/ecbb5891-da50-4488-ba94-a13aa742168a
+
+Fantasy FREE - Low Poly 3D Models Pack (s.d.) At: https://www.fab.com/listings/e5d17709-8ebe-44af-946f-5991117095bc 
+
+Low Poly Nature Pack Lite (s.d.) At: https://www.fab.com/listings/d2c038a0-302b-4197-b22b-b6a1b21a703b 
+
+All the Animations - Mixamo (s.d.) At: https://www.mixamo.com/#/
+
+All the Music and SFX - 6.1 million+ Stunning Free Images to Use Anywhere - Pixabay (s.d.) At: https://pixabay.com/
+
+I used Google Gemini (s.d.) At: https://gemini.google.com to help me write this commentary and generate some images for this commentary
 
 4396 words
