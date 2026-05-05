@@ -623,11 +623,11 @@ The testing phase was conducted through a series of playtests involving 12 exter
 
 | Problem Name | Description | Solution |
 | :--- | :--- | :--- |
-| **Game Balancing** | Too many enemies would spawn for the players to handle also they would too much damage, have too much health and move very fast. | Solution 1 |
+| **Game Balancing** | Too many enemies would spawn for the players to handle also they would too much damage, have too much health and move very fast. | Edited the DDA formulas it would more balanced dpending on the amount of players and the round number |
 | **Animation Bug** | Enemy attack animations will not play if too close to player and do no damage | Solution 2|
 | **UI Bugs** | The player and ready up UIs will or will not pop up or go away when needed also when perk ui is on screen the player can still move camera |Solution 3 |
-| **Cam Bug** | When enemies go right next to player the camera pushes right against the player's back and players cannot see |Solution 4 |
-| **Static Meshes Colision Bug** | Players and enemies can stand on small foliage |Solution 5 |
+| **Cam Bug** | When enemies go right next to player the camera pushes right against the player's back and players cannot see | Turn enemy collision preset for both its capsule component  and mesh to custom to tick ignore camera |
+| **Static Meshes Colision Bug** | Players and enemies can stand on small foliage | Remove collision on small foliage |
 | **World Desynchronization** | Players would see different world compared to each but still exist in same same world |Solution 6 |
 
 ## Evaluation
@@ -671,6 +671,8 @@ Low Poly Weapons Lite (s.d.) At: https://www.fab.com/listings/ecbb5891-da50-4488
 Fantasy FREE - Low Poly 3D Models Pack (s.d.) At: https://www.fab.com/listings/e5d17709-8ebe-44af-946f-5991117095bc 
 
 Low Poly Nature Pack Lite (s.d.) At: https://www.fab.com/listings/d2c038a0-302b-4197-b22b-b6a1b21a703b 
+
+FREE Mega Crosshairs Pack by VOiD1 Gaming (s.d.) At: https://void1gaming.itch.io/free-mega-crosshairs-pack
 
 All the Animations - Mixamo (s.d.) At: https://www.mixamo.com/#/
 
