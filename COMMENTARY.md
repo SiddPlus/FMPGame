@@ -624,9 +624,11 @@ The testing phase was conducted through a series of playtests involving 12 exter
 | Problem Name | Description | Solution |
 | :--- | :--- | :--- |
 | **Game Balancing** | Too many enemies would spawn for the players to handle also they would too much damage, have too much health and move very fast. | Solution 1 |
-| **Animation Bug** | Enemy attack animations will not play if too close to player and do no damage| Solution 2|
+| **Animation Bug** | Enemy attack animations will not play if too close to player and do no damage | Solution 2|
 | **UI Bugs** | The player and ready up UIs will or will not pop up or go away when needed also when perk ui is on screen the player can still move camera |Solution 3 |
-| **World Desynchronization** | Players would see different world compared to each but still exist in same same world|Solution 4 |
+| **Cam Bug** | When enemies go right next to player the camera pushes right against the player's back and players cannot see |Solution 4 |
+| **Static Meshes Colision Bug** | Players and enemies can stand on small foliage |Solution 5 |
+| **World Desynchronization** | Players would see different world compared to each but still exist in same same world |Solution 6 |
 
 ## Evaluation
 
