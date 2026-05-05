@@ -305,10 +305,6 @@ protected:
 	/** @brief Populates the generated terrain with configured meshes and actors */
 	void PopulateWorld();
 
-	// **Refactor:** Function to hold the core generation logic
-	/** @brief Coordinates the entire procedural generation process (mesh, deformation, population) */
-	void GenerateMap();
-
 public:	
 	/** @brief Called every frame */
 	virtual void Tick(float DeltaTime) override;
@@ -355,13 +351,6 @@ private:
 	TMap<UStaticMesh*, int> SpawnedMeshCounts;
 	/** @brief Tracks the number of spawned instances for each actor class */
 	TMap<TSubclassOf<AActor>, int> SpawnedActorCounts;
-
-	/** @brief Tracks whether the local player is currently out of the map bounds */
-	bool bIsPlayerOutOfBounds = false;
-	/** @brief Timer tracking how long the player has been out of bounds */
-	float OutOfBoundsTimer = 0.0f;
-	/** @brief Indicates if the player has died from being out of bounds */
-	bool bPlayerIsDead = false;
 
 	/** @brief Base location determined for the central spawn point of players */
 	FVector MasterSpawnLocation = FVector::ZeroVector;

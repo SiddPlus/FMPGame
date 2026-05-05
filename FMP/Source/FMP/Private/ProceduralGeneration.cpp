@@ -18,7 +18,7 @@
 AProceduralGeneration::AProceduralGeneration()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	// **Multiplayer Change:** Enable replication
 	bReplicates = true;
@@ -99,49 +99,6 @@ void AProceduralGeneration::PopulateWorld()
     }
 }
 
-// **Refactor:** The entire map generation logic is now in this function.
-void AProceduralGeneration::GenerateMap()
-{
-	// Initialize the deterministic random stream using the synchronized seed
-	FMath::RandInit(Seed);
-
-	Vertices.Reset();
-	Triangles.Reset();
-	UV0.Reset();
-	Normals.Reset();
-	Tangents.Reset();
-	SpawnedObjectGrid.Reset();
-
-	SpawnedMeshCounts.Reset();
-	SpawnedActorCounts.Reset();
-
-	for (auto& Elem : MeshToHISMMap)
-	{
-		if (Elem.Value)
-		{
-			Elem.Value->ClearInstances();
-			Elem.Value->DestroyComponent();
-		}
-	}
-	MeshToHISMMap.Empty();
-
-	// Noise offset must be generated here using the initialized, deterministic random stream
-	NoiseOffset = FVector2D(FMath::RandRange(-10000.0f, 10000.0f), FMath::RandRange(-10000.0f, 10000.0f));
-
-	CreateVertices();
-	CreateTriangles();
-
-	UKismetProceduralMeshLibrary::CalculateTangentsForMesh(Vertices, Triangles, UV0, Normals, Tangents);
-
-	ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, Normals, UV0, TArray<FColor>(), Tangents, true);
-	ProceduralMesh->SetMaterial(0, TerrainMaterial);
-
-	SetupHISMComponents();
-	PopulateObjects();
-
-	BorderExclusion = FMath::CeilToInt(OutOfBoundsDepth / Scale);
-}
-
 void AProceduralGeneration::OnConstruction(const FTransform& Transform)
 {
     Super::OnConstruction(Transform);
@@ -202,43 +159,6 @@ void AProceduralGeneration::BeginPlay()
 void AProceduralGeneration::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(this, 0);
-	if (PlayerPawn)
-	{
-		FVector PlayerLocation = PlayerPawn->GetActorLocation();
-		bool bCurrentlyInOutOfBounds = IsPlayerInOutOfBounds(PlayerLocation);
-
-		if (bCurrentlyInOutOfBounds && !bIsPlayerOutOfBounds)
-		{
-			bIsPlayerOutOfBounds = true;
-			OutOfBoundsTimer = OutOfBoundsCountdownDuration;
-			bPlayerIsDead = false;
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Out of Bounds!")); // Player just entered out of bounds region
-		}
-		else if (bCurrentlyInOutOfBounds && bIsPlayerOutOfBounds)
-		{
-			if (!bPlayerIsDead)
-			{
-				OutOfBoundsTimer -= DeltaTime;
-				if (OutOfBoundsTimer > 0)
-				{
-					GEngine->AddOnScreenDebugMessage(12345, DeltaTime + 0.1f, FColor::Yellow, FString::Printf(TEXT("Countdown: %.1f"), OutOfBoundsTimer)); // Countdown until player is dead
-				}
-				else
-				{
-					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player is dead!")); // Player is dead
-					bPlayerIsDead = true;
-				}
-			}
-		}
-		else if (!bCurrentlyInOutOfBounds && bIsPlayerOutOfBounds)
-		{
-			bIsPlayerOutOfBounds = false;
-			OutOfBoundsTimer = 0.0f;
-			bPlayerIsDead = false;
-		}
-	}
 }
 
 void AProceduralGeneration::ApplyMaterialToTerrain(UMaterialInterface* NewMaterial)
