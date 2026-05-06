@@ -327,6 +327,9 @@ private:
 	/** @brief Component responsible for rendering the procedurally generated terrain */
 	UProceduralMeshComponent* ProceduralMesh;
 
+	/** @brief Dedicated random stream to ensure Server/Client synchronicity */
+	FRandomStream MapRandomStream;
+
 	/** @brief Map of static meshes to their corresponding HISM components for optimized rendering */
 	TMap<UStaticMesh*, UHierarchicalInstancedStaticMeshComponent*> MeshToHISMMap;
 

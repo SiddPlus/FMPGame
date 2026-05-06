@@ -41,7 +41,7 @@ void AProceduralGeneration::OnRep_Seed()
 	// Run map generation only after the deterministic seed has been set/received.
 	if (Seed != 0)
 	{
-        FMath::RandInit(Seed);
+        MapRandomStream.Initialize(Seed);
 
         GenerateBaseMesh();
         DeformMeshWithNoise();
@@ -52,7 +52,7 @@ void AProceduralGeneration::OnRep_Seed()
 void AProceduralGeneration::DeformMeshWithNoise()
 {
     // 1. Generate new deterministic offset
-    NoiseOffset = FVector2D(FMath::RandRange(-10000.f, 10000.f), FMath::RandRange(-10000.f, 10000.f));
+    NoiseOffset = FVector2D(MapRandomStream.FRandRange(-10000.f, 10000.f), MapRandomStream.FRandRange(-10000.f, 10000.f));
 
     // 2. Update existing vertex Z values
     for (int i = 0; i <= XSize; ++i)
@@ -291,8 +291,8 @@ FVector AProceduralGeneration::GetRandomValidSpawnLocation(float Radius, FVector
     int MaxAttempts = 1000;
     for (int Attempt = 0; Attempt < MaxAttempts; ++Attempt)
     {
-        int RandX = FMath::RandRange(BorderExclusion, XSize - BorderExclusion);
-        int RandY = FMath::RandRange(BorderExclusion, YSize - BorderExclusion);
+        int RandX = MapRandomStream.FRandRange(BorderExclusion, XSize - BorderExclusion);
+        int RandY = MapRandomStream.FRandRange(BorderExclusion, YSize - BorderExclusion);
 
         int VertexIndex = RandX * (YSize + 1) + RandY;
         if (Vertices.IsValidIndex(VertexIndex))
@@ -421,8 +421,8 @@ FVector AProceduralGeneration::GetRandomPlanarOffset(const FVector& BaseLocation
     FVector BiTangent = FVector::CrossProduct(SurfaceNormal, Tangent).GetSafeNormal();
 
     FVector OffsetLocation = BaseLocation;
-    OffsetLocation += Tangent * FMath::RandRange(-OffsetMagnitude, OffsetMagnitude);
-    OffsetLocation += BiTangent * FMath::RandRange(-OffsetMagnitude, OffsetMagnitude);
+    OffsetLocation += Tangent * MapRandomStream.FRandRange(-OffsetMagnitude, OffsetMagnitude);
+    OffsetLocation += BiTangent * MapRandomStream.FRandRange(-OffsetMagnitude, OffsetMagnitude);
 
     return OffsetLocation;
 }
@@ -456,7 +456,7 @@ FVector AProceduralGeneration::GetPlayerSpawnPoint()
     }
 
     // Return the shared spot with a small random XY jitter (approx 1 meter)
-    return MasterSpawnLocation + FVector(FMath::RandRange(-100.f, 100.f), FMath::RandRange(-100.f, 100.f), 0.0f);
+    return MasterSpawnLocation + FVector(MapRandomStream.FRandRange(-100.f, 100.f), MapRandomStream.FRandRange(-100.f, 100.f), 0.0f);
 }
 
 FVector AProceduralGeneration::GetTerrainPointAtWorldLocationXY(FVector WorldLocationXY, FVector& OutSurfaceNormal)
@@ -508,7 +508,6 @@ void AProceduralGeneration::PopulateObjects()
     {
         if (MeshSetting.Mesh)
         {
-            // Removed MaxSpawnCount == 1 SingleSpawnChance check here.
             
             if (MeshSetting.MaxSpawnCount > 0)
             {
@@ -538,16 +537,16 @@ void AProceduralGeneration::PopulateObjects()
                                 {
                                     FRotator InstanceBaseRotation = FRotationMatrix::MakeFromZ(ActualSurfaceNormal).Rotator();
                                     FRotator RandomRotation = FRotator(
-                                        FMath::RandRange(MeshSetting.RotationMin.Roll, MeshSetting.RotationMax.Roll),
-                                        FMath::RandRange(MeshSetting.RotationMin.Yaw, MeshSetting.RotationMax.Yaw),
-                                        FMath::RandRange(MeshSetting.RotationMin.Pitch, MeshSetting.RotationMax.Pitch)
+                                        MapRandomStream.FRandRange(MeshSetting.RotationMin.Roll, MeshSetting.RotationMax.Roll),
+                                        MapRandomStream.FRandRange(MeshSetting.RotationMin.Yaw, MeshSetting.RotationMax.Yaw),
+                                        MapRandomStream.FRandRange(MeshSetting.RotationMin.Pitch, MeshSetting.RotationMax.Pitch)
                                     );
                                     FRotator FinalRotation = InstanceBaseRotation + RandomRotation;
 
                                     FVector RandomScale = FVector(
-                                        FMath::RandRange(MeshSetting.ScaleMin.X, MeshSetting.ScaleMax.X),
-                                        FMath::RandRange(MeshSetting.ScaleMin.Y, MeshSetting.ScaleMax.Y),
-                                        FMath::RandRange(MeshSetting.ScaleMin.Z, MeshSetting.ScaleMax.Z)
+                                        MapRandomStream.FRandRange(MeshSetting.ScaleMin.X, MeshSetting.ScaleMax.X),
+                                        MapRandomStream.FRandRange(MeshSetting.ScaleMin.Y, MeshSetting.ScaleMax.Y),
+                                        MapRandomStream.FRandRange(MeshSetting.ScaleMin.Z, MeshSetting.ScaleMax.Z)
                                     );
                                     FTransform InstanceTransform(FinalRotation, FinalSpawnLocation, RandomScale);
                                     HISM->AddInstance(InstanceTransform);
@@ -577,7 +576,6 @@ void AProceduralGeneration::PopulateObjects()
     {
         if (ActorSetting.ActorClass)
         {
-            // Removed MaxSpawnCount == 1 SingleSpawnChance check here.
 
             if (ActorSetting.MaxSpawnCount > 0)
             {
@@ -608,10 +606,10 @@ void AProceduralGeneration::PopulateObjects()
                                     FActorSpawnParameters SpawnParams;
                                     SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
                                     GetWorld()->SpawnActor<AActor>(ActorSetting.ActorClass, FinalSpawnLocation, FRotationMatrix::MakeFromZ(ActualSurfaceNormal).Rotator(), SpawnParams);
-                                    AddObjectToGrid(FinalSpawnLocation, ActorSetting.Radius);
-                                    SpawnedActorCounts.FindOrAdd(ActorSetting.ActorClass)++;
-                                    CurrentAttempts = 0;
                                 }
+                                AddObjectToGrid(FinalSpawnLocation, ActorSetting.Radius);
+                                SpawnedActorCounts.FindOrAdd(ActorSetting.ActorClass)++;
+                                CurrentAttempts = 0;
                             }
                             else
                             {
@@ -639,11 +637,11 @@ void AProceduralGeneration::PopulateObjects()
         // **Multiplayer Note:** Only run the random logic on the server to keep it deterministic
         // The HISM instances are local, but the *random number* calls must be deterministic on all clients.
         // FMath::RandInit(Seed) at the start of GenerateMap handles this.
-        int NumBordersToSpawn = FMath::RandRange(1, 4); 
+        int NumBordersToSpawn = MapRandomStream.FRandRange(1, 4);
         TArray<EBorder> AllBorders = {EBorder::North, EBorder::South, EBorder::West, EBorder::East};
         for (int i = 0; i < AllBorders.Num() - 1; ++i)
         {
-            int32 RandIndex = FMath::RandRange(i, AllBorders.Num() - 1);
+            int32 RandIndex = MapRandomStream.FRandRange(i, AllBorders.Num() - 1);
             if (i != RandIndex)
             {
                 AllBorders.Swap(i, RandIndex);
@@ -659,7 +657,7 @@ void AProceduralGeneration::PopulateObjects()
 
             while (SpawnedCountThisSide < BorderMeshSetting.MaxCountPerSide && CurrentSideAttempts < MaxSideAttempts)
             {
-                EBorderSpawnLocation RandomSpawnLocationType = static_cast<EBorderSpawnLocation>(FMath::RandRange(0, 2));
+                EBorderSpawnLocation RandomSpawnLocationType = static_cast<EBorderSpawnLocation>(MapRandomStream.FRandRange(0, 2));
 
                 FVector2D BorderGridCoords = GetBorderGridCoordinates(BorderType, RandomSpawnLocationType);
                 FVector InitialXYLocation = FVector(BorderGridCoords.X * Scale, BorderGridCoords.Y * Scale, 0.0f);
@@ -690,16 +688,16 @@ void AProceduralGeneration::PopulateObjects()
                         {
                             FRotator InstanceBaseRotation = FRotationMatrix::MakeFromZ(NewSurfaceNormal).Rotator(); 
                             FRotator RandomRotation = FRotator(
-                                FMath::RandRange(BorderMeshSetting.RotationMin.Roll, BorderMeshSetting.RotationMax.Roll),
-                                FMath::RandRange(BorderMeshSetting.RotationMin.Yaw, BorderMeshSetting.RotationMax.Yaw),
-                                FMath::RandRange(BorderMeshSetting.RotationMin.Pitch, BorderMeshSetting.RotationMax.Pitch)
+                                MapRandomStream.FRandRange(BorderMeshSetting.RotationMin.Roll, BorderMeshSetting.RotationMax.Roll),
+                                MapRandomStream.FRandRange(BorderMeshSetting.RotationMin.Yaw, BorderMeshSetting.RotationMax.Yaw),
+                                MapRandomStream.FRandRange(BorderMeshSetting.RotationMin.Pitch, BorderMeshSetting.RotationMax.Pitch)
                             );
                             FRotator FinalRotation = InstanceBaseRotation + RandomRotation;
 
                             FVector RandomScale = FVector(
-                                FMath::RandRange(BorderMeshSetting.ScaleMin.X, BorderMeshSetting.ScaleMax.X),
-                                FMath::RandRange(BorderMeshSetting.ScaleMin.Y, BorderMeshSetting.ScaleMax.Y),
-                                FMath::RandRange(BorderMeshSetting.ScaleMin.Z, BorderMeshSetting.ScaleMax.Z)
+                                MapRandomStream.FRandRange(BorderMeshSetting.ScaleMin.X, BorderMeshSetting.ScaleMax.X),
+                                MapRandomStream.FRandRange(BorderMeshSetting.ScaleMin.Y, BorderMeshSetting.ScaleMax.Y),
+                                MapRandomStream.FRandRange(BorderMeshSetting.ScaleMin.Z, BorderMeshSetting.ScaleMax.Z)
                             );
                             FTransform InstanceTransform(FinalRotation, FinalSpawnLocation, RandomScale);
                             HISM->AddInstance(InstanceTransform);
@@ -723,11 +721,11 @@ void AProceduralGeneration::PopulateObjects()
     {
         if (!BorderActorSetting.ActorClass) continue;
 
-        int NumBordersToSpawn = FMath::RandRange(1, 4);
+        int NumBordersToSpawn = MapRandomStream.FRandRange(1, 4);
         TArray<EBorder> AllBorders = {EBorder::North, EBorder::South, EBorder::West, EBorder::East};
         for (int i = 0; i < AllBorders.Num() - 1; ++i)
         {
-            int32 RandIndex = FMath::RandRange(i, AllBorders.Num() - 1);
+            int32 RandIndex = MapRandomStream.FRandRange(i, AllBorders.Num() - 1);
             if (i != RandIndex)
             {
                 AllBorders.Swap(i, RandIndex);
@@ -743,7 +741,7 @@ void AProceduralGeneration::PopulateObjects()
 
             while (SpawnedCountThisSide < BorderActorSetting.MaxCountPerSide && CurrentSideAttempts < MaxSideAttempts)
             {
-                EBorderSpawnLocation RandomSpawnLocationType = static_cast<EBorderSpawnLocation>(FMath::RandRange(0, 2));
+                EBorderSpawnLocation RandomSpawnLocationType = static_cast<EBorderSpawnLocation>(MapRandomStream.FRandRange(0, 2));
 
                 FVector2D BorderGridCoords = GetBorderGridCoordinates(BorderType, RandomSpawnLocationType);
                 FVector InitialXYLocation = FVector(BorderGridCoords.X * Scale, BorderGridCoords.Y * Scale, 0.0f);
@@ -833,23 +831,23 @@ void AProceduralGeneration::PopulateObjects()
                         continue;
                     }
 
-                    float RandomValue = FMath::FRand();
+                    float RandomValue = MapRandomStream.FRand();
                     if (MeshSetting.Mesh && RandomValue < MeshSetting.Density && IsLocationClear(FinalSpawnLocation, MeshSetting.Radius))
                     {
                         UHierarchicalInstancedStaticMeshComponent* HISM = MeshToHISMMap.FindRef(MeshSetting.Mesh);
                         if (HISM)
                         {
                             FRotator RandomRotation = FRotator(
-                                FMath::RandRange(MeshSetting.RotationMin.Roll, MeshSetting.RotationMax.Roll),
-                                FMath::RandRange(MeshSetting.RotationMin.Yaw, MeshSetting.RotationMax.Yaw),
-                                FMath::RandRange(MeshSetting.RotationMin.Pitch, MeshSetting.RotationMax.Pitch)
+                                MapRandomStream.FRandRange(MeshSetting.RotationMin.Roll, MeshSetting.RotationMax.Roll),
+                                MapRandomStream.FRandRange(MeshSetting.RotationMin.Yaw, MeshSetting.RotationMax.Yaw),
+                                MapRandomStream.FRandRange(MeshSetting.RotationMin.Pitch, MeshSetting.RotationMax.Pitch)
                             );
                             FRotator FinalRotation = InstanceBaseRotation + RandomRotation;
 
                             FVector RandomScale = FVector(
-                                FMath::RandRange(MeshSetting.ScaleMin.X, MeshSetting.ScaleMax.X),
-                                FMath::RandRange(MeshSetting.ScaleMin.Y, MeshSetting.ScaleMax.Y),
-                                FMath::RandRange(MeshSetting.ScaleMin.Z, MeshSetting.ScaleMax.Z)
+                                MapRandomStream.FRandRange(MeshSetting.ScaleMin.X, MeshSetting.ScaleMax.X),
+                                MapRandomStream.FRandRange(MeshSetting.ScaleMin.Y, MeshSetting.ScaleMax.Y),
+                                MapRandomStream.FRandRange(MeshSetting.ScaleMin.Z, MeshSetting.ScaleMax.Z)
                             );
                             FTransform InstanceTransform(FinalRotation, FinalSpawnLocation, RandomScale);
                             HISM->AddInstance(InstanceTransform);
@@ -867,7 +865,7 @@ void AProceduralGeneration::PopulateObjects()
                         continue;
                     }
 
-                    float RandomValue = FMath::FRand();
+                    float RandomValue = MapRandomStream.FRand();
                     if (ActorSetting.ActorClass && RandomValue < ActorSetting.Density && IsLocationClear(FinalSpawnLocation, ActorSetting.Radius))
                     {
                         // **Multiplayer Note:** Actors must be spawned on the server
@@ -876,9 +874,9 @@ void AProceduralGeneration::PopulateObjects()
                             FActorSpawnParameters SpawnParams;
                             SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
                             GetWorld()->SpawnActor<AActor>(ActorSetting.ActorClass, FinalSpawnLocation, InstanceBaseRotation, SpawnParams);
-                            AddObjectToGrid(FinalSpawnLocation, ActorSetting.Radius);
-                            goto NextGridPoint;
                         }
+                        AddObjectToGrid(FinalSpawnLocation, ActorSetting.Radius);
+                        goto NextGridPoint;
                     }
                 }
             }
