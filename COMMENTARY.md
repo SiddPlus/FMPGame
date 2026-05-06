@@ -628,7 +628,7 @@ The testing phase was conducted through a series of playtests involving 12 exter
 | **UI Bugs** | The player and ready up UIs will or will not pop up or go away when needed also when perk ui is on screen the player can still move camera |Solution 3 |
 | **Cam Bug** | When enemies go right next to player the camera pushes right against the player's back and players cannot see | Turn enemy collision preset for both its capsule component  and mesh to custom to tick ignore camera |
 | **Static Meshes Colision Bug** | Players and enemies can stand on small foliage | Remove collision on small foliage |
-| **World Desynchronization** | Players would see different world compared to each but still exist in same same world |Solution 6 |
+| **World Desynchronization** | Players would see different world compared to each but still exist in same same world | replaced all the FMath random to the custom roundom stream variable to handle the random calculations and then execute the exact same sequence of random number calls by keeping loop logic and variable updates outside of HasAuthority() blocks |
 
 ## Evaluation
 
