@@ -245,7 +245,7 @@ void ATheGameMode::RegisterPlayerDown(APlayerController* PC)
         if (DownPlayers.Num() >= GS->TotalPlayersInGame && GS->TotalPlayersInGame > 0)
         {
             GS->bIsTeamWiped = true;
-            EndRun();
+            GetWorldTimerManager().SetTimer(EndRunTimerHandle, this, &ATheGameMode::EndRun, 0.2f, false);
         }
     }
 }

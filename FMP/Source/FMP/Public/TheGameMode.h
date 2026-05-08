@@ -100,6 +100,9 @@ private:
 	/** @brief Timer handle used for managing round time updates */
 	FTimerHandle RoundTimerHandle;
 
+	/** @brief Timer handle used for managing end of run time updates */
+	FTimerHandle EndRunTimerHandle;
+
 	/** @brief List of cached enemy spawners in the map */
 	UPROPERTY()
 	TArray<class AEnemySpawner*> CachedSpawners;
