@@ -6,7 +6,8 @@ OUTPUT_LANGUAGE        = English
 
 # --- INPUT SETTINGS ---
 # Points specifically to your FMP/Source folder
-INPUT                  = FMP/Source
+INPUT                  = README.md FMP/Source
+USE_MDFILE_AS_MAINPAGE = README.md
 RECURSIVE              = YES
 FILE_PATTERNS          = *.h *.cpp *.hpp *.c
 EXCLUDE_PATTERNS       = */Intermediate/* */Binaries/* */Build/*

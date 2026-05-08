@@ -624,7 +624,7 @@ The testing phase was conducted through a series of playtests involving 12 exter
 | Problem Name | Description | Solution |
 | :--- | :--- | :--- |
 | **Game Balancing** | Too many enemies would spawn for the players to handle also they would too much damage, have too much health and move very fast. | Edited the DDA formulas it would more balanced dpending on the amount of players and the round number |
-| **Animation Bug** | Enemy attack animations will not play if too close to player and do no damage | Solution 2|
+| **Animation Bug** | Enemy attack animations will not play if too close to player and do no damage | In the enemy 's behaviour tree place the attack task within a sequence then placed a 2 second wait after the attack task in the same sequence so to let enemy attack montage play out |
 | **UI Bugs** | The player and ready up UIs will or will not pop up or go away when needed also when perk ui is on screen the player can still move camera |Solution 3 |
 | **Cam Bug** | When enemies go right next to player the camera pushes right against the player's back and players cannot see | Turn enemy collision preset for both its capsule component  and mesh to custom to tick ignore camera |
 | **Static Meshes Colision Bug** | Players and enemies can stand on small foliage | Remove collision on small foliage |
