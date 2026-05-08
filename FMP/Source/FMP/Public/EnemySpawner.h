@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "NiagaraSystem.h"
 #include "EnemySpawner.generated.h"
 
 /**
@@ -23,6 +24,10 @@ protected:
 	/** @brief The class of the enemy character to spawn */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawning")
 	TSubclassOf<ACharacter> EnemyToSpawnClass;
+
+	/** @brief The Niagara portal effect to play when an enemy spawns */
+	UPROPERTY(EditAnywhere, Category = "Spawning|Effects")
+	UNiagaraSystem* PortalSystemAsset;
 	
 	/** @brief Frequency of enemy spawns in seconds */
 	UPROPERTY(EditAnywhere, Category = "Spawning", Meta = (ClampMin = "0.5"))
@@ -54,6 +59,10 @@ protected:
 	/** @brief Instantiates a new enemy and applies the current multipliers */
 	UFUNCTION(BlueprintCallable, Category = "Spawning")
 	void SpawnEnemy();
+
+	/** @brief Multicast function to trigger the portal effect on all clients */
+	UFUNCTION(NetMulticast, Reliable)
+	void SpawnPortalEffect(FVector Location);
 
 public:	
 	/** @brief Called every frame */

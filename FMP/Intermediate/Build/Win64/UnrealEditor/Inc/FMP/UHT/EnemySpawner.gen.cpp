@@ -13,11 +13,13 @@ void EmptyLinkFunctionForGeneratedCodeEnemySpawner() {}
 
 // ********** Begin Cross Module References ********************************************************
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 ENGINE_API UClass* Z_Construct_UClass_AActor();
 ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_ACharacter_NoRegister();
 FMP_API UClass* Z_Construct_UClass_AEnemySpawner();
 FMP_API UClass* Z_Construct_UClass_AEnemySpawner_NoRegister();
+NIAGARA_API UClass* Z_Construct_UClass_UNiagaraSystem_NoRegister();
 UPackage* Z_Construct_UPackage__Script_FMP();
 // ********** End Cross Module References **********************************************************
 
@@ -157,6 +159,62 @@ DEFINE_FUNCTION(AEnemySpawner::execSpawnEnemy)
 }
 // ********** End Class AEnemySpawner Function SpawnEnemy ******************************************
 
+// ********** Begin Class AEnemySpawner Function SpawnPortalEffect *********************************
+struct EnemySpawner_eventSpawnPortalEffect_Parms
+{
+	FVector Location;
+};
+static FName NAME_AEnemySpawner_SpawnPortalEffect = FName(TEXT("SpawnPortalEffect"));
+void AEnemySpawner::SpawnPortalEffect(FVector Location)
+{
+	EnemySpawner_eventSpawnPortalEffect_Parms Parms;
+	Parms.Location=Location;
+	UFunction* Func = FindFunctionChecked(NAME_AEnemySpawner_SpawnPortalEffect);
+	ProcessEvent(Func,&Parms);
+}
+struct Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Multicast function to trigger the portal effect on all clients */" },
+#endif
+		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Multicast function to trigger the portal effect on all clients" },
+#endif
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStructPropertyParams NewProp_Location;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics::NewProp_Location = { "Location", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EnemySpawner_eventSpawnPortalEffect_Parms, Location), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics::NewProp_Location,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_AEnemySpawner, nullptr, "SpawnPortalEffect", Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics::PropPointers), sizeof(EnemySpawner_eventSpawnPortalEffect_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00884CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics::Function_MetaDataParams), Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics::Function_MetaDataParams)},  };
+static_assert(sizeof(EnemySpawner_eventSpawnPortalEffect_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AEnemySpawner::execSpawnPortalEffect)
+{
+	P_GET_STRUCT(FVector,Z_Param_Location);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->SpawnPortalEffect_Implementation(Z_Param_Location);
+	P_NATIVE_END;
+}
+// ********** End Class AEnemySpawner Function SpawnPortalEffect ***********************************
+
 // ********** Begin Class AEnemySpawner Function StartSpawningTimer ********************************
 struct Z_Construct_UFunction_AEnemySpawner_StartSpawningTimer_Statics
 {
@@ -201,6 +259,7 @@ void AEnemySpawner::StaticRegisterNativesAEnemySpawner()
 		{ "ConfigureSpawner", &AEnemySpawner::execConfigureSpawner },
 		{ "EndSpawningAndClearEnemies", &AEnemySpawner::execEndSpawningAndClearEnemies },
 		{ "SpawnEnemy", &AEnemySpawner::execSpawnEnemy },
+		{ "SpawnPortalEffect", &AEnemySpawner::execSpawnPortalEffect },
 		{ "StartSpawningTimer", &AEnemySpawner::execStartSpawningTimer },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -255,6 +314,16 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "@brief The class of the enemy character to spawn" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PortalSystemAsset_MetaData[] = {
+		{ "Category", "Spawning|Effects" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief The Niagara portal effect to play when an enemy spawns */" },
+#endif
+		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief The Niagara portal effect to play when an enemy spawns" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SpawnRate_MetaData[] = {
@@ -322,6 +391,7 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_EnemyToSpawnClass;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_PortalSystemAsset;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_SpawnRate;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_SpawnRadius;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_MaxConcurrentEnemies;
@@ -335,6 +405,7 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 		{ &Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner, "ConfigureSpawner" }, // 353782792
 		{ &Z_Construct_UFunction_AEnemySpawner_EndSpawningAndClearEnemies, "EndSpawningAndClearEnemies" }, // 3091595215
 		{ &Z_Construct_UFunction_AEnemySpawner_SpawnEnemy, "SpawnEnemy" }, // 2284598156
+		{ &Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect, "SpawnPortalEffect" }, // 3155982592
 		{ &Z_Construct_UFunction_AEnemySpawner_StartSpawningTimer, "StartSpawningTimer" }, // 3355906880
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -344,6 +415,7 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_EnemyToSpawnClass = { "EnemyToSpawnClass", nullptr, (EPropertyFlags)0x0024080000000015, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, EnemyToSpawnClass), Z_Construct_UClass_UClass, Z_Construct_UClass_ACharacter_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EnemyToSpawnClass_MetaData), NewProp_EnemyToSpawnClass_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_PortalSystemAsset = { "PortalSystemAsset", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, PortalSystemAsset), Z_Construct_UClass_UNiagaraSystem_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PortalSystemAsset_MetaData), NewProp_PortalSystemAsset_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnRate = { "SpawnRate", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, SpawnRate), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpawnRate_MetaData), NewProp_SpawnRate_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnRadius = { "SpawnRadius", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, SpawnRadius), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpawnRadius_MetaData), NewProp_SpawnRadius_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_MaxConcurrentEnemies = { "MaxConcurrentEnemies", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, MaxConcurrentEnemies), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxConcurrentEnemies_MetaData), NewProp_MaxConcurrentEnemies_MetaData) };
@@ -353,6 +425,7 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AEnemySpawner_
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnedEnemies = { "SpawnedEnemies", nullptr, (EPropertyFlags)0x0020080000022001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AEnemySpawner, SpawnedEnemies), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpawnedEnemies_MetaData), NewProp_SpawnedEnemies_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AEnemySpawner_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_EnemyToSpawnClass,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_PortalSystemAsset,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnRate,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_SpawnRadius,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemySpawner_Statics::NewProp_MaxConcurrentEnemies,
@@ -398,10 +471,10 @@ AEnemySpawner::~AEnemySpawner() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 2471560504U) },
+		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 407629529U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_3800606901(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_4238320614(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

@@ -17,16 +17,19 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 // ********** Begin Class AEnemySpawner ************************************************************
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void SpawnPortalEffect_Implementation(FVector Location); \
 	DECLARE_FUNCTION(execEndSpawningAndClearEnemies); \
 	DECLARE_FUNCTION(execStartSpawningTimer); \
 	DECLARE_FUNCTION(execConfigureSpawner); \
+	DECLARE_FUNCTION(execSpawnPortalEffect); \
 	DECLARE_FUNCTION(execSpawnEnemy);
 
 
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_14_CALLBACK_WRAPPERS
 FMP_API UClass* Z_Construct_UClass_AEnemySpawner_NoRegister();
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_13_INCLASS_NO_PURE_DECLS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_14_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAEnemySpawner(); \
 	friend struct Z_Construct_UClass_AEnemySpawner_Statics; \
@@ -37,7 +40,7 @@ public: \
 	DECLARE_SERIALIZER(AEnemySpawner)
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_13_ENHANCED_CONSTRUCTORS \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_14_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	AEnemySpawner(AEnemySpawner&&) = delete; \
 	AEnemySpawner(const AEnemySpawner&) = delete; \
@@ -47,13 +50,14 @@ public: \
 	NO_API virtual ~AEnemySpawner();
 
 
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_10_PROLOG
-#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_13_GENERATED_BODY \
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_11_PROLOG
+#define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_14_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_13_INCLASS_NO_PURE_DECLS \
-	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_13_ENHANCED_CONSTRUCTORS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_14_CALLBACK_WRAPPERS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_14_INCLASS_NO_PURE_DECLS \
+	FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_14_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

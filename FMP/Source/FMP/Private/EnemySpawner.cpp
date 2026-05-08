@@ -5,6 +5,7 @@
 #include "GameFramework/Character.h"
 #include "NavigationSystem.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "NiagaraFunctionLibrary.h"
 
 // Sets default values
 AEnemySpawner::AEnemySpawner()
@@ -79,6 +80,19 @@ void AEnemySpawner::ConfigureSpawner(float NewSpawnRate, int32 NewMaxConcurrentE
 	}
 }
 
+void AEnemySpawner::SpawnPortalEffect_Implementation(FVector Location)
+{
+	if (PortalSystemAsset)
+	{
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+			GetWorld(),
+			PortalSystemAsset,
+			Location,
+			FRotator::ZeroRotator
+		);
+	}
+}
+
 void AEnemySpawner::SpawnEnemy()
 {
 	if (!HasAuthority() || !EnemyToSpawnClass || SpawnedEnemies.Num() >= MaxConcurrentEnemies) return;
@@ -110,6 +124,8 @@ void AEnemySpawner::SpawnEnemy()
 			FActorSpawnParameters SpawnParams;
 			// IMPORTANT: If they would hit a tree, this prevents the spawn
 			SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+
+			SpawnPortalEffect(FinalSpawnPos);
 
 			ACharacter* NewEnemy = GetWorld()->SpawnActor<ACharacter>(
 				EnemyToSpawnClass,

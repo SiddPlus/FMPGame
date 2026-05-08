@@ -18,15 +18,15 @@ public class FMP : ModuleRules
             "GameplayStateTreeModule",
             "UMG",
             "Slate",
-            "NavigationSystem" // Added from your second list
+            "Niagara",
+            "NavigationSystem"
         });
 
         PrivateDependencyModuleNames.AddRange(new string[] { 
             "ProceduralMeshComponent",
-            "OnlineSubsystem" // Added to support online features
+            "OnlineSubsystem"
         });
 
-        // This is where you add the line you asked about:
         DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
     }
 }
