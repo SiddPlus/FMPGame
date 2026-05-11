@@ -67,8 +67,6 @@ public:
 	/** @brief Event broadcasted when the count of ready players changes */
 	UPROPERTY(BlueprintAssignable, Category = "Round Management|Events")
 	FOnPlayerReadyChange OnPlayerReadyChange;
-	
-protected:
 
 	/** @brief Replication callback for bIsRoundActive */
 	UFUNCTION()
@@ -77,6 +75,12 @@ protected:
 	/** @brief Replication callback for ReadyPlayersCount */
 	UFUNCTION()
 	void OnRep_ReadyPlayers() { OnPlayerReadyChange.Broadcast(ReadyPlayersCount); }
+	
+protected:
+
+	
+
+	
 
 	/** 
 	 * @brief Setup variables to be replicated.

@@ -83,6 +83,7 @@ void ATheGameMode::Logout(AController* Exiting)
         {
             ReadyPlayersSet.Remove(PC);
             GS->ReadyPlayersCount = ReadyPlayersSet.Num();
+            GS->OnRep_ReadyPlayers();
         }
 
         RefreshDifficultyScaling();
@@ -131,6 +132,7 @@ void ATheGameMode::StartRound()
 
     GS->RoundTimer = BaseRoundDuration;
     GS->bIsRoundActive = true;
+    GS->OnRep_IsRoundActive();
 
     for (AEnemySpawner* Spawner : CachedSpawners)
     {
@@ -167,6 +169,7 @@ void ATheGameMode::EndRound()
 
     GetWorldTimerManager().ClearTimer(RoundTimerHandle);
     GS->bIsRoundActive = false;
+    GS->OnRep_IsRoundActive();
 
     // Cleanup enemies
     for (AEnemySpawner* Spawner : CachedSpawners)
@@ -224,6 +227,7 @@ void ATheGameMode::PlayerReadyUp(APlayerController* PC)
 
     // Sync the count to the GameState so the UI updates for everyone
     GS->ReadyPlayersCount = ReadyPlayersSet.Num();
+    GS->OnRep_ReadyPlayers();
 
     // Auto-start when all are ready
     if (GS->ReadyPlayersCount >= GS->TotalPlayersInGame && GS->TotalPlayersInGame > 0)
@@ -277,6 +281,7 @@ void ATheGameMode::EndRun()
 
     GetWorldTimerManager().ClearTimer(RoundTimerHandle);
     GS->bIsRoundActive = false;
+    GS->OnRep_IsRoundActive();
 
     // Cleanup enemies
     for (AEnemySpawner* Spawner : CachedSpawners)
