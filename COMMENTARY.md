@@ -30,6 +30,8 @@ The game demonstrates the core tenets of the Roguelike genre: Permadeath, Proced
 
 Researching Risk of Rain 2 was the most engaging part of my planning. I found the "Director" concept—where an invisible AI spends a "budget" to spawn enemies—to be a brilliant way to manage difficulty. I particularly enjoyed analyzing how the game maintains its challenge in multiplayer. However, I felt that the game’s reliance on RNG (Random Number Generation) can sometimes lead to "dead runs," which I aim to mitigate in my own design by ensuring a baseline level of player agency through the perk selection system.
 
+![My Photo](Images/RiskofRain2.png)
+
 ### Planning
 
 1. Environment Foundation: I began with Procedural Generation. This was the most complex technical task, so it was vital to ensure the world could generate and handle collisions before any other systems were built.
@@ -66,6 +68,8 @@ void UHealthSystem::DecreaseHealth(float HealthDelta, const class UDamageType* D
 ```
 
 The use of `FMath::Clam` ensures data integrity, preventing the CurrentHealth from ever entering a negative state, which could cause errors in UI progress bars or logic gates that check for death. This component-based approach allows the same health logic to be applied to AI enemies, where the delegate is bound to the AI Controller’s blackboard rather than a player’s HUD.
+
+![My Photo](Images/Health.gif)
 
 ### Procedural Generation: Algorithmic Efficiency and HISMs
 
@@ -159,6 +163,8 @@ void AProceduralGeneration::GenerateWorld()
 
 This approach achieves 100% visual parity across the network. Because the generation algorithm is mathematical and deterministic, the server only needs to send 4 bytes (the integer seed) rather than megabytes of vertex and transform data. This allows the game to support large-scale procedural worlds even on low-bandwidth connections, as the heavy lifting of construction happens locally on each client's CPU.
 
+![My Photo](Images/ProcGen.gif)
+
 ### The Game Framework: Authority vs. Synchronization
 
 In Unreal Engine’s multiplayer architecture, the relationship between the `GameMode` and `GameState` represents the fundamental divide between Server Authority and Client Representation. By strictly segregating logic into these two classes, I ensured that the "rules" of the Roguelike remain unhackable on the server while the "status" of the game is perfectly mirrored across all player screens.
@@ -199,6 +205,7 @@ void ATheGameMode::Logout(AController* Exiting)
 This implementation demonstrates a reactive difficulty system. By overriding PostLogin and Logout, the `GameMode` ensures that the challenge level is always mathematically proportional to the current team size, fulfilling the Roguelike requirement for a fair but escalating challenge.
 
 #### `ATheGameState`: The Synchronized Global Blackboard
+
 While the `GameMode` makes the decisions, the ATheGameState is responsible for broadcasting those decisions. It acts as a "Global Blackboard" that every client can read. All critical gameplay variables here are marked with the `Replicated` or `ReplicatedUsing` specifiers.
 
 A key feature of my `GameState` is the use of `RepNotify` (`ReplicatedUsing`) for the `ReadyPlayersCount` and `bIsRoundActiv` variables. This ensures that when the server updates these values, a specific function (OnRep_...) is triggered on every client, allowing the UI to update instantly without polling the server every frame.
@@ -279,6 +286,8 @@ void ATheGameMode::RefreshDifficultyScaling()
 ```
 
 This interaction ensures that the "Heavy Lifting" (AI management, spawning, and math) is hidden within the `GameMode`, while the `GameState` provides a clean, synchronized API for the clients to drive their HUDs and local visual effects. This architecture is the backbone of the project’s multiplayer stability, ensuring that even under high network load, the core rules of the game remain consistent for every participant.
+
+![My Photo](Images/RoundCountdown.gif)
 
 ### Perks and the Loot Pool: Data-Driven Extensibility
 
@@ -383,6 +392,8 @@ The interaction between these classes creates a robust "Selection Loop." When th
 
 This loop is highly efficient because the LootPool only exists to do the "math" of the draw, while the `PlayerPerks` remains a lightweight data container. This separation of concerns ensures that even in a chaotic 4-player multiplayer match, the game can handle hundreds of active perk instances across the team without causing server-side performance degradation or network desynchronization.
 
+![My Photo](Images/Perks.gif)
+
 ### Networking Strategy: RPCs and Validation
 
 The multiplayer architecture of this project is built upon the principle of `Server Authority`. In a networked environment, the client is essentially a "dumb terminal" that sends input requests to the server, which then simulates the results and broadcasts them back. To manage this communication, I utilized Remote Procedure Calls (RPCs)—specifically `Server` and `Client` functions—to bridge the gap between local player actions and global game state changes.
@@ -443,6 +454,8 @@ void UPlayerPerks::OnRep_LastEquippedPerk()
 
 By combining authoritative server validation with efficient replication types and local notifications, the networking strategy ensures a cheat-resistant environment that remains performant across varying network conditions.
 
+![My Photo](Images/Networking.gif)
+
 ### Analytics and Optimization: Performance and Telemetry
 
 To ensure the project met professional standards, I developed two specialized logging classes: `UPerformanceLogger` and `TelemetryLogger`. The `PerformanceLogger` is an `UActorComponent` attached to the `GameState` that captures frame-time, FPS, and memory usage metrics at a regular frequency using `FTimerHandle`.
@@ -462,7 +475,12 @@ void UPerformanceLogger::WriteLogToFile()
 ```
 The `TelemetryLogger` serves a different purpose: tracking the meta-progression of the Roguelike loop. It records which perks were unlocked and the highest round reached. This data is persistent, saved to the `ProjectSavedDir`, ensuring that player progress is retained across sessions. The technical achievement here is the robust handling of the `IPlatformFile` interface, which ensures the directory structure is created correctly across different operating systems, making the project's data management cross-platform ready.
 
+![My Photo](Images/Performance.png)
+
+![My Photo](Images/PlayerProfileStats.png)
+
 ### AI and Spawner Management
+
 The `AEnemySpawner` class manages the lifecycle of AI agents within the procedural environment. A major technical hurdle was ensuring enemies didn't spawn inside the geometry created by the `AProceduralGeneration` class. I solved this by implementing a Line Trace system that fires downwards from a randomized height. If the trace hits the `ProceduralMesh`, the system then utilizes the `UNavigationSystemV1` to find the nearest valid point on the `NavMesh`.
 
 ```
@@ -474,6 +492,8 @@ if (NavSys->GetRandomReachablePointInRadius(Hit.ImpactPoint, SpawnRadius, NavLoc
 ```
 
 By spawning the enemies 70 units above the ground, I ensured they "settle" onto the floor correctly, preventing them from falling through the world due to collision overlap. The spawner also maintains a `TArray<AActor*> SpawnedEnemies` to monitor the population. This allows the `GameMode` to enforce a hard cap on concurrent enemies, preventing the server from being overwhelmed by AI calculations and ensuring that the tick-rate remains high enough for a smooth multiplayer experience.
+
+![My Photo](Images/AI.gif)
 
 ### Full Documentation & Architecture Diagram
 
@@ -629,6 +649,8 @@ The testing phase was conducted through a series of playtests involving 12 exter
 | **Cam Bug** | When enemies go right next to player the camera pushes right against the player's back and players cannot see | Turn enemy collision preset for both its capsule component  and mesh to custom to tick ignore camera |
 | **Static Meshes Colision Bug** | Players and enemies can stand on small foliage | Remove collision on small foliage |
 | **World Desynchronization** | Players would see different world compared to each but still exist in same same world | replaced all the FMath random to the custom roundom stream variable to handle the random calculations and then execute the exact same sequence of random number calls by keeping loop logic and variable updates outside of HasAuthority() blocks |
+
+## User Testing
 
 ## Evaluation
 
