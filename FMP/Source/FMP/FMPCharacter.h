@@ -50,6 +50,10 @@ class AFMPCharacter : public ACharacter
 	
 protected:
 
+	/** @brief Jump Input Action */
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* JumpAction;
+
 	/** @brief Move Input Action */
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* MoveAction;
@@ -106,6 +110,14 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoLook(float Yaw, float Pitch);
+
+	/** @brief Handles jump inputs from either controls or UI interfaces */
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	virtual void DoJumpStart();
+
+	/** @brief Handles not to jump inputs from either controls or UI interfaces */
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	virtual void DoJumpEnd();
 
 public:
 
