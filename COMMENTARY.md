@@ -669,7 +669,31 @@ The testing phase was conducted through a series of playtests involving 12 exter
 
 ### User Testing
 
+![My Photo](Images/UserTesting/Overall.png)
+
+![My Photo](Images/UserTesting/Controls.png)
+
+![My Photo](Images/UserTesting/Motivation.png)
+
+![My Photo](Images/UserTesting/Difficulty.png)
+
+![My Photo](Images/UserTesting/ProcGen.png)
+
+![My Photo](Images/UserTesting/PerkDeck.png)
+
+![My Photo](Images/UserTesting/Perks.png)
+
+![My Photo](Images/UserTesting/Multiplayer.png)
+
+![My Photo](Images/UserTesting/Lag.png)
+
+![My Photo](Images/UserTesting/Rounds.png)
+
+To quantify the project's success and identify outstanding mechanical pain points, quantitative survey data was gathered from 4 external playtesters across several technical and gameplay categories. Session survivability data showed a tightly balanced but punishing difficulty ceiling, with 75% of playtesters (3 responses) reaching an authoritative milestone of Round 2 and only 25% (1 response) pushing forward to survive until Round 3. Despite this steep curve, mechanical engagement remained strong, with 75% of users scoring their motivation to keep playing after death at a 4 or 5 out of 5. The data-driven bridge between C++ structures and Blueprint functionality achieved exceptional clarity metrics, as 75% of players awarded a score of 4 out of 5 for perk system understandability, and 75% rated the direct impact of these unlocked perks on their gameplay style at a 4 or 5 out of 5. Environmental variety driven by the deterministic seed distribution was well-received, with 75% of testers rating the uniqueness of the randomly generated levels at a 4 or 5 out of 5, though a remaining 25% gave a neutral score of 3, signaling a need for more distinct generation. The server-authoritative optimization model effectively eliminated game-breaking rubber-banding, resulting in a flat 50/50 split between scores of 2 and 3 out of 5 for connection stability, indicating that while the network baseline was structurally sound, noticeable performance jitter remained during intensive runtime calculations. This technical variance directly correlated with character control responsiveness, which was rated at a 4 out of 5 by 50% of testers while the rest split between scores of 2 and 3 due to outstanding camera look glitches. However, the architectural commitment to multiplayer design paid off significantly, with 100% of participants scoring the co-op aspect's ability to enhance enjoyment at a 4 or 5 out of 5, which ultimately elevated the overall gameplay experience to a highly encouraging baseline where 50% rated their enjoyment at a solid 3 out of 5, 25% at a 4 out of 5, and 25% at a top score of 5 out of 5.
+
 ### Evaluation
+
+To determine if the final build achieved a baseline of professional polish, balancing, and game-feel, a focused feedback evaluation was conducted with external participants, revealing critical areas where player expectations collided with initial design constraints. Correlating directly with the mixed control responsiveness and difficulty curve metrics analyzed in the user testing section, testers explicitly requested a traversal jump mechanic to navigate vertical procedural terrain steps more fluidly rather than relying on flat planar movement. Furthermore, matching the lower scoring outliers in player perk impact and responsiveness, players highlighted a severe lack of combat clarity due to the absence of pop-up floating enemy health bars and distinct on-screen damage indicators when the player took hits. Pacing feedback also directly expanded upon the difficulty curves recorded in the data; early-game pacing was flagged as overly punishing due to excessive enemy health scaling and uncontrollable weapon recoil, which explains why 75% of players were eliminated by Round 2. Additionally, the technical split seen in the connection stability data was fully contextualized when a major technical performance bottleneck was uncovered: exactly when the exit portal's initialization triggered, it caused noticeable network lag spikes across all connected client machines. Ultimately, evaluating this feedback proved that while the underlying C++ systems—such as server-authoritative replication, spatial grid partitioning, and procedural seeding—were structurally sound, the project required micro-level gameplay and UI refinements to balance network stability with satisfying player feedback, all of which I have thoroughly reviewed and successfully actioned in the final build. As a resuult, the gaaame performed more smotthly and provided better user exerience.
 
 # Reflection on Outcomes
 
@@ -693,6 +717,8 @@ In a future iteration, I would capitalize on the fact that I no longer need to "
 
 Ultimately, this project proved that a small-scale, high-performance multiplayer experience is achievable with a "Server-First" mindset. The lessons learned in debugging the `HISM` (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) generation and the JSON memory leaks have provided me with a robust toolkit for professional-grade C++ development in the future.
 
+Overall, the game successfully delivers an engaging and dynamic cooperative roguelike experience, with the data-driven, deck-based perk system standing out as the definitive highlight of the gameplay loop. However, the experience would be significantly enhanced by a deeper system of long-term player meta-progression and a broader variety of enemy archetypes to sustain engagement across extended sessions. While the project successfully fulfilled its initial design objectives, future iterations will focus on expanding these progression systems and content variety to elevate the game's overall depth and replayability.
+
 ## Final Outcome
 
 
@@ -712,6 +738,8 @@ Fantasy FREE - Low Poly 3D Models Pack (s.d.) At: https://www.fab.com/listings/e
 Low Poly Nature Pack Lite (s.d.) At: https://www.fab.com/listings/d2c038a0-302b-4197-b22b-b6a1b21a703b 
 
 FREE Mega Crosshairs Pack by VOiD1 Gaming (s.d.) At: https://void1gaming.itch.io/free-mega-crosshairs-pack
+
+Blood Screen Effects by ScratchBattles (s.d.) At: https://squaremeapixel.itch.io/blood-screen-effects
 
 All the Animations - Mixamo (s.d.) At: https://www.mixamo.com/#/
 
