@@ -21,7 +21,10 @@ class APlayerController;
 // ********** Begin Class ATheGameMode *************************************************************
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameMode_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execRegisterPlayerDown); \
-	DECLARE_FUNCTION(execPlayerReadyUp);
+	DECLARE_FUNCTION(execPlayerReadyUp); \
+	DECLARE_FUNCTION(execCanSpawnMoreEnemiesGlobal); \
+	DECLARE_FUNCTION(execRegisterEnemyDespawned); \
+	DECLARE_FUNCTION(execRegisterEnemySpawned);
 
 
 FMP_API UClass* Z_Construct_UClass_ATheGameMode_NoRegister();

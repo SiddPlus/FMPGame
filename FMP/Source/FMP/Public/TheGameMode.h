@@ -28,6 +28,26 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Settings")
 	int32 CurrentRoundMaxEnemies = 10;
 
+	/** @brief Hard map-wide ceiling to prevent game crashes, set dynamically by player count */
+	UPROPERTY(VisibleAnywhere, Category = "Settings")
+	int32 GlobalMaxEnemiesLimit = 73;
+
+	/** @brief Track total globally spawned active enemies currently alive on the map */
+	UPROPERTY(VisibleAnywhere, Category = "State")
+	int32 GlobalActiveEnemyCount = 0;
+
+	/** @brief Call when an enemy successfully spawns into the map */
+	UFUNCTION(BlueprintCallable, Category = "GameMode|Spawning")
+	void RegisterEnemySpawned();
+
+	/** @brief Call when an enemy dies or is destroyed */
+	UFUNCTION(BlueprintCallable, Category = "GameMode|Spawning")
+	void RegisterEnemyDespawned();
+
+	/** @brief Checks if the total map population has reached the global ceiling */
+	UFUNCTION(BlueprintCallable, Category = "GameMode|Spawning")
+	bool CanSpawnMoreEnemiesGlobal() const;
+
 	/** @brief Health multiplier of enemies in the current round */
 	UPROPERTY(EditAnywhere, Category = "Settings")
 	float TargetHealthMult = 1.0f;

@@ -6,6 +6,7 @@
 #include "NavigationSystem.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "TheGameMode.h"
 
 // Sets default values
 AEnemySpawner::AEnemySpawner()
@@ -95,7 +96,11 @@ void AEnemySpawner::SpawnPortalEffect_Implementation(FVector Location)
 
 void AEnemySpawner::SpawnEnemy()
 {
+	ATheGameMode* GM = Cast<ATheGameMode>(GetWorld()->GetAuthGameMode());
+
 	if (!HasAuthority() || !EnemyToSpawnClass || SpawnedEnemies.Num() >= MaxConcurrentEnemies) return;
+
+	if (GM && !GM->CanSpawnMoreEnemiesGlobal()) return;
 
 	FVector Origin = GetActorLocation();
 
@@ -137,6 +142,11 @@ void AEnemySpawner::SpawnEnemy()
 			if (NewEnemy)
 			{
 				SpawnedEnemies.Add(NewEnemy);
+
+				if (GM)
+				{
+					GM->RegisterEnemySpawned();
+				}
 
 				// Apply Health Multiplier
 				if (UHealthSystem* HealthComp = NewEnemy->FindComponentByClass<UHealthSystem>())

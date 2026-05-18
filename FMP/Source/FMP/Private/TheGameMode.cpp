@@ -177,6 +177,8 @@ void ATheGameMode::EndRound()
         Spawner->EndSpawningAndClearEnemies();
     }
 
+    GlobalActiveEnemyCount = 0;
+
     // Process Perks and Telemetry for all players (OG Core Logic)
     for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
     {
@@ -289,6 +291,8 @@ void ATheGameMode::EndRun()
         Spawner->EndSpawningAndClearEnemies();
     }
 
+    GlobalActiveEnemyCount = 0;
+
     // Scale difficulty for the next round
     
 
@@ -316,6 +320,23 @@ void ATheGameMode::RefreshDifficultyScaling()
     CurrentRoundSpawnRate = (FMath::Max(0.5f, 5.0f - (GS->CurrentRoundNumber * 0.2f))) / PlayerScalingFactor;
     CurrentRoundMaxEnemies = FMath::CeilToInt((1 + ((GS->CurrentRoundNumber - 1) * 2)) * PlayerScalingFactor);
 
+    switch (GS->TotalPlayersInGame)
+    {
+    case 1:
+        GlobalMaxEnemiesLimit = 29;
+        break;
+    case 2:
+        GlobalMaxEnemiesLimit = 44;
+        break;
+    case 3:
+        GlobalMaxEnemiesLimit = 58;
+        break;
+    case 4:
+    default:
+        GlobalMaxEnemiesLimit = 73;
+        break;
+    }
+
     // Health & Speed Multipliers
     TargetHealthMult = (1.0f + (GS->CurrentRoundNumber - 1) * 0.15f) * PlayerScalingFactor;
     TargetSpeedMult = (1.0f + (GS->CurrentRoundNumber * 0.05f)) * (1.0f + (GS->TotalPlayersInGame - 1) * 0.1f);
@@ -330,4 +351,19 @@ void ATheGameMode::RefreshDifficultyScaling()
             TargetSpeedMult
         );
     }
+}
+
+void ATheGameMode::RegisterEnemySpawned()
+{
+    GlobalActiveEnemyCount++;
+}
+
+void ATheGameMode::RegisterEnemyDespawned()
+{
+    GlobalActiveEnemyCount = FMath::Max(0, GlobalActiveEnemyCount - 1);
+}
+
+bool ATheGameMode::CanSpawnMoreEnemiesGlobal() const
+{
+    return GlobalActiveEnemyCount < GlobalMaxEnemiesLimit;
 }
