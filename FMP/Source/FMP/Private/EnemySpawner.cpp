@@ -155,7 +155,7 @@ void AEnemySpawner::SpawnEnemy()
 				if (UHealthSystem* HealthComp = NewEnemy->FindComponentByClass<UHealthSystem>())
 				{
 					// Update the MaxHealth in HealthSystem.h first
-					HealthComp->SetMaxHealth(100.0f * CurrentHealthMultiplier);
+					HealthComp->SetMaxHealth(10.0f * CurrentHealthMultiplier);
 				}
 
 				// Apply Speed Multiplier
