@@ -133,7 +133,13 @@ struct Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Spawning" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Notifies spawner when enemy dies */" },
+#endif
 		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Notifies spawner when enemy dies" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_DeadEnemy;
@@ -448,7 +454,7 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner, "ConfigureSpawner" }, // 353782792
 		{ &Z_Construct_UFunction_AEnemySpawner_EndSpawningAndClearEnemies, "EndSpawningAndClearEnemies" }, // 3091595215
-		{ &Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath, "NotifyEnemyDeath" }, // 3227455750
+		{ &Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath, "NotifyEnemyDeath" }, // 48580422
 		{ &Z_Construct_UFunction_AEnemySpawner_SpawnEnemy, "SpawnEnemy" }, // 2284598156
 		{ &Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect, "SpawnPortalEffect" }, // 3155982592
 		{ &Z_Construct_UFunction_AEnemySpawner_StartSpawningTimer, "StartSpawningTimer" }, // 3355906880
@@ -516,10 +522,10 @@ AEnemySpawner::~AEnemySpawner() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 2581768525U) },
+		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 346142692U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_2636199633(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_269671513(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
