@@ -32,6 +32,8 @@ Researching Risk of Rain 2 was the most engaging part of my planning. I found th
 
 ![My Photo](Images/RiskofRain2.png)
 
+(Risk Of Rain 2 Review, s.d.)
+
 ### Planning
 
 1. Environment Foundation: I began with Procedural Generation. This was the most complex technical task, so it was vital to ensure the world could generate and handle collisions before any other systems were built.
