@@ -86,4 +86,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Spawning")
 	void EndSpawningAndClearEnemies();
 
+	UFUNCTION(BlueprintCallable, Category = "Spawning")
+	void NotifyEnemyDeath(AActor* DeadEnemy);
+
 };

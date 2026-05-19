@@ -123,6 +123,49 @@ DEFINE_FUNCTION(AEnemySpawner::execEndSpawningAndClearEnemies)
 }
 // ********** End Class AEnemySpawner Function EndSpawningAndClearEnemies **************************
 
+// ********** Begin Class AEnemySpawner Function NotifyEnemyDeath **********************************
+struct Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics
+{
+	struct EnemySpawner_eventNotifyEnemyDeath_Parms
+	{
+		AActor* DeadEnemy;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Spawning" },
+		{ "ModuleRelativePath", "Public/EnemySpawner.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_DeadEnemy;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::NewProp_DeadEnemy = { "DeadEnemy", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EnemySpawner_eventNotifyEnemyDeath_Parms, DeadEnemy), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::NewProp_DeadEnemy,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_AEnemySpawner, nullptr, "NotifyEnemyDeath", Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::PropPointers), sizeof(Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::EnemySpawner_eventNotifyEnemyDeath_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::Function_MetaDataParams), Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::Function_MetaDataParams)},  };
+static_assert(sizeof(Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::EnemySpawner_eventNotifyEnemyDeath_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AEnemySpawner::execNotifyEnemyDeath)
+{
+	P_GET_OBJECT(AActor,Z_Param_DeadEnemy);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->NotifyEnemyDeath(Z_Param_DeadEnemy);
+	P_NATIVE_END;
+}
+// ********** End Class AEnemySpawner Function NotifyEnemyDeath ************************************
+
 // ********** Begin Class AEnemySpawner Function SpawnEnemy ****************************************
 struct Z_Construct_UFunction_AEnemySpawner_SpawnEnemy_Statics
 {
@@ -258,6 +301,7 @@ void AEnemySpawner::StaticRegisterNativesAEnemySpawner()
 	static const FNameNativePtrPair Funcs[] = {
 		{ "ConfigureSpawner", &AEnemySpawner::execConfigureSpawner },
 		{ "EndSpawningAndClearEnemies", &AEnemySpawner::execEndSpawningAndClearEnemies },
+		{ "NotifyEnemyDeath", &AEnemySpawner::execNotifyEnemyDeath },
 		{ "SpawnEnemy", &AEnemySpawner::execSpawnEnemy },
 		{ "SpawnPortalEffect", &AEnemySpawner::execSpawnPortalEffect },
 		{ "StartSpawningTimer", &AEnemySpawner::execStartSpawningTimer },
@@ -404,6 +448,7 @@ struct Z_Construct_UClass_AEnemySpawner_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AEnemySpawner_ConfigureSpawner, "ConfigureSpawner" }, // 353782792
 		{ &Z_Construct_UFunction_AEnemySpawner_EndSpawningAndClearEnemies, "EndSpawningAndClearEnemies" }, // 3091595215
+		{ &Z_Construct_UFunction_AEnemySpawner_NotifyEnemyDeath, "NotifyEnemyDeath" }, // 3227455750
 		{ &Z_Construct_UFunction_AEnemySpawner_SpawnEnemy, "SpawnEnemy" }, // 2284598156
 		{ &Z_Construct_UFunction_AEnemySpawner_SpawnPortalEffect, "SpawnPortalEffect" }, // 3155982592
 		{ &Z_Construct_UFunction_AEnemySpawner_StartSpawningTimer, "StartSpawningTimer" }, // 3355906880
@@ -471,10 +516,10 @@ AEnemySpawner::~AEnemySpawner() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 407629529U) },
+		{ Z_Construct_UClass_AEnemySpawner, AEnemySpawner::StaticClass, TEXT("AEnemySpawner"), &Z_Registration_Info_UClass_AEnemySpawner, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemySpawner), 2581768525U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_4238320614(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_2636199633(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

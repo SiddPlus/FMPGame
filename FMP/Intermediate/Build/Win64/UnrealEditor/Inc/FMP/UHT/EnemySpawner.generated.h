@@ -16,9 +16,12 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
+class AActor;
+
 // ********** Begin Class AEnemySpawner ************************************************************
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_EnemySpawner_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual void SpawnPortalEffect_Implementation(FVector Location); \
+	DECLARE_FUNCTION(execNotifyEnemyDeath); \
 	DECLARE_FUNCTION(execEndSpawningAndClearEnemies); \
 	DECLARE_FUNCTION(execStartSpawningTimer); \
 	DECLARE_FUNCTION(execConfigureSpawner); \

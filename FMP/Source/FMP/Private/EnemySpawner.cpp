@@ -21,8 +21,6 @@ AEnemySpawner::AEnemySpawner()
 void AEnemySpawner::BeginPlay()
 {
 	Super::BeginPlay();
-
-	//StartSpawningTimer();
 	
 }
 
@@ -96,9 +94,13 @@ void AEnemySpawner::SpawnPortalEffect_Implementation(FVector Location)
 
 void AEnemySpawner::SpawnEnemy()
 {
+	if (!HasAuthority() || !EnemyToSpawnClass) return;
+
 	ATheGameMode* GM = Cast<ATheGameMode>(GetWorld()->GetAuthGameMode());
 
-	if (!HasAuthority() || !EnemyToSpawnClass || SpawnedEnemies.Num() >= MaxConcurrentEnemies) return;
+	SpawnedEnemies.RemoveAll([](AActor* Enemy) { return !IsValid(Enemy); });
+
+	if (SpawnedEnemies.Num() >= MaxConcurrentEnemies) return;
 
 	if (GM && !GM->CanSpawnMoreEnemiesGlobal()) return;
 
@@ -141,6 +143,7 @@ void AEnemySpawner::SpawnEnemy()
 
 			if (NewEnemy)
 			{
+				NewEnemy->SetOwner(this);
 				SpawnedEnemies.Add(NewEnemy);
 
 				if (GM)
@@ -165,6 +168,15 @@ void AEnemySpawner::SpawnEnemy()
 				NewEnemy->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
 			}
 		}
+	}
+}
+
+void AEnemySpawner::NotifyEnemyDeath(AActor* DeadEnemy)
+{
+	// Ensure this runs on the server and the pointer is valid
+	if (HasAuthority() && DeadEnemy)
+	{
+		SpawnedEnemies.Remove(DeadEnemy);
 	}
 }
 
