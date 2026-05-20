@@ -65,8 +65,8 @@ void AFMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
 
 		// Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AFMPCharacter::DoJumpStart);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AFMPCharacter::DoJumpEnd);
 
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFMPCharacter::Move);
@@ -101,6 +101,11 @@ void AFMPCharacter::Look(const FInputActionValue& Value)
 
 void AFMPCharacter::DoMove(float Right, float Forward)
 {
+	if (PlayerPerks && PlayerPerks->IsPerkSelectionActive())
+	{
+		return;
+	}
+
 	if (GetController() != nullptr)
 	{
 		// find out which way is forward
@@ -121,6 +126,11 @@ void AFMPCharacter::DoMove(float Right, float Forward)
 
 void AFMPCharacter::DoLook(float Yaw, float Pitch)
 {
+	if (PlayerPerks && PlayerPerks->IsPerkSelectionActive())
+	{
+		return;
+	}
+
 	if (GetController() != nullptr)
 	{
 		// add yaw and pitch input to controller
@@ -131,6 +141,11 @@ void AFMPCharacter::DoLook(float Yaw, float Pitch)
 
 void AFMPCharacter::DoJumpStart()
 {
+	if (PlayerPerks && PlayerPerks->IsPerkSelectionActive())
+	{
+		return;
+	}
+
 	// signal the character to jump
 	Jump();
 }
