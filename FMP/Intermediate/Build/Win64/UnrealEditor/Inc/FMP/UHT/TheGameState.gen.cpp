@@ -13,6 +13,7 @@ void EmptyLinkFunctionForGeneratedCodeTheGameState() {}
 
 // ********** Begin Cross Module References ********************************************************
 ENGINE_API UClass* Z_Construct_UClass_AGameState();
+ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 FMP_API UClass* Z_Construct_UClass_ATheGameState();
 FMP_API UClass* Z_Construct_UClass_ATheGameState_NoRegister();
 FMP_API UClass* Z_Construct_UClass_UPerformanceLogger_NoRegister();
@@ -196,6 +197,41 @@ DEFINE_FUNCTION(ATheGameState::execOnRep_ReadyPlayers)
 }
 // ********** End Class ATheGameState Function OnRep_ReadyPlayers **********************************
 
+// ********** Begin Class ATheGameState Function OnRep_ReadyPlayersList ****************************
+struct Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayersList_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief Replication callback for ReadyPlayersList */" },
+#endif
+		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief Replication callback for ReadyPlayersList" },
+#endif
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayersList_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_ATheGameState, nullptr, "OnRep_ReadyPlayersList", nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayersList_Statics::Function_MetaDataParams), Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayersList_Statics::Function_MetaDataParams)},  };
+UFunction* Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayersList()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayersList_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(ATheGameState::execOnRep_ReadyPlayersList)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->OnRep_ReadyPlayersList();
+	P_NATIVE_END;
+}
+// ********** End Class ATheGameState Function OnRep_ReadyPlayersList ******************************
+
 // ********** Begin Class ATheGameState ************************************************************
 void ATheGameState::StaticRegisterNativesATheGameState()
 {
@@ -203,6 +239,7 @@ void ATheGameState::StaticRegisterNativesATheGameState()
 	static const FNameNativePtrPair Funcs[] = {
 		{ "OnRep_IsRoundActive", &ATheGameState::execOnRep_IsRoundActive },
 		{ "OnRep_ReadyPlayers", &ATheGameState::execOnRep_ReadyPlayers },
+		{ "OnRep_ReadyPlayersList", &ATheGameState::execOnRep_ReadyPlayersList },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -331,6 +368,16 @@ struct Z_Construct_UClass_ATheGameState_Statics
 		{ "ToolTip", "@brief Total number of players connected to the game" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ReadyPlayersList_MetaData[] = {
+		{ "Category", "Round Management" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** @brief List of players who are currently ready */" },
+#endif
+		{ "ModuleRelativePath", "Public/TheGameState.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "@brief List of players who are currently ready" },
+#endif
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnRoundStateChange_MetaData[] = {
 		{ "Category", "Round Management|Events" },
 #if !UE_BUILD_SHIPPING
@@ -363,6 +410,8 @@ struct Z_Construct_UClass_ATheGameState_Statics
 	static const UECodeGen_Private::FIntPropertyParams NewProp_CurrentRoundNumber;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_ReadyPlayersCount;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_TotalPlayersInGame;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ReadyPlayersList_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_ReadyPlayersList;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnRoundStateChange;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnPlayerReadyChange;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -370,6 +419,7 @@ struct Z_Construct_UClass_ATheGameState_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_ATheGameState_OnRep_IsRoundActive, "OnRep_IsRoundActive" }, // 2084595542
 		{ &Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayers, "OnRep_ReadyPlayers" }, // 2977950703
+		{ &Z_Construct_UFunction_ATheGameState_OnRep_ReadyPlayersList, "OnRep_ReadyPlayersList" }, // 1260483363
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -397,6 +447,8 @@ const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ATheGameState_S
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_CurrentRoundNumber = { "CurrentRoundNumber", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, CurrentRoundNumber), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentRoundNumber_MetaData), NewProp_CurrentRoundNumber_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_ReadyPlayersCount = { "ReadyPlayersCount", "OnRep_ReadyPlayers", (EPropertyFlags)0x0010000100000034, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, ReadyPlayersCount), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ReadyPlayersCount_MetaData), NewProp_ReadyPlayersCount_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_TotalPlayersInGame = { "TotalPlayersInGame", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, TotalPlayersInGame), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TotalPlayersInGame_MetaData), NewProp_TotalPlayersInGame_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_ReadyPlayersList_Inner = { "ReadyPlayersList", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_APlayerController_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_ReadyPlayersList = { "ReadyPlayersList", "OnRep_ReadyPlayersList", (EPropertyFlags)0x0010000100000034, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, ReadyPlayersList), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ReadyPlayersList_MetaData), NewProp_ReadyPlayersList_MetaData) };
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_OnRoundStateChange = { "OnRoundStateChange", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, OnRoundStateChange), Z_Construct_UDelegateFunction_FMP_OnRoundStateChange__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnRoundStateChange_MetaData), NewProp_OnRoundStateChange_MetaData) }; // 520184213
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ATheGameState_Statics::NewProp_OnPlayerReadyChange = { "OnPlayerReadyChange", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ATheGameState, OnPlayerReadyChange), Z_Construct_UDelegateFunction_FMP_OnPlayerReadyChange__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnPlayerReadyChange_MetaData), NewProp_OnPlayerReadyChange_MetaData) }; // 1489233134
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ATheGameState_Statics::PropPointers[] = {
@@ -408,6 +460,8 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ATheGameS
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_CurrentRoundNumber,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_ReadyPlayersCount,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_TotalPlayersInGame,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_ReadyPlayersList_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_ReadyPlayersList,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_OnRoundStateChange,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ATheGameState_Statics::NewProp_OnPlayerReadyChange,
 };
@@ -450,6 +504,7 @@ void ATheGameState::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& C
 	static FName Name_CurrentRoundNumber(TEXT("CurrentRoundNumber"));
 	static FName Name_ReadyPlayersCount(TEXT("ReadyPlayersCount"));
 	static FName Name_TotalPlayersInGame(TEXT("TotalPlayersInGame"));
+	static FName Name_ReadyPlayersList(TEXT("ReadyPlayersList"));
 	const bool bIsValid = true
 		&& Name_bIsRoundActive == ClassReps[(int32)ENetFields_Private::bIsRoundActive].Property->GetFName()
 		&& Name_bIsRunActive == ClassReps[(int32)ENetFields_Private::bIsRunActive].Property->GetFName()
@@ -457,7 +512,8 @@ void ATheGameState::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& C
 		&& Name_RoundTimer == ClassReps[(int32)ENetFields_Private::RoundTimer].Property->GetFName()
 		&& Name_CurrentRoundNumber == ClassReps[(int32)ENetFields_Private::CurrentRoundNumber].Property->GetFName()
 		&& Name_ReadyPlayersCount == ClassReps[(int32)ENetFields_Private::ReadyPlayersCount].Property->GetFName()
-		&& Name_TotalPlayersInGame == ClassReps[(int32)ENetFields_Private::TotalPlayersInGame].Property->GetFName();
+		&& Name_TotalPlayersInGame == ClassReps[(int32)ENetFields_Private::TotalPlayersInGame].Property->GetFName()
+		&& Name_ReadyPlayersList == ClassReps[(int32)ENetFields_Private::ReadyPlayersList].Property->GetFName();
 	checkf(bIsValid, TEXT("UHT Generated Rep Indices do not match runtime populated Rep Indices for properties in ATheGameState"));
 }
 #endif
@@ -469,10 +525,10 @@ ATheGameState::~ATheGameState() {}
 struct Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ATheGameState, ATheGameState::StaticClass, TEXT("ATheGameState"), &Z_Registration_Info_UClass_ATheGameState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameState), 2477503022U) },
+		{ Z_Construct_UClass_ATheGameState, ATheGameState::StaticClass, TEXT("ATheGameState"), &Z_Registration_Info_UClass_ATheGameState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ATheGameState), 3262222583U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_3662578752(TEXT("/Script/FMP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_3422607791(TEXT("/Script/FMP"),
 	Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h__Script_FMP_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

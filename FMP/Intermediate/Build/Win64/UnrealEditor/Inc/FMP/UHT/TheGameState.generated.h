@@ -32,6 +32,7 @@ FMP_API void FOnPlayerReadyChange_DelegateWrapper(const FMulticastScriptDelegate
 
 // ********** Begin Class ATheGameState ************************************************************
 #define FID_Users_Siddg_Downloads_FMPGame_FMP_Source_FMP_Public_TheGameState_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execOnRep_ReadyPlayersList); \
 	DECLARE_FUNCTION(execOnRep_ReadyPlayers); \
 	DECLARE_FUNCTION(execOnRep_IsRoundActive);
 
@@ -57,7 +58,8 @@ public: \
 		CurrentRoundNumber, \
 		ReadyPlayersCount, \
 		TotalPlayersInGame, \
-		NETFIELD_REP_END=TotalPlayersInGame	}; \
+		ReadyPlayersList, \
+		NETFIELD_REP_END=ReadyPlayersList	}; \
 	DECLARE_VALIDATE_GENERATED_REP_ENUMS(NO_API)
 
 

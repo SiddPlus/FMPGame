@@ -23,5 +23,6 @@ void ATheGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	DOREPLIFETIME(ATheGameState, ReadyPlayersCount);
 	DOREPLIFETIME(ATheGameState, TotalPlayersInGame);
 	DOREPLIFETIME(ATheGameState, bIsTeamWiped);
+	DOREPLIFETIME(ATheGameState, ReadyPlayersList);
 }
 

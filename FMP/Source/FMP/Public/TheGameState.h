@@ -60,6 +60,10 @@ public:
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Round Management")
 	int32 TotalPlayersInGame = 0;
 
+	/** @brief List of players who are currently ready */
+	UPROPERTY(ReplicatedUsing = OnRep_ReadyPlayersList, BlueprintReadOnly, Category = "Round Management")
+	TArray<APlayerController*> ReadyPlayersList;
+
 	/** @brief Event broadcasted when the round active state changes */
 	UPROPERTY(BlueprintAssignable, Category = "Round Management|Events")
 	FOnRoundStateChange OnRoundStateChange;
@@ -75,6 +79,10 @@ public:
 	/** @brief Replication callback for ReadyPlayersCount */
 	UFUNCTION()
 	void OnRep_ReadyPlayers() { OnPlayerReadyChange.Broadcast(ReadyPlayersCount); }
+
+	/** @brief Replication callback for ReadyPlayersList */
+	UFUNCTION()
+	void OnRep_ReadyPlayersList() { OnPlayerReadyChange.Broadcast(ReadyPlayersCount); }
 	
 protected:
 

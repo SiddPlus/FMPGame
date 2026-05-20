@@ -82,8 +82,10 @@ void ATheGameMode::Logout(AController* Exiting)
         if (PC && ReadyPlayersSet.Contains(PC))
         {
             ReadyPlayersSet.Remove(PC);
+            GS->ReadyPlayersList.Remove(PC);
             GS->ReadyPlayersCount = ReadyPlayersSet.Num();
             GS->OnRep_ReadyPlayers();
+            GS->OnRep_ReadyPlayersList();
         }
 
         RefreshDifficultyScaling();
@@ -203,7 +205,9 @@ void ATheGameMode::EndRound()
 
     // Reset ready status for intermission
     ReadyPlayersSet.Empty();
+    GS->ReadyPlayersList.Empty();
     GS->ReadyPlayersCount = 0;
+    GS->OnRep_ReadyPlayersList();
 }
 
 void ATheGameMode::PlayerReadyUp(APlayerController* PC)
@@ -220,16 +224,19 @@ void ATheGameMode::PlayerReadyUp(APlayerController* PC)
     {
         // Player is already ready, so UNREADY them
         ReadyPlayersSet.Remove(PC);
+        GS->ReadyPlayersList.Remove(PC);
     }
     else
     {
         // Player is not ready, so READY them up
         ReadyPlayersSet.Add(PC);
+        GS->ReadyPlayersList.Add(PC);
     }
 
     // Sync the count to the GameState so the UI updates for everyone
     GS->ReadyPlayersCount = ReadyPlayersSet.Num();
     GS->OnRep_ReadyPlayers();
+    GS->OnRep_ReadyPlayersList();
 
     // Auto-start when all are ready
     if (GS->ReadyPlayersCount >= GS->TotalPlayersInGame && GS->TotalPlayersInGame > 0)
@@ -304,7 +311,9 @@ void ATheGameMode::EndRun()
 
     // Reset ready status for intermission
     ReadyPlayersSet.Empty();
+    GS->ReadyPlayersList.Empty();
     GS->ReadyPlayersCount = 0;
+    GS->OnRep_ReadyPlayersList();
 }
 
 void ATheGameMode::RefreshDifficultyScaling()
