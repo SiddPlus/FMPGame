@@ -31,6 +31,8 @@ The game demonstrates the core tenets of the Roguelike genre: Permadeath, Proced
 Researching Risk of Rain 2 was the most engaging part of my planning. I found the "Director" concept—where an invisible AI spends a "budget" to spawn enemies—to be a brilliant way to manage difficulty. I particularly enjoyed analyzing how the game maintains its challenge in multiplayer. However, I felt that the game’s reliance on RNG (Random Number Generation) can sometimes lead to "dead runs," which I aim to mitigate in my own design by ensuring a baseline level of player agency through the perk selection system.
 
 ![My Photo](Images/RiskofRain2.png)
+<br>
+(Figure 1: Image of gameplay of Risk of Rain 2)
 
 (Risk Of Rain 2 Review, s.d.)
 
@@ -56,7 +58,7 @@ The [`UHealthSystem`](https://siddplus.github.io/FMPGame/classUHealthSystem.html
 
 A critical technical challenge addressed in this class is the Listen-Server feedback loop. In Unreal Engine, `OnRep` (Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.) functions trigger on clients upon variable replication but do not naturally trigger on the server that changed them. For a host player, this results in a UI that does not update until the server manually executes the same logic. I resolved this by manually calling the `OnRep` (Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.) function within the server-authoritative [`DecreaseHealth`](https://siddplus.github.io/FMPGame/classUHealthSystem.html#af644d52d5e4edb89df30af81007876d8) and [`IncreaseHealth`](https://siddplus.github.io/FMPGame/classUHealthSystem.html#a4878002ad95115d5d10579318ab7db31) functions.
 
-```
+```cpp
 void UHealthSystem::DecreaseHealth(float HealthDelta, const class UDamageType* DamageType)
 {
     if (!GetOwner()->HasAuthority()) return;
@@ -68,10 +70,13 @@ void UHealthSystem::DecreaseHealth(float HealthDelta, const class UDamageType* D
     OnRep_Health(OldHealth); 
 }
 ```
+(Code Snippet 1: DecreaseHealth function)
 
 The use of `FMath::Clamp` (FMath | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) ensures data integrity, preventing the CurrentHealth from ever entering a negative state, which could cause errors in UI progress bars or logic gates that check for death. This component-based approach allows the same health logic to be applied to AI enemies, where the delegate is bound to the AI Controller’s blackboard rather than a player’s HUD.
 
 ![My Photo](Images/Health.gif)
+<br>
+(Figure 2: Gif of gameplay of taking damage)
 
 ### Procedural Generation: Algorithmic Efficiency and `HISM`s
 
@@ -81,7 +86,7 @@ The [`AProceduralGeneration`](https://siddplus.github.io/FMPGame/classAProcedura
 
 To solve the $O(N^2)$ complexity inherent in traditional object placement—where every new object must check for collisions against every existing one—I implemented a Grid-Based Spatial Partitioning system (Grid System for Spatial Partitioning | bpanthi977/sph, s.d.). By utilizing a [`TMap<FIntPoint, TArray<FSpawnedObjectInfo>>`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html#a2d1f8b87aa92c8fb610699e5ea22d6e1), the world is discretized into a 2D grid. When attempting to place a new asset, the algorithm only queries the current cell and its eight immediate neighbors. This reduces the search space from thousands of entries to a localized handful, effectively maintaining $O(1)$ placement time regardless of total map size.
 
-```
+```cpp
 bool AProceduralGeneration::IsLocationClear(const FVector& Location, float CheckRadius)
 {
     FIntPoint CenterCell = GetGridCoordinates(Location);
@@ -111,12 +116,13 @@ bool AProceduralGeneration::IsLocationClear(const FVector& Location, float Check
     return true; // Safe to spawn
 }
 ```
+(Code Snippet 2: IsLocationClear function)
 
 #### Rendering Optimization via `HISM`
 
 Standard `AActor` (AActor | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) spawning carries significant overhead, including component initialization and individual draw calls. To achieve high density, I utilized `Hierarchical Instanced Static Meshes` (`HISM`) (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). `HISM`s (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) enable the GPU to draw all instances of a specific mesh (e.g., a pine tree) in a single draw call via hardware instancing. The "Hierarchical" nature is critical for performance; it builds a cluster-based tree structure that allows Unreal Engine to perform efficient frustum culling and per-instance LOD (Level of Detail) transitions. This ensures that while there may be 5,000 rocks in the world, the GPU only processes high-fidelity geometry for those immediately in the player's view.
 
-```
+```cpp
 void AProceduralGeneration::PopulateObjects()
 {
     // ... after calculating FinalSpawnLocation and InstanceRotation ...
@@ -133,16 +139,19 @@ void AProceduralGeneration::PopulateObjects()
     }
 }
 ```
+(Code Snippet 3: PopulateObjects function)
 
 #### Deterministic Networking Strategy
 
 Synchronizing a procedurally generated world in multiplayer usually requires massive bandwidth to send mesh data to clients. I bypassed this by implementing a Deterministic Seed System. By marking a single int32 Seed variable for replication, I ensure the server and all clients possess the same starting value for their Random Number Generators (RNG).
 
-```
+```cpp
 UPROPERTY(ReplicatedUsing = OnRep_Seed)
 int32 Seed;
 ```
-```
+(Code Snippet 4: Seed variable)
+
+```cpp
 void AProceduralGeneration::OnRep_Seed()
 {
     // Clients receive the seed and run the exact same generation loop as the server
@@ -162,10 +171,13 @@ void AProceduralGeneration::GenerateWorld()
     UNavigationSystemV1::UpdateComponentInNavOctree(*ProceduralMesh);
 }
 ```
+(Code Snippet 5: OnRep_Seed function)
 
 This approach achieves 100% visual parity across the network. Because the generation algorithm is mathematical and deterministic, the server only needs to send 4 bytes (the integer seed) rather than megabytes of vertex and transform data. This allows the game to support large-scale procedural worlds even on low-bandwidth connections, as the heavy lifting of construction happens locally on each client's CPU.
 
 ![My Photo](Images/ProcGen.gif)
+<br>
+(Figure 3: Gif of gameplay of procedural generation of the map)
 
 ### The Game Framework: Authority vs. Synchronization
 
@@ -177,7 +189,7 @@ The [`ATheGameMode`](https://siddplus.github.io/FMPGame/classATheGameMode.html) 
 
 I utilized the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to manage the lifecycle of a "Run." This includes handling player logins, spawning the procedural world, and—most importantly—calculating the difficulty scaling. By keeping the [`BaseRoundDuration`](https://siddplus.github.io/FMPGame/classATheGameMode.html#a050ac944aebecdf181d1bfa70efaba88) and [`CurrentRoundSpawnRate`](https://siddplus.github.io/FMPGame/classATheGameMode.html#ace46610d5c94f6cfbcadd40013c6a99a) within this class, I prevent "Memory Hacking" where a client might attempt to artificially lengthen a timer or reduce enemy counts.
 
-```
+```cpp
 void ATheGameMode::PostLogin(APlayerController* NewPlayer)
 {
     Super::PostLogin(NewPlayer);
@@ -203,6 +215,7 @@ void ATheGameMode::Logout(AController* Exiting)
     }
 }
 ```
+(Code Snippet 6: PostLogin & Logout functions)
 
 This implementation demonstrates a reactive difficulty system. By overriding PostLogin and Logout, the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) ensures that the challenge level is always mathematically proportional to the current team size, fulfilling the Roguelike requirement for a fair but escalating challenge.
 
@@ -212,7 +225,7 @@ While the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 
 
 A key feature of my `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) is the use of `RepNotify`  (Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.) (`ReplicatedUsing` (Multiplayer Programming Quick Start for Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.)) for the [`ReadyPlayersCount`](https://siddplus.github.io/FMPGame/classATheGameState.html#a02788c82e3c8e18a5e2516975923f6e2) and [`bIsRoundActive`](https://siddplus.github.io/FMPGame/classATheGameState.html#af880af6d0d7c50fab2546bfc79c1d807) variables. This ensures that when the server updates these values, a specific function (OnRep_...) is triggered on every client, allowing the UI to update instantly without polling the server every frame.
 
-```
+```cpp
 UPROPERTY(ReplicatedUsing = OnRep_IsRoundActive, BlueprintReadOnly, Category = "Round")
 bool bIsRoundActive = false;
 
@@ -220,7 +233,9 @@ UPROPERTY(Replicated, BlueprintReadOnly, Category = "Round")
 float RoundTimer = 0.0f;
 
 ```
-```
+(Code Snippet 7: RoundTimer & bIsActive variables)
+
+```cpp
 void ATheGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -232,6 +247,8 @@ void ATheGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
     DOREPLIFETIME(ATheGameState, TotalPlayersInGame);
 }
 ```
+(Code Snippet 8: GetLifeTimeReplicatedProps function)
+
 The [`RoundTimer`](https://siddplus.github.io/FMPGame/classATheGameState.html#a2fa32669b03284686fd74e6abc157591) replication is essential for synchronization. Since the server increments this value and replicates it, all players see the exact same countdown. This prevents a scenario where one player’s round ends before another’s due to local CPU clock drift.
 
 #### The Interaction: Logic Pushing to State
@@ -240,7 +257,7 @@ The interaction between these two classes follows a "Command and Broadcast" patt
 
 For example, when a round ends, the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) performs the cleanup (deleting enemies and logging telemetry) and then updates the `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to inform clients that they should display the "Intermission" UI.
 
-```
+```cpp
 void ATheGameMode::EndRound()
 {
     ATheGameState* GS = GetGameState<ATheGameState>();
@@ -263,10 +280,11 @@ void ATheGameMode::EndRound()
     TelemetryLogger::RecordSessionData(GS->CurrentRoundNumber, GS->AllUnlockedPerks);
 }
 ```
+(Code Snippet 9: EndRound function)
 
 In the [`RefreshDifficultyScaling`](https://siddplus.github.io/FMPGame/classATheGameMode.html#a6ec19d1e3f10543902dcededee763a15) function, the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) reads the current player count from the `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), performs the math, and then pushes new settings back to the AEnemySpawner actors.
 
-```
+```cpp
 void ATheGameMode::RefreshDifficultyScaling()
 {
     ATheGameState* GS = GetGameState<ATheGameState>();
@@ -286,10 +304,13 @@ void ATheGameMode::RefreshDifficultyScaling()
     }
 }
 ```
+(Code Snippet 10: RefrshDifficlultyScaling function)
 
 This interaction ensures that the "Heavy Lifting" (AI management, spawning, and math) is hidden within the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), while the `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) provides a clean, synchronized API for the clients to drive their HUDs and local visual effects. This architecture is the backbone of the project’s multiplayer stability, ensuring that even under high network load, the core rules of the game remain consistent for every participant.
 
 ![My Photo](Images/RoundCountdown.gif)
+<br>
+(Figure 4: Gif of gameplay of round countdown)
 
 ### Perks and the Loot Pool: Data-Driven Extensibility
 
@@ -299,11 +320,13 @@ The progression system of a Roguelike depends entirely on the variety and synerg
 
 The [`UPlayerPerks`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html) component acts as the persistent inventory for each player. It is responsible for tracking which perks are currently active and ensuring those choices are synchronized across the network. A core technical feature is the [`FPerks`](https://siddplus.github.io/FMPGame/structFPerks.html) struct, which uses [`TSubclassOf<UPerkEffectBase>`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#a35ecac42bcd81ac0036add3873f2e39d) to allow C++ logic to spawn and manage Blueprint-defined effects safely.To maintain multiplayer integrity, I implemented a strict Server-Request-Validation flow. A client cannot simply "give" themselves a perk; they must send a [`ServerEquipPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#ad39d55de5ce3d9df01ef817c8b408a2c) `RPC` (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), which triggers the authoritative logic on the server to verify the request before applying any stat changes.
 
-```
+```cpp
 UPROPERTY(Replicated, BlueprintReadOnly, Category = "Perks")
 TArray<FPerks> EquippedPerks;
 ```
-```
+(Code Snippet 11: EquippedPerks array)
+
+```cpp
 void UPlayerPerks::ServerEquipPerk_Implementation(const FString& PerkName)
 {
     // Find the perk in the unlocked list to prevent clients from requesting unearned items
@@ -325,6 +348,7 @@ void UPlayerPerks::ServerEquipPerk_Implementation(const FString& PerkName)
     }
 }
 ```
+(Code Snippet 12: SeverEquipPerk function)
 
 The use of [`ActivePerkInstances`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#a35ecac42bcd81ac0036add3873f2e39d) ensures that even if a perk has complex logic (like a timer or a tick function), the C++ component retains a pointer to the object, preventing it from being Garbage Collected.
 
@@ -332,7 +356,7 @@ The use of [`ActivePerkInstances`](https://siddplus.github.io/FMPGame/classUPlay
 
 While [`PlayerPerks`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html) stores data, [`ULootPool`](https://siddplus.github.io/FMPGame/classULootPool.html) manages the "Deck Shuffling" algorithm. The primary design goal was to ensure players are never offered redundant choices. I utilized a Lambda Predicate within the ContainsByPredicate function to filter the available pool. This provides an efficient $O(N)$ search through the player's current equipment to ensure only "Fresh" options are presented during a level-up event.
 
-```
+```cpp
 void ULootPool::ResetPool()
 {
     if (!GetOwner()->HasAuthority() || !PlayerPerksComponent) return;
@@ -360,6 +384,7 @@ void ULootPool::ResetPool()
     }
 }
 ```
+(Code Snippet 13: ResetPool function)
 
 This "Deck Shuffling" approach ensures that as a player progresses and equips more perks, the pool of available options naturally thins out, forcing players into more specialized "Builds"—a hallmark of high-quality Roguelike design.
 
@@ -367,7 +392,7 @@ This "Deck Shuffling" approach ensures that as a player progresses and equips mo
 
 To avoid a massive, unmanageable switch-statement containing every perk's logic, I created the [`UPerkEffectBase`](https://siddplus.github.io/FMPGame/classUPerkEffectBase.html) class. This is an `Abstract` (Class Specifiers | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) class that defines a contract for what a perk should do. By using `BlueprintImplementableEvent` (BlueprintImplementableEvent | Unreal Engine Community Wiki, s.d.), I decoupled the technical "Management" (C++) from the creative "Effect" (Blueprints).This allows for rapid iteration: a designer can create a new "Fire Trail" perk in the editor, inheriting from this C++ class, and the [`PlayerPerks`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html) system will handle its networking and memory management automatically without a single line of new code being written.
 
-```
+```cpp
 UCLASS(Abstract, Blueprintable)
 class UPerkEffectBase : public UObject
 {
@@ -382,6 +407,7 @@ public:
     void UnapplyPerkEffect(AActor* TargetActor);
 };
 ```
+(Code Snippet 14: PerkEffectBase class)
 
 #### The Interaction: The Synergy Loop
 
@@ -395,6 +421,8 @@ The interaction between these classes creates a robust "Selection Loop." When th
 This loop is highly efficient because the LootPool only exists to do the "math" of the draw, while the [`PlayerPerks`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html) remains a lightweight data container. This separation of concerns ensures that even in a chaotic 4-player multiplayer match, the game can handle hundreds of active perk instances across the team without causing server-side performance degradation or network desynchronization.
 
 ![My Photo](Images/Perks.gif)
+<br>
+(Figure 5: Gif of gameplay deck based perk system)
 
 ### Networking Strategy: `RPC`s and Validation
 
@@ -404,7 +432,7 @@ The multiplayer architecture of this project is built upon the principle of `Ser
 
 Every critical gameplay action, such as unlocking or equipping a perk, follows a strict validation handshake. When a player interacts with the UI, the client triggers a `Server RPC` (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). The server then executes a validation check (e.g., verifying if the player has reached the required round or if the perk is actually available) before modifying any variables. This prevents "Client-Side Injection" where a malicious user might attempt to trigger functions they haven't earned.
 
-```
+```cpp
 void UPlayerPerks::ServerEquipPerk_Implementation(const FString& PerkName)
 {
     // The server-side logic 'PerkEquipLogic' returns false if validation fails
@@ -422,6 +450,7 @@ void UPlayerPerks::ServerEquipPerk_Implementation(const FString& PerkName)
     }
 }
 ```
+(Code Snippet 15: SeverEquipPerk function)
 
 #### Reliability and Bandwidth Optimization
 
@@ -429,7 +458,7 @@ A key technical decision in the networking layer was the strategic use of `Relia
 
 Conversely, for high-frequency or cosmetic updates where a missed packet is negligible (like minor UI updates or secondary effects), I utilized the default replication to save bandwidth.
 
-```
+```cpp
 UFUNCTION(Server, Reliable)
 void ServerFinishedPerkSelection();
 
@@ -437,12 +466,13 @@ void ServerFinishedPerkSelection();
 UFUNCTION(Server, Reliable)
 void ServerEquipPerk(const FString& PerkName);
 ```
+(Code Snippet 16: SeverFinishperkSelection function)
 
 #### Client-Side Responsiveness (Predictive Feedback)
 
 To avoid the "input lag" typically associated with waiting for a server response, I implemented `RepNotify` (Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.) functions. When the server validates a perk and updates the [`LastEquippedPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#a9295eff30a5a3e70ef3a6a45cd51b406) variable, the [`OnRep_LastEquippedPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#a8133606e54047a12a6d1a2efc52094f7) function triggers on the client. This allows the local UI to react immediately to the server's confirmation, providing a seamless experience for the player even when the round-trip time (ping) is high.
 
-```
+```cpp
 void UPlayerPerks::OnRep_LastEquippedPerk()
 {
     // This triggers on the client the moment the server replicates the new perk data
@@ -453,10 +483,13 @@ void UPlayerPerks::OnRep_LastEquippedPerk()
     }
 }
 ```
+(Code Snippet 17: OnRep_LastEquippedPerk function)
 
 By combining authoritative server validation with efficient replication types and local notifications, the networking strategy ensures a cheat-resistant environment that remains performant across varying network conditions.
 
 ![My Photo](Images/Networking.gif)
+<br>
+(Figure 6: Gif of gameplay of multiplayer)
 
 ### Analytics and Optimization: Performance and Telemetry
 
@@ -464,7 +497,7 @@ To ensure the project met professional standards, I developed two specialized lo
 
 These metrics are serialized into a `JSON` (What is JSON, s.d.) format using Unreal’s `TJsonWriter` (TJsonWriter | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). This allows for a detailed analysis of the procedural generation’s impact on hardware. For example, if a certain density of `HISM`s (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) causes a spike in frame-time, the log captures the exact Timestamp and MemoryUsedMB, allowing for targeted optimization.
 
-```
+```cpp
 void UPerformanceLogger::WriteLogToFile()
 {
     FString OutputString;
@@ -475,33 +508,104 @@ void UPerformanceLogger::WriteLogToFile()
     }
 }
 ```
+(Code Snippet 18: WriteLogToFile function)
+
 The [`TelemetryLogger`](https://siddplus.github.io/FMPGame/classTelemetryLogger.html) serves a different purpose: tracking the meta-progression of the Roguelike loop. It records which perks were unlocked and the highest round reached. This data is persistent, saved to the `ProjectSavedDir` (Project Saved Dir | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), ensuring that player progress is retained across sessions. The technical achievement here is the robust handling of the `IPlatformFile` (IPlatformFile | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) interface, which ensures the directory structure is created correctly across different operating systems, making the project's data management cross-platform ready.
 
-![My Photo](Images/Performance.png)
+```json
+"PerformanceData": [
+		{
+			"Timestamp": 0.37406250834465027,
+			"Frame Time": 246.64369201660156,
+			"FPS": 4.0544319152832031,
+			"CPU Cycles": 3742122330,
+			"Memory Used": 3641
+		},
+		{
+			"Timestamp": 0.78506249189376831,
+			"Frame Time": 90.351295471191406,
+			"FPS": 11.067909240722656,
+			"CPU Cycles": 3746228176,
+			"Memory Used": 3732
+		},
+		{
+			"Timestamp": 1.229062557220459,
+			"Frame Time": 8.3338022232055664,
+			"FPS": 119.99324798583984,
+			"CPU Cycles": 3750672912,
+			"Memory Used": 3782
+		},
+		{
+			"Timestamp": 1.7370624542236328,
+			"Frame Time": 8.3337020874023438,
+			"FPS": 119.99469757080078,
+			"CPU Cycles": 3755757599,
+			"Memory Used": 3786
+		}
+	]
+}
+```
+(Code Snippet 19: Performance Data)
 
-![My Photo](Images/PlayerProfileStats.png)
+```json
+"MaxRoundsSurvived": 1,
+	"UnlockedPerks": [
+		{
+			"Name": "Fast Feet",
+			"Description": "Move 20% more faster",
+			"UnlockRound": 0
+		},
+		{
+			"Name": "More Health",
+			"Description": "+50 to max health",
+			"UnlockRound": 0
+		},
+		{
+			"Name": "Fast Hands",
+			"Description": "Reload 20% more faster",
+			"UnlockRound": 0
+		},
+		{
+			"Name": "Laser Focus",
+			"Description": "-20% to spread",
+			"UnlockRound": 0
+		},
+		{
+			"Name": "Steady Grip",
+			"Description": "-25% to recoil",
+			"UnlockRound": 1
+		}
+	]
+}
+```
+(Code Snippet 20: Telemetry)
 
 ### AI and Spawner Management
 
 The [`AEnemySpawner`](https://siddplus.github.io/FMPGame/classAEnemySpawner.html) class manages the lifecycle of AI agents within the procedural environment. A major technical hurdle was ensuring enemies didn't spawn inside the geometry created by the [`AProceduralGeneration`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html) class. I solved this by implementing a Line Trace system that fires downwards from a randomized height. If the trace hits the `ProceduralMesh` (Procedural Mesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), the system then utilizes the `UNavigationSystemV1` (UNavigationSystemV1 | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to find the nearest valid point on the `NavMesh` (Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.).
 
-```
+```cpp
 if (NavSys->GetRandomReachablePointInRadius(Hit.ImpactPoint, SpawnRadius, NavLocation))
 {
     FVector FinalSpawnPos = NavLocation.Location + FVector(0, 0, 70.0f);
     GetWorld()->SpawnActor<ACharacter>(EnemyToSpawnClass, FinalSpawnPos, FRotator::ZeroRotator, SpawnParams);
 }
 ```
+(Code Snippet 21: Enemy spawning)
 
 By spawning the enemies 70 units above the ground, I ensured they "settle" onto the floor correctly, preventing them from falling through the world due to collision overlap. The spawner also maintains a [`TArray<AActor*> SpawnedEnemies`](https://siddplus.github.io/FMPGame/classAEnemySpawner.html#ad79c766d7cb49cf3a6964984715fda7e) to monitor the population. This allows the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to enforce a hard cap on concurrent enemies, preventing the server from being overwhelmed by AI calculations and ensuring that the tick-rate remains high enough for a smooth multiplayer experience.
 
 ![My Photo](Images/AI.gif)
+<br>
+(Figure 7 : Image of user testing)
 
 ### Full Documentation & Architecture Diagram
 
 [Documentation](https://siddplus.github.io/FMPGame/)
 
 ![My Photo](Images/ArchitectureDiagram.png)
+<br>
+(Figure 8 : Image of architecture diagram)
 
 # Iteration & Problem-solving
 
@@ -513,7 +617,7 @@ The Problem: In the initial prototype, I managed the entire round lifecycle (tim
 
 The Solution: I realized that I was fighting against the engine's intended framework. I had to undergo a major refactor to split this logic into the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) and `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) architecture. I moved all authoritative logic—such as calculating when a round should end and scaling the difficulty—into [`ATheGameMode`](https://siddplus.github.io/FMPGame/classATheGameMode.html). I then moved the variables that clients needed to see (like the round timer and current round number) into [`ATheGameState`](https://siddplus.github.io/FMPGame/classATheGameState.html).
 
-```
+```cpp
 void ATheGameMode::StartRound()
 {
     ATheGameState* GS = GetGameState<ATheGameState>();
@@ -525,6 +629,7 @@ void ATheGameMode::StartRound()
     }
 }
 ```
+(Code Snippet 22: StartRound function)
 
 By making this split, I utilized Unreal’s internal "Handshake." The `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) (The Boss) makes a decision, and the `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) (The Public Record) broadcasts it. This iteration was the single most important step in making the game viable for co-op play, as it established a "Single Source of Truth" for the match progress.
 
@@ -534,7 +639,7 @@ The Problem: Before implementing a formal multiplayer flow, I used a physical bu
 
 The Solution: I replaced the physical trigger with a global Ready-Up System. I iterated on the player character blueprint. Now, the GameMode monitors the [`ReadyPlayersCount`](https://siddplus.github.io/FMPGame/classATheGameState.html#a02788c82e3c8e18a5e2516975923f6e2) count in the GameState. The round only transitions from the intermission phase to the combat phase when [`ReadyPlayersCount`](https://siddplus.github.io/FMPGame/classATheGameState.html#a02788c82e3c8e18a5e2516975923f6e2) `==` [`TotalPlayersInGame`](https://siddplus.github.io/FMPGame/classATheGameState.html#a1a1804fa33a9df24bac559b97c8116c3).
 
-```
+```cpp
 void ATheGameState::OnRep_ReadyPlayersCount()
 {
     // Update UI on all clients to show "X / Total" players ready
@@ -544,6 +649,7 @@ void ATheGameState::OnRep_ReadyPlayersCount()
     }
 }
 ```
+(Code Snippet 23: OnRep_ReadyPlayerCount function)
 
 This change shifted the game from a chaotic individual experience to a coordinated team experience. It also provided a technical window for the server to ensure all clients had finished their perk selection `RPC`s (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) before the first enemy was spawned, preventing the game state from breaking due to overlapping menu and combat logic.
 
@@ -553,7 +659,7 @@ The Problem: As I moved from one player to four, the game began to crash or "han
 
 The Solution: The issue was that in a multiplayer environment, [`BeginPlay`](https://siddplus.github.io/FMPGame/classATheGameMode.html#ac8e832534210db9130623978a60a8035) triggers simultaneously with many other network handshakes. Running an expensive $O(N)$ search for actors while the server is trying to initialize four players was overwhelming the game thread. I moved the spawner search logic out of [`BeginPlay`](https://siddplus.github.io/FMPGame/classATheGameMode.html#ac8e832534210db9130623978a60a8035) and into the specific round start function.
 
-```
+```cpp
 void ATheGameMode::InitRoundSpawners()
 {
     // Search once and cache results in TArray to avoid repeated expensive searches
@@ -568,6 +674,7 @@ void ATheGameMode::InitRoundSpawners()
     }
 }
 ```
+(Code Snippet 24: InitRoundSpawners function)
 
 I also added a caching layer. Instead of searching for the spawners every time, I search for them once when the first round starts and store their references in a [`TArray<AEnemySpawner*>`](https://siddplus.github.io/FMPGame/classATheGameMode.html#abf6a350e0fa33ffdce3c0d759e0214aa). By deferring this heavy search and caching the results, I eliminated the startup crash and ensured that round transitions remained smooth even as the complexity of the world increased.
 
@@ -577,7 +684,7 @@ The Problem: This was the most significant technical hurdle. Because my terrain 
 
 The Solution: I had to solve this using a two-part iteration. First, I modified the [`AProceduralGeneration`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html) class to generate a simple flat collision plane during the [`OnConstruction`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html#a39b187ec000cedc2205cfdd9fd8fc0e1) phase. This gave the `NavMesh` (Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) a base to initialize on. Second, I moved all the complex noise calculations, mesh deformation, and `HISM` (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) placement into [`BeginPlay`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html#a794c8213c431398abd6a98c987f25cc2).
 
-```
+```cpp
 // 1. Provide a base for the NavMesh during the Construction phase
 void AProceduralGeneration::OnConstruction(const FTransform& Transform)
 {
@@ -604,6 +711,7 @@ void AProceduralGeneration::PopulateWorld()
     }
 }
 ```
+(Code Snippet 25: OnConstuction function in AProceduralGeneration)
 
 Crucially, I had to change the project's Navigation settings to Dynamic. This allows the `NavMesh` (Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to re-scan the world at runtime. In C++, I added a call to notify the navigation system once the procedural mesh was finished. This ensured the AI could perceive the hills and valleys created by my noise algorithms, allowing for true combat on procedurally generated terrain.
 
@@ -613,7 +721,7 @@ The Problem: Even after the AI could move, I found that enemies were frequently 
 
 The Solution: I iterated on the [`AEnemySpawner`](https://siddplus.github.io/FMPGame/classAEnemySpawner.html) logic to implement a vertical validated spawn. Instead of spawning enemies directly on the ground, I modified the code to spawn them 200 units in the air. Immediately upon spawning, I performed a `LineTraceSingleByChannel` (Line Trace By Trace Channel | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) downwards to the ground.
 
-```
+```cpp
 FHitResult GroundHit;
 FVector TraceStart = RawSpawnLoc + FVector(0, 0, 200);
 FVector TraceEnd = RawSpawnLoc - FVector(0, 0, 500);
@@ -625,6 +733,7 @@ if (GetWorld()->LineTraceSingleByChannel(GroundHit, TraceStart, TraceEnd, ECC_Vi
     GetWorld()->SpawnActor<AEnemyBase>(EnemyClass, AdjustedLoc, FRotator::ZeroRotator);
 }
 ```
+(Code Snippet 26: Enemy ground detection)
 
 By dropping the enemies onto the ground from a safe height and using a line trace to find the exact vertex of the procedural mesh, I eliminated the clipping issues. This ensured that enemies always landed safely on the terrain, regardless of how steep the procedural hills were, providing a much more polished and bug-free combat experience.
 
@@ -634,7 +743,7 @@ The Problem: After resolving the navigation issues by generating a base mesh in 
 
 The Solution: To fix this, I had to ensure the base mesh was only generated once the client was actually in possession of the synchronized data from the server. I moved the mesh generation trigger into the [`OnRep_Seed`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html#a6e7ce686d86623d5cf12041439a57db7) notify call. This ensures that the client waits for the server to send the deterministic seed, at which point it can safely initialize the arrays and build the mesh sections without triggering an out-of-bounds error.
 
-```
+```cpp
 void AProceduralGeneration::OnRep_Seed()
 {
     // By triggering here, we guarantee the Seed is valid for this specific client
@@ -648,6 +757,7 @@ void AProceduralGeneration::OnRep_Seed()
     }
 }
 ```
+(Code Snippet 27: OnRep_Seed function)
 
 This iteration highlighted a key lesson in multiplayer engineering: Editor behavior is not always representative of a packaged build. By leveraging the `RepNotify` (Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.) system, I synchronized the mesh generation lifecycle with the network lifecycle, resulting in a stable experience for both the host and joined clients in the final built version of the game.
 
@@ -665,6 +775,8 @@ The testing phase was conducted through a series of playtests involving 12 exter
 | **Cam Bug** | When enemies go right next to player the camera pushes right against the player's back and players cannot see | Turn enemy collision preset for both its capsule component  and mesh to custom to tick ignore camera |
 | **Static Meshes Colision Bug** | Players and enemies can stand on small foliage | Remove collision on small foliage |
 | **World Desynchronization** | Players would see different world compared to each but still exist in same same world | replaced all the FMath random to the custom roundom stream variable to handle the random calculations and then execute the exact same sequence of random number calls by keeping loop logic and variable updates outside of HasAuthority() blocks |
+<br>
+(Figure 9 : Table of testing)
 
 
 ## User Testing & Evaluation 
@@ -672,24 +784,44 @@ The testing phase was conducted through a series of playtests involving 12 exter
 ### User Testing
 
 ![My Photo](Images/UserTesting/Overall.png)
+<br>
+(Figure 10 : Image of user testing)
 
 ![My Photo](Images/UserTesting/Controls.png)
+<br>
+(Figure 11: Image of user testing)
 
 ![My Photo](Images/UserTesting/Motivation.png)
+<br>
+(Figure 12: Image of user testing)
 
 ![My Photo](Images/UserTesting/Difficulty.png)
+<br>
+(Figure 13: Image of user testing)
 
 ![My Photo](Images/UserTesting/ProcGen.png)
+<br>
+(Figure 14: Image of user testing)
 
 ![My Photo](Images/UserTesting/PerkDeck.png)
+<br>
+(Figure 15: Gif of gameplay of taking damage)
 
 ![My Photo](Images/UserTesting/Perks.png)
+<br>
+(Figure 16: Image of user testing)
 
 ![My Photo](Images/UserTesting/Multiplayer.png)
+<br>
+(Figure 17: Gif of gameplay of taking damage)
 
 ![My Photo](Images/UserTesting/Lag.png)
+<br>
+(Figure 18: Image of user testing)
 
 ![My Photo](Images/UserTesting/Rounds.png)
+<br>
+(Figure 19: Image of user testing)
 
 To quantify the project's success and identify outstanding mechanical pain points, quantitative survey data was gathered from 4 external playtesters across several technical and gameplay categories. Session survivability data showed a tightly balanced but punishing difficulty ceiling, with 75% of playtesters (3 responses) reaching an authoritative milestone of Round 2 and only 25% (1 response) pushing forward to survive until Round 3. Despite this steep curve, mechanical engagement remained strong, with 75% of users scoring their motivation to keep playing after death at a 4 or 5 out of 5. The data-driven bridge between C++ structures and Blueprint functionality achieved exceptional clarity metrics, as 75% of players awarded a score of 4 out of 5 for perk system understandability, and 75% rated the direct impact of these unlocked perks on their gameplay style at a 4 or 5 out of 5. Environmental variety driven by the deterministic seed distribution was well-received, with 75% of testers rating the uniqueness of the randomly generated levels at a 4 or 5 out of 5, though a remaining 25% gave a neutral score of 3, signaling a need for more distinct generation. The server-authoritative optimization model effectively eliminated game-breaking rubber-banding, resulting in a flat 50/50 split between scores of 2 and 3 out of 5 for connection stability, indicating that while the network baseline was structurally sound, noticeable performance jitter remained during intensive runtime calculations. This technical variance directly correlated with character control responsiveness, which was rated at a 4 out of 5 by 50% of testers while the rest split between scores of 2 and 3 due to outstanding camera look glitches. However, the architectural commitment to multiplayer design paid off significantly, with 100% of participants scoring the co-op aspect's ability to enhance enjoyment at a 4 or 5 out of 5, which ultimately elevated the overall gameplay experience to a highly encouraging baseline where 50% rated their enjoyment at a solid 3 out of 5, 25% at a 4 out of 5, and 25% at a top score of 5 out of 5.
 
