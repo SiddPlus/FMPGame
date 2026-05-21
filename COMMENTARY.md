@@ -853,7 +853,11 @@ Ultimately, this project proved that a small-scale, high-performance multiplayer
 
 Overall, the game successfully delivers an engaging and dynamic cooperative roguelike experience, with the data-driven, deck-based perk system standing out as the definitive highlight of the gameplay loop. However, the experience would be significantly enhanced by a deeper system of long-term player meta-progression and a broader variety of enemy archetypes to sustain engagement across extended sessions. While the project successfully fulfilled its initial design objectives, future iterations will focus on expanding these progression systems and content variety to elevate the game's overall depth and replayability.
 
+## GDC Talk
+
 ## Final Outcome
+
+[Evolvd Survivors on itch.io](https://siddplus.itch.io/evolved-survivors)
 
 
 
