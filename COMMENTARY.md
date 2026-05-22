@@ -8,17 +8,17 @@ In this high-stakes, up to 4-player cooperative 3D roguelike, you and your squad
 
 #### Networking and Multiplayer in Unreal Engine 5
 
-"Networking and Multiplayer" is an official documentation section published by Epic Games, the developers of Unreal Engine 5 (Networking and Multiplayer in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). Epic Games is a global leader in the games industry, and their networking framework is widely considered the gold standard for synchronized, client-server gameplay. This documentation reflects Epic’s commitment to providing a professional-grade architecture for developers to build scalable multiplayer experiences. While highly regarded for its technical depth and reliability, some community members have noted that the learning curve for "Network Relevancy" and "`RPC`s" can be steep, often requiring significant trial and error to master. Nevertheless, it remains the definitive authority for Unreal developers.
+"Networking and Multiplayer" is an official documentation section published by Epic Games, the developers of Unreal Engine 5 ([Networking and Multiplayer in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/networking-and-multiplayer-in-unreal-engine)). Epic Games is a global leader in the games industry, and their networking framework is widely considered the gold standard for synchronized, client-server gameplay. This documentation reflects Epic’s commitment to providing a professional-grade architecture for developers to build scalable multiplayer experiences. While highly regarded for its technical depth and reliability, some community members have noted that the learning curve for "Network Relevancy" and "`RPC`s" can be steep, often requiring significant trial and error to master. Nevertheless, it remains the definitive authority for Unreal developers.
 
-The source explains the core Client-Server model, where the server acts as the ultimate authority to prevent cheating. It covers essential concepts such as Actor Replication, Property Replication (using ReplicatedUsing for RepNotifies), and `Remote Procedure Calls (RPCs)`. The guide details how data is passed between the server and clients, ensuring that game states like health and positioning are synchronized across the network (Networking and Multiplayer in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.).
+The source explains the core Client-Server model, where the server acts as the ultimate authority to prevent cheating. It covers essential concepts such as Actor Replication, Property Replication (using ReplicatedUsing for RepNotifies), and `Remote Procedure Calls (RPCs)`. The guide details how data is passed between the server and clients, ensuring that game states like health and positioning are synchronized across the network ([Networking and Multiplayer in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/networking-and-multiplayer-in-unreal-engine)).
 
 I found this documentation incredibly insightful because it lays out the "why" behind server authority. The step-by-step breakdown of how a variable travels from the server to the client was particularly helpful for understanding bandwidth optimization. However, the language is quite dense; as a student, I felt that more visual flowcharts of the packet lifecycle would have helped bridge the gap for beginners. I disagreed with the brief coverage of "Listen Servers," as more practical examples of host-player logic would have been beneficial.
 
 #### Procedural Mesh Component in Unreal Engine 5
 
-"Procedural Mesh Component" is an official technical guide provided by Epic Games (Procedural Mesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). As the creators of the engine, Epic provides these resources to empower developers to create dynamic, runtime-generated geometry. The documentation is praised for its high degree of control, allowing developers to manipulate individual vertices and indices. However, critics often point out that the documentation assumes a high level of mathematical proficiency, particularly in linear algebra and coordinate spaces, which can be a barrier for some.
+"Procedural Mesh Component" is an official technical guide provided by Epic Games ([Procedural Mesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/BlueprintAPI/Components/ProceduralMesh)). As the creators of the engine, Epic provides these resources to empower developers to create dynamic, runtime-generated geometry. The documentation is praised for its high degree of control, allowing developers to manipulate individual vertices and indices. However, critics often point out that the documentation assumes a high level of mathematical proficiency, particularly in linear algebra and coordinate spaces, which can be a barrier for some.
 
-This source explains how to generate 3D geometry at runtime by defining arrays of Vertices, Triangles, Normals, and UVs. It demonstrates how to use the CreateMeshSection function to build physical objects from purely mathematical data. This is essential for creating infinite, non-repetitive landscapes or destructible environments that are not limited by pre-made static meshes (Procedural Mesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.).
+This source explains how to generate 3D geometry at runtime by defining arrays of Vertices, Triangles, Normals, and UVs. It demonstrates how to use the CreateMeshSection function to build physical objects from purely mathematical data. This is essential for creating infinite, non-repetitive landscapes or destructible environments that are not limited by pre-made static meshes ([Procedural Mesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/BlueprintAPI/Components/ProceduralMesh)).
 
 I appreciated this source for its "no-nonsense" approach to geometry. Learning how triangles are wound (clockwise vs. counter-clockwise) to determine face direction was a fascinating technical hurdle. While the documentation is mathematically robust, I felt it lacked sufficient information on optimizing procedural meshes for collisions. I found the lack of a "Best Practices" section for performance frustrating, as generating large meshes at runtime can easily stall the game thread if not handled carefully.
 
@@ -54,9 +54,9 @@ Researching Risk of Rain 2 was the most engaging part of my planning. I found th
 
 ### The HealthSystem Component: Decoupled Logic and Authority
 
-The [`UHealthSystem`](https://siddplus.github.io/FMPGame/classUHealthSystem.html) was engineered as a standalone `UActorComponent` (UActorComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to maximize reusability across different actor types. By inheriting from `UActorComponent` (UActorComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), the system gains a lightweight footprint, avoiding the overhead of the full Transform hierarchy associated with Scene Components. The primary design pattern utilized here is the Observer Pattern, implemented via dynamic multicast delegates. This allows the UI and SFX systems to remain entirely ignorant of the health logic, simply reacting when the OnHealthChanged event is broadcast.
+The [`UHealthSystem`](https://siddplus.github.io/FMPGame/classUHealthSystem.html) was engineered as a standalone `UActorComponent` ([UActorComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UActorComponent)) to maximize reusability across different actor types. By inheriting from `UActorComponent` ([UActorComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UActorComponent)), the system gains a lightweight footprint, avoiding the overhead of the full Transform hierarchy associated with Scene Components. The primary design pattern utilized here is the Observer Pattern, implemented via dynamic multicast delegates. This allows the UI and SFX systems to remain entirely ignorant of the health logic, simply reacting when the OnHealthChanged event is broadcast.
 
-A critical technical challenge addressed in this class is the Listen-Server feedback loop. In Unreal Engine, `OnRep` (Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.) functions trigger on clients upon variable replication but do not naturally trigger on the server that changed them. For a host player, this results in a UI that does not update until the server manually executes the same logic. I resolved this by manually calling the `OnRep` (Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.) function within the server-authoritative [`DecreaseHealth`](https://siddplus.github.io/FMPGame/classUHealthSystem.html#af644d52d5e4edb89df30af81007876d8) and [`IncreaseHealth`](https://siddplus.github.io/FMPGame/classUHealthSystem.html#a4878002ad95115d5d10579318ab7db31) functions.
+A critical technical challenge addressed in this class is the Listen-Server feedback loop. In Unreal Engine, `OnRep` ([Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.]( https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-and-multiplayer-in-unreal-engine )) functions trigger on clients upon variable replication but do not naturally trigger on the server that changed them. For a host player, this results in a UI that does not update until the server manually executes the same logic. I resolved this by manually calling the `OnRep` ([Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.]( https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-and-multiplayer-in-unreal-engine )) function within the server-authoritative [`DecreaseHealth`](https://siddplus.github.io/FMPGame/classUHealthSystem.html#af644d52d5e4edb89df30af81007876d8) and [`IncreaseHealth`](https://siddplus.github.io/FMPGame/classUHealthSystem.html#a4878002ad95115d5d10579318ab7db31) functions.
 
 ```cpp
 void UHealthSystem::DecreaseHealth(float HealthDelta, const class UDamageType* DamageType)
@@ -72,7 +72,7 @@ void UHealthSystem::DecreaseHealth(float HealthDelta, const class UDamageType* D
 ```
 (Code Snippet 1: DecreaseHealth function)
 
-The use of `FMath::Clamp` (FMath | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) ensures data integrity, preventing the CurrentHealth from ever entering a negative state, which could cause errors in UI progress bars or logic gates that check for death. This component-based approach allows the same health logic to be applied to AI enemies, where the delegate is bound to the AI Controller’s blackboard rather than a player’s HUD.
+The use of `FMath::Clamp` ([FMath | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Core/FMath)) ensures data integrity, preventing the CurrentHealth from ever entering a negative state, which could cause errors in UI progress bars or logic gates that check for death. This component-based approach allows the same health logic to be applied to AI enemies, where the delegate is bound to the AI Controller’s blackboard rather than a player’s HUD.
 
 ![My Photo](Images/Health.gif)
 <br>
@@ -84,7 +84,7 @@ The [`AProceduralGeneration`](https://siddplus.github.io/FMPGame/classAProcedura
 
 #### Spatial Partitioning and Collision Optimization
 
-To solve the $O(N^2)$ complexity inherent in traditional object placement—where every new object must check for collisions against every existing one—I implemented a Grid-Based Spatial Partitioning system (Grid System for Spatial Partitioning | bpanthi977/sph, s.d.). By utilizing a [`TMap<FIntPoint, TArray<FSpawnedObjectInfo>>`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html#a2d1f8b87aa92c8fb610699e5ea22d6e1), the world is discretized into a 2D grid. When attempting to place a new asset, the algorithm only queries the current cell and its eight immediate neighbors. This reduces the search space from thousands of entries to a localized handful, effectively maintaining $O(1)$ placement time regardless of total map size.
+To solve the $O(N^2)$ complexity inherent in traditional object placement—where every new object must check for collisions against every existing one—I implemented a Grid-Based Spatial Partitioning system ([Grid System for Spatial Partitioning | bpanthi977/sph, s.d.]( https://deepwiki.com/bpanthi977/sph/4.1-grid-system-for-spatial-partitioning)). By utilizing a [`TMap<FIntPoint, TArray<FSpawnedObjectInfo>>`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html#a2d1f8b87aa92c8fb610699e5ea22d6e1), the world is discretized into a 2D grid. When attempting to place a new asset, the algorithm only queries the current cell and its eight immediate neighbors. This reduces the search space from thousands of entries to a localized handful, effectively maintaining $O(1)$ placement time regardless of total map size.
 
 ```cpp
 bool AProceduralGeneration::IsLocationClear(const FVector& Location, float CheckRadius)
@@ -120,7 +120,7 @@ bool AProceduralGeneration::IsLocationClear(const FVector& Location, float Check
 
 #### Rendering Optimization via `HISM`
 
-Standard `AActor` (AActor | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) spawning carries significant overhead, including component initialization and individual draw calls. To achieve high density, I utilized `Hierarchical Instanced Static Meshes` (`HISM`) (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). `HISM`s (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) enable the GPU to draw all instances of a specific mesh (e.g., a pine tree) in a single draw call via hardware instancing. The "Hierarchical" nature is critical for performance; it builds a cluster-based tree structure that allows Unreal Engine to perform efficient frustum culling and per-instance LOD (Level of Detail) transitions. This ensures that while there may be 5,000 rocks in the world, the GPU only processes high-fidelity geometry for those immediately in the player's view.
+Standard `AActor` ([AActor | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/AActor)) spawning carries significant overhead, including component initialization and individual draw calls. To achieve high density, I utilized `Hierarchical Instanced Static Meshes` (`HISM`) ([UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UHierarchicalInstancedStaticMesh-)). `HISM`s (([UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UHierarchicalInstancedStaticMesh-)) enable the GPU to draw all instances of a specific mesh (e.g., a pine tree) in a single draw call via hardware instancing. The "Hierarchical" nature is critical for performance; it builds a cluster-based tree structure that allows Unreal Engine to perform efficient frustum culling and per-instance LOD (Level of Detail) transitions. This ensures that while there may be 5,000 rocks in the world, the GPU only processes high-fidelity geometry for those immediately in the player's view.
 
 ```cpp
 void AProceduralGeneration::PopulateObjects()
@@ -181,13 +181,13 @@ This approach achieves 100% visual parity across the network. Because the genera
 
 ### The Game Framework: Authority vs. Synchronization
 
-In Unreal Engine’s multiplayer architecture, the relationship between the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) and `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) represents the fundamental divide between Server Authority and Client Representation. By strictly segregating logic into these two classes, I ensured that the "rules" of the Roguelike remain unhackable on the server while the "status" of the game is perfectly mirrored across all player screens.
+In Unreal Engine’s multiplayer architecture, the relationship between the `GameMode` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) and `GameState` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) represents the fundamental divide between Server Authority and Client Representation. By strictly segregating logic into these two classes, I ensured that the "rules" of the Roguelike remain unhackable on the server while the "status" of the game is perfectly mirrored across all player screens.
 
 #### [`ATheGameMode`](https://siddplus.github.io/FMPGame/classATheGameMode.html): The Authoritative Decision Maker
 
 The [`ATheGameMode`](https://siddplus.github.io/FMPGame/classATheGameMode.html) class is the "Brain" of the project. Critically, this actor exists only on the server. Because it is never replicated to clients, its internal variables and logic are invisible to players, providing a secure environment for sensitive gameplay calculations.
 
-I utilized the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to manage the lifecycle of a "Run." This includes handling player logins, spawning the procedural world, and—most importantly—calculating the difficulty scaling. By keeping the [`BaseRoundDuration`](https://siddplus.github.io/FMPGame/classATheGameMode.html#a050ac944aebecdf181d1bfa70efaba88) and [`CurrentRoundSpawnRate`](https://siddplus.github.io/FMPGame/classATheGameMode.html#ace46610d5c94f6cfbcadd40013c6a99a) within this class, I prevent "Memory Hacking" where a client might attempt to artificially lengthen a timer or reduce enemy counts.
+I utilized the `GameMode` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) to manage the lifecycle of a "Run." This includes handling player logins, spawning the procedural world, and—most importantly—calculating the difficulty scaling. By keeping the [`BaseRoundDuration`](https://siddplus.github.io/FMPGame/classATheGameMode.html#a050ac944aebecdf181d1bfa70efaba88) and [`CurrentRoundSpawnRate`](https://siddplus.github.io/FMPGame/classATheGameMode.html#ace46610d5c94f6cfbcadd40013c6a99a) within this class, I prevent "Memory Hacking" where a client might attempt to artificially lengthen a timer or reduce enemy counts.
 
 ```cpp
 void ATheGameMode::PostLogin(APlayerController* NewPlayer)
@@ -223,7 +223,7 @@ This implementation demonstrates a reactive difficulty system. By overriding Pos
 
 While the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) makes the decisions, the ATheGameState is responsible for broadcasting those decisions. It acts as a "Global Blackboard" that every client can read. All critical gameplay variables here are marked with the `Replicated` (Multiplayer Programming Quick Start for Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) or `ReplicatedUsing` (Multiplayer Programming Quick Start for Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) specifiers.
 
-A key feature of my `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) is the use of `RepNotify`  (Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.) (`ReplicatedUsing` (Multiplayer Programming Quick Start for Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.)) for the [`ReadyPlayersCount`](https://siddplus.github.io/FMPGame/classATheGameState.html#a02788c82e3c8e18a5e2516975923f6e2) and [`bIsRoundActive`](https://siddplus.github.io/FMPGame/classATheGameState.html#af880af6d0d7c50fab2546bfc79c1d807) variables. This ensures that when the server updates these values, a specific function (OnRep_...) is triggered on every client, allowing the UI to update instantly without polling the server every frame.
+A key feature of my `GameState` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) is the use of `RepNotify`  ([Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.]( https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-and-multiplayer-in-unreal-engine )) (`ReplicatedUsing` (Multiplayer Programming Quick Start for Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.)) for the [`ReadyPlayersCount`](https://siddplus.github.io/FMPGame/classATheGameState.html#a02788c82e3c8e18a5e2516975923f6e2) and [`bIsRoundActive`](https://siddplus.github.io/FMPGame/classATheGameState.html#af880af6d0d7c50fab2546bfc79c1d807) variables. This ensures that when the server updates these values, a specific function (OnRep_...) is triggered on every client, allowing the UI to update instantly without polling the server every frame.
 
 ```cpp
 UPROPERTY(ReplicatedUsing = OnRep_IsRoundActive, BlueprintReadOnly, Category = "Round")
@@ -253,9 +253,9 @@ The [`RoundTimer`](https://siddplus.github.io/FMPGame/classATheGameState.html#a2
 
 #### The Interaction: Logic Pushing to State
 
-The interaction between these two classes follows a "Command and Broadcast" pattern. The `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) commands a change in state, and the `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) broadcasts that change to the world.
+The interaction between these two classes follows a "Command and Broadcast" pattern. The `GameMode` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) commands a change in state, and the `GameState` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) broadcasts that change to the world.
 
-For example, when a round ends, the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) performs the cleanup (deleting enemies and logging telemetry) and then updates the `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to inform clients that they should display the "Intermission" UI.
+For example, when a round ends, the `GameMode` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) performs the cleanup (deleting enemies and logging telemetry) and then updates the `GameState` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) to inform clients that they should display the "Intermission" UI.
 
 ```cpp
 void ATheGameMode::EndRound()
@@ -282,7 +282,7 @@ void ATheGameMode::EndRound()
 ```
 (Code Snippet 9: EndRound function)
 
-In the [`RefreshDifficultyScaling`](https://siddplus.github.io/FMPGame/classATheGameMode.html#a6ec19d1e3f10543902dcededee763a15) function, the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) reads the current player count from the `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), performs the math, and then pushes new settings back to the AEnemySpawner actors.
+In the [`RefreshDifficultyScaling`](https://siddplus.github.io/FMPGame/classATheGameMode.html#a6ec19d1e3f10543902dcededee763a15) function, the `GameMode` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) reads the current player count from the `GameState` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )), performs the math, and then pushes new settings back to the AEnemySpawner actors.
 
 ```cpp
 void ATheGameMode::RefreshDifficultyScaling()
@@ -306,7 +306,7 @@ void ATheGameMode::RefreshDifficultyScaling()
 ```
 (Code Snippet 10: RefrshDifficlultyScaling function)
 
-This interaction ensures that the "Heavy Lifting" (AI management, spawning, and math) is hidden within the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), while the `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) provides a clean, synchronized API for the clients to drive their HUDs and local visual effects. This architecture is the backbone of the project’s multiplayer stability, ensuring that even under high network load, the core rules of the game remain consistent for every participant.
+This interaction ensures that the "Heavy Lifting" (AI management, spawning, and math) is hidden within the `GameMode` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )), while the `GameState` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) provides a clean, synchronized API for the clients to drive their HUDs and local visual effects. This architecture is the backbone of the project’s multiplayer stability, ensuring that even under high network load, the core rules of the game remain consistent for every participant.
 
 ![My Photo](Images/RoundCountdown.gif)
 <br>
@@ -318,7 +318,7 @@ The progression system of a Roguelike depends entirely on the variety and synerg
 
 #### [`UPlayerPerks`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html): The Replicated Inventory
 
-The [`UPlayerPerks`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html) component acts as the persistent inventory for each player. It is responsible for tracking which perks are currently active and ensuring those choices are synchronized across the network. A core technical feature is the [`FPerks`](https://siddplus.github.io/FMPGame/structFPerks.html) struct, which uses [`TSubclassOf<UPerkEffectBase>`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#a35ecac42bcd81ac0036add3873f2e39d) to allow C++ logic to spawn and manage Blueprint-defined effects safely.To maintain multiplayer integrity, I implemented a strict Server-Request-Validation flow. A client cannot simply "give" themselves a perk; they must send a [`ServerEquipPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#ad39d55de5ce3d9df01ef817c8b408a2c) `RPC` (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), which triggers the authoritative logic on the server to verify the request before applying any stat changes.
+The [`UPlayerPerks`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html) component acts as the persistent inventory for each player. It is responsible for tracking which perks are currently active and ensuring those choices are synchronized across the network. A core technical feature is the [`FPerks`](https://siddplus.github.io/FMPGame/structFPerks.html) struct, which uses [`TSubclassOf<UPerkEffectBase>`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#a35ecac42bcd81ac0036add3873f2e39d) to allow C++ logic to spawn and manage Blueprint-defined effects safely.To maintain multiplayer integrity, I implemented a strict Server-Request-Validation flow. A client cannot simply "give" themselves a perk; they must send a [`ServerEquipPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#ad39d55de5ce3d9df01ef817c8b408a2c) `RPC` ([Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/en-us/unreal-engine/remote-procedure-calls-in-unreal-engine)), which triggers the authoritative logic on the server to verify the request before applying any stat changes.
 
 ```cpp
 UPROPERTY(Replicated, BlueprintReadOnly, Category = "Perks")
@@ -414,7 +414,7 @@ public:
 The interaction between these classes creates a robust "Selection Loop." When the GameMode signals a round end, it triggers the [`ULootPool`](https://siddplus.github.io/FMPGame/classULootPool.html) on each player's controller.
 1. Selection: The [`ULootPool`](https://siddplus.github.io/FMPGame/classULootPool.html) calculates a subset of available perks (excluding those already in [`EquippedPerks`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#acf0db2732e4f025600d21e048351c039)).
 
-2. Request: The player clicks a perk in the UI, sending an `RPC` (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to [`PlayerPerks::ServerEquipPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#ad39d55de5ce3d9df01ef817c8b408a2c).
+2. Request: The player clicks a perk in the UI, sending an `RPC` ([Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/en-us/unreal-engine/remote-procedure-calls-in-unreal-engine)) to [`PlayerPerks::ServerEquipPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#ad39d55de5ce3d9df01ef817c8b408a2c).
 3. Instantiation: The [`PlayerPerks`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html) component on the server instantiates the [`PerkEffect`](https://siddplus.github.io/FMPGame/structFPerks.html#a55990e1302908cd1ac8c9eb006238a05) class defined in the struct.
 4. Execution: The newly created [`UPerkEffectBase`](https://siddplus.github.io/FMPGame/classUPerkEffectBase.html) instance runs its [`ApplyPerkEffect`](https://siddplus.github.io/FMPGame/classUPerkEffectBase.html#a18298ff5ac96ff062cb0b7676d58e606) logic (e.g., modifying health, speed, or spawning projectiles).
 
@@ -426,11 +426,11 @@ This loop is highly efficient because the LootPool only exists to do the "math" 
 
 ### Networking Strategy: `RPC`s and Validation
 
-The multiplayer architecture of this project is built upon the principle of `Server Authority` (Server Authority: What Developers Need to Know — Last Level Studios blog, s.d.). In a networked environment, the client is essentially a "dumb terminal" that sends input requests to the server, which then simulates the results and broadcasts them back. To manage this communication, I utilized `Remote Procedure Calls (RPCs)` (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) —specifically `Server` (Server Authority: What Developers Need to Know — Last Level Studios blog, s.d.) and `Client` (TheKnowledgeAcademy, s.d.) functions—to bridge the gap between local player actions and global game state changes.
+The multiplayer architecture of this project is built upon the principle of `Server Authority` ([Server Authority: What Developers Need to Know — Last Level Studios blog, s.d.](https://lastlevel.co.uk/blog/server-authority-what-developers-need-to-know)). In a networked environment, the client is essentially a "dumb terminal" that sends input requests to the server, which then simulates the results and broadcasts them back. To manage this communication, I utilized `Remote Procedure Calls (RPCs)` (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) —specifically `Server` ([Server Authority: What Developers Need to Know — Last Level Studios blog, s.d.](https://lastlevel.co.uk/blog/server-authority-what-developers-need-to-know)) functions—to bridge the gap between local player actions and global game state changes.
 
 #### The Request-Validation Flow
 
-Every critical gameplay action, such as unlocking or equipping a perk, follows a strict validation handshake. When a player interacts with the UI, the client triggers a `Server RPC` (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). The server then executes a validation check (e.g., verifying if the player has reached the required round or if the perk is actually available) before modifying any variables. This prevents "Client-Side Injection" where a malicious user might attempt to trigger functions they haven't earned.
+Every critical gameplay action, such as unlocking or equipping a perk, follows a strict validation handshake. When a player interacts with the UI, the client triggers a `Server RPC` ([Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/en-us/unreal-engine/remote-procedure-calls-in-unreal-engine)). The server then executes a validation check (e.g., verifying if the player has reached the required round or if the perk is actually available) before modifying any variables. This prevents "Client-Side Injection" where a malicious user might attempt to trigger functions they haven't earned.
 
 ```cpp
 void UPlayerPerks::ServerEquipPerk_Implementation(const FString& PerkName)
@@ -454,7 +454,7 @@ void UPlayerPerks::ServerEquipPerk_Implementation(const FString& PerkName)
 
 #### Reliability and Bandwidth Optimization
 
-A key technical decision in the networking layer was the strategic use of `Reliable` (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) vs `Unreliable` (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) `RPCs` (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). I designated game-critical state changes—such as starting a round, finalizing perk selections, or player death—as Reliable. This ensures that even if a packet is lost due to network jitter, the engine will retry the transmission until the message is confirmed, preventing the game state from breaking.
+A key technical decision in the networking layer was the strategic use of `Reliable` ([Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/en-us/unreal-engine/remote-procedure-calls-in-unreal-engine)) `RPCs` ([Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/en-us/unreal-engine/remote-procedure-calls-in-unreal-engine)). I designated game-critical state changes—such as starting a round, finalizing perk selections, or player death—as Reliable. This ensures that even if a packet is lost due to network jitter, the engine will retry the transmission until the message is confirmed, preventing the game state from breaking.
 
 Conversely, for high-frequency or cosmetic updates where a missed packet is negligible (like minor UI updates or secondary effects), I utilized the default replication to save bandwidth.
 
@@ -470,7 +470,7 @@ void ServerEquipPerk(const FString& PerkName);
 
 #### Client-Side Responsiveness (Predictive Feedback)
 
-To avoid the "input lag" typically associated with waiting for a server response, I implemented `RepNotify` (Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.) functions. When the server validates a perk and updates the [`LastEquippedPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#a9295eff30a5a3e70ef3a6a45cd51b406) variable, the [`OnRep_LastEquippedPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#a8133606e54047a12a6d1a2efc52094f7) function triggers on the client. This allows the local UI to react immediately to the server's confirmation, providing a seamless experience for the player even when the round-trip time (ping) is high.
+To avoid the "input lag" typically associated with waiting for a server response, I implemented `RepNotify` ([Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.]( https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-and-multiplayer-in-unreal-engine )) functions. When the server validates a perk and updates the [`LastEquippedPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#a9295eff30a5a3e70ef3a6a45cd51b406) variable, the [`OnRep_LastEquippedPerk`](https://siddplus.github.io/FMPGame/classUPlayerPerks.html#a8133606e54047a12a6d1a2efc52094f7) function triggers on the client. This allows the local UI to react immediately to the server's confirmation, providing a seamless experience for the player even when the round-trip time (ping) is high.
 
 ```cpp
 void UPlayerPerks::OnRep_LastEquippedPerk()
@@ -493,9 +493,9 @@ By combining authoritative server validation with efficient replication types an
 
 ### Analytics and Optimization: Performance and Telemetry
 
-To ensure the project met professional standards, I developed two specialized logging classes: [`UPerformanceLogger`](https://siddplus.github.io/FMPGame/classUPerformanceLogger.html) and [`TelemetryLogger`](https://siddplus.github.io/FMPGame/classTelemetryLogger.html). The [`PerformanceLogger`](https://siddplus.github.io/FMPGame/classUPerformanceLogger.html) is an `UActorComponent` (UActorComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) attached to the `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) that captures frame-time, FPS, and memory usage metrics at a regular frequency using `FTimerHandle` (FTimerHandle | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.).
+To ensure the project met professional standards, I developed two specialized logging classes: [`UPerformanceLogger`](https://siddplus.github.io/FMPGame/classUPerformanceLogger.html) and [`TelemetryLogger`](https://siddplus.github.io/FMPGame/classTelemetryLogger.html). The [`PerformanceLogger`](https://siddplus.github.io/FMPGame/classUPerformanceLogger.html) is an `UActorComponent` ([UActorComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UActorComponent)) attached to the `GameState` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) that captures frame-time, FPS, and memory usage metrics at a regular frequency using `FTimerHandle` ([FTimerHandle | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/FTimerHandle)).
 
-These metrics are serialized into a `JSON` (What is JSON, s.d.) format using Unreal’s `TJsonWriter` (TJsonWriter | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). This allows for a detailed analysis of the procedural generation’s impact on hardware. For example, if a certain density of `HISM`s (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) causes a spike in frame-time, the log captures the exact Timestamp and MemoryUsedMB, allowing for targeted optimization.
+These metrics are serialized into a `JSON` ([What is JSON, s.d.](https://www.w3schools.com/whatis/whatis_json.asp)) format using Unreal’s `TJsonWriter` (TJsonWriter | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). This allows for a detailed analysis of the procedural generation’s impact on hardware. For example, if a certain density of `HISM`s ([UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UHierarchicalInstancedStaticMesh-)) causes a spike in frame-time, the log captures the exact Timestamp and MemoryUsedMB, allowing for targeted optimization.
 
 ```cpp
 void UPerformanceLogger::WriteLogToFile()
@@ -510,7 +510,7 @@ void UPerformanceLogger::WriteLogToFile()
 ```
 (Code Snippet 18: WriteLogToFile function)
 
-The [`TelemetryLogger`](https://siddplus.github.io/FMPGame/classTelemetryLogger.html) serves a different purpose: tracking the meta-progression of the Roguelike loop. It records which perks were unlocked and the highest round reached. This data is persistent, saved to the `ProjectSavedDir` (Project Saved Dir | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), ensuring that player progress is retained across sessions. The technical achievement here is the robust handling of the `IPlatformFile` (IPlatformFile | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) interface, which ensures the directory structure is created correctly across different operating systems, making the project's data management cross-platform ready.
+The [`TelemetryLogger`](https://siddplus.github.io/FMPGame/classTelemetryLogger.html) serves a different purpose: tracking the meta-progression of the Roguelike loop. It records which perks were unlocked and the highest round reached. This data is persistent, saved to the `ProjectSavedDir` ([Project Saved Dir | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/BlueprintAPI/Utilities/Paths/ProjectSavedDir)), ensuring that player progress is retained across sessions. The technical achievement here is the robust handling of the `IPlatformFile` ([IPlatformFile | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Core/IPlatformFile)) interface, which ensures the directory structure is created correctly across different operating systems, making the project's data management cross-platform ready.
 
 ```json
 "PerformanceData": [
@@ -582,7 +582,7 @@ The [`TelemetryLogger`](https://siddplus.github.io/FMPGame/classTelemetryLogger.
 
 ### AI and Spawner Management
 
-The [`AEnemySpawner`](https://siddplus.github.io/FMPGame/classAEnemySpawner.html) class manages the lifecycle of AI agents within the procedural environment. A major technical hurdle was ensuring enemies didn't spawn inside the geometry created by the [`AProceduralGeneration`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html) class. I solved this by implementing a Line Trace system that fires downwards from a randomized height. If the trace hits the `ProceduralMesh` (Procedural Mesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.), the system then utilizes the `UNavigationSystemV1` (UNavigationSystemV1 | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to find the nearest valid point on the `NavMesh` (Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.).
+The [`AEnemySpawner`](https://siddplus.github.io/FMPGame/classAEnemySpawner.html) class manages the lifecycle of AI agents within the procedural environment. A major technical hurdle was ensuring enemies didn't spawn inside the geometry created by the [`AProceduralGeneration`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html) class. I solved this by implementing a Line Trace system that fires downwards from a randomized height. If the trace hits the `ProceduralMesh` ([Procedural Mesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/BlueprintAPI/Components/ProceduralMesh)), the system then utilizes the `UNavigationSystemV1` ([UNavigationSystemV1 | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.]( https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/NavigationSystem/UNavigationSystemV1 )) to find the nearest valid point on the `NavMesh` ([Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Navmesh)).
 
 ```cpp
 if (NavSys->GetRandomReachablePointInRadius(Hit.ImpactPoint, SpawnRadius, NavLocation))
@@ -593,7 +593,7 @@ if (NavSys->GetRandomReachablePointInRadius(Hit.ImpactPoint, SpawnRadius, NavLoc
 ```
 (Code Snippet 21: Enemy spawning)
 
-By spawning the enemies 70 units above the ground, I ensured they "settle" onto the floor correctly, preventing them from falling through the world due to collision overlap. The spawner also maintains a [`TArray<AActor*> SpawnedEnemies`](https://siddplus.github.io/FMPGame/classAEnemySpawner.html#ad79c766d7cb49cf3a6964984715fda7e) to monitor the population. This allows the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to enforce a hard cap on concurrent enemies, preventing the server from being overwhelmed by AI calculations and ensuring that the tick-rate remains high enough for a smooth multiplayer experience.
+By spawning the enemies 70 units above the ground, I ensured they "settle" onto the floor correctly, preventing them from falling through the world due to collision overlap. The spawner also maintains a [`TArray<AActor*> SpawnedEnemies`](https://siddplus.github.io/FMPGame/classAEnemySpawner.html#ad79c766d7cb49cf3a6964984715fda7e) to monitor the population. This allows the `GameMode` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) to enforce a hard cap on concurrent enemies, preventing the server from being overwhelmed by AI calculations and ensuring that the tick-rate remains high enough for a smooth multiplayer experience.
 
 ![My Photo](Images/AI.gif)
 <br>
@@ -613,9 +613,9 @@ Developing a multiplayer roguelike in C++ is a process defined by a constant cyc
 
 ## Problem 1: Architectural Fragility in Round Management
 
-The Problem: In the initial prototype, I managed the entire round lifecycle (timers, enemy counts, and transitions) within a standard `AActor` (AActor | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) placed in the level. While this worked perfectly during solo testing, it created a massive synchronization bottleneck in a 4-player environment. Because the actor was just another object in the world, there was no clear hierarchy of who "owned" the round data. Clients would often desync, with one player believing the round had ended while another was still fighting enemies that didn't exist on the first player's screen.
+The Problem: In the initial prototype, I managed the entire round lifecycle (timers, enemy counts, and transitions) within a standard `AActor` ([AActor | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/AActor)) placed in the level. While this worked perfectly during solo testing, it created a massive synchronization bottleneck in a 4-player environment. Because the actor was just another object in the world, there was no clear hierarchy of who "owned" the round data. Clients would often desync, with one player believing the round had ended while another was still fighting enemies that didn't exist on the first player's screen.
 
-The Solution: I realized that I was fighting against the engine's intended framework. I had to undergo a major refactor to split this logic into the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) and `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) architecture. I moved all authoritative logic—such as calculating when a round should end and scaling the difficulty—into [`ATheGameMode`](https://siddplus.github.io/FMPGame/classATheGameMode.html). I then moved the variables that clients needed to see (like the round timer and current round number) into [`ATheGameState`](https://siddplus.github.io/FMPGame/classATheGameState.html).
+The Solution: I realized that I was fighting against the engine's intended framework. I had to undergo a major refactor to split this logic into the `GameMode` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) and `GameState` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) architecture. I moved all authoritative logic—such as calculating when a round should end and scaling the difficulty—into [`ATheGameMode`](https://siddplus.github.io/FMPGame/classATheGameMode.html). I then moved the variables that clients needed to see (like the round timer and current round number) into [`ATheGameState`](https://siddplus.github.io/FMPGame/classATheGameState.html).
 
 ```cpp
 void ATheGameMode::StartRound()
@@ -631,7 +631,7 @@ void ATheGameMode::StartRound()
 ```
 (Code Snippet 22: StartRound function)
 
-By making this split, I utilized Unreal’s internal "Handshake." The `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) (The Boss) makes a decision, and the `GameState` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) (The Public Record) broadcasts it. This iteration was the single most important step in making the game viable for co-op play, as it established a "Single Source of Truth" for the match progress.
+By making this split, I utilized Unreal’s internal "Handshake." The `GameMode` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) (The Boss) makes a decision, and the `GameState` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )) (The Public Record) broadcasts it. This iteration was the single most important step in making the game viable for co-op play, as it established a "Single Source of Truth" for the match progress.
 
 ## Problem 2: Design Friction in Round Initiation
 
@@ -651,11 +651,11 @@ void ATheGameState::OnRep_ReadyPlayersCount()
 ```
 (Code Snippet 23: OnRep_ReadyPlayerCount function)
 
-This change shifted the game from a chaotic individual experience to a coordinated team experience. It also provided a technical window for the server to ensure all clients had finished their perk selection `RPC`s (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) before the first enemy was spawned, preventing the game state from breaking due to overlapping menu and combat logic.
+This change shifted the game from a chaotic individual experience to a coordinated team experience. It also provided a technical window for the server to ensure all clients had finished their perk selection `RPC`s ([Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/en-us/unreal-engine/remote-procedure-calls-in-unreal-engine)) before the first enemy was spawned, preventing the game state from breaking due to overlapping menu and combat logic.
 
 ## Problem 3: Multi-Player Performance Crashes
 
-The Problem: As I moved from one player to four, the game began to crash or "hang" (freeze) every time a round started. Using the debugger, I identified a massive CPU spike during the [`BeginPlay`](https://siddplus.github.io/FMPGame/classATheGameMode.html#ac8e832534210db9130623978a60a8035) of the `GameMode` (Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.). I was using `UGameplayStatics::GetAllActorsOfClass` (UGameplayStatics::GetAllActorsOfClass | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to find all enemy spawners in the world.
+The Problem: As I moved from one player to four, the game began to crash or "hang" (freeze) every time a round started. Using the debugger, I identified a massive CPU spike during the [`BeginPlay`](https://siddplus.github.io/FMPGame/classATheGameMode.html#ac8e832534210db9130623978a60a8035) of the `GameMode` ([Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine )). I was using `UGameplayStatics::GetAllActorsOfClass` (UGameplayStatics::GetAllActorsOfClass | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to find all enemy spawners in the world.
 
 The Solution: The issue was that in a multiplayer environment, [`BeginPlay`](https://siddplus.github.io/FMPGame/classATheGameMode.html#ac8e832534210db9130623978a60a8035) triggers simultaneously with many other network handshakes. Running an expensive $O(N)$ search for actors while the server is trying to initialize four players was overwhelming the game thread. I moved the spawner search logic out of [`BeginPlay`](https://siddplus.github.io/FMPGame/classATheGameMode.html#ac8e832534210db9130623978a60a8035) and into the specific round start function.
 
@@ -680,9 +680,9 @@ I also added a caching layer. Instead of searching for the spawners every time, 
 
 ## Problem 4: AI Navigation on Procedural Terrain
 
-The Problem: This was the most significant technical hurdle. Because my terrain is generated via C++ at runtime, the `NavMesh` (Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) had nothing to bake onto when the level loaded. The AI would spawn and simply stand still because, in the engine's eyes, there was no floor. Standard `NavMesh` (Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) is static and baked in the editor, but my world didn't exist until the game was running.
+The Problem: This was the most significant technical hurdle. Because my terrain is generated via C++ at runtime, the `NavMesh` ([Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Navmesh)) had nothing to bake onto when the level loaded. The AI would spawn and simply stand still because, in the engine's eyes, there was no floor. Standard `NavMesh` ([Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Navmesh)) is static and baked in the editor, but my world didn't exist until the game was running.
 
-The Solution: I had to solve this using a two-part iteration. First, I modified the [`AProceduralGeneration`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html) class to generate a simple flat collision plane during the [`OnConstruction`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html#a39b187ec000cedc2205cfdd9fd8fc0e1) phase. This gave the `NavMesh` (Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) a base to initialize on. Second, I moved all the complex noise calculations, mesh deformation, and `HISM` (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) placement into [`BeginPlay`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html#a794c8213c431398abd6a98c987f25cc2).
+The Solution: I had to solve this using a two-part iteration. First, I modified the [`AProceduralGeneration`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html) class to generate a simple flat collision plane during the [`OnConstruction`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html#a39b187ec000cedc2205cfdd9fd8fc0e1) phase. This gave the `NavMesh` ([Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Navmesh)) a base to initialize on. Second, I moved all the complex noise calculations, mesh deformation, and `HISM` ([UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UHierarchicalInstancedStaticMesh-)) placement into [`BeginPlay`](https://siddplus.github.io/FMPGame/classAProceduralGeneration.html#a794c8213c431398abd6a98c987f25cc2).
 
 ```cpp
 // 1. Provide a base for the NavMesh during the Construction phase
@@ -713,11 +713,11 @@ void AProceduralGeneration::PopulateWorld()
 ```
 (Code Snippet 25: OnConstuction function in AProceduralGeneration)
 
-Crucially, I had to change the project's Navigation settings to Dynamic. This allows the `NavMesh` (Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) to re-scan the world at runtime. In C++, I added a call to notify the navigation system once the procedural mesh was finished. This ensured the AI could perceive the hills and valleys created by my noise algorithms, allowing for true combat on procedurally generated terrain.
+Crucially, I had to change the project's Navigation settings to Dynamic. This allows the `NavMesh` ([Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Navmesh)) to re-scan the world at runtime. In C++, I added a call to notify the navigation system once the procedural mesh was finished. This ensured the AI could perceive the hills and valleys created by my noise algorithms, allowing for true combat on procedurally generated terrain.
 
 ## Problem 5: Collision Clipping and Stuck Enemies
 
-The Problem: Even after the AI could move, I found that enemies were frequently falling through the map or getting stuck half-way inside rocks and trees. This happened because the AI was spawning at the exact same time the `HISM` (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) environmental objects were being placed. If an AI's collision capsule overlapped with a rock's collision at the moment of spawning, the physics engine would "jitter," causing the AI to fall through the floor or become permanently immobilized.
+The Problem: Even after the AI could move, I found that enemies were frequently falling through the map or getting stuck half-way inside rocks and trees. This happened because the AI was spawning at the exact same time the `HISM` ([UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UHierarchicalInstancedStaticMesh-)) environmental objects were being placed. If an AI's collision capsule overlapped with a rock's collision at the moment of spawning, the physics engine would "jitter," causing the AI to fall through the floor or become permanently immobilized.
 
 The Solution: I iterated on the [`AEnemySpawner`](https://siddplus.github.io/FMPGame/classAEnemySpawner.html) logic to implement a vertical validated spawn. Instead of spawning enemies directly on the ground, I modified the code to spawn them 200 units in the air. Immediately upon spawning, I performed a `LineTraceSingleByChannel` (Line Trace By Trace Channel | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) downwards to the ground.
 
@@ -746,20 +746,20 @@ The Solution: To fix this, I had to ensure the base mesh was only generated once
 ```cpp
 void AProceduralGeneration::OnRep_Seed()
 {
-    // By triggering here, we guarantee the Seed is valid for this specific client
-    if (Seed != 0)
-    {
-        // Re-generating the base mesh here prevents the "Array Out of Bounds" 
-        // crash seen in standalone builds by ensuring arrays are properly sized.
-        GenerateBaseMesh(); 
-        
-        // Follow up with noise and object population
-    }
+	// Run map generation only after the deterministic seed has been set/received.
+	if (Seed != 0)
+	{
+        MapRandomStream.Initialize(Seed);
+
+        GenerateBaseMesh();
+        DeformMeshWithNoise();
+        PopulateWorld();
+	}
 }
 ```
 (Code Snippet 27: OnRep_Seed function)
 
-This iteration highlighted a key lesson in multiplayer engineering: Editor behavior is not always representative of a packaged build. By leveraging the `RepNotify` (Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.) system, I synchronized the mesh generation lifecycle with the network lifecycle, resulting in a stable experience for both the host and joined clients in the final built version of the game.
+This iteration highlighted a key lesson in multiplayer engineering: Editor behavior is not always representative of a packaged build. By leveraging the `RepNotify` ([Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community, s.d.]( https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-and-multiplayer-in-unreal-engine )) system, I synchronized the mesh generation lifecycle with the network lifecycle, resulting in a stable experience for both the host and joined clients in the final built version of the game.
 
 # Testing & Evaluation
 
@@ -776,7 +776,7 @@ The testing phase was conducted through a series of playtests involving 12 exter
 | **Static Meshes Colision Bug** | Players and enemies can stand on small foliage | Remove collision on small foliage |
 | **World Desynchronization** | Players would see different world compared to each but still exist in same same world | replaced all the FMath random to the custom roundom stream variable to handle the random calculations and then execute the exact same sequence of random number calls by keeping loop logic and variable updates outside of HasAuthority() blocks |
 <br>
-(Figure 9 : Table of testing)
+(Table 1: Table of testing)
 
 
 ## User Testing & Evaluation 
@@ -785,43 +785,43 @@ The testing phase was conducted through a series of playtests involving 12 exter
 
 ![My Photo](Images/UserTesting/Overall.png)
 <br>
-(Figure 10 : Image of user testing)
+(Figure 9 : Image of user testing)
 
 ![My Photo](Images/UserTesting/Controls.png)
 <br>
-(Figure 11: Image of user testing)
+(Figure 10: Image of user testing)
 
 ![My Photo](Images/UserTesting/Motivation.png)
 <br>
-(Figure 12: Image of user testing)
+(Figure 11: Image of user testing)
 
 ![My Photo](Images/UserTesting/Difficulty.png)
 <br>
-(Figure 13: Image of user testing)
+(Figure 12: Image of user testing)
 
 ![My Photo](Images/UserTesting/ProcGen.png)
 <br>
-(Figure 14: Image of user testing)
+(Figure 13: Image of user testing)
 
 ![My Photo](Images/UserTesting/PerkDeck.png)
 <br>
-(Figure 15: Gif of gameplay of taking damage)
+(Figure 14: Gif of gameplay of taking damage)
 
 ![My Photo](Images/UserTesting/Perks.png)
 <br>
-(Figure 16: Image of user testing)
+(Figure 15: Image of user testing)
 
 ![My Photo](Images/UserTesting/Multiplayer.png)
 <br>
-(Figure 17: Gif of gameplay of taking damage)
+(Figure 16: Gif of gameplay of taking damage)
 
 ![My Photo](Images/UserTesting/Lag.png)
 <br>
-(Figure 18: Image of user testing)
+(Figure 17: Image of user testing)
 
 ![My Photo](Images/UserTesting/Rounds.png)
 <br>
-(Figure 19: Image of user testing)
+(Figure 18: Image of user testing)
 
 To quantify the project's success and identify outstanding mechanical pain points, quantitative survey data was gathered from 4 external playtesters across several technical and gameplay categories. Session survivability data showed a tightly balanced but punishing difficulty ceiling, with 75% of playtesters (3 responses) reaching an authoritative milestone of Round 2 and only 25% (1 response) pushing forward to survive until Round 3. Despite this steep curve, mechanical engagement remained strong, with 75% of users scoring their motivation to keep playing after death at a 4 or 5 out of 5. The data-driven bridge between C++ structures and Blueprint functionality achieved exceptional clarity metrics, as 75% of players awarded a score of 4 out of 5 for perk system understandability, and 75% rated the direct impact of these unlocked perks on their gameplay style at a 4 or 5 out of 5. Environmental variety driven by the deterministic seed distribution was well-received, with 75% of testers rating the uniqueness of the randomly generated levels at a 4 or 5 out of 5, though a remaining 25% gave a neutral score of 3, signaling a need for more distinct generation. The server-authoritative optimization model effectively eliminated game-breaking rubber-banding, resulting in a flat 50/50 split between scores of 2 and 3 out of 5 for connection stability, indicating that while the network baseline was structurally sound, noticeable performance jitter remained during intensive runtime calculations. This technical variance directly correlated with character control responsiveness, which was rated at a 4 out of 5 by 50% of testers while the rest split between scores of 2 and 3 due to outstanding camera look glitches. However, the architectural commitment to multiplayer design paid off significantly, with 100% of participants scoring the co-op aspect's ability to enhance enjoyment at a 4 or 5 out of 5, which ultimately elevated the overall gameplay experience to a highly encouraging baseline where 50% rated their enjoyment at a solid 3 out of 5, 25% at a 4 out of 5, and 25% at a top score of 5 out of 5.
 
@@ -833,7 +833,7 @@ To determine if the final build achieved a baseline of professional polish, bala
 
 The final result of this project is a functional, network-authoritative 3D roguelike that successfully integrates procedural generation with a complex perk-shuffling system. Critically reflecting on the development process reveals a journey of steep technical learning curves and the necessity of architectural adaptability.
 
-One of the most significant outcomes was the realization that single-player logic cannot simply be "converted" to multiplayer; it must be built for it from the foundation. The most pivotal moment in the project was the complete rewrite of the Round Management system. Moving from a localized Actor-based logic to a split GameMode/GameState framework was a difficult but essential pivot. This taught me that the "Single Source of Truth" principle is the most important rule in networked games. Learning to manage the flow of data through `RPC`s (Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) and RepNotifies while actively building the game was a "learn-as-you-go" challenge that ultimately made the final product stable and cheat-resistant.
+One of the most significant outcomes was the realization that single-player logic cannot simply be "converted" to multiplayer; it must be built for it from the foundation. The most pivotal moment in the project was the complete rewrite of the Round Management system. Moving from a localized Actor-based logic to a split GameMode/GameState framework was a difficult but essential pivot. This taught me that the "Single Source of Truth" principle is the most important rule in networked games. Learning to manage the flow of data through `RPC`s ([Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/en-us/unreal-engine/remote-procedure-calls-in-unreal-engine)) and RepNotifies while actively building the game was a "learn-as-you-go" challenge that ultimately made the final product stable and cheat-resistant.
 
 The development process highlighted that technical art is just as critical as back-end C++. I encountered significant issues with the gun model clipping into the player’s head during the camera-setup phase. To resolve this, I had to iterate outside of Unreal Engine, using Maya to physically modify the mesh by removing the back portion of the firearm to ensure it fit the third-person perspective without visual artifacts.
 
@@ -849,7 +849,7 @@ In a future iteration, I would capitalize on the fact that I no longer need to "
 
 - Enhanced Environmental Variety: Utilizing more complex noise algorithms (like Voronoi or cellular noise) to create distinct biomes within the procedural generator.
 
-Ultimately, this project proved that a small-scale, high-performance multiplayer experience is achievable with a "Server-First" mindset. The lessons learned in debugging the `HISM` (UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.) generation and the JSON memory leaks have provided me with a robust toolkit for professional-grade C++ development in the future.
+Ultimately, this project proved that a small-scale, high-performance multiplayer experience is achievable with a "Server-First" mindset. The lessons learned in debugging the `HISM` ([UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community, s.d.](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UHierarchicalInstancedStaticMesh-)) generation and the JSON memory leaks have provided me with a robust toolkit for professional-grade C++ development in the future.
 
 Overall, the game successfully delivers an engaging and dynamic cooperative roguelike experience, with the data-driven, deck-based perk system standing out as the definitive highlight of the gameplay loop. However, the experience would be significantly enhanced by a deeper system of long-term player meta-progression and a broader variety of enemy archetypes to sustain engagement across extended sessions. While the project successfully fulfilled its initial design objectives, future iterations will focus on expanding these progression systems and content variety to elevate the game's overall depth and replayability.
 
@@ -884,3 +884,37 @@ All the Animations - Mixamo (s.d.) At: https://www.mixamo.com/#/
 All the Music and SFX - 6.1 million+ Stunning Free Images to Use Anywhere - Pixabay (s.d.) At: https://pixabay.com/
 
 I used Google Gemini (s.d.) At: https://gemini.google.com to help me write this commentary and generate some images for this commentary
+
+Networking and Multiplayer in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/networking-and-multiplayer-in-unreal-engine
+
+Procedural Mesh | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/BlueprintAPI/Components/ProceduralMesh
+
+UActorComponent | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UActorComponent 
+
+FMath | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Core/FMath
+
+Grid System for Spatial Partitioning | bpanthi977/sph (s.d.) At: https://deepwiki.com/bpanthi977/sph/4.1-grid-system-for-spatial-partitioning
+
+AActor | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/AActor 
+
+UHierarchicalInstancedStaticMeshComponent | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UHierarchicalInstancedStaticMesh-
+
+Game Mode and Game State in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/game-mode-and-game-state-in-unreal-engine
+
+Server Authority: What Developers Need to Know — Last Level Studios blog (s.d.) At: https://lastlevel.co.uk/blog/server-authority-what-developers-need-to-know
+
+Remote Procedure Calls in Unreal Engine | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/en-us/unreal-engine/remote-procedure-calls-in-unreal-engine 
+
+Replicating Variables in Blueprints | Unreal Engine 4.27 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-and-multiplayer-in-unreal-engine 
+
+What is JSON (s.d.) At: https://www.w3schools.com/whatis/whatis_json.asp
+
+FTimerHandle | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/FTimerHandle
+
+Project Saved Dir | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/BlueprintAPI/Utilities/Paths/ProjectSavedDir 
+
+IPlatformFile | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Core/IPlatformFile
+
+UNavigationSystemV1 | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/NavigationSystem/UNavigationSystemV1
+
+Navmesh | Unreal Engine 5.7 Documentation | Epic Developer Community (s.d.) At: https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Navmesh
