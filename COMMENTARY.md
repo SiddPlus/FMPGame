@@ -855,13 +855,13 @@ Overall, the game successfully delivers an engaging and dynamic cooperative rogu
 
 ## GDC Talk
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/AfiVn09vubc?si=TD5-_lXGtlwHgXPp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[SHARED FATE vs INDIVIDUAL FORTUNE - GDC Talk](https://www.youtube.com/watch?v=AfiVn09vubc&t=1s)
 
 ## Final Outcome
 
 [Evolvd Survivors on itch.io](https://siddplus.itch.io/evolved-survivors)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Qp20KLwnVRE?si=uHLUe-a30YT576yQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[Evolved Survivors Trailer](https://www.youtube.com/watch?v=Qp20KLwnVRE)
 
 # Bibiolography
 
