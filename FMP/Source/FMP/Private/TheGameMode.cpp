@@ -332,23 +332,23 @@ void ATheGameMode::RefreshDifficultyScaling()
     switch (GS->TotalPlayersInGame)
     {
     case 1:
-        GlobalMaxEnemiesLimit = 29;
+        GlobalMaxEnemiesLimit = 15;
         break;
     case 2:
-        GlobalMaxEnemiesLimit = 44;
+        GlobalMaxEnemiesLimit = 30;
         break;
     case 3:
-        GlobalMaxEnemiesLimit = 58;
+        GlobalMaxEnemiesLimit = 45;
         break;
     case 4:
     default:
-        GlobalMaxEnemiesLimit = 73;
+        GlobalMaxEnemiesLimit = 60;
         break;
     }
 
     // Health & Speed Multipliers
-    TargetHealthMult = (1.0f + (GS->CurrentRoundNumber - 1) * 0.15f) * PlayerScalingFactor;
-    TargetSpeedMult = (1.0f + (GS->CurrentRoundNumber * 0.05f)) * (1.0f + (GS->TotalPlayersInGame - 1) * 0.1f);
+    TargetHealthMult = (1.0f + (GS->CurrentRoundNumber - 1) * 0.05f) * PlayerScalingFactor;
+    TargetSpeedMult = (1.0f + (GS->CurrentRoundNumber * 0.02f)) * (1.0f + (GS->TotalPlayersInGame - 1) * 0.03f);
 
     // 3. Update Spawners (We pass Health and Speed, but NOT Damage since you're doing that in BP)
     for (AEnemySpawner* Spawner : CachedSpawners)
